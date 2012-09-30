@@ -17,7 +17,7 @@
      */
     public function __construct($dateTime = 'now', $timezone = 'UTC')
     {
-      parent::__construct($dateTime, new DateTimeZone($timezone));
+      parent::__construct($dateTime, $this->_getDateTimeZone($timezone));
 
       return $this;
     }
@@ -25,12 +25,23 @@
     // ##########################################
 
     /**
-     * @param DateTimeZone $timezone
-     * @return DateTime|Moment
+     * @param $timezone
+     * @return DateTimeZone
+     */
+    protected function _getDateTimeZone($timezone)
+    {
+      return new \DateTimeZone($timezone);
+    }
+
+    // ##########################################
+
+    /**
+     * @param \DateTimeZone $timezone
+     * @return \DateTime|Moment
      */
     public function setTimezone($timezone)
     {
-      parent::setTimezone(new DateTimeZone($timezone));
+      parent::setTimezone($this->_getDateTimeZone($timezone));
 
       return $this;
     }
@@ -44,7 +55,7 @@
      */
     public function resetDateTime($dateTime = 'now', $timezone = 'UTC')
     {
-      parent::__construct($dateTime, new DateTimeZone($timezone));
+      parent::__construct($dateTime, $this->_getDateTimeZone($timezone));
 
       return $this;
     }
@@ -59,7 +70,7 @@
     {
       if($format === NULL)
       {
-        $format = DateTime::ISO8601;
+        $format = \DateTime::ISO8601;
       }
 
       return parent::format($format);
@@ -129,7 +140,7 @@
     // ############################################
 
     /**
-     * @param DateInterval $dateInterval
+     * @param \DateInterval $dateInterval
      * @return string
      */
     protected function _fromToSeconds(\DateInterval $dateInterval)
@@ -140,7 +151,7 @@
     // ############################################
 
     /**
-     * @param DateInterval $dateInterval
+     * @param \DateInterval $dateInterval
      * @return string
      */
     protected function _fromToMinutes(\DateInterval $dateInterval)
@@ -151,7 +162,7 @@
     // ############################################
 
     /**
-     * @param DateInterval $dateInterval
+     * @param \DateInterval $dateInterval
      * @return string
      */
     protected function _fromToHours(\DateInterval $dateInterval)
@@ -162,7 +173,7 @@
     // ############################################
 
     /**
-     * @param DateInterval $dateInterval
+     * @param \DateInterval $dateInterval
      * @return string
      */
     protected function _fromToDays(\DateInterval $dateInterval)
@@ -173,7 +184,7 @@
     // ############################################
 
     /**
-     * @param DateInterval $dateInterval
+     * @param \DateInterval $dateInterval
      * @return string
      */
     protected function _fromToWeeks(\DateInterval $dateInterval)
