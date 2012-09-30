@@ -26,7 +26,7 @@
 
     /**
      * @param $timezone
-     * @return DateTimeZone
+     * @return \DateTimeZone
      */
     protected function _getDateTimeZone($timezone)
     {
