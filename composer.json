@@ -1,0 +1,19 @@
+{
+    "name": "efides/moment",
+    "description": "DateTime Wrapper",
+    "version": "1.0.0",
+    "type": "library",
+    "keywords": ["date", "time"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tino Ehrich",
+            "email": "opensource@efides.com",
+            "role": "developer"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "minimum-stability": "dev"
+}

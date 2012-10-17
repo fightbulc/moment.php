@@ -34,6 +34,9 @@
   $response['test06.01'] = $m->format();
   $response['test06.02'] = $m->setTimezone('UTC')->format();
 
+  $m = new Moment('2012-04-25T03:00:00', 'CET');
+  $response['test07'] = $m->format('l, dS F Y / H:i (e)');
+
   // ############################################
 
   $tmpl = join('', file('test.html'));
