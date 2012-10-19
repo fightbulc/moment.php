@@ -1,9 +1,9 @@
 {
-    "name": "efides/moment",
+    "name": "fightbulc/moment",
     "description": "DateTime Wrapper",
     "version": "1.0.0",
     "type": "library",
-    "keywords": ["date", "time"],
+    "keywords": ["date", "time", "manipulation", "format"],
     "license": "MIT",
     "authors": [
         {
