@@ -20,8 +20,6 @@
     },
 
     "autoload": {
-        "psr-0": {
-            "Moment\\": "src/"
-        }
+        "classmap": ["src/"]
     }
 }
