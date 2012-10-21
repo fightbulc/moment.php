@@ -9,6 +9,8 @@
    * @dependencies  >= PHP 5.3.0
    *
    */
+  namespace Moment;
+
   class Moment extends \DateTime
   {
     /**
