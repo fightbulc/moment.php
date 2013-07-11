@@ -17,9 +17,12 @@ class Moment extends \DateTime
      * @param string $dateTime
      * @param string $timezone
      */
-    public function __construct($dateTime = 'now', $timezone = 'UTC')
+    public function __construct($dateTime = 'now', $timezone = NULL)
     {
-        parent::__construct($dateTime, $this->_getDateTimeZone($timezone));
+        if($timezone !== null) {
+           $timezone =  $this->_getDateTimeZone($timezone);
+        }
+        parent::__construct($dateTime, $timezone);
 
         return $this;
     }
@@ -27,7 +30,7 @@ class Moment extends \DateTime
     // ##########################################
 
     /**
-     * @param $timezone
+     * @param string $timezone
      * @return \DateTimeZone
      */
     protected function _getDateTimeZone($timezone)
@@ -38,7 +41,7 @@ class Moment extends \DateTime
     // ##########################################
 
     /**
-     * @param \DateTimeZone $timezone
+     * @param string $timezone
      * @return \DateTime|Moment
      */
     public function setTimezone($timezone)
