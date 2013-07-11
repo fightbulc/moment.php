@@ -1,5 +1,5 @@
 {
-    "name": "fightbulc/moment",
+    "name": "ashishtilara/moment",
     "description": "DateTime Wrapper",
     "version": "1.0.3",
     "type": "library",
@@ -9,6 +9,11 @@
         {
             "name": "Tino Ehrich",
             "email": "opensource@efides.com",
+            "role": "developer"
+        },
+        {
+            "name": "Ashish Tilara",
+            "email": "ashish@itcutives.com",
             "role": "developer"
         }
     ],
