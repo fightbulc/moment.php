@@ -85,7 +85,7 @@ echo $m->subtract('days', 7)->subtract('minutes', 15)->format(); // 2012-05-08T1
 ### 5. Difference between dates
 ```php
 $m = new Moment('2013-02-01T07:00:00');
-$difference = $m->fromNow();
+$momentFromVo = $m->fromNow();
 
 // or from a specific moment
 $m = new Moment('2013-02-01T07:00:00');
