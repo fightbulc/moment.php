@@ -27,7 +27,7 @@ Below you see the easiest setup to install moment:
 }
 ```
 
-If you wanna add it to your existing project just use the package reference: ```"fightbulc/moment": "1.0.*"```.
+If you wanna add it to your existing project just use the package reference: ```"fightbulc/moment": "1.1.*"```.
 
 # Quick examples
 
@@ -41,12 +41,31 @@ echo $m->format(); // e.g. 2012-10-03T12:00:00+0200
 ```
 
 ### 2. Custom format
+
+### 2.1 PHP only (Standard)
+
 ```php
 $m = new Moment('2012-04-25T03:00:00', 'CET');
 echo $m->format('l, dS F Y / H:i (e)'); // Wednesday, 25th April 2012 / 03:00 (Europe/Berlin)
 ```
-Formats are based on PHP's [Date function](http://php.net/manual/en/function.date.php)
-and [DateTime class](http://www.php.net/manual/en/datetime.formats.php).
+Formats are based on PHP's [Date function](http://php.net/manual/en/function.date.php) and [DateTime class](http://www.php.net/manual/en/datetime.formats.php).
+
+### 2.2 Non-php formats
+
+You can now inject different format handling by passing along a class which implements the ```FormatsInterface```. You can find an example within the test folder for implementing all formats from [moment.js](http://momentjs.com/docs/#/displaying/format/). Thanks to [Ashish](https://github.com/ashishtilara) for taking the time to match ```moment.js``` formats to those of PHP. Have a look at the [test script](https://github.com/fightbulc/moment.php/blob/master/test/test.php) to see the example in action.
+
+Everybody can write format classes in the same manner. Its easy and scalable.
+
+```php
+// get  desired formats class
+require 'MomentJs.php';
+
+// create a moment
+$m = new \Moment\Moment('2012-04-25T03:00:00', 'CET');
+
+// format with moment.js definitions
+echo $m->format('LLLL', new MomentJs()); // Wednesday, April 25th 2012 3:00 AM
+```
 
 ### 3. Switch timezones
 ```php
@@ -121,7 +140,7 @@ $m->getPeriodByInterval('2012', 'quarter', 2);
 # License
 Moment.php is freely distributable under the terms of the MIT license.
 
-Copyright (c) 2012 Tino Ehrich
+Copyright (c) 2013 Tino Ehrich
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

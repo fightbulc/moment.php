@@ -1,83 +1,125 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <title>moment.php testing</title>
-  <style>
-    body {
-      font-family:"Helvetica Neue";
-    }
-    div {
-      background:#eee;
-      padding:10px 20px;
-      margin-bottom:10px;
-    }
+    <meta charset="utf-8">
+    <title>moment.php testing</title>
+    <style>
+        body
+        {
+            font-family: "Helvetica Neue";
+        }
 
-    pre {
-      background:#cef;
-    }
+        div
+        {
+            background: #eee;
+            padding: 10px 20px;
+            margin-bottom: 10px;
+        }
 
-    code {
-      display:block;
-      margin:0;
-      padding:0;
-    }
-  </style>
+        pre
+        {
+            background: #cef;
+        }
+
+        code
+        {
+            display: block;
+            margin: 0;
+            padding: 0;
+        }
+    </style>
 </head>
 <body>
 
-  <h1>Moment.php</h1>
+<h1>Moment.php</h1>
 
-  <p>Wrapper for PHP's DateTime class inspired by moment.js</p>
+<p>Wrapper for PHP's DateTime class inspired by moment.js</p>
 
-  <div>
+<div>
     <h3>1. DateTime from "Now" (UTC)</h3>
+
     <p>{{test01}}</p>
-  </div>
+</div>
 
-  <div>
+<div>
     <h3>2. Set date and add 2 hours</h3>
+
     <p><strong>Date:</strong> 15.05.2012 12:30:00 (CET)</p>
+
     <p>{{test02}}</p>
-  </div>
+</div>
 
-  <div>
+<div>
     <h3>3. Set date and subtract 7 days and 15 minutes</h3>
+
     <p><strong>Date:</strong> 15.05.2012 12:30:00 (CET)</p>
+
     <p>{{test03}}</p>
-  </div>
+</div>
 
-  <div>
+<div>
     <h3>4. Difference between two dates</h3>
+
     <p><strong>Date#1:</strong> 12.05.2012 / 15:00:00 (UTC)</p>
+
     <p><strong>Date#2:</strong> 25.09.2011 / 10:00:00 (UTC)</p>
+
     <p><strong>Difference seconds:</strong> {{test04.01}}</p>
+
     <p><strong>Difference in minutes:</strong> {{test04.02}}</p>
+
     <p><strong>Difference in hours:</strong> {{test04.03}}</p>
+
     <p><strong>Difference in days:</strong> {{test04.04}}</p>
+
     <p><strong>Difference in weeks:</strong> {{test04.05}}</p>
-  </div>
+</div>
 
-  <div>
+<div>
     <h3>5. Difference Date#1 to "Now"</h3>
+
     <p><strong>Date#1:</strong> 01.02.2013 / 07:00:00 (UTC)</p>
+
     <p><strong>Difference seconds:</strong> {{test05.01}}</p>
+
     <p><strong>Difference in minutes:</strong> {{test05.02}}</p>
+
     <p><strong>Difference in hours:</strong> {{test05.03}}</p>
+
     <p><strong>Difference in days:</strong> {{test05.04}}</p>
+
     <p><strong>Difference in weeks:</strong> {{test05.05}}</p>
-  </div>
+</div>
 
-  <div>
+<div>
     <h3>6. CET to UTC</h3>
-    <p><strong>CET:</strong> {{test06.01}}</p>
-    <p><strong>UTC:</strong> {{test06.02}}</p>
-  </div>
 
-  <div>
+    <p><strong>CET:</strong> {{test06.01}}</p>
+
+    <p><strong>UTC:</strong> {{test06.02}}</p>
+</div>
+
+<div>
     <h3>7. Custom format</h3>
+
     <p>{{test07}}</p>
-  </div>
+</div>
+
+<div>
+    <h3>8. Get period</h3>
+    Get the period week for the date: {{test08.03}}
+    <p><strong>Week starts on:</strong> {{test08.01}}</p>
+
+    <p><strong>Week ends on:</strong> {{test08.02}}</p>
+</div>
+
+<div>
+    <h3>9. Use other format definitions via FormatsInterface</h3>
+    Reference date '2012-04-25T03:00:00' in 'CET'.
+    <p><strong>Moment.php "l, F jS Y g:i A"</strong> {{test09.01}}</p>
+
+    <p><strong>Moment.js "LLLL"</strong> {{test09.02}}</p>
+</div>
 
 
 </body>

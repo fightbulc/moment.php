@@ -4,30 +4,57 @@
      * Wrapper for PHP's DateTime class inspired by moment.js
      *
      * @author  Tino Ehrich <ehrich@efides.com>
-     * @version 0.1
+     * @version 1.1
      *
      * @dependencies  >= PHP 5.3.0
-     *
      */
+
     namespace Moment;
 
     class Moment extends \DateTime
     {
+        /** @var string */
+        protected $_timezoneString;
+
+        // ##########################################
+
         /**
          * @param string $dateTime
          * @param string $timezone
          */
         public function __construct($dateTime = 'now', $timezone = 'UTC')
         {
-            parent::__construct($dateTime, $this->_getDateTimeZone($timezone));
+            return $this->resetDateTime($dateTime, $timezone);
+        }
+
+        // ##########################################
+
+        /**
+         * @param string $timezoneString
+         *
+         * @return Moment
+         */
+        protected function _setTimezoneString($timezoneString)
+        {
+            $this->_timezoneString = $timezoneString;
 
             return $this;
         }
 
-        // ######################################
+        // ##########################################
 
         /**
-         * @param $timezone
+         * @return string
+         */
+        protected function _getTimezoneString()
+        {
+            return $this->_timezoneString;
+        }
+
+        // ##########################################
+
+        /**
+         * @param string $timezone
          *
          * @return \DateTimeZone
          */
@@ -36,21 +63,23 @@
             return new \DateTimeZone($timezone);
         }
 
-        // ######################################
+        // ##########################################
 
         /**
-         * @param \DateTimeZone $timezone
+         * @param string $timezone
          *
          * @return \DateTime|Moment
          */
         public function setTimezone($timezone)
         {
+            $this->_setTimezoneString($timezone);
+
             parent::setTimezone($this->_getDateTimeZone($timezone));
 
             return $this;
         }
 
-        // ######################################
+        // ##########################################
 
         /**
          * @param string $dateTime
@@ -60,29 +89,41 @@
          */
         public function resetDateTime($dateTime = 'now', $timezone = 'UTC')
         {
+            // cache timezone string
+            $this->_setTimezoneString($timezone);
+
+            // create instance
             parent::__construct($dateTime, $this->_getDateTimeZone($timezone));
 
             return $this;
         }
 
-        // ######################################
+        // ##########################################
 
         /**
          * @param null $format
+         * @param null|FormatsInterface $formatsInterface
          *
          * @return string
          */
-        public function format($format = NULL)
+        public function format($format = NULL, $formatsInterface = NULL)
         {
+            // set default format
             if ($format === NULL)
             {
                 $format = \DateTime::ISO8601;
             }
 
+            // handle diverse format types
+            if ($formatsInterface instanceof FormatsInterface)
+            {
+                $format = $formatsInterface->format($format);
+            }
+
             return parent::format($format);
         }
 
-        // ######################################
+        // ############################################
 
         /**
          * @param string $type
@@ -97,7 +138,7 @@
             return $this;
         }
 
-        // ######################################
+        // ############################################
 
         /**
          * @param string $type
@@ -138,7 +179,7 @@
         /**
          * @param string $timezone
          *
-         * @return array
+         * @return MomentFromVo
          */
         public function fromNow($timezone = 'UTC')
         {
@@ -221,43 +262,44 @@
                     $currentWeekDay = $this->format('N');
 
                     $start = (new Moment('@' . $this->format('U')))
-                        ->setTimezone($this->getTimezone())
+                        ->setTimezone($this->_getTimezoneString())
                         ->subtract('day', $currentWeekDay - 1)
                         ->setTime(0, 0, 0);
 
                     $end = (new Moment('@' . $this->format('U')))
-                        ->setTimezone($this->getTimezone())
+                        ->setTimezone($this->_getTimezoneString())
                         ->add('day', 7 - $currentWeekDay)
                         ->setTime(23, 59, 59);
 
                     break;
+
+                // ------------------------------
 
                 case 'month':
                     $maxMonthDays = $this->format('t');
                     $currentMonthDay = $this->format('j');
 
                     $start = (new Moment('@' . $this->format('U')))
-                        ->setTimezone($this->getTimezone())
+                        ->setTimezone($this->_getTimezoneString())
                         ->subtract('day', $currentMonthDay - 1)
                         ->setTime(0, 0, 0);
 
                     $end = (new Moment('@' . $this->format('U')))
-                        ->setTimezone($this->getTimezone())
+                        ->setTimezone($this->_getTimezoneString())
                         ->add('day', $maxMonthDays - $currentMonthDay)
                         ->setTime(23, 59, 59);
 
                     break;
 
+                // ------------------------------
+
                 default:
-                    throw new \Exception("Period \"{$period}\" does not exist.", 500);
+                    throw new \Exception("Period \"{$period}\" is not supported yet (supported are \"week\" and \"month\").", 500);
             }
 
-            // fill Vo
-            $momentPeriodVo = (new MomentPeriodVo())
+            return (new MomentPeriodVo())
                 ->setRefDate($this)
                 ->setStartDate($start)
                 ->setEndDate($end);
-
-            return $momentPeriodVo;
         }
     }
