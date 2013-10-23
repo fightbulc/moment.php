@@ -15,6 +15,19 @@ Date library for parsing, manipulating and formatting dates.
 ### Any dependencies?
 PHP 5.3 or later since moment.php is based on php's [DateTime Class](http://php.net/manual/en/class.datetime.php).
 
+# Install
+
+Below you see the easiest setup to install moment:
+
+```json
+{
+    "require": {
+        "fightbulc/moment": "1.0.*"
+    }
+}
+```
+
+If you wanna add it to your existing project just use the package reference: ```"fightbulc/moment": "1.0.*"```.
 
 # Quick examples
 
