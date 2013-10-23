@@ -27,7 +27,7 @@ Below you see the easiest setup to install moment:
 }
 ```
 
-If you wanna add it to your existing project just use the package reference: ```"fightbulc/moment": "1.0.*"```.
+If you wanna add it to your existing project just use the package reference: ```"fightbulc/moment": "1.1.*"```.
 
 # Quick examples
 
