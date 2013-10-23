@@ -22,7 +22,7 @@ Below you see the easiest setup to install moment:
 ```json
 {
     "require": {
-        "fightbulc/moment": "1.0.*"
+        "fightbulc/moment": "1.1.*"
     }
 }
 ```
@@ -70,18 +70,27 @@ $difference = $m->fromNow();
 
 // or from a specific moment
 $m = new Moment('2013-02-01T07:00:00');
-$difference = $m->from('2011-09-25T10:00:00');
+$momentFromVo = $m->from('2011-09-25T10:00:00');
 
-// result comes as an array
-var_dump($difference);
+// result comes as a value object class
+echo $momentFromVo->getSeconds()    // -19630800
+echo $momentFromVo->getMinutes()    // -327180
+echo $momentFromVo->getHours()      // -5453
+echo $momentFromVo->getDays()       // -227.21
+echo $momentFromVo->getWeeks()      // -32.46
+```
 
-/* array(5) {
-  ["seconds"]=> string(9) "-19630800"
-  ["minutes"]=> string(7) "-327180"
-  ["hours"]=> string(5) "-5453"
-  ["days"]=> string(7) "-227.21"
-  ["weeks"]=> string(6) "-32.46"
-} */
+### 6. Get date periods (week, month)
+Sometimes its helpful to get the period boundaries of a given date. For instance in case that today is Wednesday and I need the starting-/end dates from today's week. Allowed periods are ```week``` and ```month```.
+
+```php
+$m = new Moment();
+$momentPeriodVo = $m->getPeriod('week');
+
+// results comes as well as a value object class
+echo $momentPeriodVo->getStartDate()->format('Y-m-d');  // get start date
+echo $momentPeriodVo->getEndDate()->format('Y-m-d');    // get end date
+echo $momentPeriodVo->getRefDate()->format('Y-m-d');    // get reference date
 ```
 
 # Roadmap
@@ -90,17 +99,6 @@ var_dump($difference);
 Handle invalid dates.
 
 ### Useful date calculations
-Get the period by a given date. Valid periods would be: week, month, quarter, halfyear, year.
-```php
-$m = new Moment();
-
-// Get the period for the given date
-$m->getPeriodByDate('2012-04-08', 'month');
-
-// result as array
-[reference] => 2012-04-08, [start] => 2012-04-01, [end] => 2012-04-30, [interval] => 04
-```
-
 Get date periods by a given interval. Valid periods would be: week, month, quarter, halfyear, year.
 ```php
 $m = new Moment();
@@ -111,7 +109,6 @@ $m->getPeriodByInterval('2012', 'quarter', 2);
 // result as array
 [reference] => 2012-04-01, [start] => 2012-04-01, [end] => 2012-06-30, [interval] => 2
 ```
-
 
 # License
 Moment.php is freely distributable under the terms of the MIT license.

@@ -5,13 +5,13 @@
     class MomentPeriodVo
     {
         /** @var  Moment */
-        protected $_start;
+        protected $_startDate;
 
         /** @var  Moment */
-        protected $_end;
+        protected $_endDate;
 
         /** @var  Moment */
-        protected $_reference;
+        protected $_refDate;
 
         // ######################################
 
@@ -20,9 +20,9 @@
          *
          * @return MomentPeriodVo
          */
-        public function setReference(Moment $reference)
+        public function setRefDate(Moment $reference)
         {
-            $this->_reference = $reference;
+            $this->_refDate = $reference;
 
             return $this;
         }
@@ -32,9 +32,9 @@
         /**
          * @return \Moment\Moment
          */
-        public function getReference()
+        public function getRefDate()
         {
-            return $this->_reference;
+            return $this->_refDate;
         }
 
         // ######################################
@@ -44,9 +44,9 @@
          *
          * @return MomentPeriodVo
          */
-        public function setEnd(Moment $end)
+        public function setEndDate(Moment $end)
         {
-            $this->_end = $end;
+            $this->_endDate = $end;
 
             return $this;
         }
@@ -56,9 +56,9 @@
         /**
          * @return Moment
          */
-        public function getEnd()
+        public function getEndDate()
         {
-            return $this->_end;
+            return $this->_endDate;
         }
 
         // ######################################
@@ -68,9 +68,9 @@
          *
          * @return MomentPeriodVo
          */
-        public function setStart(Moment $start)
+        public function setStartDate(Moment $start)
         {
-            $this->_start = $start;
+            $this->_startDate = $start;
 
             return $this;
         }
@@ -80,8 +80,8 @@
         /**
          * @return Moment
          */
-        public function getStart()
+        public function getStartDate()
         {
-            return $this->_start;
+            return $this->_startDate;
         }
     }

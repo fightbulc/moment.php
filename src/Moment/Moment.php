@@ -118,21 +118,19 @@
          * @param string $dateTime
          * @param string $timezone
          *
-         * @return array
+         * @return MomentFromVo
          */
         public function from($dateTime = 'now', $timezone = 'UTC')
         {
             $fromInstance = parent::diff(new Moment($dateTime, $timezone));
 
-            $direction = $fromInstance->format('%R');
-
-            return array(
-                'seconds' => $direction . $this->_fromToSeconds($fromInstance),
-                'minutes' => $direction . round($this->_fromToMinutes($fromInstance), 2),
-                'hours'   => $direction . round($this->_fromToHours($fromInstance), 2),
-                'days'    => $direction . round($this->_fromToDays($fromInstance), 2),
-                'weeks'   => $direction . round($this->_fromToWeeks($fromInstance), 2),
-            );
+            return (new MomentFromVo())
+                ->setDirection($fromInstance->format('%R'))
+                ->setSeconds($this->_fromToSeconds($fromInstance))
+                ->setMinutes($this->_fromToMinutes($fromInstance))
+                ->setHours($this->_fromToHours($fromInstance))
+                ->setDays($this->_fromToDays($fromInstance))
+                ->setWeeks($this->_fromToWeeks($fromInstance));
         }
 
         // ######################################
@@ -256,9 +254,9 @@
 
             // fill Vo
             $momentPeriodVo = (new MomentPeriodVo())
-                ->setReference($this)
-                ->setStart($start)
-                ->setEnd($end);
+                ->setRefDate($this)
+                ->setStartDate($start)
+                ->setEndDate($end);
 
             return $momentPeriodVo;
         }
