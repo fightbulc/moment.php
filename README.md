@@ -84,13 +84,13 @@ echo $momentFromVo->getWeeks()      // -32.46
 Sometimes its helpful to get the period boundaries of a given date. For instance in case that today is Wednesday and I need the starting-/end dates from today's week. Allowed periods are ```week``` and ```month```.
 
 ```php
-$m = new Moment();
+$m = new Moment('2013-10-23T10:00:00');
 $momentPeriodVo = $m->getPeriod('week');
 
 // results comes as well as a value object class
-echo $momentPeriodVo->getStartDate()->format('Y-m-d');  // get start date
-echo $momentPeriodVo->getEndDate()->format('Y-m-d');    // get end date
-echo $momentPeriodVo->getRefDate()->format('Y-m-d');    // get reference date
+echo $momentPeriodVo->getStartDate()->format('Y-m-d');  // get start date       -> 2013-10-21
+echo $momentPeriodVo->getEndDate()->format('Y-m-d');    // get end date:        -> 2013-10-27
+echo $momentPeriodVo->getRefDate()->format('Y-m-d');    // get reference date:  -> 2013-10-23
 ```
 
 # Roadmap
