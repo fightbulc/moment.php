@@ -88,9 +88,17 @@ $m = new Moment('2013-10-23T10:00:00');
 $momentPeriodVo = $m->getPeriod('week');
 
 // results comes as well as a value object class
-echo $momentPeriodVo->getStartDate()->format('Y-m-d');  // get start date       -> 2013-10-21
-echo $momentPeriodVo->getEndDate()->format('Y-m-d');    // get end date:        -> 2013-10-27
-echo $momentPeriodVo->getRefDate()->format('Y-m-d');    // get reference date:  -> 2013-10-23
+echo $momentPeriodVo
+    ->getStartDate()
+    ->format('Y-m-d'); // 2013-10-21
+
+echo $momentPeriodVo
+    ->getEndDate()
+    ->format('Y-m-d'); // 2013-10-27
+
+echo $momentPeriodVo
+    ->getRefDate()
+    ->format('Y-m-d'); // 2013-10-23
 ```
 
 # Roadmap
