@@ -22,12 +22,12 @@ Below you see the easiest setup to install moment:
 ```json
 {
     "require": {
-        "fightbulc/moment": "1.1.*"
+        "fightbulc/moment": "1.2.*"
     }
 }
 ```
 
-If you wanna add it to your existing project just use the package reference: ```"fightbulc/moment": "1.1.*"```.
+If you wanna add it to your existing project just use the package reference: ```"fightbulc/moment": "1.2.*"```.
 
 # Quick examples
 

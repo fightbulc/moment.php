@@ -4,7 +4,7 @@
      * Wrapper for PHP's DateTime class inspired by moment.js
      *
      * @author  Tino Ehrich <ehrich@efides.com>
-     * @version 1.1
+     * @version See composer.json
      *
      * @dependencies  >= PHP 5.3.0
      */
