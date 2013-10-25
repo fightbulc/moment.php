@@ -58,13 +58,11 @@ Everybody can write format classes in the same manner. Its easy and scalable.
 
 ```php
 // get  desired formats class
-require 'MomentJs.php';
-
 // create a moment
 $m = new \Moment\Moment('2012-04-25T03:00:00', 'CET');
 
 // format with moment.js definitions
-echo $m->format('LLLL', new MomentJs()); // Wednesday, April 25th 2012 3:00 AM
+echo $m->format('LLLL', new \Moment\CustomFormats\MomentJs()); // Wednesday, April 25th 2012 3:00 AM
 ```
 
 ### 3. Switch timezones

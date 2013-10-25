@@ -76,10 +76,9 @@
 
     // ------------------------------------------
 
-    require __DIR__ . '/custom_formats/MomentJs.php';
     $m = new \Moment\Moment('2012-04-25T03:00:00', 'CET');
     $response['test09.01'] = $m->format('l, F jS Y g:i A');
-    $response['test09.02'] = $m->format('LLLL', new MomentJs());
+    $response['test09.02'] = $m->format('LLLL', new \Moment\CustomFormats\MomentJs());
 
     // ############################################
 

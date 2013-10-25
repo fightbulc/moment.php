@@ -1,6 +1,10 @@
 <?php
 
-    class MomentJs implements \Moment\FormatsInterface
+    namespace Moment\CustomFormats;
+
+    use Moment\FormatsInterface;
+
+    class MomentJs implements FormatsInterface
     {
         /**
          * @param $format
