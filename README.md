@@ -84,11 +84,23 @@ echo $m->setTimezone('UTC')->format(); // 2012-04-25T01:00:00+0000
 ### 4. Create a custom moment and manipulate it
 ```php
 $m = new Moment('2012-05-15T12:30:00', 'CET');
-echo $m->add('hours', 2)->format(); // 2012-05-15T14:30:00+0200
+echo $m->addHours(2)->format(); // 2012-05-15T14:30:00+0200
 
 $m = new Moment('2012-05-15T12:30:00', 'CET');
-echo $m->subtract('days', 7)->subtract('minutes', 15)->format(); // 2012-05-08T12:15:00+0200
+echo $m->subtractDays(7)->subtractMinutes(15)->format(); // 2012-05-08T12:15:00+0200
 ```
+
+### Methods for manipulating the date/time
+
+Add             | Subtract
+---             | ---
+addSeconds($s)  | subtractSeconds($s)
+addMinutes($s)  | subtractMinutes($i)
+addHours($s)    | subtractHours($h)
+addDays($s)     | subtractDays($d)
+addWeeks($w)    | subtractWeeks($w)
+addMonths($m)   | subtractMonths($m)
+addYears($y)    | subtractYears($y)
 
 -------------------------------------------------
 
