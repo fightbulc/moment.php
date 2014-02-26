@@ -14,6 +14,9 @@
     class Moment extends \DateTime
     {
         /** @var string */
+        protected $_rawDateTimeString;
+
+        /** @var string */
         protected $_timezoneString;
 
         // ##########################################
@@ -25,6 +28,59 @@
         public function __construct($dateTime = 'now', $timezone = 'UTC')
         {
             return $this->resetDateTime($dateTime, $timezone);
+        }
+
+        // ##########################################
+
+        /**
+         * @param string $dateTime
+         * @param string $timezone
+         *
+         * @return $this
+         * @throws MomentException
+         */
+        public function resetDateTime($dateTime = 'now', $timezone = 'UTC')
+        {
+            // cache dateTime
+            $this->_setRawDateTimeString($dateTime);
+
+            // cache timezone string
+            $this->_setTimezoneString($timezone);
+
+            // create instance
+            parent::__construct($dateTime, $this->_getDateTimeZone($timezone));
+
+            // date validation
+            if ($this->_isValidDate() === FALSE)
+            {
+                throw new MomentException('Given date of "' . $dateTime . '" is invalid');
+            }
+
+            return $this;
+        }
+
+        // ##########################################
+
+        /**
+         * @param string $rawDateTimeString
+         *
+         * @return Moment
+         */
+        protected function _setRawDateTimeString($rawDateTimeString)
+        {
+            $this->_rawDateTimeString = $rawDateTimeString;
+
+            return $this;
+        }
+
+        // ##########################################
+
+        /**
+         * @return string
+         */
+        protected function _getRawDateTimeString()
+        {
+            return $this->_rawDateTimeString;
         }
 
         // ##########################################
@@ -82,25 +138,6 @@
         // ##########################################
 
         /**
-         * @param string $dateTime
-         * @param string $timezone
-         *
-         * @return Moment
-         */
-        public function resetDateTime($dateTime = 'now', $timezone = 'UTC')
-        {
-            // cache timezone string
-            $this->_setTimezoneString($timezone);
-
-            // create instance
-            parent::__construct($dateTime, $this->_getDateTimeZone($timezone));
-
-            return $this;
-        }
-
-        // ##########################################
-
-        /**
          * @param null $format
          * @param null|FormatsInterface $formatsInterface
          *
@@ -126,6 +163,8 @@
         // ############################################
 
         /**
+         * @deprecated
+         *
          * @param string $type
          * @param int $value
          *
@@ -141,6 +180,92 @@
         // ############################################
 
         /**
+         * @param int $seconds
+         *
+         * @return Moment
+         */
+        public function addSeconds($seconds = 1)
+        {
+            return $this->add('second', $seconds);
+        }
+
+        // ############################################
+
+        /**
+         * @param int $minutes
+         *
+         * @return Moment
+         */
+        public function addMinutes($minutes = 1)
+        {
+            return $this->add('minute', $minutes);
+        }
+
+        // ############################################
+
+        /**
+         * @param int $hours
+         *
+         * @return Moment
+         */
+        public function addHours($hours = 1)
+        {
+            return $this->add('hour', $hours);
+        }
+
+        // ############################################
+
+        /**
+         * @param int $days
+         *
+         * @return Moment
+         */
+        public function addDays($days = 1)
+        {
+            return $this->add('day', $days);
+        }
+
+        // ############################################
+
+        /**
+         * @param int $weeks
+         *
+         * @return Moment
+         */
+        public function addWeeks($weeks = 1)
+        {
+            return $this->add('week', $weeks);
+        }
+
+        // ############################################
+
+        /**
+         * @param int $months
+         *
+         * @return Moment
+         */
+        public function addMonths($months = 1)
+        {
+            return $this->add('month', $months);
+        }
+
+        // ############################################
+
+        /**
+         * @param int $years
+         *
+         * @return Moment
+         */
+        public function addYears($years = 1)
+        {
+            return $this->add('year', $years);
+        }
+
+        // ############################################
+
+        /**
+         * @deprecated
+         *
          * @param string $type
          * @param int $value
          *
@@ -151,6 +276,90 @@
             parent::modify('-' . $value . ' ' . $type);
 
             return $this;
+        }
+
+        // ############################################
+
+        /**
+         * @param int $seconds
+         *
+         * @return Moment
+         */
+        public function subtractSeconds($seconds = 1)
+        {
+            return $this->subtract('second', $seconds);
+        }
+
+        // ############################################
+
+        /**
+         * @param int $minutes
+         *
+         * @return Moment
+         */
+        public function subtractMinutes($minutes = 1)
+        {
+            return $this->subtract('minute', $minutes);
+        }
+
+        // ############################################
+
+        /**
+         * @param int $hours
+         *
+         * @return Moment
+         */
+        public function subtractHours($hours = 1)
+        {
+            return $this->subtract('hour', $hours);
+        }
+
+        // ############################################
+
+        /**
+         * @param int $days
+         *
+         * @return Moment
+         */
+        public function subtractDays($days = 1)
+        {
+            return $this->subtract('day', $days);
+        }
+
+        // ############################################
+
+        /**
+         * @param int $weeks
+         *
+         * @return Moment
+         */
+        public function subtractWeeks($weeks = 1)
+        {
+            return $this->subtract('week', $weeks);
+        }
+
+        // ############################################
+
+        /**
+         * @param int $months
+         *
+         * @return Moment
+         */
+        public function subtractMonths($months = 1)
+        {
+            return $this->subtract('month', $months);
+        }
+
+        // ############################################
+
+        /**
+         * @param int $years
+         *
+         * @return Moment
+         */
+        public function subtractYears($years = 1)
+        {
+            return $this->subtract('year', $years);
         }
 
         // ######################################
@@ -165,7 +374,9 @@
         {
             $fromInstance = parent::diff(new Moment($dateTime, $timezone));
 
-            return (new MomentFromVo())
+            $momentFromVo = new MomentFromVo();
+
+            return $momentFromVo
                 ->setDirection($fromInstance->format('%R'))
                 ->setSeconds($this->_fromToSeconds($fromInstance))
                 ->setMinutes($this->_fromToMinutes($fromInstance))
@@ -249,10 +460,26 @@
         // ######################################
 
         /**
+         * @param int $hour
+         * @param int $minute
+         * @param int $second
+         *
+         * @return Moment
+         */
+        public function setTime($hour, $minute, $second)
+        {
+            parent::setTime($hour, $minute, $second);
+
+            return $this;
+        }
+
+        // ######################################
+
+        /**
          * @param $period
          *
          * @return MomentPeriodVo
-         * @throws \Exception
+         * @throws MomentException
          */
         public function getPeriod($period)
         {
@@ -261,14 +488,14 @@
                 case 'week':
                     $currentWeekDay = $this->format('N');
 
-                    $start = (new Moment('@' . $this->format('U')))
-                        ->setTimezone($this->_getTimezoneString())
-                        ->subtract('day', $currentWeekDay - 1)
+                    $start = new Moment('@' . $this->format('U'));
+                    $start->setTimezone($this->_getTimezoneString())
+                        ->subtractDays($currentWeekDay - 1)
                         ->setTime(0, 0, 0);
 
-                    $end = (new Moment('@' . $this->format('U')))
-                        ->setTimezone($this->_getTimezoneString())
-                        ->add('day', 7 - $currentWeekDay)
+                    $end = new Moment('@' . $this->format('U'));
+                    $end->setTimezone($this->_getTimezoneString())
+                        ->addDays(7 - $currentWeekDay)
                         ->setTime(23, 59, 59);
 
                     break;
@@ -279,14 +506,14 @@
                     $maxMonthDays = $this->format('t');
                     $currentMonthDay = $this->format('j');
 
-                    $start = (new Moment('@' . $this->format('U')))
-                        ->setTimezone($this->_getTimezoneString())
-                        ->subtract('day', $currentMonthDay - 1)
+                    $start = new Moment('@' . $this->format('U'));
+                    $start->setTimezone($this->_getTimezoneString())
+                        ->subtractDays($currentMonthDay - 1)
                         ->setTime(0, 0, 0);
 
-                    $end = (new Moment('@' . $this->format('U')))
-                        ->setTimezone($this->_getTimezoneString())
-                        ->add('day', $maxMonthDays - $currentMonthDay)
+                    $end = new Moment('@' . $this->format('U'));
+                    $end->setTimezone($this->_getTimezoneString())
+                        ->addDays($maxMonthDays - $currentMonthDay)
                         ->setTime(23, 59, 59);
 
                     break;
@@ -294,12 +521,45 @@
                 // ------------------------------
 
                 default:
-                    throw new \Exception("Period \"{$period}\" is not supported yet (supported are \"week\" and \"month\").", 500);
+                    throw new MomentException("Period \"{$period}\" is not supported yet (supported are \"week\" and \"month\").", 500);
             }
 
-            return (new MomentPeriodVo())
+            $momentPeriodVo = new MomentPeriodVo();
+
+            return $momentPeriodVo
                 ->setRefDate($this)
                 ->setStartDate($start)
                 ->setEndDate($end);
+        }
+
+        // ######################################
+
+        /**
+         * @return bool
+         */
+        protected function _isValidDate()
+        {
+            $rawDateTime = $this->_getRawDateTimeString();
+
+            if (strpos($rawDateTime, '-') === FALSE)
+            {
+                return TRUE;
+            }
+
+            // ----------------------------------
+
+            // with time
+            if (strpos($rawDateTime, 'T') !== FALSE)
+            {
+                $momentDateTime = $this->format('Y-m-dTH:i:s');
+            }
+
+            // without time
+            else
+            {
+                $momentDateTime = $this->format('Y-m-d');
+            }
+
+            return $rawDateTime === $momentDateTime;
         }
     }
