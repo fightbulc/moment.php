@@ -462,11 +462,11 @@
         /**
          * @param int $hour
          * @param int $minute
-         * @param int $second
+         * @param null $second
          *
-         * @return Moment
+         * @return $this|\DateTime
          */
-        public function setTime($hour, $minute, $second)
+        public function setTime($hour, $minute, $second = NULL)
         {
             parent::setTime($hour, $minute, $second);
 

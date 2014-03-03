@@ -1,7 +1,7 @@
 {
     "name": "fightbulc/moment",
     "description": "DateTime Wrapper",
-    "version": "1.3.0",
+    "version": "1.3.1",
     "type": "library",
     "keywords": ["date", "time", "manipulation", "format"],
     "license": "MIT",
