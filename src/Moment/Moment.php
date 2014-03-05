@@ -548,10 +548,16 @@
 
             // ----------------------------------
 
-            // with time
+            // time with indicator "T"
             if (strpos($rawDateTime, 'T') !== FALSE)
             {
                 $momentDateTime = $this->format('Y-m-d\TH:i:s');
+            }
+
+            // time without indicator "T"
+            elseif (strpos($rawDateTime, ':') !== FALSE)
+            {
+                $momentDateTime = $this->format('Y-m-d H:i:s');
             }
 
             // without time
