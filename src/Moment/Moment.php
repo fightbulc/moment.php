@@ -551,7 +551,7 @@
             // with time
             if (strpos($rawDateTime, 'T') !== FALSE)
             {
-                $momentDateTime = $this->format('Y-m-dTH:i:s');
+                $momentDateTime = $this->format('Y-m-d\TH:i:s');
             }
 
             // without time
