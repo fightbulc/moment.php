@@ -557,7 +557,7 @@
             // time without indicator "T"
             elseif (strpos($rawDateTime, ':') !== FALSE)
             {
-                if (substr_count($rawDateTime, ':') === 3) // with seconds
+                if (substr_count($rawDateTime, ':') === 2) // with seconds
                 {
                     $momentDateTime = $this->format('Y-m-d H:i:s');
                 }
