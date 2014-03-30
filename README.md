@@ -7,7 +7,7 @@
                                            |_|         |_|    
 </pre>
 
-Current version: 1.3.0
+Current version: 1.4.0
 
 # Intro
 
@@ -26,7 +26,7 @@ Easy install via composer. Still no idea what composer is? Inform yourself [here
 ```json
 {
     "require": {
-        "fightbulc/moment": "1.3.*"
+        "fightbulc/moment": "1.4.*"
     }
 }
 ```
