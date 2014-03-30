@@ -372,17 +372,19 @@
          */
         public function from($dateTime = 'now', $timezone = 'UTC')
         {
-            $fromInstance = parent::diff(new Moment($dateTime, $timezone));
+            $fromMoment = new Moment($dateTime, $timezone);
+            $dateDiff = parent::diff($fromMoment);
 
             $momentFromVo = new MomentFromVo();
 
             return $momentFromVo
-                ->setDirection($fromInstance->format('%R'))
-                ->setSeconds($this->_fromToSeconds($fromInstance))
-                ->setMinutes($this->_fromToMinutes($fromInstance))
-                ->setHours($this->_fromToHours($fromInstance))
-                ->setDays($this->_fromToDays($fromInstance))
-                ->setWeeks($this->_fromToWeeks($fromInstance));
+                ->setMoment($fromMoment)
+                ->setDirection($dateDiff->format('%R'))
+                ->setSeconds($this->_fromToSeconds($dateDiff))
+                ->setMinutes($this->_fromToMinutes($dateDiff))
+                ->setHours($this->_fromToHours($dateDiff))
+                ->setDays($this->_fromToDays($dateDiff))
+                ->setWeeks($this->_fromToWeeks($dateDiff));
         }
 
         // ######################################
@@ -530,6 +532,48 @@
                 ->setRefDate($this)
                 ->setStartDate($start)
                 ->setEndDate($end);
+        }
+
+        // ######################################
+
+        /**
+         * @return string
+         */
+        public function calendar()
+        {
+            $momentFromVo = $this->fromNow($this->_getTimezoneString());
+            $diff = floor($momentFromVo->getDays());
+
+            if ($diff > 6)
+            {
+                $format = 'm/d/Y';
+            }
+            elseif ($diff > 1)
+            {
+                $format = '\L\a\s\t l \a\t H:i';
+            }
+            elseif ($diff > 0)
+            {
+                $format = '\Y\e\s\t\e\r\d\a\y \a\t H:i';
+            }
+            elseif ($diff == 0)
+            {
+                $format = '\T\o\d\a\y \a\t H:i';
+            }
+            elseif ($diff >= -1)
+            {
+                $format = '\T\o\m\o\r\r\o\w \a\t H:i';
+            }
+            elseif ($diff > -7)
+            {
+                $format = 'l \a\t H:i';
+            }
+            else
+            {
+                $format = 'm/d/Y';
+            }
+
+            return $this->format($format);
         }
 
         // ######################################

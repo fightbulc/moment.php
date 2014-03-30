@@ -146,6 +146,29 @@ echo $momentPeriodVo
 
 -------------------------------------------------
 
+### 7. Calendar Times
+Calendar time displays time relative to ```now```, but slightly differently than ```Moment::fromNow()```. ```Moment::calendar()``` will format a date with different strings depending on how close to today the date is.
+
+```php
+(new \Moment\Moment('2014-03-30T16:58:00', 'CET'))->subtractDays(6)->calendar(); // last week
+(new \Moment\Moment('2014-03-30T16:58:00', 'CET'))->subtractDays(1)->calendar(); // yesterday
+(new \Moment\Moment('2014-03-30T16:58:00', 'CET'))->calendar(); // today
+(new \Moment\Moment('2014-03-30T16:58:00', 'CET'))->addDays(1)->calendar(); // tomorrow
+(new \Moment\Moment('2014-03-30T16:58:00', 'CET'))->addDays(3)->calendar(); // next week
+(new \Moment\Moment('2014-03-30T16:58:00', 'CET'))->addDays(10)->calendar(); // everything else
+```
+
+Time            | Display
+---             | ---
+Last week       | Last Monday at 15:54
+The day before  | Yesterday at 15:54
+The same day    | Today at 15:54
+The next day    | Tomorrow at 15:54
+The next week   | Wednesday at 15:54
+Everything else | 04/09/2014
+
+-------------------------------------------------
+
 # Roadmap
 
 ### Useful date calculations
@@ -164,6 +187,10 @@ $m->getPeriodByInterval('2012', 'quarter', 2);
 
 # Changelog
 
+### 1.4.0
+- added:
+    - calendar format as implemented by [moment.js](http://momentjs.com/docs/#/displaying/calendar-time/)
+    
 ### 1.3.0
 - fixed:
     - incompatibility w/ PHP 5.3

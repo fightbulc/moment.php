@@ -80,6 +80,16 @@
     $response['test09.01'] = $m->format('l, F jS Y g:i A');
     $response['test09.02'] = $m->format('LLLL', new \Moment\CustomFormats\MomentJs());
 
+    // ------------------------------------------
+
+    $date = 'now';
+    $response['test10.01'] = (new \Moment\Moment($date, 'CET'))->subtractDays(6)->calendar();
+    $response['test10.02'] = (new \Moment\Moment($date, 'CET'))->subtractDays(1)->calendar();
+    $response['test10.03'] = (new \Moment\Moment($date, 'CET'))->calendar();
+    $response['test10.04'] = (new \Moment\Moment($date, 'CET'))->addDays(1)->calendar();
+    $response['test10.05'] = (new \Moment\Moment($date, 'CET'))->addDays(3)->calendar();
+    $response['test10.06'] = (new \Moment\Moment($date, 'CET'))->addDays(10)->calendar();
+
     // ############################################
 
     $tmpl = join('', file('test.html'));

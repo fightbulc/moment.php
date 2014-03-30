@@ -19,6 +19,29 @@
         protected $_hours;
         protected $_days;
         protected $_weeks;
+        protected $_moment;
+
+        /**
+         * @return Moment
+         */
+        public function getMoment()
+        {
+            return $this->_moment;
+        }
+
+        // ######################################
+
+        /**
+         * @param Moment $moment
+         *
+         * @return MomentFromVo
+         */
+        public function setMoment(Moment $moment)
+        {
+            $this->_moment = $moment;
+
+            return $this;
+        }
 
         // ######################################
 
