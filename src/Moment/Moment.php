@@ -122,6 +122,19 @@ class Moment extends \DateTime
     }
 
     /**
+     * @param $number
+     *
+     * @return string
+     */
+    protected function formatOrdinal($number)
+    {
+        $ends = array('\t\h', '\s\t', '\n\d', '\r\d', '\t\h', '\t\h', '\t\h', '\t\h', '\t\h', '\t\h');
+        $mod100 = $number % 100;
+
+        return $number . ($mod100 >= 11 && $mod100 <= 13 ? '\t\h' : $ends[$number % 10]);
+    }
+
+    /**
      * @param null $format
      * @param null|FormatsInterface $formatsInterface
      *
@@ -139,6 +152,36 @@ class Moment extends \DateTime
         if ($formatsInterface instanceof FormatsInterface)
         {
             $format = $formatsInterface->format($format);
+        }
+
+        // handle text
+        if (strpos($format, '[') !== false)
+        {
+            preg_match_all('/(\[[^\[]*\])/', $format, $matches);
+
+            foreach ($matches[1] as $part)
+            {
+                // split string to add \ in front of each character (required for PHP escaping)
+                $result = str_split(trim($part, "[]"));
+
+                // join string will \ in front of each character + add back to format
+                $format = str_replace($part, "\\" . implode("\\", $result), $format);
+            }
+        }
+
+        // handle ordinals
+        if (strpos($format, 'S') !== false)
+        {
+            preg_match_all('/(\wS)/', $format, $matches);
+
+            if (count($matches) >= 1)
+            {
+                foreach ($matches[1] as $part)
+                {
+                    $number = $this->format(substr($part, 0, 1));
+                    $format = str_replace($part, $this->formatOrdinal($number), $format);
+                }
+            }
         }
 
         return parent::format($format);
