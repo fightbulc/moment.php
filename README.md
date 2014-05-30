@@ -7,7 +7,7 @@
                                            |_|         |_|    
 </pre>
 
-Current version: 1.5.0
+Current version: 1.5.0 | [See Change log](#changelog)
 
 # Intro
 
