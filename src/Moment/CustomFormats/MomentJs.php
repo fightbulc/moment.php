@@ -7,7 +7,7 @@ use Moment\FormatsInterface;
 class MomentJs implements FormatsInterface
 {
     /** @var array */
-    protected $_tokens = array(
+    protected $tokens = array(
         "M"       => "n", // 1 2 ... 11 12
         "Mo"      => "nS", // month: 1st 2nd ... 11th 12th
         "MM"      => "m", // 01 02 ... 11 12
@@ -81,17 +81,17 @@ class MomentJs implements FormatsInterface
      */
     public function getTokens()
     {
-        return (array)$this->_tokens;
+        return (array)$this->tokens;
     }
 
     /**
-     * @param array $tokens
+     * @param array $options
      *
      * @return MomentJs
      */
-    public function setTokens(array $tokens)
+    public function setTokens(array $options)
     {
-        $this->_tokens = $tokens;
+        $this->tokens = array_merge($this->tokens, $options);
 
         return $this;
     }
