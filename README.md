@@ -198,7 +198,7 @@ echo $momentPeriodVo
     ->getRefDate()
     ->format('Y-m-d'); // 2013-10-23
 
-echo $momentPeriodVo->getInterval(); // 
+echo $momentPeriodVo->getInterval(); // 43 = week of year
 ```
 
 Same procedure for monthly and quarterly periods:
