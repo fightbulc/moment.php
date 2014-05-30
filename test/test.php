@@ -98,9 +98,11 @@ $response['test08.09'] = $momentPeriodVo->getInterval();
 
 // ------------------------------------------
 
-$m = new \Moment\Moment('2012-04-25T03:00:00', 'CET');
+//$m = new \Moment\Moment('2012-04-25T03:00:00', 'CET');
 $response['test09.01'] = $m->format('l, F jS Y g:i A');
 $response['test09.02'] = $m->format('LLLL', new \Moment\CustomFormats\MomentJs());
+$response['test09.03'] = $m->format('WS [week of the year]');
+$response['test09.04'] = $m->format('Wo [week of the year]', new \Moment\CustomFormats\MomentJs());
 
 // ------------------------------------------
 
