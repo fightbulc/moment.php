@@ -71,6 +71,30 @@ $m = new \Moment\Moment('2012-04-25T03:00:00', 'CET');
 echo $m->format('LLLL', new \Moment\CustomFormats\MomentJs()); // Wednesday, April 25th 2012 3:00 AM
 ```
 
+### 2.3 Easy text escaping
+
+Just wrap all your text within ```[]``` and all characters will be automatically escaped for you.
+
+```php
+$m = new Moment('2012-04-25T03:00:00', 'CET');
+echo $m->format('[We are in the month of:] F'); // We are in the month of: April
+```
+
+### 2.4 Fixed ordinal representations
+
+PHP's interal ordinal calculation seems to be buggy. I added a quick fix to handle this issue.
+
+The following example prints the week of the year of the given date. It should print ```22nd```:
+
+```php
+// internal function
+date('WS', mktime(12, 22, 0, 5, 27, 2014)); // 22th
+
+// moment.php
+$m = new \Moment\Moment('2014-05-27T12:22:00', 'CET');
+$m->format('WS'); // 22nd
+```
+
 -------------------------------------------------
 
 ### 3. Switch timezones
@@ -220,7 +244,8 @@ __Note:__ I ignored the period of ```second``` since we are not dealing with mil
 
 # Roadmap
 
-Try to port useful methods from moment.js.
+- Try to port useful methods from moment.js
+- Add unit tests
 
 -------------------------------------------------
 
@@ -249,6 +274,10 @@ Try to port useful methods from moment.js.
         - ```quarter``` = quarter of the year
     - added a static class ```MomentHelper```
         - get the period for a given quarter in a given year
+    - fixed PHP's internal ordinal calculation (also in combination with moment.js formatting)
+        - e.g. ```WS``` for 21th week of the year shows now correct ```21th``` etc.
+    - you can now escape text by wrapping it in ```[]```
+        - e.g. ```[Hello World]``` will be automatically transformed into ```\H\e\l\l\o \W\o\r\l\d``` 
     
 - removed:
     - add()
