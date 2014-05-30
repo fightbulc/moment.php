@@ -7,7 +7,7 @@
                                            |_|         |_|    
 </pre>
 
-Current version: 1.4.0
+Current version: 1.5.0
 
 # Intro
 
@@ -26,7 +26,7 @@ Easy install via composer. Still no idea what composer is? Inform yourself [here
 ```json
 {
     "require": {
-        "fightbulc/moment": "1.4.*"
+        "fightbulc/moment": "1.5.*"
     }
 }
 ```
@@ -95,12 +95,25 @@ echo $m->subtractDays(7)->subtractMinutes(15)->format(); // 2012-05-08T12:15:00+
 Add             | Subtract
 ---             | ---
 addSeconds($s)  | subtractSeconds($s)
-addMinutes($s)  | subtractMinutes($i)
-addHours($s)    | subtractHours($h)
-addDays($s)     | subtractDays($d)
+addMinutes($i)  | subtractMinutes($i)
+addHours($h)    | subtractHours($h)
+addDays($d)     | subtractDays($d)
 addWeeks($w)    | subtractWeeks($w)
 addMonths($m)   | subtractMonths($m)
 addYears($y)    | subtractYears($y)
+
+### Additional methods since version 1.5
+
+Setter          | Getter
+---             | ---
+setSecond($s)   | getSecond()
+setMinute($m)   | getMinute()
+setHour($h)     | getHour()
+setDay($d)      | getDay()
+setMonth($m)    | getMonth()
+setYear($y)     | getYear()
+--              | getQuarter()
+
 
 -------------------------------------------------
 
@@ -123,8 +136,8 @@ echo $momentFromVo->getWeeks()      // -32.46
 
 -------------------------------------------------
 
-### 6. Get date periods (week, month)
-Sometimes its helpful to get the period boundaries of a given date. For instance in case that today is Wednesday and I need the starting-/end dates from today's week. Allowed periods are ```week``` and ```month```.
+### 6. Get date periods (week, month, quarter)
+Sometimes its helpful to get the period boundaries of a given date. For instance in case that today is Wednesday and I need the starting-/end dates from today's week. Allowed periods are ```week```, ```month``` and ```quarter```.
 
 ```php
 $m = new Moment('2013-10-23T10:00:00');
@@ -142,6 +155,15 @@ echo $momentPeriodVo
 echo $momentPeriodVo
     ->getRefDate()
     ->format('Y-m-d'); // 2013-10-23
+
+echo $momentPeriodVo->getInterval(); // 
+```
+
+Same procedure for monthly and quarterly periods:
+
+```php
+$momentPeriodVo = $m->getPeriod('month');
+$momentPeriodVo = $m->getPeriod('quarter');
 ```
 
 -------------------------------------------------
@@ -169,24 +191,69 @@ Everything else | 04/09/2014
 
 -------------------------------------------------
 
+### 8. startOf / endOf
+Same process as for moment.js: mutates the original moment by setting it to the start/end of a unit of time.
+
+```php
+$m = new \Moment\Moment('20140515T10:15:23', 'CET');
+
+$m->startOf('year');    // set to January 1st, 00:00 this year
+$m->startOf('quarter');  // set to the beginning of the current quarter, 1st day of months, 00:00
+$m->startOf('month');   // set to the first of this month, 00:00
+$m->startOf('week');    // set to the first day of this week, 00:00
+$m->startOf('day');     // set to 00:00 today
+$m->startOf('hour');    // set to now, but with 0 mins, 0 secs
+$m->startOf('minute');  // set to now, but with 0 seconds
+
+$m->endOf('year');    // set to December 31st, 23:59 this year
+$m->endOf('quarter');  // set to the end of the current quarter, last day of month, 23:59
+$m->endOf('month');   // set to the last of this month, 23:59
+$m->endOf('week');    // set to the last day of this week, 23:59
+$m->endOf('day');     // set to 23:59 today
+$m->endOf('hour');    // set to now, but with 59 mins, 59 secs
+$m->endOf('minute');  // set to now, but with 59 seconds
+```
+
+__Note:__ I ignored the period of ```second``` since we are not dealing with milliseconds.
+
+-------------------------------------------------
+
 # Roadmap
 
-### Useful date calculations
-Get date periods by a given interval. Valid periods would be: week, month, quarter, halfyear, year.
-```php
-$m = new Moment();
-
-// Get the period for the 2nd quarter of 2012
-$m->getPeriodByInterval('2012', 'quarter', 2);
-
-// result as array
-[reference] => 2012-04-01, [start] => 2012-04-01, [end] => 2012-06-30, [interval] => 2
-```
+Try to port useful methods from moment.js.
 
 -------------------------------------------------
 
 # Changelog
 
+### 1.5.0
+- added:
+    - startOf and endOf as implemented by [moment.js](http://momentjs.com/docs/#/manipulating/start-of/)
+    - get the quarter period of a given date
+    - setDay()
+    - getDay()
+    - setMonth()
+    - getMonth()
+    - setYear()
+    - getYear()
+    - getQuarter()
+    - setSecond()
+    - getSecond()
+    - setMinute()
+    - getMinute()
+    - setHour()
+    - getHour()
+    - added ```getInterval()``` to ```MomentPeriodVo``` to indicate the interval of the given period
+        - ```week``` = week of the year
+        - ```month``` = month of the year
+        - ```quarter``` = quarter of the year
+    - added a static class ```MomentHelper```
+        - get the period for a given quarter in a given year
+    
+- removed:
+    - add()
+    - subtract()
+    
 ### 1.4.0
 - added:
     - calendar format as implemented by [moment.js](http://momentjs.com/docs/#/displaying/calendar-time/)
@@ -224,7 +291,7 @@ $m->getPeriodByInterval('2012', 'quarter', 2);
 # License
 Moment.php is freely distributable under the terms of the MIT license.
 
-Copyright (c) 2013 Tino Ehrich
+Copyright (c) 2014 Tino Ehrich
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

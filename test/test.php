@@ -55,8 +55,12 @@ $response['test07'] = $m->format('l, dS F Y / H:i (e)');
 
 // ------------------------------------------
 
-$m = new \Moment\Moment('2012-04-25T03:00:00', 'CET');
+$m = new \Moment\Moment('2013-10-23T10:00:00', 'CET');
 $momentPeriodVo = $m->getPeriod('week');
+
+$response['test08.00'] = $momentPeriodVo
+    ->getRefDate()
+    ->format('Y-m-d');
 
 $response['test08.01'] = $momentPeriodVo
     ->getStartDate()
@@ -66,9 +70,31 @@ $response['test08.02'] = $momentPeriodVo
     ->getEndDate()
     ->format('Y-m-d');
 
-$response['test08.03'] = $momentPeriodVo
-    ->getRefDate()
+$response['test08.03'] = $momentPeriodVo->getInterval();
+
+$momentPeriodVo = $m->getPeriod('month');
+
+$response['test08.04'] = $momentPeriodVo
+    ->getStartDate()
     ->format('Y-m-d');
+
+$response['test08.05'] = $momentPeriodVo
+    ->getEndDate()
+    ->format('Y-m-d');
+
+$response['test08.06'] = $momentPeriodVo->getInterval();
+
+$momentPeriodVo = $m->getPeriod('quarter');
+
+$response['test08.07'] = $momentPeriodVo
+    ->getStartDate()
+    ->format('Y-m-d');
+
+$response['test08.08'] = $momentPeriodVo
+    ->getEndDate()
+    ->format('Y-m-d');
+
+$response['test08.09'] = $momentPeriodVo->getInterval();
 
 // ------------------------------------------
 
@@ -105,7 +131,7 @@ $m = new \Moment\Moment($date, 'CET');
 
 $response['test11.00'] = $m->format();
 
-foreach (['second', 'minute', 'hour', 'day', 'isoWeek', 'week', 'quarter', 'month', 'year'] as $k => $period)
+foreach (['minute', 'hour', 'day', 'week', 'month', 'quarter', 'year'] as $k => $period)
 {
     $index = $k + 1;
     $response['test11.0' . $index] = $m->startOf($period)->format();
@@ -118,7 +144,7 @@ $m = new \Moment\Moment($date, 'CET');
 
 $response['test12.00'] = $m->format();
 
-foreach (['second', 'minute', 'hour', 'day', 'isoWeek', 'week', 'quarter', 'month', 'year'] as $k => $period)
+foreach (['minute', 'hour', 'day', 'week', 'month', 'quarter', 'year'] as $k => $period)
 {
     $index = $k + 1;
     $response['test12.0' . $index] = $m->endOf($period)->format();
