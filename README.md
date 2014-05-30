@@ -9,6 +9,8 @@
 
 Current version: 1.5.0 | [See Change log](#changelog)
 
+[![Latest Stable Version](https://poser.pugx.org/fightbulc/moment/v/stable.svg)](https://packagist.org/packages/fightbulc/moment) [![Total Downloads](https://poser.pugx.org/fightbulc/moment/downloads.svg)](https://packagist.org/packages/fightbulcs/fightbulc/moment) [![License](https://poser.pugx.org/fightbulc/moment/license.svg)](https://packagist.org/packages/fightbulc/moment)
+
 # Intro
 
 ### What is moment.php?
