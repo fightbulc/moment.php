@@ -854,4 +854,12 @@ class Moment extends \DateTime
                 return $this;
         }
     }
+
+    /**
+     * @return Moment
+     */
+    public function cloning()
+    {
+        return clone($this);
+    }
 }

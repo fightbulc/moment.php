@@ -48,7 +48,7 @@ echo $m->format(); // e.g. 2012-10-03T12:00:00+0200
 
 ### 2. Custom format
 
-### 2.1 PHP only (Standard)
+#### 2.1 PHP only (Standard)
 
 ```php
 $m = new Moment('2012-04-25T03:00:00', 'CET');
@@ -56,7 +56,7 @@ echo $m->format('l, dS F Y / H:i (e)'); // Wednesday, 25th April 2012 / 03:00 (E
 ```
 Formats are based on PHP's [Date function](http://php.net/manual/en/function.date.php) and [DateTime class](http://www.php.net/manual/en/datetime.formats.php).
 
-### 2.2 Non-php formats
+#### 2.2 Non-php formats
 
 You can now inject different format handling by passing along a class which implements the ```FormatsInterface```. You can find an example within the test folder for implementing all formats from [moment.js](http://momentjs.com/docs/#/displaying/format/). Thanks to [Ashish](https://github.com/ashishtilara) for taking the time to match ```moment.js``` formats to those of PHP. Have a look at the [test script](https://github.com/fightbulc/moment.php/blob/master/test/test.php) to see the example in action.
 
@@ -71,7 +71,7 @@ $m = new \Moment\Moment('2012-04-25T03:00:00', 'CET');
 echo $m->format('LLLL', new \Moment\CustomFormats\MomentJs()); // Wednesday, April 25th 2012 3:00 AM
 ```
 
-### 2.3 Easy text escaping
+#### 2.3 Easy text escaping
 
 Just wrap all your text within ```[]``` and all characters will be automatically escaped for you.
 
@@ -80,7 +80,7 @@ $m = new Moment('2012-04-25T03:00:00', 'CET');
 echo $m->format('[We are in the month of:] F'); // We are in the month of: April
 ```
 
-### 2.4 Fixed ordinal representations
+#### 2.4 Fixed ordinal representations
 
 PHP's interal ordinal calculation seems to be buggy. I added a quick fix to handle this issue.
 
@@ -105,16 +105,34 @@ echo $m->setTimezone('UTC')->format(); // 2012-04-25T01:00:00+0000
 
 -------------------------------------------------
 
-### 4. Create a custom moment and manipulate it
+### 4. Create custom moments and manipulate it
+
+#### 4.1 Past/Future moments
+
 ```php
 $m = new Moment('2012-05-15T12:30:00', 'CET');
 echo $m->addHours(2)->format(); // 2012-05-15T14:30:00+0200
 
 $m = new Moment('2012-05-15T12:30:00', 'CET');
 echo $m->subtractDays(7)->subtractMinutes(15)->format(); // 2012-05-08T12:15:00+0200
+
+$m = new Moment('@1401443979', 'CET'); // unix time
+echo $m->subtractDays(7)->subtractMinutes(15)->format(); // 2014-05-23T09:44:39+0000
 ```
 
-### Methods for manipulating the date/time
+#### 4.2 Clone a given moment
+
+Sometimes its useful to take a given moment and work with it without changing the origin. For that use ```cloning()```.
+
+```php
+$m = new Moment('2012-05-15T12:30:00', 'CET');
+$c = $m->cloning()->addDays(1);
+ 
+echo $m->getDay(); // 15
+echo $c->getDay(); // 16
+```
+
+#### 4.3 Methods for manipulating the date/time
 
 Add             | Subtract
 ---             | ---
@@ -138,7 +156,6 @@ setMonth($m)    | getMonth()
 setYear($y)     | getYear()
 --              | getQuarter()
 
-
 -------------------------------------------------
 
 ### 5. Difference between dates
@@ -161,6 +178,7 @@ echo $momentFromVo->getWeeks()      // -32.46
 -------------------------------------------------
 
 ### 6. Get date periods (week, month, quarter)
+
 Sometimes its helpful to get the period boundaries of a given date. For instance in case that today is Wednesday and I need the starting-/end dates from today's week. Allowed periods are ```week```, ```month``` and ```quarter```.
 
 ```php
@@ -268,6 +286,8 @@ __Note:__ I ignored the period of ```second``` since we are not dealing with mil
     - getMinute()
     - setHour()
     - getHour()
+    - added cloning()
+        - create a new mutable moment based of the given instance
     - added ```getInterval()``` to ```MomentPeriodVo``` to indicate the interval of the given period
         - ```week``` = week of the year
         - ```month``` = month of the year
@@ -277,7 +297,7 @@ __Note:__ I ignored the period of ```second``` since we are not dealing with mil
     - fixed PHP's internal ordinal calculation (also in combination with moment.js formatting)
         - e.g. ```WS``` for 21th week of the year shows now correct ```21th``` etc.
     - you can now escape text by wrapping it in ```[]```
-        - e.g. ```[Hello World]``` will be automatically transformed into ```\H\e\l\l\o \W\o\r\l\d``` 
+        - e.g. ```[Hello World]``` will be automatically transformed into ```\H\e\l\l\o \W\o\r\l\d```
     
 - removed:
     - add()
