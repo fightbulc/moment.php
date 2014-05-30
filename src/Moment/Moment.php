@@ -688,23 +688,23 @@ class Moment extends \DateTime
         }
         elseif ($diff > 1)
         {
-            $format = '\L\a\s\t l \a\t H:i';
+            $format = '[Last at] H:i';
         }
         elseif ($diff > 0)
         {
-            $format = '\Y\e\s\t\e\r\d\a\y \a\t H:i';
+            $format = '[Yesterday at] H:i';
         }
         elseif ($diff == 0)
         {
-            $format = '\T\o\d\a\y \a\t H:i';
+            $format = '[Today at] H:i';
         }
         elseif ($diff >= -1)
         {
-            $format = '\T\o\m\o\r\r\o\w \a\t H:i';
+            $format = '[Tomorrow at] H:i';
         }
         elseif ($diff > -7)
         {
-            $format = 'l \a\t H:i';
+            $format = 'l [at] H:i';
         }
         else
         {
