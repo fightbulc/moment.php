@@ -128,10 +128,10 @@ class Moment extends \DateTime
      */
     protected function formatOrdinal($number)
     {
-        $ends = array('\t\h', '\s\t', '\n\d', '\r\d', '\t\h', '\t\h', '\t\h', '\t\h', '\t\h', '\t\h');
+        $ends = array('[th]', '[st]', '[nd]', '[rd]', '[th]', '[th]', '[th]', '[th]', '[th]', '[th]');
         $mod100 = $number % 100;
 
-        return $number . ($mod100 >= 11 && $mod100 <= 13 ? '\t\h' : $ends[$number % 10]);
+        return $number . ($mod100 >= 11 && $mod100 <= 13 ? '[th]' : $ends[$number % 10]);
     }
 
     /**
@@ -154,21 +154,6 @@ class Moment extends \DateTime
             $format = $formatsInterface->format($format);
         }
 
-        // handle text
-        if (strpos($format, '[') !== false)
-        {
-            preg_match_all('/(\[[^\[]*\])/', $format, $matches);
-
-            foreach ($matches[1] as $part)
-            {
-                // split string to add \ in front of each character (required for PHP escaping)
-                $result = str_split(trim($part, "[]"));
-
-                // join string will \ in front of each character + add back to format
-                $format = str_replace($part, "\\" . implode("\\", $result), $format);
-            }
-        }
-
         // handle ordinals
         if (strpos($format, 'S') !== false)
         {
@@ -181,6 +166,21 @@ class Moment extends \DateTime
                     $number = $this->format(substr($part, 0, 1));
                     $format = str_replace($part, $this->formatOrdinal($number), $format);
                 }
+            }
+        }
+
+        // handle text
+        if (strpos($format, '[') !== false)
+        {
+            preg_match_all('/(\[[^\[]*\])/', $format, $matches);
+
+            foreach ($matches[1] as $part)
+            {
+                // split string to add \ in front of each character (required for PHP escaping)
+                $result = str_split(trim($part, "[]"));
+
+                // join string will \ in front of each character + add back to format
+                $format = str_replace($part, "\\" . implode("\\", $result), $format);
             }
         }
 
@@ -407,6 +407,22 @@ class Moment extends \DateTime
     public function getDay()
     {
         return (int)$this->format('d');
+    }
+
+    /**
+     * @return int
+     */
+    public function getWeekday()
+    {
+        return (int)$this->format('N');
+    }
+
+    /**
+     * @return int
+     */
+    public function getWeekOfYear()
+    {
+        return (int)$this->format('W');
     }
 
     /**
@@ -675,9 +691,11 @@ class Moment extends \DateTime
     }
 
     /**
+     * @param bool $withTime
+     *
      * @return string
      */
-    public function calendar()
+    public function calendar($withTime = true)
     {
         $momentFromVo = $this->fromNow($this->getTimezoneString());
         $diff = floor($momentFromVo->getDays());
@@ -688,23 +706,23 @@ class Moment extends \DateTime
         }
         elseif ($diff > 1)
         {
-            $format = '[Last at] H:i';
+            $format = '[Last] l' . ($withTime === true ? ' [at] H:i' : null);
         }
         elseif ($diff > 0)
         {
-            $format = '[Yesterday at] H:i';
+            $format = '[Yesterday]' . ($withTime === true ? ' [at] H:i' : null);
         }
         elseif ($diff == 0)
         {
-            $format = '[Today at] H:i';
+            $format = '[Today]' . ($withTime === true ? ' [at] H:i' : null);
         }
         elseif ($diff >= -1)
         {
-            $format = '[Tomorrow at] H:i';
+            $format = '[Tomorrow]' . ($withTime === true ? ' [at] H:i' : null);
         }
         elseif ($diff > -7)
         {
-            $format = 'l [at] H:i';
+            $format = 'l' . ($withTime === true ? ' [at] H:i' : null);
         }
         else
         {
@@ -732,23 +750,18 @@ class Moment extends \DateTime
         if (strpos($rawDateTime, 'T') !== false)
         {
             $momentDateTime = $this->format('Y-m-d\TH:i:s');
-        }
-
-        // time without indicator "T"
+        } // time without indicator "T"
         elseif (strpos($rawDateTime, ':') !== false)
         {
             if (substr_count($rawDateTime, ':') === 2) // with seconds
             {
                 $momentDateTime = $this->format('Y-m-d H:i:s');
             }
-
             else
             {
                 $momentDateTime = $this->format('Y-m-d H:i');
             }
-        }
-
-        // without time
+        } // without time
         else
         {
             $momentDateTime = $this->format('Y-m-d');
@@ -861,5 +874,38 @@ class Moment extends \DateTime
     public function cloning()
     {
         return clone($this);
+    }
+
+    /**
+     * @param array $weekdayNumbers
+     * @param int $forUpcomingWeeks
+     *
+     * @return Moment[]
+     */
+    public function getMomentsByWeekdays(array $weekdayNumbers, $forUpcomingWeeks = 1)
+    {
+        /** @var Moment[] $moments */
+        $dates = array();
+
+        // get today's week day number
+        $todayWeekday = $this->getWeekday();
+
+        // generate for upcoming weeks
+        for ($w = 1; $w <= $forUpcomingWeeks; $w++)
+        {
+            for ($d = 1; $d <= 7; $d++)
+            {
+                if (in_array($d, $weekdayNumbers) && ($w > 1 || $d > $todayWeekday))
+                {
+                    // calculate add days from today's perspective
+                    $addDays = $w === 1 ? $d - $todayWeekday : ($d - $todayWeekday) + ($w * 7 - 7);
+
+                    // set date
+                    $dates[] = $this->cloning()->addDays($addDays);
+                }
+            }
+        }
+
+        return $dates;
     }
 }
