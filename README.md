@@ -231,6 +231,8 @@ The next day    | Tomorrow at 15:54
 The next week   | Wednesday at 15:54
 Everything else | 04/09/2014
 
+__Note:__ Use ```$moment->calendar(false)``` to leave out the time ```at 00:00```.
+
 -------------------------------------------------
 
 ### 8. startOf / endOf
