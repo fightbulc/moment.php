@@ -7,7 +7,7 @@
                                            |_|         |_|    
 </pre>
 
-Current version: 1.5.0 - [Change log](#changelog)
+Current version: 1.5.* - [Change log](#changelog)
 
 # Intro
 
@@ -260,6 +260,28 @@ __Note:__ I ignored the period of ```second``` since we are not dealing with mil
 
 -------------------------------------------------
 
+### 9. Get dates for given weekdays for upcoming weeks 
+For one of my customers I needed to get moments by selected weekdays. __The task was:__ give me the dates for
+```Tuesdays``` and ```Thursdays``` for the next three weeks. So I added a small handler which does exactly this.
+As result you will receive an array filled with ```Moment Objects```. 
+
+```php
+// 1 - 7 = Mon - Sun
+$weekdayNumbers = [
+    2, // tuesday
+    4, // thursday
+];
+
+$m = new \Moment\Moment();
+$dates = $m->getMomentsByWeekdays($weekdayNumbers, 3);
+
+// $dates = [Moment, Moment, Moment ...]
+```
+
+You can now run through the result and put it formatted into a drop-down field or for whatever you might need it.
+
+-------------------------------------------------
+
 # Roadmap
 
 - Try to port useful methods from moment.js
@@ -268,6 +290,14 @@ __Note:__ I ignored the period of ```second``` since we are not dealing with mil
 -------------------------------------------------
 
 # Changelog
+
+### 1.5.1
+- added:
+    - getMomentsByWeekdays()
+    - getWeekday()
+    - getWeekOfYear()
+- other:
+    - escaped text
 
 ### 1.5.0
 - added:
