@@ -293,6 +293,10 @@ You can now run through the result and put it formatted into a drop-down field o
 
 # Changelog
 
+### 1.5.2
+- fixed:
+    - unrecognised timezone when constructing a Moment
+    
 ### 1.5.1
 - added:
     - getMomentsByWeekdays()
