@@ -1,8 +1,8 @@
 {
     "name": "fightbulc/moment",
-    "description": "DateTime Wrapper",
+    "description": "Parse, validate, manipulate, and display dates in PHP. Inspired by moment.js",
     "type": "library",
-    "keywords": ["date", "time", "manipulation", "format"],
+    "keywords": ["date", "time", "parse", "validate", "manipulate", "display", "format"],
     "license": "MIT",
     "authors": [
         {
