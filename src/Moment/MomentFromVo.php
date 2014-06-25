@@ -48,11 +48,18 @@ class MomentFromVo
      */
     protected function getRoundedValue($value)
     {
-        return round($value, 2);
+        $value = round($value, 2);
+
+        if ($this->getDirection() === 'future')
+        {
+            $value = '-' . $value;
+        }
+
+        return (float)$value;
     }
 
     /**
-     * @param mixed $direction
+     * @param string $direction
      *
      * @return MomentFromVo
      */
@@ -64,15 +71,15 @@ class MomentFromVo
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getDirection()
     {
-        return $this->direction;
+        return $this->direction === '-' ? 'future' : 'past';
     }
 
     /**
-     * @param mixed $days
+     * @param float $days
      *
      * @return MomentFromVo
      */
@@ -84,15 +91,15 @@ class MomentFromVo
     }
 
     /**
-     * @return string
+     * @return float
      */
     public function getDays()
     {
-        return $this->getDirection() . $this->getRoundedValue($this->days);
+        return $this->getRoundedValue($this->days);
     }
 
     /**
-     * @param mixed $hours
+     * @param float $hours
      *
      * @return MomentFromVo
      */
@@ -104,15 +111,15 @@ class MomentFromVo
     }
 
     /**
-     * @return string
+     * @return float
      */
     public function getHours()
     {
-        return $this->getDirection() . $this->getRoundedValue($this->hours);
+        return $this->getRoundedValue($this->hours);
     }
 
     /**
-     * @param mixed $minutes
+     * @param float $minutes
      *
      * @return MomentFromVo
      */
@@ -124,15 +131,15 @@ class MomentFromVo
     }
 
     /**
-     * @return string
+     * @return float
      */
     public function getMinutes()
     {
-        return $this->getDirection() . $this->getRoundedValue($this->minutes);
+        return $this->getRoundedValue($this->minutes);
     }
 
     /**
-     * @param mixed $seconds
+     * @param int $seconds
      *
      * @return MomentFromVo
      */
@@ -144,11 +151,11 @@ class MomentFromVo
     }
 
     /**
-     * @return string
+     * @return int
      */
     public function getSeconds()
     {
-        return $this->getDirection() . $this->seconds;
+        return (int)$this->seconds;
     }
 
     /**
@@ -164,10 +171,10 @@ class MomentFromVo
     }
 
     /**
-     * @return string
+     * @return float
      */
     public function getWeeks()
     {
-        return $this->getDirection() . $this->getRoundedValue($this->weeks);
+        return $this->getRoundedValue($this->weeks);
     }
 }

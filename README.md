@@ -168,6 +168,7 @@ $m = new Moment('2013-02-01T07:00:00');
 $momentFromVo = $m->from('2011-09-25T10:00:00');
 
 // result comes as a value object class
+echo $momentFromVo->getDirection()  // "future"
 echo $momentFromVo->getSeconds()    // -19630800
 echo $momentFromVo->getMinutes()    // -327180
 echo $momentFromVo->getHours()      // -5453
@@ -293,6 +294,14 @@ You can now run through the result and put it formatted into a drop-down field o
 
 # Changelog
 
+### 1.5.3
+- fixed:
+    - timezone issue which occured only for unixtime dates
+- other:
+    - MomentFromVo:
+        - direction returns now: "future" (-) / "past" (+)
+        - time values are now type casted as floats
+    
 ### 1.5.2
 - fixed:
     - unrecognised timezone when constructing a Moment

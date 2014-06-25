@@ -32,24 +32,28 @@ class Moment extends \DateTime
 
     /**
      * @param string $dateTime
-     * @param string $timezone
+     * @param string $timezoneString
      *
      * @return $this
      * @throws MomentException
      */
-    public function resetDateTime($dateTime = 'now', $timezone = 'UTC')
+    public function resetDateTime($dateTime = 'now', $timezoneString = 'UTC')
     {
         // cache dateTime
         $this->setRawDateTimeString($dateTime);
 
         // create instance
-        parent::__construct($dateTime);
+        parent::__construct($dateTime, $this->getDateTimeZone($timezoneString));
 
-        // set timezone
-        $this->setTimezone($timezone);
+        // set timezone if unix time
+        if (strpos($dateTime, '@') !== false)
+        {
+            $this->setTimezone($timezoneString);
+        }
 
         // date validation
-        if ($this->isValidDate() === false) {
+        if ($this->isValidDate() === false)
+        {
             throw new MomentException('Given date of "' . $dateTime . '" is invalid');
         }
 
@@ -97,13 +101,16 @@ class Moment extends \DateTime
     }
 
     /**
-     * @param string $timezone
+     * @param string $timezoneString
      *
      * @return \DateTimeZone
      */
-    protected function getDateTimeZone($timezone)
+    protected function getDateTimeZone($timezoneString)
     {
-        return new \DateTimeZone($timezone);
+        // cache timezone
+        $this->setTimezoneString($timezoneString);
+
+        return new \DateTimeZone($timezoneString);
     }
 
     /**
@@ -142,21 +149,26 @@ class Moment extends \DateTime
     public function format($format = null, $formatsInterface = null)
     {
         // set default format
-        if ($format === null) {
+        if ($format === null)
+        {
             $format = \DateTime::ISO8601;
         }
 
         // handle diverse format types
-        if ($formatsInterface instanceof FormatsInterface) {
+        if ($formatsInterface instanceof FormatsInterface)
+        {
             $format = $formatsInterface->format($format);
         }
 
         // handle ordinals
-        if (strpos($format, 'S') !== false) {
+        if (strpos($format, 'S') !== false)
+        {
             preg_match_all('/(\wS)/', $format, $matches);
 
-            if (count($matches) >= 1) {
-                foreach ($matches[1] as $part) {
+            if (count($matches) >= 1)
+            {
+                foreach ($matches[1] as $part)
+                {
                     $number = $this->format(substr($part, 0, 1));
                     $format = str_replace($part, $this->formatOrdinal($number), $format);
                 }
@@ -164,10 +176,12 @@ class Moment extends \DateTime
         }
 
         // handle text
-        if (strpos($format, '[') !== false) {
+        if (strpos($format, '[') !== false)
+        {
             preg_match_all('/(\[[^\[]*\])/', $format, $matches);
 
-            foreach ($matches[1] as $part) {
+            foreach ($matches[1] as $part)
+            {
                 // split string to add \ in front of each character (required for PHP escaping)
                 $result = str_split(trim($part, "[]"));
 
@@ -531,13 +545,16 @@ class Moment extends \DateTime
 
     /**
      * @param string $dateTime
-     * @param string $timezone
+     * @param null $timezoneString
      *
      * @return MomentFromVo
      */
-    public function from($dateTime = 'now', $timezone = 'UTC')
+    public function from($dateTime = 'now', $timezoneString = null)
     {
-        $fromMoment = new Moment($dateTime, $timezone);
+        // use custom timezone or fallback the current moment
+        $useTimezoneString = $timezoneString !== null ? $timezoneString : $this->getTimezoneString();
+
+        $fromMoment = new Moment($dateTime, $useTimezoneString);
         $dateDiff = parent::diff($fromMoment);
 
         $momentFromVo = new MomentFromVo();
@@ -553,13 +570,16 @@ class Moment extends \DateTime
     }
 
     /**
-     * @param string $timezone
+     * @param null $timezoneString
      *
      * @return MomentFromVo
      */
-    public function fromNow($timezone = 'UTC')
+    public function fromNow($timezoneString = null)
     {
-        return $this->from('now', $timezone);
+        // use custom timezone or fallback the current moment
+        $useTimezoneString = $timezoneString !== null ? $timezoneString : $this->getTimezoneString();
+
+        return $this->from('now', $useTimezoneString);
     }
 
     /**
@@ -620,7 +640,8 @@ class Moment extends \DateTime
      */
     public function getPeriod($period)
     {
-        switch ($period) {
+        switch ($period)
+        {
             case 'week':
                 $currentWeekDay = $this->format('N');
                 $interval = $this->format('W');
@@ -691,19 +712,32 @@ class Moment extends \DateTime
         $momentFromVo = $this->fromNow($this->getTimezoneString());
         $diff = floor($momentFromVo->getDays());
 
-        if ($diff > 6) {
+        if ($diff > 6)
+        {
             $format = 'm/d/Y';
-        } elseif ($diff > 1) {
+        }
+        elseif ($diff > 1)
+        {
             $format = '[Last] l' . ($withTime === true ? ' [at] H:i' : null);
-        } elseif ($diff > 0) {
+        }
+        elseif ($diff > 0)
+        {
             $format = '[Yesterday]' . ($withTime === true ? ' [at] H:i' : null);
-        } elseif ($diff == 0) {
+        }
+        elseif ($diff == 0)
+        {
             $format = '[Today]' . ($withTime === true ? ' [at] H:i' : null);
-        } elseif ($diff >= -1) {
+        }
+        elseif ($diff >= -1)
+        {
             $format = '[Tomorrow]' . ($withTime === true ? ' [at] H:i' : null);
-        } elseif ($diff > -7) {
+        }
+        elseif ($diff > -7)
+        {
             $format = 'l' . ($withTime === true ? ' [at] H:i' : null);
-        } else {
+        }
+        else
+        {
             $format = 'm/d/Y';
         }
 
@@ -717,25 +751,31 @@ class Moment extends \DateTime
     {
         $rawDateTime = $this->getRawDateTimeString();
 
-        if (strpos($rawDateTime, '-') === false) {
+        if (strpos($rawDateTime, '-') === false)
+        {
             return true;
         }
 
         // ----------------------------------
 
         // time with indicator "T"
-        if (strpos($rawDateTime, 'T') !== false) {
+        if (strpos($rawDateTime, 'T') !== false)
+        {
             $momentDateTime = $this->format('Y-m-d\TH:i:s');
         } // time without indicator "T"
-        elseif (strpos($rawDateTime, ':') !== false) {
+        elseif (strpos($rawDateTime, ':') !== false)
+        {
             if (substr_count($rawDateTime, ':') === 2) // with seconds
             {
                 $momentDateTime = $this->format('Y-m-d H:i:s');
-            } else {
+            }
+            else
+            {
                 $momentDateTime = $this->format('Y-m-d H:i');
             }
         } // without time
-        else {
+        else
+        {
             $momentDateTime = $this->format('Y-m-d');
         }
 
@@ -749,7 +789,8 @@ class Moment extends \DateTime
      */
     public function startOf($period)
     {
-        switch ($period) {
+        switch ($period)
+        {
             // set to now, but with 0 seconds
             case 'minute':
                 return $this->setTime($this->getHour(), $this->getMinute(), 0);
@@ -797,7 +838,8 @@ class Moment extends \DateTime
      */
     public function endOf($period)
     {
-        switch ($period) {
+        switch ($period)
+        {
             // set to now, but with 59 seconds
             case 'minute':
                 return $this->setTime($this->getHour(), $this->getMinute(), 59);
@@ -861,9 +903,12 @@ class Moment extends \DateTime
         $todayWeekday = $this->getWeekday();
 
         // generate for upcoming weeks
-        for ($w = 1; $w <= $forUpcomingWeeks; $w++) {
-            for ($d = 1; $d <= 7; $d++) {
-                if (in_array($d, $weekdayNumbers) && ($w > 1 || $d > $todayWeekday)) {
+        for ($w = 1; $w <= $forUpcomingWeeks; $w++)
+        {
+            for ($d = 1; $d <= 7; $d++)
+            {
+                if (in_array($d, $weekdayNumbers) && ($w > 1 || $d > $todayWeekday))
+                {
                     // calculate add days from today's perspective
                     $addDays = $w === 1 ? $d - $todayWeekday : ($d - $todayWeekday) + ($w * 7 - 7);
 
