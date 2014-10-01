@@ -589,7 +589,7 @@ class Moment extends \DateTime
      */
     protected function fromToSeconds(\DateInterval $dateInterval)
     {
-        return ($dateInterval->y * 365 * 24 * 60 * 60) + ($dateInterval->m * 30 * 24 * 60 * 60) + ($dateInterval->d * 24 * 60 * 60) + ($dateInterval->h * 60 * 60) + ($dateInterval->i * 60 ) + $dateInterval->s;
+        return ($dateInterval->y * 365 * 24 * 60 * 60) + ($dateInterval->m * 30 * 24 * 60 * 60) + ($dateInterval->d * 24 * 60 * 60) + ($dateInterval->h * 60 * 60) + $dateInterval->s;
     }
 
     /**
@@ -761,20 +761,7 @@ class Moment extends \DateTime
         // time with indicator "T"
         if (strpos($rawDateTime, 'T') !== false)
         {
-            //We remove fraction if any ... DateTime holds only seconds
-            $rawDateTime = preg_replace('/\.[0-9][0-9][0-9]/', '', $rawDateTime);
-            $rawTimeZone = substr($rawDateTime, 19);
-            if ($rawTimeZone && strpos($rawTimeZone, '+') !== FALSE) {
-                if (substr_count($rawTimeZone, ':') > 0) {
-                    $momentDateTime = $this->format('Y-m-d\TH:i:sP');
-                } else {
-                    $momentDateTime = $this->format('Y-m-d\TH:i:sO');
-                }
-            } elseif ($rawTimeZone) {
-                $momentDateTime = $this->format('Y-m-d\TH:i:se');
-            } else {
-                $momentDateTime = $this->format('Y-m-d\TH:i:s');
-            }
+            $momentDateTime = $this->format('Y-m-d\TH:i:s');
         } // time without indicator "T"
         elseif (strpos($rawDateTime, ':') !== false)
         {
