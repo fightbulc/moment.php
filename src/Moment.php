@@ -745,26 +745,35 @@ class Moment extends \DateTime
         // time with indicator "T"
         if (strpos($rawDateTime, 'T') !== false)
         {
-            // remove fraction if any ... DateTime holds only seconds
+            // remove fraction if any
             $rawDateTime = preg_replace('/\.[0-9][0-9][0-9]/', '', $rawDateTime);
+
+            // get timezone if any
             $rawTimeZone = substr($rawDateTime, 19);
 
-            if ($rawTimeZone && strpos($rawTimeZone, '+') !== false)
+            // timezone w/ difference in hours: e.g. +0200
+            if ($rawTimeZone !== false && strpos($rawTimeZone, '+') !== false)
             {
-                // with seconds
+                // with colon: +HH:MM
                 if (substr_count($rawTimeZone, ':') > 0)
                 {
                     $momentDateTime = $this->format('Y-m-d\TH:i:sP');
                 }
+
+                // without colon: +HHMM
                 else
                 {
                     $momentDateTime = $this->format('Y-m-d\TH:i:sO');
                 }
             }
-            elseif ($rawTimeZone)
+
+            // timezone with name: e.g. UTC
+            elseif ($rawTimeZone !== false)
             {
                 $momentDateTime = $this->format('Y-m-d\TH:i:se');
             }
+
+            // no timezone specified
             else
             {
                 $momentDateTime = $this->format('Y-m-d\TH:i:s');
