@@ -366,11 +366,7 @@ class Moment extends \DateTime
      */
     public function setDay($day)
     {
-        $this->setDate(
-            $this->format('Y'),
-            $this->format('m'),
-            $day
-        );
+        $this->setDate($this->format('Y'), $this->format('m'), $day);
 
         return $this;
     }
@@ -382,11 +378,7 @@ class Moment extends \DateTime
      */
     public function setMonth($month)
     {
-        $this->setDate(
-            $this->format('Y'),
-            $month,
-            $this->format('d')
-        );
+        $this->setDate($this->format('Y'), $month, $this->format('d'));
 
         return $this;
     }
@@ -398,11 +390,7 @@ class Moment extends \DateTime
      */
     public function setYear($year)
     {
-        $this->setDate(
-            $year,
-            $this->format('m'),
-            $this->format('d')
-        );
+        $this->setDate($year, $this->format('m'), $this->format('d'));
 
         return $this;
     }
@@ -464,11 +452,7 @@ class Moment extends \DateTime
      */
     public function setSecond($second)
     {
-        $this->setTime(
-            $this->format('H'),
-            $this->format('i'),
-            $second
-        );
+        $this->setTime($this->format('H'), $this->format('i'), $second);
 
         return $this;
     }
@@ -480,11 +464,7 @@ class Moment extends \DateTime
      */
     public function setMinute($minute)
     {
-        $this->setTime(
-            $this->format('H'),
-            $minute,
-            $this->format('s')
-        );
+        $this->setTime($this->format('H'), $minute, $this->format('s'));
 
         return $this;
     }
@@ -496,11 +476,7 @@ class Moment extends \DateTime
      */
     public function setHour($hour)
     {
-        $this->setTime(
-            $hour,
-            $this->format('i'),
-            $this->format('s')
-        );
+        $this->setTime($hour, $this->format('i'), $this->format('s'));
 
         return $this;
     }
@@ -589,7 +565,13 @@ class Moment extends \DateTime
      */
     protected function fromToSeconds(\DateInterval $dateInterval)
     {
-        return ($dateInterval->y * 365 * 24 * 60 * 60) + ($dateInterval->m * 30 * 24 * 60 * 60) + ($dateInterval->d * 24 * 60 * 60) + ($dateInterval->h * 60 * 60) + ($dateInterval->i * 60 ) + $dateInterval->s;
+        return
+            ($dateInterval->y * 365 * 24 * 60 * 60)
+            + ($dateInterval->m * 30 * 24 * 60 * 60)
+            + ($dateInterval->d * 24 * 60 * 60)
+            + ($dateInterval->h * 60 * 60)
+            + ($dateInterval->i * 60)
+            + $dateInterval->s;
     }
 
     /**
@@ -761,24 +743,37 @@ class Moment extends \DateTime
         // time with indicator "T"
         if (strpos($rawDateTime, 'T') !== false)
         {
-            //We remove fraction if any ... DateTime holds only seconds
+            // remove fraction if any ... DateTime holds only seconds
             $rawDateTime = preg_replace('/\.[0-9][0-9][0-9]/', '', $rawDateTime);
             $rawTimeZone = substr($rawDateTime, 19);
-            if ($rawTimeZone && strpos($rawTimeZone, '+') !== FALSE) {
-                if (substr_count($rawTimeZone, ':') > 0) {
+
+            if ($rawTimeZone && strpos($rawTimeZone, '+') !== false)
+            {
+                // with seconds
+                if (substr_count($rawTimeZone, ':') > 0)
+                {
                     $momentDateTime = $this->format('Y-m-d\TH:i:sP');
-                } else {
+                }
+                else
+                {
                     $momentDateTime = $this->format('Y-m-d\TH:i:sO');
                 }
-            } elseif ($rawTimeZone) {
+            }
+            elseif ($rawTimeZone)
+            {
                 $momentDateTime = $this->format('Y-m-d\TH:i:se');
-            } else {
+            }
+            else
+            {
                 $momentDateTime = $this->format('Y-m-d\TH:i:s');
             }
-        } // time without indicator "T"
+        }
+
+        // time without indicator "T"
         elseif (strpos($rawDateTime, ':') !== false)
         {
-            if (substr_count($rawDateTime, ':') === 2) // with seconds
+            // with seconds
+            if (substr_count($rawDateTime, ':') === 2)
             {
                 $momentDateTime = $this->format('Y-m-d H:i:s');
             }
@@ -786,7 +781,9 @@ class Moment extends \DateTime
             {
                 $momentDateTime = $this->format('Y-m-d H:i');
             }
-        } // without time
+        }
+
+        // without time
         else
         {
             $momentDateTime = $this->format('Y-m-d');
