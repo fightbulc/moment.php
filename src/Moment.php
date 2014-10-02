@@ -1,22 +1,24 @@
 <?php
 
-/**
- * Wrapper for PHP's DateTime class inspired by moment.js
- *
- * @author  Tino Ehrich <ehrich@efides.com>
- * @version See composer.json
- *
- * @dependencies  >= PHP 5.3.0
- */
-
 namespace Moment;
 
+/**
+ * Moment
+ * Wrapper for PHP's DateTime class inspired by moment.js
+ *
+ * @package Moment
+ * @author Tino Ehrich (tino@bigpun.me)
+ */
 class Moment extends \DateTime
 {
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $rawDateTimeString;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $timezoneString;
 
     /**
