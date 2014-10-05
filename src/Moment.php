@@ -1,22 +1,29 @@
 <?php
 
-/**
- * Wrapper for PHP's DateTime class inspired by moment.js
- *
- * @author  Tino Ehrich <ehrich@efides.com>
- * @version See composer.json
- *
- * @dependencies  >= PHP 5.3.0
- */
-
 namespace Moment;
 
+/**
+ * Moment
+ * Wrapper for PHP's DateTime class inspired by moment.js
+ *
+ * @package Moment
+ * @author Tino Ehrich (tino@bigpun.me)
+ */
 class Moment extends \DateTime
 {
-    /** @var string */
+    /**
+     * @var string
+     */
+    public static $locale = 'en_GB';
+
+    /**
+     * @var string
+     */
     protected $rawDateTimeString;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     protected $timezoneString;
 
     /**
@@ -743,26 +750,35 @@ class Moment extends \DateTime
         // time with indicator "T"
         if (strpos($rawDateTime, 'T') !== false)
         {
-            // remove fraction if any ... DateTime holds only seconds
+            // remove fraction if any
             $rawDateTime = preg_replace('/\.[0-9][0-9][0-9]/', '', $rawDateTime);
+
+            // get timezone if any
             $rawTimeZone = substr($rawDateTime, 19);
 
-            if ($rawTimeZone && strpos($rawTimeZone, '+') !== false)
+            // timezone w/ difference in hours: e.g. +0200
+            if ($rawTimeZone !== false && strpos($rawTimeZone, '+') !== false)
             {
-                // with seconds
+                // with colon: +HH:MM
                 if (substr_count($rawTimeZone, ':') > 0)
                 {
                     $momentDateTime = $this->format('Y-m-d\TH:i:sP');
                 }
+
+                // without colon: +HHMM
                 else
                 {
                     $momentDateTime = $this->format('Y-m-d\TH:i:sO');
                 }
             }
-            elseif ($rawTimeZone)
+
+            // timezone with name: e.g. UTC
+            elseif ($rawTimeZone !== false)
             {
                 $momentDateTime = $this->format('Y-m-d\TH:i:se');
             }
+
+            // no timezone specified
             else
             {
                 $momentDateTime = $this->format('Y-m-d\TH:i:s');
