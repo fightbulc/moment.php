@@ -4,6 +4,10 @@ require __DIR__ . '/../vendor/autoload.php';
 
 $response = array();
 
+\Moment\Moment::$locale = 'de_DE';
+
+die(var_dump((new \Moment\Moment('2014-06-10'))->format('[Long:] F || [Short:] M || D, d.m.Y H:i')));
+
 // ############################################
 
 $m = new \Moment\Moment();

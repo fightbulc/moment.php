@@ -14,6 +14,11 @@ class Moment extends \DateTime
     /**
      * @var string
      */
+    public static $locale = 'en_GB';
+
+    /**
+     * @var string
+     */
     protected $rawDateTimeString;
 
     /**
@@ -143,6 +148,66 @@ class Moment extends \DateTime
     }
 
     /**
+     * @param string $format
+     *
+     * @return string
+     */
+    protected function prepareLocaleFormat($format)
+    {
+        $placeholders = [
+            // months
+            '(?!\\\)F' => 'm__0001',
+            '(?!\\\)M' => 'm__0002',
+            // weekdays
+            '(?!\\\)l' => 'w__0003',
+            '(?!\\\)D' => 'w__0004',
+        ];
+
+        foreach ($placeholders as $regexp => $tag)
+        {
+            $format = preg_replace('/' . $regexp . '/u', $tag, $format);
+        }
+
+        return $format;
+    }
+
+    /**
+     * @param string $format
+     *
+     * @return string
+     */
+    protected function renderLocaleFormat($format)
+    {
+        $locale = require __DIR__ . '/Locales/' . self::$locale . '.php';
+
+        $placeholders = [
+            // months
+            '\d{2}__0001' => 'months',
+            '\d{2}__0002' => 'monthsShort',
+            // weekdays
+            '\d__0003'    => 'weekdays',
+            '\d__0004'    => 'weekdaysShort',
+        ];
+
+        foreach ($placeholders as $regexp => $tag)
+        {
+            preg_match_all('/(' . $regexp . ')/', $format, $match);
+
+            if (isset($match[1]))
+            {
+                foreach ($match[1] as $date)
+                {
+                    list($index, $type) = explode('__', $date);
+                    $localeString = $locale[$tag][((int)$index - 1)];
+                    $format = preg_replace('/' . $date . '/u', $localeString, $format);
+                }
+            }
+        }
+
+        return $format;
+    }
+
+    /**
      * @param null $format
      * @param null|FormatsInterface $formatsInterface
      *
@@ -192,7 +257,17 @@ class Moment extends \DateTime
             }
         }
 
-        return parent::format($format);
+        // prepare locale formats
+        $format = $this->prepareLocaleFormat($format);
+        var_dump($format);
+        echo '<hr>';
+        // render date
+        $format = parent::format($format);
+
+        // render locale format
+        $format = $this->renderLocaleFormat($format);
+
+        return $format;
     }
 
     /**
