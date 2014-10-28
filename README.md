@@ -37,10 +37,10 @@ Easy install via composer. Still no idea what composer is? Inform yourself [here
 
 ### 1. Get a moment
 ```php
-$m = new Moment(); // default is "now" UTC
+$m = new \Moment\Moment(); // default is "now" UTC
 echo $m->format(); // e.g. 2012-10-03T10:00:00+0000
 
-$m = new Moment('now', 'Europe/Berlin');
+$m = new \Moment\Moment('now', 'Europe/Berlin');
 echo $m->format(); // e.g. 2012-10-03T12:00:00+0200
 ```
 
@@ -51,7 +51,7 @@ echo $m->format(); // e.g. 2012-10-03T12:00:00+0200
 #### 2.1 PHP only (Standard)
 
 ```php
-$m = new Moment('2012-04-25T03:00:00', 'CET');
+$m = new \Moment\Moment('2012-04-25T03:00:00', 'CET');
 echo $m->format('l, dS F Y / H:i (e)'); // Wednesday, 25th April 2012 / 03:00 (Europe/Berlin)
 ```
 Formats are based on PHP's [Date function](http://php.net/manual/en/function.date.php) and [DateTime class](http://www.php.net/manual/en/datetime.formats.php).
@@ -76,7 +76,7 @@ echo $m->format('LLLL', new \Moment\CustomFormats\MomentJs()); // Wednesday, Apr
 Just wrap all your text within ```[]``` and all characters will be automatically escaped for you.
 
 ```php
-$m = new Moment('2012-04-25T03:00:00', 'CET');
+$m = new \Moment\Moment('2012-04-25T03:00:00', 'CET');
 echo $m->format('[We are in the month of:] F'); // We are in the month of: April
 ```
 
@@ -99,7 +99,7 @@ $m->format('WS'); // 22nd
 
 ### 3. Switch timezones
 ```php
-$m = new Moment('2012-04-25T03:00:00', 'CET');
+$m = new \Moment\Moment('2012-04-25T03:00:00', 'CET');
 echo $m->setTimezone('UTC')->format(); // 2012-04-25T01:00:00+0000
 ```
 
@@ -110,13 +110,13 @@ echo $m->setTimezone('UTC')->format(); // 2012-04-25T01:00:00+0000
 #### 4.1 Past/Future moments
 
 ```php
-$m = new Moment('2012-05-15T12:30:00', 'CET');
+$m = new \Moment\Moment('2012-05-15T12:30:00', 'CET');
 echo $m->addHours(2)->format(); // 2012-05-15T14:30:00+0200
 
-$m = new Moment('2012-05-15T12:30:00', 'CET');
+$m = new \Moment\Moment('2012-05-15T12:30:00', 'CET');
 echo $m->subtractDays(7)->subtractMinutes(15)->format(); // 2012-05-08T12:15:00+0200
 
-$m = new Moment('@1401443979', 'CET'); // unix time
+$m = new \Moment\Moment('@1401443979', 'CET'); // unix time
 echo $m->subtractDays(7)->subtractMinutes(15)->format(); // 2014-05-23T09:44:39+0000
 ```
 
@@ -125,7 +125,7 @@ echo $m->subtractDays(7)->subtractMinutes(15)->format(); // 2014-05-23T09:44:39+
 Sometimes its useful to take a given moment and work with it without changing the origin. For that use ```cloning()```.
 
 ```php
-$m = new Moment('2012-05-15T12:30:00', 'CET');
+$m = new \Moment\Moment('2012-05-15T12:30:00', 'CET');
 $c = $m->cloning()->addDays(1);
  
 echo $m->getDay(); // 15
@@ -160,11 +160,11 @@ setYear($y)     | getYear()
 
 ### 5. Difference between dates
 ```php
-$m = new Moment('2013-02-01T07:00:00');
+$m = new \Moment\Moment('2013-02-01T07:00:00');
 $momentFromVo = $m->fromNow();
 
 // or from a specific moment
-$m = new Moment('2013-02-01T07:00:00');
+$m = new \Moment\Moment('2013-02-01T07:00:00');
 $momentFromVo = $m->from('2011-09-25T10:00:00');
 
 // result comes as a value object class
@@ -183,7 +183,7 @@ echo $momentFromVo->getWeeks()      // -32.46
 Sometimes its helpful to get the period boundaries of a given date. For instance in case that today is Wednesday and I need the starting-/end dates from today's week. Allowed periods are ```week```, ```month``` and ```quarter```.
 
 ```php
-$m = new Moment('2013-10-23T10:00:00');
+$m = new \Moment\Moment('2013-10-23T10:00:00');
 $momentPeriodVo = $m->getPeriod('week');
 
 // results comes as well as a value object class
