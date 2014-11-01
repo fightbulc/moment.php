@@ -946,4 +946,77 @@ class Moment extends \DateTime
 
         return $dates;
     }
+
+    /**
+     * Checks if given param is an instance of Moment
+     * 
+     * @param mixed $dateTime
+     * @return boolean
+     */
+    public static function isMoment($dateTime){
+        return ($dateTime instanceof self);
+    }
+
+    /**
+     * Returns copy of Moment normalized to UTC timezone
+     * 
+     * @return \Moment\Moment
+     */
+    public function toUTC(){
+        return $this->cloning()->setTimezone('UTC');
+    }
+            
+    /**
+     * Check if a moment is the same as another moment
+     * 
+     * @param string|Moment $dateTime
+     * @param string $period 'seconds|minute|hour|day|month|year'
+     * @return boolean
+     */
+    public function isSame($dateTime,$period = 'seconds'){
+        $dateTime = $this->isMoment($dateTime)?$dateTime:new Moment($dateTime);
+        return (bool)( $this->toUTC()->startOf($period)->getTimestamp() == $dateTime->toUTC()->startOf($period)->getTimestamp());
+    }
+    
+    /**
+     * Checks if Moment is before given time
+     * 
+     * @param string|Moment $dateTime
+     * @param string $period 'seconds|minute|hour|day|month|year'
+     * @return boolean
+     */
+    public function isBefore($dateTime,$period = 'seconds'){
+        $dateTime = $this->isMoment($dateTime)?$dateTime:new Moment($dateTime);
+        return (bool)( $this->toUTC()->startOf($period)->getTimestamp() < $dateTime->toUTC()->startOf($period)->getTimestamp());
+    }
+
+    /**
+     * Checks if Moment is after given time
+     * 
+     * @param string|Moment $dateTime
+     * @param string $period 'seconds|minute|hour|day|month|year'
+     * @return boolean
+     */
+    public function isAfter($dateTime,$period = 'seconds'){
+        $dateTime = $this->isMoment($dateTime)?$dateTime:new Moment($dateTime);
+        return $dateTime->isBefore($this,$period);
+    }
+    
+    /**
+     * Checks if Moment is between given time range
+     * 
+     * @param string|Moment $minDateTime
+     * @param string|Moment $maxDateTime
+     * @param boolean $closed - true = include endpoints, false = do not
+     * @param string $period 'seconds|minute|hour|day|month|year'
+     * @return boolean
+     */
+    public function isBetween($minDateTime, $maxDateTime, $closed = true, $period = 'seconds'){
+        if($closed){
+            return (bool)(!$this->isBefore($minDateTime,$period) && !$this->isAfter($maxDateTime,$period));
+        }else{
+            return (bool)($this->isAfter($minDateTime,$period) && $this->isBefore($maxDateTime,$period));
+        }
+    }
+    
 }
