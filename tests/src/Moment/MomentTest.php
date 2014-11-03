@@ -48,9 +48,17 @@ class MomentTest extends \PHPUnit_Framework_TestCase
         $m = new Moment($data);
         $this->assertEquals('1923-12-31T12:30:00+0200', $m->format());
         
+        $data = '2013-12-31T12:30:00.123+06:00';
+        $m = new Moment($data);
+        $this->assertEquals('2013-12-31T12:30:00+0600', $m->format());
+        
         $data = '1923-12-31T12:30:00.123+0200';
         $m = new Moment($data);
         $this->assertEquals('1923-12-31T12:30:00+0200', $m->format());
+
+        $data = '2013-12-31T12:30:00.123-06:30';
+        $m = new Moment($data);
+        $this->assertEquals('2013-12-31T12:30:00-0630', $m->format());
         
         $data = '1923-12-31T12:30:00.123Z';
         $m = new Moment($data);
