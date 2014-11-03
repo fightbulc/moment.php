@@ -28,7 +28,7 @@ class MomentHelperTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Moment\Moment::resetDateTime
+     * @covers MomentHelper methods
      */
     public function testMomentHelper()
     {
