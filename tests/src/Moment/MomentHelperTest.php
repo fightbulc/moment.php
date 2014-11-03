@@ -32,33 +32,14 @@ class MomentHelperTest extends \PHPUnit_Framework_TestCase
      */
     public function testMomentHelper()
     {
-        $data = '1923-12-31 12:30:00';
-        $tz = MomentHelper::getTimeZoneFromDate($data);
-        $this->assertEquals('+00:00', $tz);
-
-        $data = '2014-11-02T05:12:15+07:00';
-        $tz = MomentHelper::getTimeZoneFromDate($data);
-        $this->assertEquals('+07:00', $tz);
-
-        $data = '2014-11-02T05:12:15-01:00';
-        $tz = MomentHelper::getTimeZoneFromDate($data);
-        $this->assertEquals('-01:00', $tz);
-        
-        $data = '2014-11-02T05:12:15-01:00';
-        $isiso8601 = MomentHelper::isValidISO8601Date($data);
-        $this->assertTrue($isiso8601);
-
-        $data = '2014-11-02T05:12:15+0530';
-        $isiso8601 = MomentHelper::isValidISO8601Date($data);
-        $this->assertTrue($isiso8601);
-
-        $data = '12th Jan 2014';
-        $isiso8601 = MomentHelper::isValidISO8601Date($data);
-        $this->assertFalse($isiso8601);
 
         $data = '-0100';
         $offset = MomentHelper::getTimeZoneOffset($data);
         $this->assertEquals(-3600, $offset);
+
+        $data = '+00:00';
+        $offset = MomentHelper::getTimeZoneOffset($data);
+        $this->assertEquals(0, $offset);
 
         $data = '+0600';
         $offset = MomentHelper::getTimeZoneOffset($data);

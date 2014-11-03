@@ -58,16 +58,6 @@ class Moment extends \DateTime
             $this->setTimezone($timezoneString);
         }
 
-        // check and set timezone if $dateTime is in ISO8601 format
-        $isISODate = MomentHelper::isValidISO8601Date($dateTime);
-        if($isISODate == true)
-        {
-            $timeZone = MomentHelper::getTimeZoneFromDate($dateTime);
-            $timeZoneOffset = MomentHelper::getTimeZoneOffset($timeZone);
-            $timeZoneName = MomentHelper::getTimeZoneName($timeZoneOffset);
-            $this->setTimezone($timeZoneName);
-        }
-
         // date validation
         if ($this->isValidDate() === false)
         {
@@ -128,6 +118,21 @@ class Moment extends \DateTime
         $this->setTimezoneString($timezoneString);
 
         return new \DateTimeZone($timezoneString);
+    }
+
+    /**
+     * @param string $timeZone
+     *
+     * @return this
+     */
+    protected function setTimezoneForOffset($timeZone)
+    {
+
+        $timeZoneOffset = MomentHelper::getTimeZoneOffset($timeZone);
+        $timeZoneName = MomentHelper::getTimeZoneName($timeZoneOffset);
+        $this->setTimezone($timeZoneName);
+
+        return $this;
     }
 
     /**
@@ -772,12 +777,14 @@ class Moment extends \DateTime
                 // with colon: +HH:MM
                 if (substr_count($rawTimeZone, ':') > 0)
                 {
+                    $this->setTimezoneForOffset($rawTimeZone);
                     $momentDateTime = $this->format('Y-m-d\TH:i:sP');
                 }
 
                 // without colon: +HHMM
                 else
                 {
+                    $this->setTimezoneForOffset($rawTimeZone);
                     $momentDateTime = $this->format('Y-m-d\TH:i:sO');
                 }
             }
