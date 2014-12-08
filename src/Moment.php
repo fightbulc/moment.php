@@ -696,14 +696,19 @@ class Moment extends \DateTime
      *
      * @return string
      */
-    public function calendar($withTime = true)
+    public function calendar($withTime = true, $customFormat = false)
     {
         $momentFromVo = $this->fromNow($this->getTimezoneString());
         $diff = floor($momentFromVo->getDays());
 
+        $useFormat = 'm/d/Y';
+        if($customFormat) {
+            $useFormat = $customFormat;
+        }
+
         if ($diff > 6)
         {
-            $format = 'm/d/Y';
+            $format = $useFormat;
         }
         elseif ($diff > 1)
         {
@@ -727,7 +732,7 @@ class Moment extends \DateTime
         }
         else
         {
-            $format = 'm/d/Y';
+            $format = $useFormat;
         }
 
         return $this->format($format);
