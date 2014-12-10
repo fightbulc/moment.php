@@ -26,7 +26,7 @@ Easy install via composer. Still no idea what composer is? Inform yourself [here
 ```json
 {
     "require": {
-        "fightbulc/moment": "1.5.*"
+        "fightbulc/moment": "1.6.*"
     }
 }
 ```
