@@ -64,6 +64,14 @@ echo $m->format('[Wochentag:] l); // e.g. Wochentag: Mittwoch
 
 -------------------------------------------------
 
+### Switch timezones
+```php
+$m = new \Moment\Moment('2012-04-25T03:00:00', 'CET');
+echo $m->setTimezone('UTC')->format(); // 2012-04-25T01:00:00+0000
+```
+
+-------------------------------------------------
+
 ### Custom format
 
 #### I. PHP only (Standard)
@@ -111,14 +119,6 @@ date('WS', mktime(12, 22, 0, 5, 27, 2014)); // 22th
 // moment.php
 $m = new \Moment\Moment('2014-05-27T12:22:00', 'CET');
 $m->format('WS'); // 22nd
-```
-
--------------------------------------------------
-
-### Switch timezones
-```php
-$m = new \Moment\Moment('2012-04-25T03:00:00', 'CET');
-echo $m->setTimezone('UTC')->format(); // 2012-04-25T01:00:00+0000
 ```
 
 -------------------------------------------------
