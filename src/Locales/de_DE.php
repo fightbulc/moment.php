@@ -10,37 +10,32 @@ return [
     "weekdays"      => explode('_', 'Sonntag_Montag_Dienstag_Mittwoch_Donnerstag_Freitag_Samstag'),
     "weekdaysShort" => explode('_', 'So_Mo_Di_Mi_Do_Fr_Sa'),
     "calendar"      => [
-        "sameDay"  => '[Today at] LT',
-        "nextDay"  => '[Tomorrow at] LT',
-        "nextWeek" => 'dddd [at] LT',
-        "lastDay"  => '[Yesterday at] LT',
-        "lastWeek" => '[Last] dddd [at] LT',
-        "sameElse" => 'L',
+        "sameDay"  => '[Heute]',
+        "nextDay"  => '[Morgen]',
+        "lastDay"  => '[Gestern]',
+        "lastWeek" => '[Letzten] l',
+        "sameElse" => 'l',
+        "withTime" => '[um] H:i',
+        "default"  => 'd.m.Y',
     ],
     "relativeTime"  => [
         "future" => 'in %s',
         "past"   => 'vor %s',
         "s"      => 'ein paar Sekunden',
-        "m"      => 'a minute',
-        "mm"     => '%d minutes',
-        "h"      => 'an hour',
-        "hh"     => '%d hours',
-        "d"      => 'a day',
-        "dd"     => '%d days',
-        "M"      => 'a month',
-        "MM"     => '%d months',
-        "y"      => 'a year',
-        "yy"     => '%d years',
+        "m"      => 'einer Minute',
+        "mm"     => '%d Minuten',
+        "h"      => 'einer Stunde',
+        "hh"     => '%d Stunden',
+        "d"      => 'einem Tag',
+        "dd"     => '%d Tagen',
+        "M"      => 'einem Monat',
+        "MM"     => '%d Monaten',
+        "y"      => 'einem Jahr',
+        "yy"     => '%d Jahren',
     ],
     "ordinal"       => function ($number)
     {
-        $b = $number % 10;
-        $output = (~~($number % 100 / 10) === 1) ? 'th' :
-            ($b === 1) ? 'st' :
-                ($b === 2) ? 'nd' :
-                    ($b === 3) ? 'rd' : 'th';
-
-        return $number . $output;
+        return $number . '.';
     },
     "week"          => [
         "dow" => 1, // Monday is the first day of the week.

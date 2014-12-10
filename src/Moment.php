@@ -14,7 +14,12 @@ class Moment extends \DateTime
     /**
      * @var string
      */
-    public static $locale = 'en_GB';
+    protected static $locale = 'en_GB';
+
+    /**
+     * @var array
+     */
+    protected static $localeContent;
 
     /**
      * @var string
@@ -27,6 +32,28 @@ class Moment extends \DateTime
     protected $timezoneString;
 
     /**
+     * @param string $locale
+     *
+     * @return void
+     */
+    public static function setLocale($locale)
+    {
+        // set current language
+        self::$locale = $locale;
+
+        // load content
+        self::loadLocaleContent();
+    }
+
+    /**
+     * @return void
+     */
+    private static function loadLocaleContent()
+    {
+        self::$localeContent = require __DIR__ . '/Locales/' . self::$locale . '.php';
+    }
+
+    /**
      * @param string $dateTime
      * @param string $timezone
      *
@@ -34,6 +61,9 @@ class Moment extends \DateTime
      */
     public function __construct($dateTime = 'now', $timezone = 'UTC')
     {
+        // load locale content
+        self::loadLocaleContent();
+
         return $this->resetDateTime($dateTime, $timezone);
     }
 
@@ -141,10 +171,7 @@ class Moment extends \DateTime
      */
     protected function formatOrdinal($number)
     {
-        $ends = array('[th]', '[st]', '[nd]', '[rd]', '[th]', '[th]', '[th]', '[th]', '[th]', '[th]');
-        $mod100 = $number % 100;
-
-        return $number . ($mod100 >= 11 && $mod100 <= 13 ? '[th]' : $ends[$number % 10]);
+        return call_user_func(self::$localeContent['ordinal'], $number);
     }
 
     /**
@@ -156,11 +183,11 @@ class Moment extends \DateTime
     {
         $placeholders = [
             // months
-            '(?!\\\)F' => 'm__0001',
-            '(?!\\\)M' => 'm__0002',
+            '(?<!\\\)F' => 'm__0001',
+            '(?<!\\\)M' => 'm__0002',
             // weekdays
-            '(?!\\\)l' => 'w__0003',
-            '(?!\\\)D' => 'w__0004',
+            '(?<!\\\)l' => 'w__0003',
+            '(?<!\\\)D' => 'w__0004',
         ];
 
         foreach ($placeholders as $regexp => $tag)
@@ -178,8 +205,6 @@ class Moment extends \DateTime
      */
     protected function renderLocaleFormat($format)
     {
-        $locale = require __DIR__ . '/Locales/' . self::$locale . '.php';
-
         $placeholders = [
             // months
             '\d{2}__0001' => 'months',
@@ -198,7 +223,8 @@ class Moment extends \DateTime
                 foreach ($match[1] as $date)
                 {
                     list($index, $type) = explode('__', $date);
-                    $localeString = $locale[$tag][((int)$index - 1)];
+                    $localeIndex = $index > 0 ? (int)$index - 1 : $index;
+                    $localeString = self::$localeContent[$tag][$localeIndex];
                     $format = preg_replace('/' . $date . '/u', $localeString, $format);
                 }
             }
@@ -257,10 +283,17 @@ class Moment extends \DateTime
             }
         }
 
+//        echo '<div style="background:#F66;padding:10px;margin-bottom:5px">';
+//        var_dump($format);
+//        echo '</div><hr>';
+
         // prepare locale formats
         $format = $this->prepareLocaleFormat($format);
-        var_dump($format);
-        echo '<hr>';
+
+//        echo '<div style="background:#ffc;padding:10px;margin-bottom:5px">';
+//        var_dump($format);
+//        echo '</div><hr>';
+
         // render date
         $format = parent::format($format);
 
@@ -610,10 +643,9 @@ class Moment extends \DateTime
         $fromMoment = new Moment($dateTime, $useTimezoneString);
         $dateDiff = parent::diff($fromMoment);
 
-        $momentFromVo = new MomentFromVo();
+        $momentFromVo = new MomentFromVo($fromMoment, self::$localeContent);
 
         return $momentFromVo
-            ->setMoment($fromMoment)
             ->setDirection($dateDiff->format('%R'))
             ->setSeconds($this->fromToSeconds($dateDiff))
             ->setMinutes($this->fromToMinutes($dateDiff))
@@ -773,31 +805,31 @@ class Moment extends \DateTime
 
         if ($diff > 6)
         {
-            $format = 'm/d/Y';
+            $format = self::$localeContent['calendar']['default'];
         }
         elseif ($diff > 1)
         {
-            $format = '[Last] l' . ($withTime === true ? ' [at] H:i' : null);
+            $format = self::$localeContent['calendar']['lastWeek'] . ($withTime === true ? ' ' . self::$localeContent['calendar']['withTime'] : null);
         }
         elseif ($diff > 0)
         {
-            $format = '[Yesterday]' . ($withTime === true ? ' [at] H:i' : null);
+            $format = self::$localeContent['calendar']['lastDay'] . ($withTime === true ? ' ' . self::$localeContent['calendar']['withTime'] : null);
         }
         elseif ($diff == 0)
         {
-            $format = '[Today]' . ($withTime === true ? ' [at] H:i' : null);
+            $format = self::$localeContent['calendar']['sameDay'] . ($withTime === true ? ' ' . self::$localeContent['calendar']['withTime'] : null);
         }
-        elseif ($diff >= -1)
+        elseif ($diff == -1)
         {
-            $format = '[Tomorrow]' . ($withTime === true ? ' [at] H:i' : null);
+            $format = self::$localeContent['calendar']['nextDay'] . ($withTime === true ? ' ' . self::$localeContent['calendar']['withTime'] : null);
         }
-        elseif ($diff > -7)
+        elseif ($diff < -7)
         {
-            $format = 'l' . ($withTime === true ? ' [at] H:i' : null);
+            $format = self::$localeContent['calendar']['default'];
         }
         else
         {
-            $format = 'm/d/Y';
+            $format = self::$localeContent['calendar']['sameElse'] . ($withTime === true ? ' ' . self::$localeContent['calendar']['withTime'] : null);
         }
 
         return $this->format($format);
@@ -993,7 +1025,7 @@ class Moment extends \DateTime
     public function getMomentsByWeekdays(array $weekdayNumbers, $forUpcomingWeeks = 1)
     {
         /** @var Moment[] $moments */
-        $dates = array();
+        $dates = [];
 
         // get today's week day number
         $todayWeekday = $this->getWeekday();

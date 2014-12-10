@@ -1,25 +1,68 @@
 <?php
 
-/**
- * Wrapper for PHP's DateTime class inspired by moment.js
- *
- * @author  Tino Ehrich <ehrich@efides.com>
- * @version See composer.json
- *
- * @dependencies  >= PHP 5.3.0
- */
-
 namespace Moment;
 
+/**
+ * MomentFromVo
+ * @package Moment
+ * @author Tino Ehrich (tino@bigpun.me)
+ */
 class MomentFromVo
 {
-    protected $direction;
-    protected $seconds;
-    protected $minutes;
-    protected $hours;
-    protected $days;
-    protected $weeks;
+    /**
+     * @var Moment
+     */
     protected $moment;
+
+    /**
+     * @var string
+     */
+    protected $direction;
+
+    /**
+     * @var int
+     */
+    protected $seconds;
+
+    /**
+     * @var float
+     */
+    protected $minutes;
+
+    /**
+     * @var float
+     */
+    protected $hours;
+
+    /**
+     * @var float
+     */
+    protected $days;
+
+    /**
+     * @var float
+     */
+    protected $weeks;
+
+    /**
+     * @var string
+     */
+    protected $relative;
+
+    /**
+     * @var array
+     */
+    private $localeContent;
+
+    /**
+     * @param Moment $moment
+     * @param array $localeContent
+     */
+    public function __construct(Moment $moment, array $localeContent)
+    {
+        $this->moment = $moment;
+        $this->localeContent = $localeContent;
+    }
 
     /**
      * @return Moment
@@ -27,18 +70,6 @@ class MomentFromVo
     public function getMoment()
     {
         return $this->moment;
-    }
-
-    /**
-     * @param Moment $moment
-     *
-     * @return MomentFromVo
-     */
-    public function setMoment(Moment $moment)
-    {
-        $this->moment = $moment;
-
-        return $this;
     }
 
     /**
@@ -155,7 +186,7 @@ class MomentFromVo
      */
     public function getSeconds()
     {
-        return (int)$this->seconds;
+        return (int)$this->getRoundedValue($this->seconds);
     }
 
     /**
@@ -176,5 +207,90 @@ class MomentFromVo
     public function getWeeks()
     {
         return $this->getRoundedValue($this->weeks);
+    }
+
+    /**
+     * @return float
+     */
+    public function getMonths()
+    {
+        return $this->getRoundedValue($this->weeks / 4);
+    }
+
+    /**
+     * @return float
+     */
+    public function getYears()
+    {
+        return $this->getRoundedValue($this->days / 345);
+    }
+
+    /**
+     * @return string
+     */
+    public function getRelative()
+    {
+        $time = null;
+
+        if ($this->valueInRange($this->getSeconds(), 0, 45))
+        {
+            $time = $this->localeContent['relativeTime']['s'];
+        }
+        elseif ($this->valueInRange($this->getSeconds(), 45, 90))
+        {
+            $time = $this->localeContent['relativeTime']['m'];
+        }
+        elseif ($this->valueInRange($this->getSeconds(), 90, 45 * 60))
+        {
+            $time = sprintf($this->localeContent['relativeTime']['mm'], abs($this->getMinutes()));
+        }
+        elseif ($this->valueInRange($this->getMinutes(), 45, 90))
+        {
+            $time = $this->localeContent['relativeTime']['h'];
+        }
+        elseif ($this->valueInRange($this->getMinutes(), 90, 22 * 60))
+        {
+            $time = sprintf($this->localeContent['relativeTime']['hh'], abs($this->getHours()));
+        }
+        elseif ($this->valueInRange($this->getHours(), 22, 36))
+        {
+            $time = $this->localeContent['relativeTime']['d'];
+        }
+        elseif ($this->valueInRange($this->getHours(), 36, 25 * 24))
+        {
+            $time = sprintf($this->localeContent['relativeTime']['dd'], abs($this->getDays()));
+        }
+        elseif ($this->valueInRange($this->getDays(), 25, 45))
+        {
+            $time = $this->localeContent['relativeTime']['M'];
+        }
+        elseif ($this->valueInRange($this->getDays(), 25, 345))
+        {
+            $time = sprintf($this->localeContent['relativeTime']['MM'], abs($this->getMonths()));
+        }
+        elseif ($this->valueInRange($this->getDays(), 345, 547))
+        {
+            $time = $this->localeContent['relativeTime']['y'];
+        }
+        elseif ($this->getDays() > 547)
+        {
+            $time = sprintf($this->localeContent['relativeTime']['yy'], abs($this->getYears()));
+        }
+
+        $baseString = $this->getDirection() === 'future' ? $this->localeContent['relativeTime']['future'] : $this->localeContent['relativeTime']['past'];
+
+        return sprintf($baseString, $time);
+    }
+
+    /**
+     * @param $value
+     * @param $from
+     * @param $to
+     *
+     * @return bool
+     */
+    private function valueInRange($value, $from, $to)
+    {
+        return abs($value) >= $from && abs($value) <= $to ? true : false;
     }
 }
