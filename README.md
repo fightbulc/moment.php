@@ -12,7 +12,7 @@ Current version: 1.6.* - [Change log](#changelog)
 # Intro
 
 ### What is moment.php?
-Date library for parsing, manipulating and formatting dates.
+Date library for parsing, manipulating and formatting dates w/ i18n.
 
 ### Any dependencies?
 PHP 5.3 or later since moment.php is based on php's [DateTime Class](http://php.net/manual/en/class.datetime.php).
@@ -35,7 +35,8 @@ Easy install via composer. Still no idea what composer is? Inform yourself [here
 
 # Quick examples
 
-### 1. Get a moment
+### Get a moment
+
 ```php
 $m = new \Moment\Moment(); // default is "now" UTC
 echo $m->format(); // e.g. 2012-10-03T10:00:00+0000
@@ -46,9 +47,26 @@ echo $m->format(); // e.g. 2012-10-03T12:00:00+0200
 
 -------------------------------------------------
 
-### 2. Custom format
+### Switch locale
 
-#### 2.1 PHP only (Standard)
+Have a look at the ```Locales``` folder to see all supported languages.
+
+```php
+$m = new \Moment\Moment();
+echo $m->format('[Weekday:] l); // e.g. Weekday: Wednesday
+
+// set german locale
+\Moment\Moment::setLocale('de_DE');
+
+$m = new \Moment\Moment();
+echo $m->format('[Wochentag:] l); // e.g. Wochentag: Mittwoch 
+```
+
+-------------------------------------------------
+
+### Custom format
+
+#### I. PHP only (Standard)
 
 ```php
 $m = new \Moment\Moment('2012-04-25T03:00:00', 'CET');
@@ -56,7 +74,7 @@ echo $m->format('l, dS F Y / H:i (e)'); // Wednesday, 25th April 2012 / 03:00 (E
 ```
 Formats are based on PHP's [Date function](http://php.net/manual/en/function.date.php) and [DateTime class](http://www.php.net/manual/en/datetime.formats.php).
 
-#### 2.2 Non-php formats
+#### II. Non-php formats
 
 You can now inject different format handling by passing along a class which implements the ```FormatsInterface```. You can find an example within the test folder for implementing all formats from [moment.js](http://momentjs.com/docs/#/displaying/format/). Thanks to [Ashish](https://github.com/ashishtilara) for taking the time to match ```moment.js``` formats to those of PHP. Have a look at the [test script](https://github.com/fightbulc/moment.php/blob/master/test/test.php) to see the example in action.
 
@@ -71,7 +89,7 @@ $m = new \Moment\Moment('2012-04-25T03:00:00', 'CET');
 echo $m->format('LLLL', new \Moment\CustomFormats\MomentJs()); // Wednesday, April 25th 2012 3:00 AM
 ```
 
-#### 2.3 Easy text escaping
+#### III. Easy text escaping
 
 Just wrap all your text within ```[]``` and all characters will be automatically escaped for you.
 
@@ -80,7 +98,7 @@ $m = new \Moment\Moment('2012-04-25T03:00:00', 'CET');
 echo $m->format('[We are in the month of:] F'); // We are in the month of: April
 ```
 
-#### 2.4 Fixed ordinal representations
+#### IV. Fixed ordinal representations
 
 PHP's interal ordinal calculation seems to be buggy. I added a quick fix to handle this issue.
 
@@ -97,7 +115,7 @@ $m->format('WS'); // 22nd
 
 -------------------------------------------------
 
-### 3. Switch timezones
+### Switch timezones
 ```php
 $m = new \Moment\Moment('2012-04-25T03:00:00', 'CET');
 echo $m->setTimezone('UTC')->format(); // 2012-04-25T01:00:00+0000
@@ -105,9 +123,9 @@ echo $m->setTimezone('UTC')->format(); // 2012-04-25T01:00:00+0000
 
 -------------------------------------------------
 
-### 4. Create custom moments and manipulate it
+### Create custom moments and manipulate it
 
-#### 4.1 Past/Future moments
+#### I. Past/Future moments
 
 ```php
 $m = new \Moment\Moment('2012-05-15T12:30:00', 'CET');
@@ -120,7 +138,7 @@ $m = new \Moment\Moment('@1401443979', 'CET'); // unix time
 echo $m->subtractDays(7)->subtractMinutes(15)->format(); // 2014-05-23T09:44:39+0000
 ```
 
-#### 4.2 Clone a given moment
+#### II. Clone a given moment
 
 Sometimes its useful to take a given moment and work with it without changing the origin. For that use ```cloning()```.
 
@@ -132,7 +150,7 @@ echo $m->getDay(); // 15
 echo $c->getDay(); // 16
 ```
 
-#### 4.3 Methods for manipulating the date/time
+#### III. Methods for manipulating the date/time
 
 Add             | Subtract
 ---             | ---
@@ -144,7 +162,7 @@ addWeeks($w)    | subtractWeeks($w)
 addMonths($m)   | subtractMonths($m)
 addYears($y)    | subtractYears($y)
 
-### Additional methods since version 1.5
+#### IV. Setter/Getter
 
 Setter          | Getter
 ---             | ---
@@ -158,7 +176,7 @@ setYear($y)     | getYear()
 
 -------------------------------------------------
 
-### 5. Difference between dates
+### Difference between dates
 ```php
 $m = new \Moment\Moment('2013-02-01T07:00:00');
 $momentFromVo = $m->fromNow();
@@ -181,7 +199,7 @@ echo $momentFromVo->getRelative()   // in a year
 
 -------------------------------------------------
 
-### 6. Get date periods (week, month, quarter)
+### Get date periods (week, month, quarter)
 
 Sometimes its helpful to get the period boundaries of a given date. For instance in case that today is Wednesday and I need the starting-/end dates from today's week. Allowed periods are ```week```, ```month``` and ```quarter```.
 
@@ -214,7 +232,7 @@ $momentPeriodVo = $m->getPeriod('quarter');
 
 -------------------------------------------------
 
-### 7. Calendar Times
+### Calendar Times
 Calendar time displays time relative to ```now```, but slightly differently than ```Moment::fromNow()```. ```Moment::calendar()``` will format a date with different strings depending on how close to today the date is.
 
 ```php
@@ -239,7 +257,7 @@ __Note:__ Use ```$moment->calendar(false)``` to leave out the time ```at 00:00``
 
 -------------------------------------------------
 
-### 8. startOf / endOf
+### startOf / endOf
 Same process as for moment.js: mutates the original moment by setting it to the start/end of a unit of time.
 
 ```php
@@ -266,7 +284,7 @@ __Note:__ I ignored the period of ```second``` since we are not dealing with mil
 
 -------------------------------------------------
 
-### 9. Get dates for given weekdays for upcoming weeks 
+### Get dates for given weekdays for upcoming weeks 
 For one of my customers I needed to get moments by selected weekdays. __The task was:__ give me the dates for
 ```Tuesdays``` and ```Thursdays``` for the next three weeks. So I added a small handler which does exactly this.
 As result you will receive an array filled with ```Moment Objects```. 
