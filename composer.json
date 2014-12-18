@@ -1,6 +1,6 @@
 {
     "name": "fightbulc/moment",
-    "description": "Parse, validate, manipulate, and display dates in PHP. Inspired by moment.js",
+    "description": "Parse, validate, manipulate, and display dates in PHP w/ i18n support. Inspired by moment.js",
     "type": "library",
     "keywords": [
         "date",
@@ -9,7 +9,8 @@
         "validate",
         "manipulate",
         "display",
-        "format"
+        "format",
+        "i18n"
     ],
     "license": "MIT",
     "authors": [
