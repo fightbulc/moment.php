@@ -55,13 +55,13 @@ Have a look at the ```Locales``` folder to see all supported languages. Default 
 
 ```php
 $m = new \Moment\Moment();
-echo $m->format('[Weekday:] l); // e.g. Weekday: Wednesday
+echo $m->format('[Weekday:] l'); // e.g. Weekday: Wednesday
 
 // set german locale
 \Moment\Moment::setLocale('de_DE');
 
 $m = new \Moment\Moment();
-echo $m->format('[Wochentag:] l); // e.g. Wochentag: Mittwoch 
+echo $m->format('[Wochentag:] l'); // e.g. Wochentag: Mittwoch 
 ```
 
 -------------------------------------------------
