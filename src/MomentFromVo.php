@@ -1,25 +1,61 @@
 <?php
 
-/**
- * Wrapper for PHP's DateTime class inspired by moment.js
- *
- * @author  Tino Ehrich <ehrich@efides.com>
- * @version See composer.json
- *
- * @dependencies  >= PHP 5.3.0
- */
-
 namespace Moment;
 
+/**
+ * MomentFromVo
+ * @package Moment
+ * @author Tino Ehrich (tino@bigpun.me)
+ */
 class MomentFromVo
 {
-    protected $direction;
-    protected $seconds;
-    protected $minutes;
-    protected $hours;
-    protected $days;
-    protected $weeks;
+    /**
+     * @var Moment
+     */
     protected $moment;
+
+    /**
+     * @var string
+     */
+    protected $direction;
+
+    /**
+     * @var int
+     */
+    protected $seconds;
+
+    /**
+     * @var float
+     */
+    protected $minutes;
+
+    /**
+     * @var float
+     */
+    protected $hours;
+
+    /**
+     * @var float
+     */
+    protected $days;
+
+    /**
+     * @var float
+     */
+    protected $weeks;
+
+    /**
+     * @var string
+     */
+    protected $relative;
+
+    /**
+     * @param Moment $moment
+     */
+    public function __construct(Moment $moment)
+    {
+        $this->moment = $moment;
+    }
 
     /**
      * @return Moment
@@ -27,18 +63,6 @@ class MomentFromVo
     public function getMoment()
     {
         return $this->moment;
-    }
-
-    /**
-     * @param Moment $moment
-     *
-     * @return MomentFromVo
-     */
-    public function setMoment(Moment $moment)
-    {
-        $this->moment = $moment;
-
-        return $this;
     }
 
     /**
@@ -155,7 +179,7 @@ class MomentFromVo
      */
     public function getSeconds()
     {
-        return (int)$this->seconds;
+        return (int)$this->getRoundedValue($this->seconds);
     }
 
     /**
@@ -176,5 +200,90 @@ class MomentFromVo
     public function getWeeks()
     {
         return $this->getRoundedValue($this->weeks);
+    }
+
+    /**
+     * @return float
+     */
+    public function getMonths()
+    {
+        return $this->getRoundedValue($this->weeks / 4);
+    }
+
+    /**
+     * @return float
+     */
+    public function getYears()
+    {
+        return $this->getRoundedValue($this->days / 345);
+    }
+
+    /**
+     * @return string
+     */
+    public function getRelative()
+    {
+        $time = null;
+
+        if ($this->valueInRange($this->getSeconds(), 0, 45))
+        {
+            $time = MomentLocale::renderLocaleString(['relativeTime', 's']);
+        }
+        elseif ($this->valueInRange($this->getSeconds(), 45, 90))
+        {
+            $time = MomentLocale::renderLocaleString(['relativeTime', 'm']);
+        }
+        elseif ($this->valueInRange($this->getSeconds(), 90, 45 * 60))
+        {
+            $time = MomentLocale::renderLocaleString(['relativeTime', 's'], [round(abs($this->getMinutes()))]);
+        }
+        elseif ($this->valueInRange($this->getMinutes(), 45, 90))
+        {
+            $time = MomentLocale::renderLocaleString(['relativeTime', 'h']);
+        }
+        elseif ($this->valueInRange($this->getMinutes(), 90, 22 * 60))
+        {
+            $time = MomentLocale::renderLocaleString(['relativeTime', 'hh'], [round(abs($this->getHours()))]);
+        }
+        elseif ($this->valueInRange($this->getHours(), 22, 36))
+        {
+            $time = MomentLocale::renderLocaleString(['relativeTime', 'd']);
+        }
+        elseif ($this->valueInRange($this->getHours(), 36, 25 * 24))
+        {
+            $time = MomentLocale::renderLocaleString(['relativeTime', 'dd'], [round(abs($this->getDays()))]);
+        }
+        elseif ($this->valueInRange($this->getDays(), 25, 45))
+        {
+            $time = MomentLocale::renderLocaleString(['relativeTime', 'M']);
+        }
+        elseif ($this->valueInRange($this->getDays(), 25, 345))
+        {
+            $time = MomentLocale::renderLocaleString(['relativeTime', 'MM'], [round(abs($this->getMonths()))]);
+        }
+        elseif ($this->valueInRange($this->getDays(), 345, 547))
+        {
+            $time = MomentLocale::renderLocaleString(['relativeTime', 'y']);
+        }
+        elseif ($this->getDays() > 547)
+        {
+            $time = MomentLocale::renderLocaleString(['relativeTime', 'yy'], [round(abs($this->getYears()))]);
+        }
+
+        $baseString = MomentLocale::getLocaleString(['relativeTime', $this->getDirection()]);
+
+        return vsprintf($baseString, [$time]);
+    }
+
+    /**
+     * @param $value
+     * @param $from
+     * @param $to
+     *
+     * @return bool
+     */
+    private function valueInRange($value, $from, $to)
+    {
+        return abs($value) >= $from && abs($value) <= $to ? true : false;
     }
 }
