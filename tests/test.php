@@ -2,12 +2,7 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$response = array();
-
-\Moment\Moment::setLocale('en_GB');
-
-//var_dump((new \Moment\Moment('2014-12-10'))->format('[Long Month:] F || [Short Month:] M || D, d.m.Y H:i'));
-//die('DEAD');
+$response = [];
 
 // ############################################
 
@@ -42,7 +37,7 @@ $response['test04.08'] = $result->getRelative();
 
 // ------------------------------------------
 
-$m = new \Moment\Moment('2013-02-01T07:00:00');
+$m = new \Moment\Moment('2014-12-09T07:00:00');
 $result = $m->fromNow();
 $response['test05.00'] = $m->format('c');
 $response['test05.01'] = $result->getSeconds();

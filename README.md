@@ -12,9 +12,11 @@ Current version: 1.6.* - [Change log](#changelog)
 # Intro
 
 ### What is moment.php?
+
 Date library for parsing, manipulating and formatting dates w/ i18n.
 
 ### Any dependencies?
+
 PHP 5.3 or later since moment.php is based on php's [DateTime Class](http://php.net/manual/en/class.datetime.php).
 
 -------------------------------------------------
@@ -49,7 +51,7 @@ echo $m->format(); // e.g. 2012-10-03T12:00:00+0200
 
 ### Switch locale
 
-Have a look at the ```Locales``` folder to see all supported languages.
+Have a look at the ```Locales``` folder to see all supported languages. Default locale is ```en_GB```. 
 
 ```php
 $m = new \Moment\Moment();
@@ -65,6 +67,7 @@ echo $m->format('[Wochentag:] l); // e.g. Wochentag: Mittwoch
 -------------------------------------------------
 
 ### Switch timezones
+
 ```php
 $m = new \Moment\Moment('2012-04-25T03:00:00', 'CET');
 echo $m->setTimezone('UTC')->format(); // 2012-04-25T01:00:00+0000
@@ -177,6 +180,7 @@ setYear($y)     | getYear()
 -------------------------------------------------
 
 ### Difference between dates
+
 ```php
 $m = new \Moment\Moment('2013-02-01T07:00:00');
 $momentFromVo = $m->fromNow();
@@ -233,6 +237,7 @@ $momentPeriodVo = $m->getPeriod('quarter');
 -------------------------------------------------
 
 ### Calendar Times
+
 Calendar time displays time relative to ```now```, but slightly differently than ```Moment::fromNow()```. ```Moment::calendar()``` will format a date with different strings depending on how close to today the date is.
 
 ```php
@@ -258,6 +263,7 @@ __Note:__ Use ```$moment->calendar(false)``` to leave out the time ```at 00:00``
 -------------------------------------------------
 
 ### startOf / endOf
+
 Same process as for moment.js: mutates the original moment by setting it to the start/end of a unit of time.
 
 ```php
@@ -285,6 +291,7 @@ __Note:__ I ignored the period of ```second``` since we are not dealing with mil
 -------------------------------------------------
 
 ### Get dates for given weekdays for upcoming weeks 
+
 For one of my customers I needed to get moments by selected weekdays. __The task was:__ give me the dates for
 ```Tuesdays``` and ```Thursdays``` for the next three weeks. So I added a small handler which does exactly this.
 As result you will receive an array filled with ```Moment Objects```. 

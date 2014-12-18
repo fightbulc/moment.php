@@ -41,7 +41,7 @@ return [
                 ($b === 2) ? 'nd' :
                     ($b === 3) ? 'rd' : 'th';
 
-        return $number . $output;
+        return $number . "[$output]";
     },
     "week"          => [
         "dow" => 1, // Monday is the first day of the week.

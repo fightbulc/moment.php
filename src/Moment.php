@@ -14,22 +14,12 @@ class Moment extends \DateTime
     /**
      * @var string
      */
-    protected static $locale = 'en_GB';
-
-    /**
-     * @var array
-     */
-    protected static $localeContent;
+    private $rawDateTimeString;
 
     /**
      * @var string
      */
-    protected $rawDateTimeString;
-
-    /**
-     * @var string
-     */
-    protected $timezoneString;
+    private $timezoneString;
 
     /**
      * @param string $locale
@@ -39,18 +29,7 @@ class Moment extends \DateTime
     public static function setLocale($locale)
     {
         // set current language
-        self::$locale = $locale;
-
-        // load content
-        self::loadLocaleContent();
-    }
-
-    /**
-     * @return void
-     */
-    private static function loadLocaleContent()
-    {
-        self::$localeContent = require __DIR__ . '/Locales/' . self::$locale . '.php';
+        MomentLocale::setLocale($locale);
     }
 
     /**
@@ -61,8 +40,11 @@ class Moment extends \DateTime
      */
     public function __construct($dateTime = 'now', $timezone = 'UTC')
     {
+        // set moment
+        MomentLocale::setMoment($this);
+
         // load locale content
-        self::loadLocaleContent();
+        MomentLocale::loadLocaleContent();
 
         return $this->resetDateTime($dateTime, $timezone);
     }
@@ -98,59 +80,6 @@ class Moment extends \DateTime
     }
 
     /**
-     * @param string $rawDateTimeString
-     *
-     * @return Moment
-     */
-    protected function setRawDateTimeString($rawDateTimeString)
-    {
-        $this->rawDateTimeString = $rawDateTimeString;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    protected function getRawDateTimeString()
-    {
-        return $this->rawDateTimeString;
-    }
-
-    /**
-     * @param string $timezoneString
-     *
-     * @return Moment
-     */
-    protected function setTimezoneString($timezoneString)
-    {
-        $this->timezoneString = $timezoneString;
-
-        return $this;
-    }
-
-    /**
-     * @return string
-     */
-    protected function getTimezoneString()
-    {
-        return $this->timezoneString;
-    }
-
-    /**
-     * @param string $timezoneString
-     *
-     * @return \DateTimeZone
-     */
-    protected function getDateTimeZone($timezoneString)
-    {
-        // cache timezone
-        $this->setTimezoneString($timezoneString);
-
-        return new \DateTimeZone($timezoneString);
-    }
-
-    /**
      * @param string $timezone
      *
      * @return \DateTime|Moment
@@ -162,75 +91,6 @@ class Moment extends \DateTime
         parent::setTimezone($this->getDateTimeZone($timezone));
 
         return $this;
-    }
-
-    /**
-     * @param $number
-     *
-     * @return string
-     */
-    protected function formatOrdinal($number)
-    {
-        return call_user_func(self::$localeContent['ordinal'], $number);
-    }
-
-    /**
-     * @param string $format
-     *
-     * @return string
-     */
-    protected function prepareLocaleFormat($format)
-    {
-        $placeholders = [
-            // months
-            '(?<!\\\)F' => 'm__0001',
-            '(?<!\\\)M' => 'm__0002',
-            // weekdays
-            '(?<!\\\)l' => 'w__0003',
-            '(?<!\\\)D' => 'w__0004',
-        ];
-
-        foreach ($placeholders as $regexp => $tag)
-        {
-            $format = preg_replace('/' . $regexp . '/u', $tag, $format);
-        }
-
-        return $format;
-    }
-
-    /**
-     * @param string $format
-     *
-     * @return string
-     */
-    protected function renderLocaleFormat($format)
-    {
-        $placeholders = [
-            // months
-            '\d{2}__0001' => 'months',
-            '\d{2}__0002' => 'monthsShort',
-            // weekdays
-            '\d__0003'    => 'weekdays',
-            '\d__0004'    => 'weekdaysShort',
-        ];
-
-        foreach ($placeholders as $regexp => $tag)
-        {
-            preg_match_all('/(' . $regexp . ')/', $format, $match);
-
-            if (isset($match[1]))
-            {
-                foreach ($match[1] as $date)
-                {
-                    list($index, $type) = explode('__', $date);
-                    $localeIndex = $index > 0 ? (int)$index - 1 : $index;
-                    $localeString = self::$localeContent[$tag][$localeIndex];
-                    $format = preg_replace('/' . $date . '/u', $localeString, $format);
-                }
-            }
-        }
-
-        return $format;
     }
 
     /**
@@ -271,49 +131,24 @@ class Moment extends \DateTime
         // handle text
         if (strpos($format, '[') !== false)
         {
-            preg_match_all('/(\[[^\[]*\])/', $format, $matches);
+            preg_match_all('/\[([^\[]*)\]/', $format, $matches);
 
             foreach ($matches[1] as $part)
             {
-                // split string to add \ in front of each character (required for PHP escaping)
-                $result = str_split(trim($part, "[]"));
-
-                // join string will \ in front of each character + add back to format
-                $format = str_replace($part, "\\" . implode("\\", $result), $format);
+                $format = preg_replace('/\[' . $part . '\]/u', preg_replace('/(\w)/u', '\\\\\1', $part), $format);
             }
         }
 
-//        echo '<div style="background:#F66;padding:10px;margin-bottom:5px">';
-//        var_dump($format);
-//        echo '</div><hr>';
-
         // prepare locale formats
-        $format = $this->prepareLocaleFormat($format);
+        $format = MomentLocale::prepareSpecialLocaleTags($format);
 
-//        echo '<div style="background:#ffc;padding:10px;margin-bottom:5px">';
-//        var_dump($format);
-//        echo '</div><hr>';
-
-        // render date
+        // render moment
         $format = parent::format($format);
 
         // render locale format
-        $format = $this->renderLocaleFormat($format);
+        $format = MomentLocale::renderSpecialLocaleTags($format);
 
         return $format;
-    }
-
-    /**
-     * @param string $type
-     * @param int $value
-     *
-     * @return Moment
-     */
-    protected function addTime($type = 'day', $value = 1)
-    {
-        parent::modify('+' . $value . ' ' . $type);
-
-        return $this;
     }
 
     /**
@@ -384,19 +219,6 @@ class Moment extends \DateTime
     public function addYears($years = 1)
     {
         return $this->addTime('year', $years);
-    }
-
-    /**
-     * @param string $type
-     * @param int $value
-     *
-     * @return Moment
-     */
-    protected function subtractTime($type = 'day', $value = 1)
-    {
-        parent::modify('-' . $value . ' ' . $type);
-
-        return $this;
     }
 
     /**
@@ -643,7 +465,7 @@ class Moment extends \DateTime
         $fromMoment = new Moment($dateTime, $useTimezoneString);
         $dateDiff = parent::diff($fromMoment);
 
-        $momentFromVo = new MomentFromVo($fromMoment, self::$localeContent);
+        $momentFromVo = new MomentFromVo($fromMoment);
 
         return $momentFromVo
             ->setDirection($dateDiff->format('%R'))
@@ -668,11 +490,24 @@ class Moment extends \DateTime
     }
 
     /**
+     * @param string $type
+     * @param int $value
+     *
+     * @return Moment
+     */
+    private function addTime($type = 'day', $value = 1)
+    {
+        parent::modify('+' . $value . ' ' . $type);
+
+        return $this;
+    }
+
+    /**
      * @param \DateInterval $dateInterval
      *
      * @return string
      */
-    protected function fromToSeconds(\DateInterval $dateInterval)
+    private function fromToSeconds(\DateInterval $dateInterval)
     {
         return
             ($dateInterval->y * 365 * 24 * 60 * 60)
@@ -688,7 +523,7 @@ class Moment extends \DateTime
      *
      * @return string
      */
-    protected function fromToMinutes(\DateInterval $dateInterval)
+    private function fromToMinutes(\DateInterval $dateInterval)
     {
         return $this->fromToSeconds($dateInterval) / 60;
     }
@@ -698,7 +533,7 @@ class Moment extends \DateTime
      *
      * @return string
      */
-    protected function fromToHours(\DateInterval $dateInterval)
+    private function fromToHours(\DateInterval $dateInterval)
     {
         return $this->fromToMinutes($dateInterval) / 60;
     }
@@ -708,7 +543,7 @@ class Moment extends \DateTime
      *
      * @return string
      */
-    protected function fromToDays(\DateInterval $dateInterval)
+    private function fromToDays(\DateInterval $dateInterval)
     {
         return $this->fromToHours($dateInterval) / 24;
     }
@@ -718,7 +553,7 @@ class Moment extends \DateTime
      *
      * @return string
      */
-    protected function fromToWeeks(\DateInterval $dateInterval)
+    private function fromToWeeks(\DateInterval $dateInterval)
     {
         return $this->fromToDays($dateInterval) / 7;
     }
@@ -803,111 +638,52 @@ class Moment extends \DateTime
         $momentFromVo = $this->fromNow($this->getTimezoneString());
         $diff = floor($momentFromVo->getDays());
 
+        // handle time string
+        $renderedTimeString = MomentLocale::renderLocaleString(['calendar', 'withTime']);
+        $addTime = false;
+
+        // apply cases
         if ($diff > 6)
         {
-            $format = self::$localeContent['calendar']['default'];
+            $format = MomentLocale::renderLocaleString(['calendar', 'default']);
         }
         elseif ($diff > 1)
         {
-            $format = self::$localeContent['calendar']['lastWeek'] . ($withTime === true ? ' ' . self::$localeContent['calendar']['withTime'] : null);
+            $format = MomentLocale::renderLocaleString(['calendar', 'lastWeek']);
+            $addTime = true;
         }
         elseif ($diff > 0)
         {
-            $format = self::$localeContent['calendar']['lastDay'] . ($withTime === true ? ' ' . self::$localeContent['calendar']['withTime'] : null);
+            $format = MomentLocale::renderLocaleString(['calendar', 'lastDay']);
+            $addTime = true;
         }
         elseif ($diff == 0)
         {
-            $format = self::$localeContent['calendar']['sameDay'] . ($withTime === true ? ' ' . self::$localeContent['calendar']['withTime'] : null);
+            $format = MomentLocale::renderLocaleString(['calendar', 'sameDay']);
+            $addTime = true;
         }
         elseif ($diff == -1)
         {
-            $format = self::$localeContent['calendar']['nextDay'] . ($withTime === true ? ' ' . self::$localeContent['calendar']['withTime'] : null);
+            $format = MomentLocale::renderLocaleString(['calendar', 'nextDay']);
+            $addTime = true;
         }
         elseif ($diff < -7)
         {
-            $format = self::$localeContent['calendar']['default'];
+            $format = MomentLocale::renderLocaleString(['calendar', 'default']);
         }
         else
         {
-            $format = self::$localeContent['calendar']['sameElse'] . ($withTime === true ? ' ' . self::$localeContent['calendar']['withTime'] : null);
+            $format = MomentLocale::renderLocaleString(['calendar', 'sameElse']);
+            $addTime = true;
+        }
+
+        // add time if valid
+        if ($addTime && $withTime === true)
+        {
+            $format .= ' ' . $renderedTimeString;
         }
 
         return $this->format($format);
-    }
-
-    /**
-     * @return bool
-     */
-    protected function isValidDate()
-    {
-        $rawDateTime = $this->getRawDateTimeString();
-
-        if (strpos($rawDateTime, '-') === false)
-        {
-            return true;
-        }
-
-        // ----------------------------------
-
-        // time with indicator "T"
-        if (strpos($rawDateTime, 'T') !== false)
-        {
-            // remove fraction if any
-            $rawDateTime = preg_replace('/\.[0-9][0-9][0-9]/', '', $rawDateTime);
-
-            // get timezone if any
-            $rawTimeZone = substr($rawDateTime, 19);
-
-            // timezone w/ difference in hours: e.g. +0200
-            if ($rawTimeZone !== false && strpos($rawTimeZone, '+') !== false)
-            {
-                // with colon: +HH:MM
-                if (substr_count($rawTimeZone, ':') > 0)
-                {
-                    $momentDateTime = $this->format('Y-m-d\TH:i:sP');
-                }
-
-                // without colon: +HHMM
-                else
-                {
-                    $momentDateTime = $this->format('Y-m-d\TH:i:sO');
-                }
-            }
-
-            // timezone with name: e.g. UTC
-            elseif ($rawTimeZone !== false)
-            {
-                $momentDateTime = $this->format('Y-m-d\TH:i:se');
-            }
-
-            // no timezone specified
-            else
-            {
-                $momentDateTime = $this->format('Y-m-d\TH:i:s');
-            }
-        }
-
-        // time without indicator "T"
-        elseif (strpos($rawDateTime, ':') !== false)
-        {
-            // with seconds
-            if (substr_count($rawDateTime, ':') === 2)
-            {
-                $momentDateTime = $this->format('Y-m-d H:i:s');
-            }
-            else
-            {
-                $momentDateTime = $this->format('Y-m-d H:i');
-            }
-        }
-
-        // without time
-        else
-        {
-            $momentDateTime = $this->format('Y-m-d');
-        }
-
-        return $rawDateTime === $momentDateTime;
     }
 
     /**
@@ -1047,5 +823,156 @@ class Moment extends \DateTime
         }
 
         return $dates;
+    }
+
+    /**
+     * @param string $rawDateTimeString
+     *
+     * @return Moment
+     */
+    private function setRawDateTimeString($rawDateTimeString)
+    {
+        $this->rawDateTimeString = $rawDateTimeString;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    private function getRawDateTimeString()
+    {
+        return $this->rawDateTimeString;
+    }
+
+    /**
+     * @param string $timezoneString
+     *
+     * @return Moment
+     */
+    private function setTimezoneString($timezoneString)
+    {
+        $this->timezoneString = $timezoneString;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    private function getTimezoneString()
+    {
+        return $this->timezoneString;
+    }
+
+    /**
+     * @param string $timezoneString
+     *
+     * @return \DateTimeZone
+     */
+    private function getDateTimeZone($timezoneString)
+    {
+        // cache timezone
+        $this->setTimezoneString($timezoneString);
+
+        return new \DateTimeZone($timezoneString);
+    }
+
+    /**
+     * @return bool
+     */
+    private function isValidDate()
+    {
+        $rawDateTime = $this->getRawDateTimeString();
+
+        if (strpos($rawDateTime, '-') === false)
+        {
+            return true;
+        }
+
+        // ----------------------------------
+
+        // time with indicator "T"
+        if (strpos($rawDateTime, 'T') !== false)
+        {
+            // remove fraction if any
+            $rawDateTime = preg_replace('/\.[0-9][0-9][0-9]/', '', $rawDateTime);
+
+            // get timezone if any
+            $rawTimeZone = substr($rawDateTime, 19);
+
+            // timezone w/ difference in hours: e.g. +0200
+            if ($rawTimeZone !== false && strpos($rawTimeZone, '+') !== false)
+            {
+                // with colon: +HH:MM
+                if (substr_count($rawTimeZone, ':') > 0)
+                {
+                    $momentDateTime = $this->format('Y-m-d\TH:i:sP');
+                }
+
+                // without colon: +HHMM
+                else
+                {
+                    $momentDateTime = $this->format('Y-m-d\TH:i:sO');
+                }
+            }
+
+            // timezone with name: e.g. UTC
+            elseif ($rawTimeZone !== false)
+            {
+                $momentDateTime = $this->format('Y-m-d\TH:i:se');
+            }
+
+            // no timezone specified
+            else
+            {
+                $momentDateTime = $this->format('Y-m-d\TH:i:s');
+            }
+        }
+
+        // time without indicator "T"
+        elseif (strpos($rawDateTime, ':') !== false)
+        {
+            // with seconds
+            if (substr_count($rawDateTime, ':') === 2)
+            {
+                $momentDateTime = $this->format('Y-m-d H:i:s');
+            }
+            else
+            {
+                $momentDateTime = $this->format('Y-m-d H:i');
+            }
+        }
+
+        // without time
+        else
+        {
+            $momentDateTime = $this->format('Y-m-d');
+        }
+
+        return $rawDateTime === $momentDateTime;
+    }
+
+    /**
+     * @param string $type
+     * @param int $value
+     *
+     * @return Moment
+     */
+    private function subtractTime($type = 'day', $value = 1)
+    {
+        parent::modify('-' . $value . ' ' . $type);
+
+        return $this;
+    }
+
+    /**
+     * @param $number
+     *
+     * @return string
+     */
+    private function formatOrdinal($number)
+    {
+        return (string)call_user_func(MomentLocale::getLocaleString(['ordinal']), $number);
     }
 }
