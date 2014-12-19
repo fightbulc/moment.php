@@ -16,7 +16,7 @@ return [
         "lastWeek" => '[Last] l',
         "sameElse" => 'l',
         "withTime" => '[at] H:i',
-        "default"  => 'm/d/Y',
+        "default"  => 'd/m/Y',
     ],
     "relativeTime"  => [
         "future" => 'in %s',

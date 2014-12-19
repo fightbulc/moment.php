@@ -151,9 +151,8 @@ class MomentLocale
             {
                 foreach ($match[1] as $date)
                 {
-                    list($index, $type) = explode('__', $date);
-                    $localeIndex = $index > 0 ? (int)$index - 1 : $index;
-                    $localeString = self::renderLocaleString([$tag, $localeIndex]);
+                    list($localeIndex, $type) = explode('__', $date);
+                    $localeString = self::renderLocaleString([$tag, (int)$localeIndex]);
                     $format = preg_replace('/' . $date . '/u', $localeString, $format);
                 }
             }

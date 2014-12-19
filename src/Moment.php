@@ -452,19 +452,23 @@ class Moment extends \DateTime
     }
 
     /**
-     * @param string $dateTime
+     * @param string|Moment $fromMoment
      * @param null $timezoneString
      *
      * @return MomentFromVo
      */
-    public function from($dateTime = 'now', $timezoneString = null)
+    public function from($fromMoment = 'now', $timezoneString = null)
     {
-        // use custom timezone or fallback the current moment
-        $useTimezoneString = $timezoneString !== null ? $timezoneString : $this->getTimezoneString();
+        // create moment first
+        if ($this->isMoment($fromMoment) === false)
+        {
+            // use custom timezone or fallback the current moment
+            $useTimezoneString = $timezoneString !== null ? $timezoneString : $this->getTimezoneString();
+            $fromMoment = new Moment($fromMoment, $useTimezoneString);
+        }
 
-        $fromMoment = new Moment($dateTime, $useTimezoneString);
+        // calc difference between dates
         $dateDiff = parent::diff($fromMoment);
-
         $momentFromVo = new MomentFromVo($fromMoment);
 
         return $momentFromVo
@@ -487,6 +491,16 @@ class Moment extends \DateTime
         $useTimezoneString = $timezoneString !== null ? $timezoneString : $this->getTimezoneString();
 
         return $this->from('now', $useTimezoneString);
+    }
+
+    /**
+     * @param $input
+     *
+     * @return bool
+     */
+    public function isMoment($input)
+    {
+        return $input instanceof Moment;
     }
 
     /**
@@ -635,15 +649,16 @@ class Moment extends \DateTime
      */
     public function calendar($withTime = true)
     {
-        $momentFromVo = $this->fromNow($this->getTimezoneString());
-        $diff = floor($momentFromVo->getDays());
+        $momentNow = new Moment('now', $this->getTimezoneString());
+        $momentFromVo = $this->cloning()->startOf('day')->from($momentNow->startOf('day'));
+        $diff = $momentFromVo->getDays();
 
         // handle time string
         $renderedTimeString = MomentLocale::renderLocaleString(['calendar', 'withTime']);
         $addTime = false;
 
         // apply cases
-        if ($diff > 6)
+        if ($diff > 7)
         {
             $format = MomentLocale::renderLocaleString(['calendar', 'default']);
         }
@@ -667,14 +682,14 @@ class Moment extends \DateTime
             $format = MomentLocale::renderLocaleString(['calendar', 'nextDay']);
             $addTime = true;
         }
-        elseif ($diff < -7)
-        {
-            $format = MomentLocale::renderLocaleString(['calendar', 'default']);
-        }
-        else
+        elseif ($diff > -7)
         {
             $format = MomentLocale::renderLocaleString(['calendar', 'sameElse']);
             $addTime = true;
+        }
+        else
+        {
+            $format = MomentLocale::renderLocaleString(['calendar', 'default']);
         }
 
         // add time if valid
