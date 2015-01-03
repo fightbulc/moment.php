@@ -235,7 +235,7 @@ class MomentFromVo
         }
         elseif ($this->valueInRange($this->getSeconds(), 90, 45 * 60))
         {
-            $time = MomentLocale::renderLocaleString(['relativeTime', 's'], [round(abs($this->getMinutes()))]);
+            $time = MomentLocale::renderLocaleString(['relativeTime', 'mm'], [round(abs($this->getMinutes()))]);
         }
         elseif ($this->valueInRange($this->getMinutes(), 45, 90))
         {
