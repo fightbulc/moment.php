@@ -62,4 +62,14 @@ class MomentHelper
             ->setStartDate($start)
             ->setEndDate($end);
     }
+
+    /**
+     * Create new instane of moment
+     * @param type $moment
+     * @return type
+     */
+    public static function getInstance($moment = 'now'){
+        return Moment::isMoment($moment)?$moment->clonning():new Moment($moment);
+    }
+    
 } 

@@ -990,4 +990,132 @@ class Moment extends \DateTime
     {
         return (string)call_user_func(MomentLocale::getLocaleString(['ordinal']), $number);
     }
+    /**
+     * Returns copy of Moment normalized to UTC timezone
+     * 
+     * @return \Moment\Moment
+     */
+    public function toUTC(){
+        return $this->cloning()->setTimezone('UTC');
+    }
+            
+    /**
+     * Check if a moment is the same as another moment
+     * 
+     * @param string|Moment $dateTime
+     * @param string $period 'seconds|minute|hour|day|month|year'
+     * @return boolean
+     */
+    public function isSame($dateTime,$period = 'seconds'){
+        $dateTime = $this->isMoment($dateTime)?$dateTime:new Moment($dateTime);
+        return (bool)( $this->toUTC()->startOf($period)->getTimestamp() == $dateTime->toUTC()->startOf($period)->getTimestamp());
+    }
+    
+    /**
+     * Checks if Moment is before given time
+     * 
+     * @param string|Moment $dateTime
+     * @param string $period 'seconds|minute|hour|day|month|year'
+     * @return boolean
+     */
+    public function isBefore($dateTime,$period = 'seconds'){
+        $dateTime = $this->isMoment($dateTime)?$dateTime:new Moment($dateTime);
+        return (bool)( $this->toUTC()->startOf($period)->getTimestamp() < $dateTime->toUTC()->startOf($period)->getTimestamp());
+    }
+
+    /**
+     * Checks if Moment is after given time
+     * 
+     * @param string|Moment $dateTime
+     * @param string $period 'seconds|minute|hour|day|month|year'
+     * @return boolean
+     */
+    public function isAfter($dateTime,$period = 'seconds'){
+        $dateTime = $this->isMoment($dateTime)?$dateTime:new Moment($dateTime);
+        return $dateTime->isBefore($this,$period);
+    }
+    
+    /**
+     * Checks if Moment is between given time range
+     * 
+     * @param string|Moment $minDateTime
+     * @param string|Moment $maxDateTime
+     * @param boolean $closed - true = include endpoints, false = do not
+     * @param string $period 'seconds|minute|hour|day|month|year'
+     * @return boolean
+     */
+    public function isBetween($minDateTime, $maxDateTime, $closed = true, $period = 'seconds'){
+        if($closed){
+            return (bool)(!$this->isBefore($minDateTime,$period) && !$this->isAfter($maxDateTime,$period));
+        }else{
+            return (bool)($this->isAfter($minDateTime,$period) && $this->isBefore($maxDateTime,$period));
+        }
+    }
+    
+    /**
+     * Returns Moment as array
+     * 
+     * @param bool $assoc - true association array
+     * @return array
+     */
+    public function toArray($assoc = true)
+    {
+        if($assoc){
+            return [
+                'year' => $this->getYear(),
+                'month' => $this->getMonth(),
+                'day' => $this->getDay(),
+                'hour' => $this->getHour(),
+                'minute' => $this->getMinute(),
+                'second' => $this->getSecond(),
+                'timezone' => $this->getTimezoneString()
+            ];
+        }else{
+            return [
+                $this->getYear(),
+                $this->getMonth(),
+                $this->getDay(),
+                $this->getHour(),
+                $this->getMinute(),
+                $this->getSecond(),
+                $this->getTimezoneString()
+            ];
+}
+    }
+
+    /**
+     * Reset datetime 
+     * 
+     * @param array $dateTime
+     * @return \Moment\Moment
+     */
+    public function setDateFromArray(array $dateTime=[]){
+        
+        $d = $this->toArray(false);
+        
+        if($dateTime == array_values($dateTime)){
+            foreach ($dateTime as $key => $value) {
+                $d[$key] = $value;
+            }
+        }else{
+            foreach (['year' => 0,
+                    'month' => 1,
+                    'day' => 2,
+                    'hour' => 3,
+                    'minute' => 4,
+                    'second' => 5,
+                    'timezone' => 6] as $key => $value) {
+                if(isset($dateTime[$key])){
+                    $d[$value]=$dateTime[$key];
+                }
+            }
+        }
+        
+        // timezone has to be set first
+        $this->setTimezoneString($d[6]);
+        $this->setDate($d[0],$d[1],$d[2]);
+        $this->setTime($d[3],$d[4],$d[5]);
+        
+        return $this;
+    }
 }
