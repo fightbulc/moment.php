@@ -1013,7 +1013,7 @@ class Moment extends \DateTime
     {
         $dateTime = $this->isMoment($dateTime) ? $dateTime : new Moment($dateTime);
 
-        return (bool)($this->toUTC()->startOf($period)->getTimestamp() == $dateTime->toUTC()->startOf($period)->getTimestamp());
+        return (bool)($this->toUTC()->startOf($period)->getTimestamp() === $dateTime->toUTC()->startOf($period)->getTimestamp());
     }
 
     /**
@@ -1035,9 +1035,9 @@ class Moment extends \DateTime
      * Checks if Moment is after given time
      *
      * @param string|Moment $dateTime
-     * @param string $period 'seconds|minute|hour|day|month|year'
+     * @param string        $period 'seconds|minute|hour|day|month|year'
      *
-     * @return boolean
+     * @return bool
      */
     public function isAfter($dateTime, $period = 'seconds')
     {
@@ -1051,101 +1051,22 @@ class Moment extends \DateTime
      *
      * @param string|Moment $minDateTime
      * @param string|Moment $maxDateTime
-     * @param boolean $closed - true = include endpoints, false = do not
-     * @param string $period 'seconds|minute|hour|day|month|year'
+     * @param boolean       $closed
+     * @param string        $period 'seconds|minute|hour|day|month|year'
      *
-     * @return boolean
+     * @return bool
      */
     public function isBetween($minDateTime, $maxDateTime, $closed = true, $period = 'seconds')
     {
-        if ($closed)
-        {
-            return (bool)(!$this->isBefore($minDateTime, $period) && !$this->isAfter($maxDateTime, $period));
-        }
-        else
-        {
-            return (bool)($this->isAfter($minDateTime, $period) && $this->isBefore($maxDateTime, $period));
-        }
-    }
+        $isBefore = $this->isBefore($minDateTime, $period);
+        $isAfter = $this->isAfter($maxDateTime, $period);
 
-    /**
-     * Returns Moment as array
-     *
-     * @param bool $assoc - true association array
-     *
-     * @return array
-     */
-    public function toArray($assoc = true)
-    {
-        if ($assoc)
+        // include endpoints
+        if ($closed === true)
         {
-            return array(
-                'year'     => $this->getYear(),
-                'month'    => $this->getMonth(),
-                'day'      => $this->getDay(),
-                'hour'     => $this->getHour(),
-                'minute'   => $this->getMinute(),
-                'second'   => $this->getSecond(),
-                'timezone' => $this->getTimezoneString()
-            );
-        }
-        else
-        {
-            return array(
-                $this->getYear(),
-                $this->getMonth(),
-                $this->getDay(),
-                $this->getHour(),
-                $this->getMinute(),
-                $this->getSecond(),
-                $this->getTimezoneString()
-            );
-        }
-    }
-
-    /**
-     * Reset datetime
-     *
-     * @param array $dateTime
-     *
-     * @return \Moment\Moment
-     */
-    public function setDateFromArray(array $dateTime = array())
-    {
-
-        $d = $this->toArray(false);
-
-        if ($dateTime == array_values($dateTime))
-        {
-            foreach ($dateTime as $key => $value)
-            {
-                $d[$key] = $value;
-            }
-        }
-        else
-        {
-            foreach (array(
-                         'year'     => 0,
-                         'month'    => 1,
-                         'day'      => 2,
-                         'hour'     => 3,
-                         'minute'   => 4,
-                         'second'   => 5,
-                         'timezone' => 6
-                     ) as $key => $value)
-            {
-                if (isset($dateTime[$key]))
-                {
-                    $d[$value] = $dateTime[$key];
-                }
-            }
+            return $isBefore === false && $isAfter === false;
         }
 
-        // timezone has to be set first
-        $this->setTimezoneString($d[6]);
-        $this->setDate($d[0], $d[1], $d[2]);
-        $this->setTime($d[3], $d[4], $d[5]);
-
-        return $this;
+        return $isBefore === true && $isAfter === true;
     }
 }
