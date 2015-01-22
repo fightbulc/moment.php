@@ -4,12 +4,12 @@
 // locale => great britain english (en-gb)
 // author => Chris Gedrim => https=>//github.com/chrisgedrim
 
-return [
+return array(
     "months"        => explode('_', 'Januar_Februar_März_April_Mai_Juni_Juli_August_September_Oktober_November_Dezember'),
     "monthsShort"   => explode('_', 'Jan_Feb_Mär_Apr_Mai_Jun_Jul_Aug_Sep_Okt_Nov_Dez'),
     "weekdays"      => explode('_', 'Sonntag_Montag_Dienstag_Mittwoch_Donnerstag_Freitag_Samstag'),
     "weekdaysShort" => explode('_', 'So_Mo_Di_Mi_Do_Fr_Sa'),
-    "calendar"      => [
+    "calendar"      => array(
         "sameDay"  => '[Heute]',
         "nextDay"  => '[Morgen]',
         "lastDay"  => '[Gestern]',
@@ -17,8 +17,8 @@ return [
         "sameElse" => 'l',
         "withTime" => '[um] H:i',
         "default"  => 'd.m.Y',
-    ],
-    "relativeTime"  => [
+    ),
+    "relativeTime"  => array(
         "future" => 'in %s',
         "past"   => 'vor %s',
         "s"      => 'ein paar Sekunden',
@@ -32,13 +32,13 @@ return [
         "MM"     => '%d Monaten',
         "y"      => 'einem Jahr',
         "yy"     => '%d Jahren',
-    ],
+    ),
     "ordinal"       => function ($number)
     {
         return $number . '.';
     },
-    "week"          => [
+    "week"          => array(
         "dow" => 1, // Monday is the first day of the week.
         "doy" => 4  // The week that contains Jan 4th is the first week of the year.
-    ],
-];
+    ),
+);

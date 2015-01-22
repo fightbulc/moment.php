@@ -31,179 +31,181 @@
 </head>
 <body>
 
-<h1>Moment.php</h1>
+    <h1>Moment.php</h1>
 
-<p>Wrapper for PHP's DateTime class inspired by moment.js</p>
+    <p>Wrapper for PHP's DateTime class inspired by moment.js</p>
 
-<div>
-    <h3>1. DateTime from "Now" (UTC)</h3>
+    <div>
+        <h3>1. DateTime from "Now" (UTC)</h3>
 
-    <p>{{test01}}</p>
-</div>
+        <p>{{test01}}</p>
+    </div>
 
-<div>
-    <h3>2. Set date and add 2 hours</h3>
+    <div>
+        <h3>2. Set date and add 2 hours</h3>
 
-    <p><strong>Date:</strong> 15.05.2012 12:30:00 (CET)</p>
+        <p><strong>Date:</strong> 15.05.2012 12:30:00 (CET)</p>
 
-    <p>{{test02}}</p>
-</div>
+        <p>{{test02}}</p>
+    </div>
 
-<div>
-    <h3>3. Set date and subtract 7 days and 15 minutes</h3>
+    <div>
+        <h3>3. Set date and subtract 7 days and 15 minutes</h3>
 
-    <p><strong>Date:</strong> 15.05.2012 12:30:00 (CET)</p>
+        <p><strong>Date:</strong> 15.05.2012 12:30:00 (CET)</p>
 
-    <p>{{test03}}</p>
-</div>
+        <p>{{test03}}</p>
+    </div>
 
-<div>
-    <h3>4. Difference between two dates</h3>
+    <div>
+        <h3>4. Difference between two dates</h3>
 
-    <p><strong>Date#1:</strong> 12.05.2012 / 15:00:00 (UTC)</p>
+        <p><strong>Date#1:</strong> 12.05.2012 / 15:00:00 (UTC)</p>
 
-    <p><strong>Date#2:</strong> 25.09.2011 / 10:00:00 (UTC)</p>
+        <p><strong>Date#2:</strong> 25.09.2011 / 10:00:00 (UTC)</p>
 
-    <p><strong>Difference seconds:</strong> {{test04.01}}</p>
+        <p><strong>Difference seconds:</strong> {{test04.01}}</p>
 
-    <p><strong>Difference in minutes:</strong> {{test04.02}}</p>
+        <p><strong>Difference in minutes:</strong> {{test04.02}}</p>
 
-    <p><strong>Difference in hours:</strong> {{test04.03}}</p>
+        <p><strong>Difference in hours:</strong> {{test04.03}}</p>
 
-    <p><strong>Difference in days:</strong> {{test04.04}}</p>
+        <p><strong>Difference in days:</strong> {{test04.04}}</p>
 
-    <p><strong>Difference in weeks:</strong> {{test04.05}}</p>
+        <p><strong>Difference in weeks:</strong> {{test04.05}}</p>
 
-    <p><strong>Difference in months:</strong> {{test04.06}}</p>
+        <p><strong>Difference in months:</strong> {{test04.06}}</p>
 
-    <p><strong>Difference in years:</strong> {{test04.07}}</p>
+        <p><strong>Difference in years:</strong> {{test04.07}}</p>
 
-    <p><strong>Difference relative:</strong> {{test04.08}}</p>
-</div>
+        <p><strong>Difference relative:</strong> {{test04.08}}</p>
+    </div>
 
-<div>
-    <h3>5. Difference Date#1 to "Now"</h3>
+    <div>
+        <h3>5. Difference Date#1 to "Now"</h3>
 
-    <p><strong>Date#1:</strong> {{test05.00}}</p>
+        <p><strong>Date#1:</strong> {{test05.00}}</p>
 
-    <p><strong>Difference seconds:</strong> {{test05.01}}</p>
+        <p><strong>Difference seconds:</strong> {{test05.01}}</p>
 
-    <p><strong>Difference in minutes:</strong> {{test05.02}}</p>
+        <p><strong>Difference in minutes:</strong> {{test05.02}}</p>
 
-    <p><strong>Difference in hours:</strong> {{test05.03}}</p>
+        <p><strong>Difference in hours:</strong> {{test05.03}}</p>
 
-    <p><strong>Difference in days:</strong> {{test05.04}}</p>
+        <p><strong>Difference in days:</strong> {{test05.04}}</p>
 
-    <p><strong>Difference in weeks:</strong> {{test05.05}}</p>
+        <p><strong>Difference in weeks:</strong> {{test05.05}}</p>
 
-    <p><strong>Difference in months:</strong> {{test05.06}}</p>
+        <p><strong>Difference in months:</strong> {{test05.06}}</p>
 
-    <p><strong>Difference in years:</strong> {{test05.07}}</p>
+        <p><strong>Difference in years:</strong> {{test05.07}}</p>
 
-    <p><strong>Difference relative:</strong> {{test05.08}}</p>
-</div>
+        <p><strong>Difference relative:</strong> {{test05.08}}</p>
+    </div>
 
-<div>
-    <h3>6. CET to UTC</h3>
+    <div>
+        <h3>6. CET to UTC</h3>
 
-    <p><strong>CET:</strong> {{test06.01}}</p>
+        <p><strong>CET:</strong> {{test06.01}}</p>
 
-    <p><strong>UTC:</strong> {{test06.02}}</p>
-</div>
+        <p><strong>UTC:</strong> {{test06.02}}</p>
+    </div>
 
-<div>
-    <h3>7. Custom format</h3>
+    <div>
+        <h3>7. Custom format</h3>
 
-    <p>{{test07}}</p>
-</div>
+        <p>{{test07}}</p>
+    </div>
 
-<div>
-    <h3>8. Get period</h3>
-    Reference date for calculating period: {{test08.00}}
-    <br>
-    <br>
-    <strong>Weekly period:</strong>
-    <ul>
-        <li><strong>starts on:</strong> {{test08.01}}</li>
-        <li><strong>ends on:</strong> {{test08.02}}</li>
-        <li><strong>interval:</strong> {{test08.03}}</li>
-    </ul>
-    <br>
-    <strong>Monthly period:</strong>
-    <ul>
-        <li><strong>starts on:</strong> {{test08.04}}</li>
-        <li><strong>ends on:</strong> {{test08.05}}</li>
-        <li><strong>interval:</strong> {{test08.06}}</li>
-    </ul>
-    <br>
-    <strong>Quarter period:</strong>
-    <ul>
-        <li><strong>starts on:</strong> {{test08.07}}</li>
-        <li><strong>ends on:</strong> {{test08.08}}</li>
-        <li><strong>interval:</strong> {{test08.09}}</li>
-    </ul>
-</div>
+    <div>
+        <h3>8. Get period</h3>
+        Reference date for calculating period: {{test08.00}}
+        <br>
+        <br>
+        <strong>Weekly period:</strong>
+        <ul>
+            <li><strong>starts on:</strong> {{test08.01}}</li>
+            <li><strong>ends on:</strong> {{test08.02}}</li>
+            <li><strong>interval:</strong> {{test08.03}}</li>
+        </ul>
+        <br>
+        <strong>Monthly period:</strong>
+        <ul>
+            <li><strong>starts on:</strong> {{test08.04}}</li>
+            <li><strong>ends on:</strong> {{test08.05}}</li>
+            <li><strong>interval:</strong> {{test08.06}}</li>
+        </ul>
+        <br>
+        <strong>Quarter period:</strong>
+        <ul>
+            <li><strong>starts on:</strong> {{test08.07}}</li>
+            <li><strong>ends on:</strong> {{test08.08}}</li>
+            <li><strong>interval:</strong> {{test08.09}}</li>
+        </ul>
+    </div>
 
-<div>
-    <h3>9. Use other format definitions via FormatsInterface</h3>
-    Reference date '2012-04-25T03:00:00' in 'CET'.
-    <p><strong>Moment.php format:</strong><br>"l, F jS Y g:i A"<br>{{test09.01}}</p>
+    <div>
+        <h3>9. Use other format definitions via FormatsInterface</h3>
+        Reference date '2012-04-25T03:00:00' in 'CET'.
+        <p><strong>Moment.php format:</strong><br>"l, F jS Y g:i A"<br>{{test09.01}}</p>
 
-    <p><strong>Moment.js</strong><br>"LLLL"<br>{{test09.02}}</p>
+        <p><strong>Moment.js</strong><br>"LLLL"<br>{{test09.02}}</p>
 
-    <p><strong>Moment.php format:</strong>&nbsp;(with fixed ordinal representation)<br>"WS [week of the year]"<br>{{test09.03}}</p>
-    <p><strong>Moment.js</strong><br>"WO"<br>{{test09.04}}</p>
-</div>
+        <p><strong>Moment.php format:</strong>&nbsp;(with fixed ordinal representation)<br>"WS [week of the year]"<br>{{test09.03}}
+        </p>
 
-<div>
-    <h3>10. Calendar Time</h3>
+        <p><strong>Moment.js</strong><br>"WO"<br>{{test09.04}}</p>
+    </div>
 
-    <p>Calendar time displays time relative to now, but slightly differently than moment::fromNow.</p>
+    <div>
+        <h3>10. Calendar Time</h3>
 
-    <p>moment::calendar will format a date with different strings depending on how close to today the date is.</p>
+        <p>Calendar time displays time relative to now, but slightly differently than moment::fromNow.</p>
 
-    <p><strong>Last week</strong><br>{{test10.01}}</p>
+        <p>moment::calendar will format a date with different strings depending on how close to today the date is.</p>
 
-    <p><strong>The day before</strong><br>{{test10.02}}</p>
+        <p><strong>Last week</strong><br>{{test10.01}}</p>
 
-    <p><strong>The same day</strong><br>{{test10.03}}</p>
+        <p><strong>The day before</strong><br>{{test10.02}}</p>
 
-    <p><strong>The next day</strong><br>{{test10.04}}</p>
+        <p><strong>The same day</strong><br>{{test10.03}}</p>
 
-    <p><strong>Upcoming days</strong><br>{{test10.05}}</p>
+        <p><strong>The next day</strong><br>{{test10.04}}</p>
 
-    <p><strong>Everything else</strong><br>{{test10.06}}</p>
-</div>
+        <p><strong>Upcoming days</strong><br>{{test10.05}}</p>
 
-<div>
-    <h3>11. startOf()</h3>
+        <p><strong>Everything else</strong><br>{{test10.06}}</p>
+    </div>
 
-    <p style="background:#ffe"><strong>Reference date</strong> {{test11.00}}</p>
-    <ul>
-        <li><strong>Minute</strong><br>{{test11.01}}</li>
-        <li><strong>Hour</strong><br>{{test11.02}}</li>
-        <li><strong>Day</strong><br>{{test11.03}}</li>
-        <li><strong>Week</strong><br>{{test11.04}}</li>
-        <li><strong>Month</strong><br>{{test11.05}}</li>
-        <li><strong>Quarter</strong><br>{{test11.06}}</li>
-        <li><strong>Year</strong><br>{{test11.07}}</li>
-    </ul>
-</div>
+    <div>
+        <h3>11. startOf()</h3>
 
-<div>
-    <h3>12. endOf()</h3>
+        <p style="background:#ffe"><strong>Reference date</strong> {{test11.00}}</p>
+        <ul>
+            <li><strong>Minute</strong><br>{{test11.01}}</li>
+            <li><strong>Hour</strong><br>{{test11.02}}</li>
+            <li><strong>Day</strong><br>{{test11.03}}</li>
+            <li><strong>Week</strong><br>{{test11.04}}</li>
+            <li><strong>Month</strong><br>{{test11.05}}</li>
+            <li><strong>Quarter</strong><br>{{test11.06}}</li>
+            <li><strong>Year</strong><br>{{test11.07}}</li>
+        </ul>
+    </div>
 
-    <p style="background:#ffe"><strong>Reference date</strong> {{test12.00}}</p>
-    <ul>
-        <li><strong>Minute</strong><br>{{test12.01}}</li>
-        <li><strong>Hour</strong><br>{{test12.02}}</li>
-        <li><strong>Day</strong><br>{{test12.03}}</li>
-        <li><strong>Week</strong><br>{{test12.04}}</li>
-        <li><strong>Month</strong><br>{{test12.05}}</li>
-        <li><strong>Quarter</strong><br>{{test12.06}}</li>
-        <li><strong>Year</strong><br>{{test12.07}}</li>
-    </ul>
-</div>
+    <div>
+        <h3>12. endOf()</h3>
+
+        <p style="background:#ffe"><strong>Reference date</strong> {{test12.00}}</p>
+        <ul>
+            <li><strong>Minute</strong><br>{{test12.01}}</li>
+            <li><strong>Hour</strong><br>{{test12.02}}</li>
+            <li><strong>Day</strong><br>{{test12.03}}</li>
+            <li><strong>Week</strong><br>{{test12.04}}</li>
+            <li><strong>Month</strong><br>{{test12.05}}</li>
+            <li><strong>Quarter</strong><br>{{test12.06}}</li>
+            <li><strong>Year</strong><br>{{test12.07}}</li>
+        </ul>
+    </div>
 
 </body>
 </html>

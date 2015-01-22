@@ -227,52 +227,52 @@ class MomentFromVo
 
         if ($this->valueInRange($this->getSeconds(), 0, 45))
         {
-            $time = MomentLocale::renderLocaleString(['relativeTime', 's']);
+            $time = MomentLocale::renderLocaleString(array('relativeTime', 's'));
         }
         elseif ($this->valueInRange($this->getSeconds(), 45, 90))
         {
-            $time = MomentLocale::renderLocaleString(['relativeTime', 'm']);
+            $time = MomentLocale::renderLocaleString(array('relativeTime', 'm'));
         }
         elseif ($this->valueInRange($this->getSeconds(), 90, 45 * 60))
         {
-            $time = MomentLocale::renderLocaleString(['relativeTime', 'mm'], [round(abs($this->getMinutes()))]);
+            $time = MomentLocale::renderLocaleString(array('relativeTime', 'mm'), array(round(abs($this->getMinutes()))));
         }
         elseif ($this->valueInRange($this->getMinutes(), 45, 90))
         {
-            $time = MomentLocale::renderLocaleString(['relativeTime', 'h']);
+            $time = MomentLocale::renderLocaleString(array('relativeTime', 'h'));
         }
         elseif ($this->valueInRange($this->getMinutes(), 90, 22 * 60))
         {
-            $time = MomentLocale::renderLocaleString(['relativeTime', 'hh'], [round(abs($this->getHours()))]);
+            $time = MomentLocale::renderLocaleString(array('relativeTime', 'hh'), array(round(abs($this->getHours()))));
         }
         elseif ($this->valueInRange($this->getHours(), 22, 36))
         {
-            $time = MomentLocale::renderLocaleString(['relativeTime', 'd']);
+            $time = MomentLocale::renderLocaleString(array('relativeTime', 'd'));
         }
         elseif ($this->valueInRange($this->getHours(), 36, 25 * 24))
         {
-            $time = MomentLocale::renderLocaleString(['relativeTime', 'dd'], [round(abs($this->getDays()))]);
+            $time = MomentLocale::renderLocaleString(array('relativeTime', 'dd'), array(round(abs($this->getDays()))));
         }
         elseif ($this->valueInRange($this->getDays(), 25, 45))
         {
-            $time = MomentLocale::renderLocaleString(['relativeTime', 'M']);
+            $time = MomentLocale::renderLocaleString(array('relativeTime', 'M'));
         }
         elseif ($this->valueInRange($this->getDays(), 25, 345))
         {
-            $time = MomentLocale::renderLocaleString(['relativeTime', 'MM'], [round(abs($this->getMonths()))]);
+            $time = MomentLocale::renderLocaleString(array('relativeTime', 'MM'), array(round(abs($this->getMonths()))));
         }
         elseif ($this->valueInRange($this->getDays(), 345, 547))
         {
-            $time = MomentLocale::renderLocaleString(['relativeTime', 'y']);
+            $time = MomentLocale::renderLocaleString(array('relativeTime', 'y'));
         }
         elseif ($this->getDays() > 547)
         {
-            $time = MomentLocale::renderLocaleString(['relativeTime', 'yy'], [round(abs($this->getYears()))]);
+            $time = MomentLocale::renderLocaleString(array('relativeTime', 'yy'), array(round(abs($this->getYears()))));
         }
 
-        $baseString = MomentLocale::getLocaleString(['relativeTime', $this->getDirection()]);
+        $baseString = MomentLocale::getLocaleString(array('relativeTime', $this->getDirection()));
 
-        return vsprintf($baseString, [$time]);
+        return vsprintf($baseString, array($time));
     }
 
     /**

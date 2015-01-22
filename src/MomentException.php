@@ -1,7 +1,7 @@
 <?php
 
-    namespace Moment;
+namespace Moment;
 
-    class MomentException extends \Exception
-    {
-    } 
+class MomentException extends \Exception
+{
+}

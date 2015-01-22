@@ -22,7 +22,7 @@ class MomentLocale
     /**
      * @var array
      */
-    private static $localeContent = [];
+    private static $localeContent = array();
 
     /**
      * @param Moment $moment
@@ -110,14 +110,14 @@ class MomentLocale
      */
     public static function prepareSpecialLocaleTags($format)
     {
-        $placeholders = [
+        $placeholders = array(
             // months
             '(?<!\\\)F' => 'm__0001',
             '(?<!\\\)M' => 'm__0002',
             // weekdays
             '(?<!\\\)l' => 'w__0003',
             '(?<!\\\)D' => 'w__0004',
-        ];
+        );
 
         foreach ($placeholders as $regexp => $tag)
         {
@@ -134,14 +134,14 @@ class MomentLocale
      */
     public static function renderSpecialLocaleTags($format)
     {
-        $placeholders = [
+        $placeholders = array(
             // months
             '\d{2}__0001' => 'months',
             '\d{2}__0002' => 'monthsShort',
             // weekdays
             '\d__0003'    => 'weekdays',
             '\d__0004'    => 'weekdaysShort',
-        ];
+        );
 
         foreach ($placeholders as $regexp => $tag)
         {
@@ -152,7 +152,7 @@ class MomentLocale
                 foreach ($match[1] as $date)
                 {
                     list($localeIndex, $type) = explode('__', $date);
-                    $localeString = self::renderLocaleString([$tag, (int)$localeIndex]);
+                    $localeString = self::renderLocaleString(array($tag, (int)$localeIndex));
                     $format = preg_replace('/' . $date . '/u', $localeString, $format);
                 }
             }
