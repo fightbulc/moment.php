@@ -328,53 +328,53 @@ class Moment extends \DateTime
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getDay()
     {
-        return (int)$this->format('d');
+        return (string)$this->format('d');
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getWeekday()
     {
-        return (int)$this->format('N');
+        return (string)$this->format('N');
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getWeekOfYear()
     {
-        return (int)$this->format('W');
+        return (string)$this->format('W');
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getMonth()
     {
-        return (int)$this->format('m');
+        return (string)$this->format('m');
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getQuarter()
     {
         $currentMonth = $this->format('n');
 
-        return (int)ceil($currentMonth / 3);
+        return (string)ceil($currentMonth / 3);
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getYear()
     {
-        return (int)$this->format('Y');
+        return (string)$this->format('Y');
     }
 
     /**
@@ -414,27 +414,27 @@ class Moment extends \DateTime
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getSecond()
     {
-        return (int)$this->format('s');
+        return (string)$this->format('s');
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getMinute()
     {
-        return (int)$this->format('i');
+        return (string)$this->format('i');
     }
 
     /**
-     * @return int
+     * @return string
      */
     public function getHour()
     {
-        return (int)$this->format('H');
+        return (string)$this->format('H');
     }
 
     /**
