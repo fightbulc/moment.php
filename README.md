@@ -7,7 +7,7 @@
                                            |_|         |_|    
 </pre>
 
-Current version: 1.6.* - [Change log](#changelog)
+Current version: 1.7.* - [Change log](#changelog)
 
 # Intro
 
@@ -28,7 +28,7 @@ Easy install via composer. Still no idea what composer is? Inform yourself [here
 ```json
 {
     "require": {
-        "fightbulc/moment": "1.6.*"
+        "fightbulc/moment": "1.7.*"
     }
 }
 ```
@@ -322,6 +322,10 @@ You can now run through the result and put it formatted into a drop-down field o
 
 # Changelog
 
+### 1.7.0
+- added:
+    - Locale: Thai
+    
 ### 1.6.0
 - added:
     - Locale
