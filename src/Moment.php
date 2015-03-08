@@ -346,6 +346,22 @@ class Moment extends \DateTime
     /**
      * @return string
      */
+    public function getWeekdayNameLong()
+    {
+        return (string)$this->format('l');
+    }
+
+    /**
+     * @return string
+     */
+    public function getWeekdayNameShort()
+    {
+        return (string)$this->format('D');
+    }
+
+    /**
+     * @return string
+     */
     public function getWeekOfYear()
     {
         return (string)$this->format('W');
@@ -357,6 +373,22 @@ class Moment extends \DateTime
     public function getMonth()
     {
         return (string)$this->format('m');
+    }
+
+    /**
+     * @return string
+     */
+    public function getMonthNameLong()
+    {
+        return (string)$this->format('F');
+    }
+
+    /**
+     * @return string
+     */
+    public function getMonthNameShort()
+    {
+        return (string)$this->format('M');
     }
 
     /**
