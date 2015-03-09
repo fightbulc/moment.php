@@ -5,7 +5,7 @@ namespace Moment;
 /**
  * MomentLocale
  * @package Moment
- * @author Tino Ehrich (tino@bigpun.me)
+ * @author  Tino Ehrich (tino@bigpun.me)
  */
 class MomentLocale
 {
@@ -115,8 +115,8 @@ class MomentLocale
             '(?<!\\\)F' => 'm__0001',
             '(?<!\\\)M' => 'm__0002',
             // weekdays
-            '(?<!\\\)l' => 'w__0003',
-            '(?<!\\\)D' => 'w__0004',
+            '(?<!\\\)l' => 'N__0003',
+            '(?<!\\\)D' => 'N__0004',
         );
 
         foreach ($placeholders as $regexp => $tag)
@@ -152,7 +152,7 @@ class MomentLocale
                 foreach ($match[1] as $date)
                 {
                     list($localeIndex, $type) = explode('__', $date);
-                    $localeString = self::renderLocaleString(array($tag, (int)$localeIndex));
+                    $localeString = self::renderLocaleString(array($tag, --$localeIndex));
                     $format = preg_replace('/' . $date . '/u', $localeString, $format);
                 }
             }

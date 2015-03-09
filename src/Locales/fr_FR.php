@@ -7,8 +7,8 @@
 return array(
     "months"        => explode('_', 'janvier_février_mars_avril_mai_juin_juillet_août_septembre_octobre_novembre_décembre'),
     "monthsShort"   => explode('_', 'janv._févr._mars_avr._mai_juin_juil._août_sept._oct._nov._déc.'),
-    "weekdays"      => explode('_', 'dimanche_lundi_mardi_mercredi_jeudi_vendredi_samedi'),
-    "weekdaysShort" => explode('_', 'dim._lun._mar._mer._jeu._ven._sam.'),
+    "weekdays"      => explode('_', 'lundi_mardi_mercredi_jeudi_vendredi_samedi_dimanche'),
+    "weekdaysShort" => explode('_', 'lun._mar._mer._jeu._ven._sam._dim.'),
     "calendar"      => array(
         "sameDay"  => '[Aujourd\'hui]',
         "nextDay"  => '[Demain]',

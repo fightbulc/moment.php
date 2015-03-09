@@ -949,15 +949,15 @@ class Moment extends \DateTime
             $rawTimeZone = substr($rawDateTime, 19);
 
             // timezone w/ difference in hours: e.g. +0200
-            if ($rawTimeZone !== false && strpos($rawTimeZone, '+') !== false)
+            if ($rawTimeZone !== false && (strpos($rawTimeZone, '+') !== false || strpos($rawTimeZone, '-') !== false))
             {
-                // with colon: +HH:MM
+                // with colon: +-HH:MM
                 if (substr_count($rawTimeZone, ':') > 0)
                 {
                     $momentDateTime = $this->format('Y-m-d\TH:i:sP');
                 }
 
-                // without colon: +HHMM
+                // without colon: +-HHMM
                 else
                 {
                     $momentDateTime = $this->format('Y-m-d\TH:i:sO');
