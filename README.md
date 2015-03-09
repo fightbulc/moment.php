@@ -322,6 +322,18 @@ You can now run through the result and put it formatted into a drop-down field o
 
 # Changelog
 
+### 1.7.2
+- fixed:
+    - Locale displayed wrong month name (#34)
+    - Changed the order of weekdays within locale files
+
+### 1.7.1
+- added:
+    - getWeekdayNameLong()
+    - getWeekdayNameShort()
+    - getMonthNameLong()
+    - getMonthNameShort()
+    
 ### 1.7.0
 - added:
     - Locale: Thai
