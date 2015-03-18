@@ -7,7 +7,7 @@
                                            |_|         |_|    
 </pre>
 
-Current version: 1.7.* - [Change log](#changelog)
+[Change log](#changelog)
 
 # Intro
 
@@ -28,7 +28,7 @@ Easy install via composer. Still no idea what composer is? Inform yourself [here
 ```json
 {
     "require": {
-        "fightbulc/moment": "1.7.*"
+        "fightbulc/moment": "1.8.*"
     }
 }
 ```
@@ -63,6 +63,9 @@ echo $m->format('[Weekday:] l'); // e.g. Weekday: Wednesday
 $m = new \Moment\Moment();
 echo $m->format('[Wochentag:] l'); // e.g. Wochentag: Mittwoch 
 ```
+
+Supported languages so far:  
+``de_DE`` ``en_GB`` ``en_US`` ``es_ES`` ``fr_FR`` ``pt_BR`` ``th_TH``  
 
 -------------------------------------------------
 
@@ -321,6 +324,9 @@ You can now run through the result and put it formatted into a drop-down field o
 -------------------------------------------------
 
 # Changelog
+
+### 1.8.0
+- added: locale Portuguese
 
 ### 1.7.2
 - fixed:
