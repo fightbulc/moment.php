@@ -89,7 +89,7 @@ class MomentLocale
      *
      * @return string
      */
-    public static function renderLocaleString(array $localeKeys, $formatArgs = [])
+    public static function renderLocaleString(array $localeKeys, $formatArgs = array())
     {
         // get locale handler
         $localeString = self::getLocaleString($localeKeys);
