@@ -325,6 +325,9 @@ You can now run through the result and put it formatted into a drop-down field o
 
 # Changelog
 
+### 1.8.1
+- fixed: english ordinal issue
+
 ### 1.8.0
 - added: locale Portuguese
 
