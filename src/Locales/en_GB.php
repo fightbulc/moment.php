@@ -36,10 +36,21 @@ return array(
     "ordinal"       => function ($number)
     {
         $b = $number % 10;
-        $output = (~~($number % 100 / 10) === 1) ? 'th' :
-            ($b === 1) ? 'st' :
-                ($b === 2) ? 'nd' :
-                    ($b === 3) ? 'rd' : 'th';
+
+        switch ($b)
+        {
+            case 1:
+                $output = 'st';
+                break;
+            case 2:
+                $output = 'nd';
+                break;
+            case 3:
+                $output = 'rd';
+                break;
+            default:
+                $output = 'th';
+        }
 
         return $number . "[$output]";
     },
