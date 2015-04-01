@@ -1,7 +1,6 @@
 <?php
 
-// moment.js locale configuration
-// locale => american english (en_US)
+// locale: american english (en_US)
 
 $locale = require __DIR__ . '/en_GB.php';
 $locale['calendar']['withTime'] = '[at] h:i A';

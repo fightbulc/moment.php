@@ -1,8 +1,7 @@
 <?php
 
-// moment.js locale configuration
-// locale : french (fr)
-// author : John Fischer : https://github.com/jfroffice
+// locale: french (fr)
+// author: John Fischer https://github.com/jfroffice
 
 return array(
     "months"        => explode('_', 'janvier_février_mars_avril_mai_juin_juillet_août_septembre_octobre_novembre_décembre'),

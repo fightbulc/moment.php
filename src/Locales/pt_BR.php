@@ -1,8 +1,7 @@
 <?php
 
-// moment.js locale configuration
-// locale : portuguese (pt-br)
-// author : Jefferson Santos : https://github.com/jefflssantos
+// locale: portuguese (pt-br)
+// author: Jefferson Santos https://github.com/jefflssantos
 
 return array(
     "months"        => explode('_', 'janeiro_fevereiro_março_abril_maio_junho_julho_agosto_setembro_outubro_novembro_dezembro'),

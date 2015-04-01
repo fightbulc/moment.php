@@ -65,7 +65,7 @@ echo $m->format('[Wochentag:] l'); // e.g. Wochentag: Mittwoch
 ```
 
 Supported languages so far:  
-``de_DE`` ``en_GB`` ``en_US`` ``es_ES`` ``fr_FR`` ``pt_BR`` ``th_TH``  
+``de_DE`` ``en_GB`` ``en_US`` ``es_ES`` ``fr_FR`` ``pt_BR`` ``th_TH`` ``it_IT``  
 
 -------------------------------------------------
 
@@ -324,6 +324,9 @@ You can now run through the result and put it formatted into a drop-down field o
 -------------------------------------------------
 
 # Changelog
+
+### 1.9.0
+- added: locale Italian
 
 ### 1.8.1
 - fixed: english ordinal issue

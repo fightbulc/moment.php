@@ -1,8 +1,7 @@
 <?php
 
-// moment.js locale configuration
-// locale => Thailand (th_TH)
-// author => Tistee Boonsuwan => https://github.com/partynetwork
+// locale: Thailand (th_TH)
+// author: Tistee Boonsuwan https://github.com/partynetwork
 
 return array(
     "months"        => explode('_', 'มกราคม_กุมภาพันธ์_มีนาคม_เมษายน_พฤษภาคม_มิถุนายน_กรกฎาคม_สิงหาคม_กันยายน_ตุลาคม_พฤศจิกายน_ธันวาคม'),

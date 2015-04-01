@@ -1,8 +1,7 @@
 <?php
 
-// moment.js locale configuration
-// locale => great britain english (en-gb)
-// author => Chris Gedrim => https=>//github.com/chrisgedrim
+// locale: great britain english (en-gb)
+// author: Chris Gedrim https://github.com/chrisgedrim
 
 return array(
     "months"        => explode('_', 'January_February_March_April_May_June_July_August_September_October_November_December'),
