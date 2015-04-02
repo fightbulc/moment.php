@@ -7,7 +7,7 @@ namespace Moment;
  * Wrapper for PHP's DateTime class inspired by moment.js
  *
  * @package Moment
- * @author Tino Ehrich (tino@bigpun.me)
+ * @author  Tino Ehrich (tino@bigpun.me)
  */
 class Moment extends \DateTime
 {
@@ -94,7 +94,7 @@ class Moment extends \DateTime
     }
 
     /**
-     * @param null $format
+     * @param null                  $format
      * @param null|FormatsInterface $formatsInterface
      *
      * @return string
@@ -278,7 +278,24 @@ class Moment extends \DateTime
      */
     public function subtractMonths($months = 1)
     {
-        return $this->subtractTime('month', $months);
+        // cache current month
+        $currentMonth = $this->getMonth();
+
+        // subtract
+        $this->subtractTime('month', $months);
+
+        /**
+         * @see https://github.com/fightbulc/moment.php/issues/20
+         *
+         * some months are longer than others. therefore check if we are
+         * still within the same month and subtract another day if so.
+         */
+        if ($currentMonth === $this->getMonth())
+        {
+            $this->subtractDays(1);
+        }
+
+        return $this;
     }
 
     /**
@@ -470,8 +487,8 @@ class Moment extends \DateTime
     }
 
     /**
-     * @param int $hour
-     * @param int $minute
+     * @param int  $hour
+     * @param int  $minute
      * @param null $second
      *
      * @return $this|\DateTime
@@ -485,7 +502,7 @@ class Moment extends \DateTime
 
     /**
      * @param string|Moment $fromMoment
-     * @param null $timezoneString
+     * @param null          $timezoneString
      *
      * @return MomentFromVo
      */
@@ -537,7 +554,7 @@ class Moment extends \DateTime
 
     /**
      * @param string $type
-     * @param int $value
+     * @param int    $value
      *
      * @return Moment
      */
@@ -841,7 +858,7 @@ class Moment extends \DateTime
 
     /**
      * @param array $weekdayNumbers
-     * @param int $forUpcomingWeeks
+     * @param int   $forUpcomingWeeks
      *
      * @return Moment[]
      */
@@ -1002,7 +1019,7 @@ class Moment extends \DateTime
 
     /**
      * @param string $type
-     * @param int $value
+     * @param int    $value
      *
      * @return Moment
      */
@@ -1037,7 +1054,7 @@ class Moment extends \DateTime
      * Check if a moment is the same as another moment
      *
      * @param string|Moment $dateTime
-     * @param string $period 'seconds|minute|hour|day|month|year'
+     * @param string        $period 'seconds|minute|hour|day|month|year'
      *
      * @return boolean
      */
@@ -1052,7 +1069,7 @@ class Moment extends \DateTime
      * Checks if Moment is before given time
      *
      * @param string|Moment $dateTime
-     * @param string $period 'seconds|minute|hour|day|month|year'
+     * @param string        $period 'seconds|minute|hour|day|month|year'
      *
      * @return boolean
      */
