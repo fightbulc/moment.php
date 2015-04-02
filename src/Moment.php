@@ -278,24 +278,7 @@ class Moment extends \DateTime
      */
     public function subtractMonths($months = 1)
     {
-        // cache current month
-        $currentMonth = $this->getMonth();
-
-        // subtract
-        $this->subtractTime('month', $months);
-
-        /**
-         * @see https://github.com/fightbulc/moment.php/issues/20
-         *
-         * some months are longer than others. therefore check if we are
-         * still within the same month and subtract another day if so.
-         */
-        if ($currentMonth === $this->getMonth())
-        {
-            $this->subtractDays(1);
-        }
-
-        return $this;
+        return $this->subtractTime('month', $months);
     }
 
     /**
