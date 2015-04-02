@@ -10,7 +10,10 @@
         "manipulate",
         "display",
         "format",
-        "i18n"
+        "i18n",
+        "translation",
+        "locale",
+        "moment"
     ],
     "license": "MIT",
     "authors": [
