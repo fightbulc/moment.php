@@ -34,24 +34,15 @@ return array(
     ),
     "ordinal"       => function ($number)
     {
-        $b = $number % 10;
+        $n = $number % 100;
+        $ends = array('th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th');
 
-        switch ($b)
+        if ($n >= 11 && $n <= 13)
         {
-            case 1:
-                $output = 'st';
-                break;
-            case 2:
-                $output = 'nd';
-                break;
-            case 3:
-                $output = 'rd';
-                break;
-            default:
-                $output = 'th';
+            return $number . '[th]';
         }
 
-        return $number . "[$output]";
+        return $number . '[' . $ends[$number % 10] . ']';
     },
     "week"          => array(
         "dow" => 1, // Monday is the first day of the week.
