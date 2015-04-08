@@ -325,6 +325,9 @@ You can now run through the result and put it formatted into a drop-down field o
 
 # Changelog
 
+### 1.9.1
+- fixed: english ordinal issue for numbers between 11 - 13
+
 ### 1.9.0
 - added: locale Italian
 
