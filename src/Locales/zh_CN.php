@@ -15,37 +15,28 @@ return array(
     "weekdaysShort" => explode('_', '周日_周一_周二_周三_周四_周五_周六'),
     "weekdaysMin"   => explode('_', '日_一_二_三_四_五_六'),
     "calendar"      => array(
-        "sameDay"  => function (Moment $moment)
-        {
-            return $moment->getMinute() === 0 ? '[今天]Ah[点整]' : '[今天]LT';
-        },
-        "nextDay"  => function (Moment $moment)
-        {
-            return $moment->getMinute() === 0 ? '[明天]Ah[点整]' : '[明天]LT';
-        },
-        "lastDay"  => function (Moment $moment)
-        {
-            return $moment->getMinute() === 0 ? '[昨天]Ah[点整]' : '[昨天]LT';
-        },
-        "lastWeek" => '[上周] l',
-        "sameElse" => 'l',
-        "withTime" => '[于] H:i',
+        "sameDay"   => '[今天]',
+        "nextDay"   => '[明天]',
+        "lastDay"   => '[昨天]',
+        "lastWeek" => '[上]D',
+        "sameElse" => '[本]D',
+        "withTime" => 'H:i',
         "default"  => 'Y-m-d',
     ),
     "relativeTime"  => array(
-        "future" => '%s[内]',
-        "past"   => '%s[前]',
-        "s"      => '[几秒]',
-        "m"      => '[1分钟]',
-        "mm"     => '%d[分钟]',
-        "h"      => '[1小时]',
-        "hh"     => '%d[小时]',
-        "d"      => '[1天]',
-        "dd"     => '%d[天]',
-        "M"      => '[1个月]',
-        "MM"     => '%d[个月]',
-        "y"      => '[1年]',
-        "yy"     => '%d[年]',
+        "future" => '%s内',
+        "past"   => '%s前',
+        "s"      => '几秒',
+        "m"      => '1分钟',
+        "mm"     => '%d分钟',
+        "h"      => '1小时',
+        "hh"     => '%d小时',
+        "d"      => '1天',
+        "dd"     => '%d天',
+        "M"      => '1个月',
+        "MM"     => '%d个月',
+        "y"      => '1年',
+        "yy"     => '%d年',
     ),
     "ordinal"       => function ($number, $token)
     {
@@ -54,16 +45,14 @@ return array(
         switch ($token)
         {
             case 'd':
-            case 'D':
-            case 'DDD':
+            case 'w':
                 $symbol = '[日]';
                 break;
 
-            case 'M':
+            case 'n':
                 $symbol = '[月]';
                 break;
 
-            case 'w':
             case 'W':
                 $symbol = '[周]';
                 break;
