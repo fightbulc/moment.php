@@ -122,8 +122,9 @@ class Moment extends \DateTime
             {
                 foreach ($matches[1] as $part)
                 {
-                    $number = $this->format(substr($part, 0, 1));
-                    $format = str_replace($part, $this->formatOrdinal($number), $format);
+                    $token = substr($part, 0, 1);
+                    $number = $this->format($token);
+                    $format = str_replace($part, $this->formatOrdinal($number, $token), $format);
                 }
             }
         }
@@ -736,7 +737,7 @@ class Moment extends \DateTime
     /**
      * @param $period
      *
-     * @return $this
+     * @return Moment
      */
     public function startOf($period)
     {
@@ -785,7 +786,7 @@ class Moment extends \DateTime
     /**
      * @param $period
      *
-     * @return $this
+     * @return Moment
      */
     public function endOf($period)
     {
@@ -1014,19 +1015,20 @@ class Moment extends \DateTime
     }
 
     /**
-     * @param $number
+     * @param int $number
+     * @param string $token
      *
      * @return string
      */
-    private function formatOrdinal($number)
+    private function formatOrdinal($number, $token)
     {
-        return (string)call_user_func(MomentLocale::getLocaleString(array('ordinal')), $number);
+        return (string)call_user_func(MomentLocale::getLocaleString(array('ordinal')), $number, $token);
     }
 
     /**
      * Returns copy of Moment normalized to UTC timezone
      *
-     * @return \Moment\Moment
+     * @return Moment
      */
     public function toUTC()
     {
