@@ -74,7 +74,7 @@ __Supported languages so far:__
 ```pt_BR``` Portuguese (Europe)  
 ```it_IT``` Italian  
 ```th_TH``` Thai  
-```zh_CH``` Chinese  
+```zh_CN``` Chinese  
 ```zh_TW``` Traditional Chinese  
 
 -------------------------------------------------
