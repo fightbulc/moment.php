@@ -325,7 +325,7 @@ You can now run through the result and put it formatted into a drop-down field o
 
 # Changelog
 
-### 1.9.2
+### 1.10.0
 - added:
     - locale Chinese
     - ordinal formatter receives now the ```token``` e.g. the token within ```dS``` is ```d```  
