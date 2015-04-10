@@ -64,8 +64,18 @@ $m = new \Moment\Moment();
 echo $m->format('[Wochentag:] l'); // e.g. Wochentag: Mittwoch 
 ```
 
-Supported languages so far:  
-``de_DE`` ``en_GB`` ``en_US`` ``es_ES`` ``fr_FR`` ``pt_BR`` ``th_TH`` ``it_IT`` ``zh_CH``
+__Supported languages so far:__
+
+```de_DE``` German (Germany)  
+```en_GB``` English  (British)  
+```en_US``` English  (American)  
+```es_ES``` Spanish (Europe)  
+```fr_FR``` French (Europe)  
+```pt_BR``` Portuguese (Europe)  
+```it_IT``` Italian  
+```th_TH``` Thai  
+```zh_CH``` Chinese  
+```zh_TW``` Traditional Chinese  
 
 -------------------------------------------------
 
@@ -324,6 +334,10 @@ You can now run through the result and put it formatted into a drop-down field o
 -------------------------------------------------
 
 # Changelog
+
+### 1.10.1
+- added:
+    - locale traditional Chinese
 
 ### 1.10.0
 - added:
