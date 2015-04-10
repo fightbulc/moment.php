@@ -3,6 +3,8 @@
 // locale: portuguese (pt-br)
 // author: Jefferson Santos https://github.com/jefflssantos
 
+use Moment\Moment;
+
 return array(
     "months"        => explode('_', 'janeiro_fevereiro_março_abril_maio_junho_julho_agosto_setembro_outubro_novembro_dezembro'),
     "monthsShort"   => explode('_', 'jan._fev._mar._abr._mai._jun._jul._ago._set._out._nov._dez.'),
@@ -14,7 +16,7 @@ return array(
         "lastDay"  => '[ontem]',
         "lastWeek" => '[útimo] l',
         "sameElse" => 'eu',
-        "withTime" => function (\Moment\Moment $moment) { return '[à' . ($moment->getHour() !== 1 ? 's' : null) . '] H:i'; },
+        "withTime" => function (Moment $moment) { return '[à' . ($moment->getHour() !== 1 ? 's' : null) . '] H:i'; },
         "default"  => 'd/m/Y',
     ),
     "relativeTime"  => array(
