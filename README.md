@@ -335,6 +335,10 @@ You can now run through the result and put it formatted into a drop-down field o
 
 # Changelog
 
+### 1.10.2
+- added:
+    - fixed Thai locale strings
+
 ### 1.10.1
 - added:
     - locale traditional Chinese
