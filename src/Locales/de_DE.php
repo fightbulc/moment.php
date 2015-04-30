@@ -1,7 +1,7 @@
 <?php
 
-// locale: great britain english (en-gb)
-// author: Chris Gedrim https://github.com/chrisgedrim
+// locale: German (Germany) (de_DE)
+// author: Tino Ehrich (tino@bigpun.me)
 
 return array(
     "months"        => explode('_', 'Januar_Februar_März_April_Mai_Juni_Juli_August_September_Oktober_November_Dezember'),
