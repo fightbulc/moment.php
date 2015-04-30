@@ -335,6 +335,11 @@ You can now run through the result and put it formatted into a drop-down field o
 
 # Changelog
 
+### 1.10.3
+- added:
+    - fixed passing closures to locale (calendar, relativeTime)
+    - set correct german locale information
+
 ### 1.10.2
 - added:
     - fixed Thai locale strings

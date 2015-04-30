@@ -270,9 +270,7 @@ class MomentFromVo
             $time = MomentLocale::renderLocaleString(array('relativeTime', 'yy'), array(round(abs($this->getYears()))));
         }
 
-        $baseString = MomentLocale::getLocaleString(array('relativeTime', $this->getDirection()));
-
-        return vsprintf($baseString, array($time));
+        return MomentLocale::renderLocaleString(array('relativeTime', $this->getDirection()), array($time));
     }
 
     /**
