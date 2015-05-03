@@ -335,6 +335,11 @@ You can now run through the result and put it formatted into a drop-down field o
 
 # Changelog
 
+### 1.10.4
+- added:
+    - ```calendar``` locale receives as \Closure the following params ```function(Moment $m) {}``` 
+    - ```relativeTime``` locale receives as \Closure the following params ```function($count, $direction, Moment $m) {}``` 
+    
 ### 1.10.3
 - added:
     - fixed passing closures to locale (calendar, relativeTime)

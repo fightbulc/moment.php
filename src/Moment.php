@@ -687,43 +687,46 @@ class Moment extends \DateTime
         $diff = $momentFromVo->getDays();
 
         // handle time string
-        $renderedTimeString = MomentLocale::renderLocaleString(array('calendar', 'withTime'));
+        $renderedTimeString = MomentLocale::renderLocaleString(array('calendar', 'withTime'), array($this));
         $addTime = false;
 
         // apply cases
         if ($diff > 7)
         {
-            $format = MomentLocale::renderLocaleString(array('calendar', 'default'));
+            $localeKeys = array('calendar', 'default');
         }
         elseif ($diff > 1)
         {
-            $format = MomentLocale::renderLocaleString(array('calendar', 'lastWeek'));
+            $localeKeys = array('calendar', 'lastWeek');
             $addTime = true;
         }
         elseif ($diff > 0)
         {
-            $format = MomentLocale::renderLocaleString(array('calendar', 'lastDay'));
+            $localeKeys = array('calendar', 'lastDay');
             $addTime = true;
         }
         elseif ($diff == 0)
         {
-            $format = MomentLocale::renderLocaleString(array('calendar', 'sameDay'));
+            $localeKeys = array('calendar', 'sameDay');
             $addTime = true;
         }
         elseif ($diff == -1)
         {
-            $format = MomentLocale::renderLocaleString(array('calendar', 'nextDay'));
+            $localeKeys = array('calendar', 'nextDay');
             $addTime = true;
         }
         elseif ($diff > -7)
         {
-            $format = MomentLocale::renderLocaleString(array('calendar', 'sameElse'));
+            $localeKeys = array('calendar', 'sameElse');
             $addTime = true;
         }
         else
         {
-            $format = MomentLocale::renderLocaleString(array('calendar', 'default'));
+            $localeKeys = array('calendar', 'default');
         }
+
+        // render format
+        $format = MomentLocale::renderLocaleString($localeKeys, array($this));
 
         // add time if valid
         if ($addTime && $withTime === true)
@@ -1015,7 +1018,7 @@ class Moment extends \DateTime
     }
 
     /**
-     * @param int $number
+     * @param int    $number
      * @param string $token
      *
      * @return string

@@ -145,7 +145,7 @@ $m = new \Moment\Moment($date, 'CET');
 
 $response['test11.00'] = $m->format();
 
-foreach (['minute', 'hour', 'day', 'week', 'month', 'quarter', 'year'] as $k => $period)
+foreach (array('minute', 'hour', 'day', 'week', 'month', 'quarter', 'year') as $k => $period)
 {
     $index = $k + 1;
     $response['test11.0' . $index] = $m->startOf($period)->format();
@@ -158,7 +158,7 @@ $m = new \Moment\Moment($date, 'CET');
 
 $response['test12.00'] = $m->format();
 
-foreach (['minute', 'hour', 'day', 'week', 'month', 'quarter', 'year'] as $k => $period)
+foreach (array('minute', 'hour', 'day', 'week', 'month', 'quarter', 'year') as $k => $period)
 {
     $index = $k + 1;
     $response['test12.0' . $index] = $m->endOf($period)->format();

@@ -89,7 +89,7 @@ class MomentLocale
      *
      * @return string
      */
-    public static function renderLocaleString(array $localeKeys, $formatArgs = array())
+    public static function renderLocaleString(array $localeKeys, array $formatArgs = array())
     {
         // get locale handler
         $localeString = self::getLocaleString($localeKeys);
@@ -97,7 +97,7 @@ class MomentLocale
         // handle callback
         if ($localeString instanceof \Closure)
         {
-            $localeString = call_user_func($localeString, self::$moment);
+            $localeString = call_user_func_array($localeString, $formatArgs);
         }
 
         return vsprintf($localeString, $formatArgs);
