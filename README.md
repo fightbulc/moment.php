@@ -66,6 +66,7 @@ echo $m->format('[Wochentag:] l'); // e.g. Wochentag: Mittwoch
 
 __Supported languages so far:__
 
+```cs_CZ``` Czech  
 ```de_DE``` German (Germany)  
 ```en_GB``` English  (British)  
 ```en_US``` English  (American)  
@@ -334,6 +335,10 @@ You can now run through the result and put it formatted into a drop-down field o
 -------------------------------------------------
 
 # Changelog
+
+### 1.11.0
+- added:
+    - locale Czech 
 
 ### 1.10.4
 - added:
