@@ -63,7 +63,7 @@ return array(
             $ifPast($direction, '%d hodinami', $ifCountSmaller($count, 5, '%d hodiny', '%d hodin'));
         },
         "d"      => function ($count, $direction, Moment $m) use ($ifPast) {
-            return $direction === 'past' ? 'dnem' : 'den';
+            return $ifPast($direction, 'dnem', 'den');
         },
         "dd"     => function ($count, $direction, Moment $m) use ($ifPast, $ifCountSmaller) {
             return $ifPast($direction, '%d dny', $ifCountSmaller($count, 5, '%d dny', '%d dnů'));
