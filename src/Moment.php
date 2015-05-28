@@ -763,17 +763,23 @@ class Moment extends \DateTime
 
             // set to the first day of this week, 00:00:00
             case 'week':
-                return $this->getPeriod('week')->getStartDate();
+                return $this->resetDateTime(
+                    $this->getPeriod('week')->getStartDate()->format('c')
+                );
                 break;
 
             // set to the beginning of the current quarter, 1st day of months, 00:00:00
             case 'quarter':
-                return $this->getPeriod('quarter')->getStartDate();
+                return $this->resetDateTime(
+                    $this->getPeriod('quarter')->getStartDate()->format('c')
+                );
                 break;
 
             // set to the first of this month, 00:00:00
             case 'month':
-                return $this->getPeriod('month')->getStartDate();
+                return $this->resetDateTime(
+                    $this->getPeriod('month')->getStartDate()->format('c')
+                );
                 break;
 
             // set to January 1st, 00:00:00 this year
@@ -812,17 +818,23 @@ class Moment extends \DateTime
 
             // set to the last day of this week, 23:59
             case 'week':
-                return $this->getPeriod('week')->getEndDate();
+                return $this->resetDateTime(
+                    $this->getPeriod('week')->getEndDate()->format('c')
+                );
                 break;
 
             // set to the end of the current quarter, last day of months, 23:59:59
             case 'quarter':
-                return $this->getPeriod('quarter')->getEndDate();
+                return $this->resetDateTime(
+                    $this->getPeriod('quarter')->getEndDate()->format('c')
+                );
                 break;
 
             // set to the last of this month, 23:59:59
             case 'month':
-                return $this->getPeriod('month')->getEndDate();
+                return $this->resetDateTime(
+                    $this->getPeriod('month')->getEndDate()->format('c')
+                );
                 break;
 
             // set to January 1st, 23:59:59 this year
