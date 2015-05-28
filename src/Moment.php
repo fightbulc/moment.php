@@ -619,14 +619,16 @@ class Moment extends \DateTime
                 $currentWeekDay = $this->format('N');
                 $interval = $this->format('W');
 
+                $dow = MomentLocale::getLocaleString(array('week','dow'), array($this));
+
                 $start = new Moment('@' . $this->format('U'));
                 $start->setTimezone($this->getTimezoneString())
-                    ->subtractDays($currentWeekDay - 1)
+                    ->subtractDays($currentWeekDay - $dow)
                     ->setTime(0, 0, 0);
 
                 $end = new Moment('@' . $this->format('U'));
                 $end->setTimezone($this->getTimezoneString())
-                    ->addDays(7 - $currentWeekDay)
+                    ->addDays((($dow + 6) % 7) - $currentWeekDay)
                     ->setTime(23, 59, 59);
 
                 break;

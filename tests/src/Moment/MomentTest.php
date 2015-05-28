@@ -419,6 +419,24 @@ class MomentTest extends \PHPUnit_Framework_TestCase
 
     }
 
+    public function testLocaleDow()
+    {
+        //Test en_GB for Monday start of week
+        Moment::setLocale('en_GB');
+
+        $gb = new Moment('2014-03-09T10:29:00Z');
+        $this->assertEquals(1, $gb->startOf('week')->getWeekday());
+        $this->assertEquals(7, $gb->endOf('week')->getWeekday());
+
+        //Test en_US for Sunday start of week
+        Moment::setLocale('en_US');
+
+        $us = new Moment('2014-03-09T10:29:00Z');
+        $this->assertEquals(7, $us->startOf('week')->getWeekday());
+        $this->assertEquals(6, $us->endOf('week')->getWeekday());
+
+    }
+
 // TODO: have a look when I am coming back to this pull request
 //    public function testToArray()
 //    {
