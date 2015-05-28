@@ -616,19 +616,16 @@ class Moment extends \DateTime
         switch ($period)
         {
             case 'week':
-                $currentWeekDay = $this->format('N');
                 $interval = $this->format('W');
-
-                $dow = MomentLocale::getLocaleString(array('week','dow'), array($this));
 
                 $start = new Moment('@' . $this->format('U'));
                 $start->setTimezone($this->getTimezoneString())
-                    ->subtractDays($currentWeekDay - $dow)
+                    ->subtractDays($this->getDaysAfterStartOfWeek())
                     ->setTime(0, 0, 0);
 
                 $end = new Moment('@' . $this->format('U'));
                 $end->setTimezone($this->getTimezoneString())
-                    ->addDays((($dow + 6) % 7) - $currentWeekDay)
+                    ->addDays(6 - $this->getDaysAfterStartOfWeek())
                     ->setTime(23, 59, 59);
 
                 break;
@@ -941,6 +938,18 @@ class Moment extends \DateTime
         $this->setTimezoneString($timezoneString);
 
         return new \DateTimeZone($timezoneString);
+    }
+
+    /**
+     * @return int
+     */
+    private function getDaysAfterStartOfWeek()
+    {
+        $dow = MomentLocale::getLocaleString(array('week','dow'), array($this)) % 7;
+        $currentWeekDay = (int) $this->getWeekday();
+        $distance = (7 - $dow + $currentWeekDay ) % 7;
+
+        return $distance;
     }
 
     /**

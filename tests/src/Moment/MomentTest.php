@@ -424,16 +424,54 @@ class MomentTest extends \PHPUnit_Framework_TestCase
         //Test en_GB for Monday start of week
         Moment::setLocale('en_GB');
 
-        $gb = new Moment('2014-03-09T10:29:00Z');
-        $this->assertEquals(1, $gb->startOf('week')->getWeekday());
-        $this->assertEquals(7, $gb->endOf('week')->getWeekday());
+        //Expected Values
+        $gb_start = new Moment('2015-04-27T00:00:00Z');
+        $gb_end = new Moment('2015-05-03T23:59:59Z');
+
+        //Current date: Middle of the week
+        $gb = new Moment('2015-04-28T10:29:00Z');
+
+        $this->assertTrue($gb->cloning()->startOf('week')->isSame($gb_start));
+        $this->assertTrue($gb->cloning()->endOf('week')->isSame($gb_end));
+
+        //Current Date: Beginning of the week
+        $gb = new Moment('2015-04-27T10:29:00Z');
+
+        $this->assertTrue($gb->cloning()->startOf('week')->isSame($gb_start));
+        $this->assertTrue($gb->cloning()->endOf('week')->isSame($gb_end));
+
+        //Current Date: End of week
+        $gb = new Moment('2015-05-03T10:29:00Z');
+
+        $this->assertTrue($gb->cloning()->startOf('week')->isSame($gb_start));
+        $this->assertTrue($gb->cloning()->endOf('week')->isSame($gb_end));
+
 
         //Test en_US for Sunday start of week
         Moment::setLocale('en_US');
 
-        $us = new Moment('2014-03-09T10:29:00Z');
-        $this->assertEquals(7, $us->startOf('week')->getWeekday());
-        $this->assertEquals(6, $us->endOf('week')->getWeekday());
+        //Expected Values
+        $us_start = new Moment('2015-04-26T00:00:00Z');
+        $us_end = new Moment('2015-05-02T23:59:59Z');
+
+        //Current date: Middle of the week
+        $us = new Moment('2015-04-28T10:29:00Z');
+
+        $this->assertTrue($us->cloning()->startOf('week')->isSame($us_start));
+        $this->assertTrue($us->cloning()->endOf('week')->isSame($us_end));
+
+        //Current Date: Beginning of the week
+        $us = new Moment('2015-04-26T10:29:00Z');
+
+        $this->assertTrue($us->cloning()->startOf('week')->isSame($us_start));
+        $this->assertTrue($us->cloning()->endOf('week')->isSame($us_end));
+
+        //Current Date: End of week
+        $us = new Moment('2015-05-02T10:29:00Z');
+
+        $this->assertTrue($us->cloning()->startOf('week')->isSame($us_start));
+        $this->assertTrue($us->cloning()->endOf('week')->isSame($us_end));
+
 
     }
 
