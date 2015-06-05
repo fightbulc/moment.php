@@ -662,7 +662,7 @@ class Moment extends \DateTime
             // ------------------------------
 
             default:
-                throw new MomentException("Period \"{$period}\" is not supported yet (supported are \"week\" and \"month\").", 500);
+                throw new MomentException("Period \"{$period}\" is not supported. Supported: \"week\", \"month\", \"quarter\".");
         }
 
         $momentPeriodVo = new MomentPeriodVo();
@@ -945,9 +945,9 @@ class Moment extends \DateTime
      */
     private function getDaysAfterStartOfWeek()
     {
-        $dow = MomentLocale::getLocaleString(array('week','dow'), array($this)) % 7;
-        $currentWeekDay = (int) $this->getWeekday();
-        $distance = (7 - $dow + $currentWeekDay ) % 7;
+        $dow = MomentLocale::getLocaleString(array('week', 'dow')) % 7;
+        $currentWeekDay = (int)$this->getWeekday();
+        $distance = (7 - $dow + $currentWeekDay) % 7;
 
         return $distance;
     }

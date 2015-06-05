@@ -336,6 +336,14 @@ You can now run through the result and put it formatted into a drop-down field o
 
 # Changelog
 
+### 1.11.2
+- fixed:
+    - take starting of week into account when calculating period 
+
+### 1.11.1
+- fixed:
+    - passing back new instance for startOf/endOf for week, month, quarter 
+
 ### 1.11.0
 - added:
     - locale Czech 
