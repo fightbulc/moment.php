@@ -72,7 +72,7 @@ __Supported languages so far:__
 ```en_US``` English  (American)  
 ```es_ES``` Spanish (Europe)  
 ```fr_FR``` French (Europe)  
-```pt_BR``` Portuguese (Europe)  
+```pt_BR``` Portuguese (Brazil)  
 ```it_IT``` Italian  
 ```th_TH``` Thai  
 ```zh_CN``` Chinese  
