@@ -4,10 +4,10 @@
 // author: Marco Micheli https://github.com/macfighterpilot
 
 return array(
-    "months"        => explode('', 'Gennaio_Febbraio_Marzo_Aprile_Maggio_Giugno_Luglio_Agosto_Settembre_Ottobre_Novembre_Dicembre'),
-    "monthsShort"   => explode('', 'Gen_Feb_Mar_Apr_Mag_Giu_Lug_Ago_Set_Ott_Nov_Dic'),
-    "weekdays"      => explode('', 'Lunedì_Martedì_Mercoledì_Giovedì_Venerdì_Sabato_Domenica'),
-    "weekdaysShort" => explode('', 'Lun_Mar_Mer_Gio_Ven_Sab_Dom'),
+    "months"        => explode('_', 'Gennaio_Febbraio_Marzo_Aprile_Maggio_Giugno_Luglio_Agosto_Settembre_Ottobre_Novembre_Dicembre'),
+    "monthsShort"   => explode('_', 'Gen_Feb_Mar_Apr_Mag_Giu_Lug_Ago_Set_Ott_Nov_Dic'),
+    "weekdays"      => explode('_', 'Lunedì_Martedì_Mercoledì_Giovedì_Venerdì_Sabato_Domenica'),
+    "weekdaysShort" => explode('_', 'Lun_Mar_Mer_Gio_Ven_Sab_Dom'),
     "calendar"      => array(
         "sameDay"  => '[Oggi]',
         "nextDay"  => '[Domani]',
