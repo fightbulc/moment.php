@@ -3,30 +3,33 @@
 // locale: romanian (ro-ro)
 // author: Calin Rada https://github.com/calinrada
 
-$rtwp = function($count, $direction, \Moment\Moment $m, $key) {
+use Moment\Moment;
 
-    $format = [
+$rtwp = function ($count, $direction, Moment $m, $key)
+{
+    $format = array(
         'mm' => 'minute',
         'hh' => 'ore',
         'dd' => 'zile',
         'MM' => 'luni',
         'yy' => 'ani'
-    ];
+    );
 
     $separator = ' ';
 
-    if ($count % 100 >= 20 || ($count >= 100 && $count % 100 === 0)) {
+    if ($count % 100 >= 20 || ($count >= 100 && $count % 100 === 0))
+    {
         $separator = ' de ';
     }
 
-    return $count.$separator.$format[$key];
+    return $count . $separator . $format[$key];
 };
 
 return array(
     "months"        => explode('_', 'ianuarie_februarie_martie_aprilie_mai_iunie_iulie_august_septembrie_octombrie_noiembrie_decembrie'),
     "monthsShort"   => explode('_', 'ian._febr._mart._apr._mai_iun._iul._aug._sept._oct._nov._dec.'),
-    "weekdays"      => explode('_', 'duminică_luni_marți_miercuri_joi_vineri_sâmbătă'),
-    "weekdaysShort" => explode('_', 'Dum_Lun_Mar_Mie_Joi_Vin_Sâm'),
+    "weekdays"      => explode('_', 'luni_marți_miercuri_joi_vineri_sâmbătă_duminică'),
+    "weekdaysShort" => explode('_', 'Lun_Mar_Mie_Joi_Vin_Sâm_Dum'),
     "calendar"      => array(
         "sameDay"  => '[azi]',
         "nextDay"  => '[mâine la]',
@@ -41,23 +44,28 @@ return array(
         "past"   => 'În urmă cu %s',
         "s"      => 'câteva secunde',
         "m"      => 'un minut',
-        "mm"     => function($count, $direction, \Moment\Moment $m) use ($rtwp){
+        "mm"     => function ($count, $direction, Moment $m) use ($rtwp)
+        {
             return $rtwp($count, $direction, $m, 'mm');
         },
         "h"      => 'o oră',
-        "hh"     => function($count, $direction, \Moment\Moment $m) use ($rtwp){
+        "hh"     => function ($count, $direction, Moment $m) use ($rtwp)
+        {
             return $rtwp($count, $direction, $m, 'hh');
         },
         "d"      => 'o zi',
-        "dd"     => function($count, $direction, \Moment\Moment $m) use ($rtwp){
+        "dd"     => function ($count, $direction, Moment $m) use ($rtwp)
+        {
             return $rtwp($count, $direction, $m, 'dd');
         },
         "M"      => 'o lună',
-        "MM"     => function($count, $direction, \Moment\Moment $m) use ($rtwp){
+        "MM"     => function ($count, $direction, Moment $m) use ($rtwp)
+        {
             return $rtwp($count, $direction, $m, 'MM');
         },
         "y"      => 'un an',
-        "yy"     => function($count, $direction, \Moment\Moment $m) use ($rtwp){
+        "yy"     => function ($count, $direction, Moment $m) use ($rtwp)
+        {
             return $rtwp($count, $direction, $m, 'yy');
         },
     ),
