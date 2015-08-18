@@ -7,6 +7,8 @@
                                            |_|         |_|    
 </pre>
 
+[![Build Status](https://travis-ci.org/fightbulc/moment.php.svg?branch=master)](https://travis-ci.org/fightbulc/moment.php)
+
 [Change log](#changelog)
 
 # Intro
@@ -336,9 +338,13 @@ You can now run through the result and put it formatted into a drop-down field o
 
 # Changelog
 
-### 1.11.2
+### 1.11.4
 - fixed:
-    - take starting of week into account when calculating period 
+    - fixed starting/ending weekday for Romanian locale 
+
+### 1.11.3
+- fixed:
+    - adding delimiter character to Italian locale 
 
 ### 1.11.1
 - fixed:
