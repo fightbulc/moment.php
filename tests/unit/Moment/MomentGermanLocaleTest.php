@@ -66,12 +66,12 @@ class MomentGermanLocaleTest extends \PHPUnit_Framework_TestCase
 
     public function testCorrectDate()
     {
-$string = '2015-06-14 20:46:22';
-$moment = new Moment($string, 'Europe/Berlin');
-$this->assertEquals('14. Juni', $moment->format('d. F'));
+        $string = '2015-06-14 20:46:22';
+        $moment = new Moment($string, 'Europe/Berlin');
+        $this->assertEquals('14. Juni', $moment->format('d. F'));
 
-$string = '2015-03-08T15:14:53-0500';
-$moment = new Moment($string, 'Europe/Berlin');
-$this->assertEquals('08. März', $moment->format('d. F'));
+        $string = '2015-03-08T15:14:53-0500';
+        $moment = new Moment($string, 'Europe/Berlin');
+        $this->assertEquals('08. März', $moment->format('d. F'));
     }
 }

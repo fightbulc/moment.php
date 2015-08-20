@@ -215,7 +215,7 @@ class MomentFromVo
      */
     public function getYears()
     {
-        return $this->getRoundedValue($this->days / 345);
+        return $this->getRoundedValue($this->days / 365);
     }
 
     /**

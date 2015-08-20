@@ -4,6 +4,14 @@ require __DIR__ . '/../vendor/autoload.php';
 
 $response = array();
 
+var_dump([
+    (new \Moment\Moment('2015-08-19 20:46:22', 'Europe/Berlin'))->format('d.m.Y'),
+    // works (return 19.08.2015)
+    (new \Moment\Moment('2015-08-19 20:46:22', 'Europe/Berlin'))->format('d. F'),
+    // fails (return 19. September)
+]);
+die();
+
 // ############################################
 
 $m = new \Moment\Moment();
