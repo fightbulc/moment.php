@@ -79,6 +79,7 @@ __Supported languages so far:__
 ```th_TH``` Thai  
 ```zh_CN``` Chinese  
 ```zh_TW``` Traditional Chinese  
+```da_DK``` Danish
 
 -------------------------------------------------
 
@@ -337,6 +338,10 @@ You can now run through the result and put it formatted into a drop-down field o
 -------------------------------------------------
 
 # Changelog
+
+### 1.12.0
+- added:
+    - Danish locale
 
 ### 1.11.4
 - fixed:
