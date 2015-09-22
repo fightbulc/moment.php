@@ -8,6 +8,7 @@
 </pre>
 
 [![Build Status](https://travis-ci.org/fightbulc/moment.php.svg?branch=master)](https://travis-ci.org/fightbulc/moment.php)
+[![Total Downloads](https://img.shields.io/packagist/dt/fightbulc/moment.svg?style=flat-square)](https://packagist.org/packages/fightbulc/moment)
 
 [Change log](#changelog)
 
