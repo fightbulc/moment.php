@@ -21,7 +21,7 @@ return array(
     ),
     "relativeTime"  => array(
         "future" => 'em %s',
-        "past"   => 'atrás %s',
+        "past"   => 'há %s',
         "s"      => 'alguns segundos',
         "m"      => 'um minuto',
         "mm"     => '%d minutos',
