@@ -80,7 +80,7 @@ __Supported languages so far:__
 ```th_TH``` Thai  
 ```zh_CN``` Chinese  
 ```zh_TW``` Traditional Chinese  
-```da_DK``` Danish
+```da_DK``` Danish  
 ```se_SV``` Swedish
 
 -------------------------------------------------
