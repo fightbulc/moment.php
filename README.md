@@ -81,6 +81,7 @@ __Supported languages so far:__
 ```zh_CN``` Chinese  
 ```zh_TW``` Traditional Chinese  
 ```da_DK``` Danish
+```se_SV``` Swedish
 
 -------------------------------------------------
 
@@ -339,6 +340,10 @@ You can now run through the result and put it formatted into a drop-down field o
 -------------------------------------------------
 
 # Changelog
+
+### 1.13.0
+- added:
+    - Swedish locale
 
 ### 1.12.0
 - added:
