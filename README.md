@@ -81,7 +81,7 @@ __Supported languages so far:__
 ```zh_CN``` Chinese  
 ```zh_TW``` Traditional Chinese  
 ```da_DK``` Danish  
-```se_SV``` Swedish
+```se_SV``` Swedish  
 ```nl_NL``` Dutch
 
 -------------------------------------------------
