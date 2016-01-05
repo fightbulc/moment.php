@@ -94,7 +94,7 @@ class Moment extends \DateTime
     }
 
     /**
-     * @param null                  $format
+     * @param null $format
      * @param null|FormatsInterface $formatsInterface
      *
      * @return string
@@ -471,8 +471,8 @@ class Moment extends \DateTime
     }
 
     /**
-     * @param int  $hour
-     * @param int  $minute
+     * @param int $hour
+     * @param int $minute
      * @param null $second
      *
      * @return $this|\DateTime
@@ -486,7 +486,7 @@ class Moment extends \DateTime
 
     /**
      * @param string|Moment $fromMoment
-     * @param null          $timezoneString
+     * @param null $timezoneString
      *
      * @return MomentFromVo
      */
@@ -538,7 +538,7 @@ class Moment extends \DateTime
 
     /**
      * @param string $type
-     * @param int    $value
+     * @param int $value
      *
      * @return Moment
      */
@@ -856,7 +856,7 @@ class Moment extends \DateTime
 
     /**
      * @param array $weekdayNumbers
-     * @param int   $forUpcomingWeeks
+     * @param int $forUpcomingWeeks
      *
      * @return Moment[]
      */
@@ -976,25 +976,28 @@ class Moment extends \DateTime
             $rawTimeZone = substr($rawDateTime, 19);
 
             // timezone w/ difference in hours: e.g. +0200
-            if ($rawTimeZone !== false && (strpos($rawTimeZone, '+') !== false || strpos($rawTimeZone, '-') !== false))
+            if (empty($rawTimeZone) === false)
             {
-                // with colon: +-HH:MM
-                if (substr_count($rawTimeZone, ':') > 0)
+                if (strpos($rawTimeZone, '+') !== false || strpos($rawTimeZone, '-') !== false)
                 {
-                    $momentDateTime = $this->format('Y-m-d\TH:i:sP');
+                    // with colon: +-HH:MM
+                    if (substr_count($rawTimeZone, ':') > 0)
+                    {
+                        $momentDateTime = $this->format('Y-m-d\TH:i:sP');
+                    }
+
+                    // without colon: +-HHMM
+                    else
+                    {
+                        $momentDateTime = $this->format('Y-m-d\TH:i:sO');
+                    }
                 }
 
-                // without colon: +-HHMM
+                // timezone with name: e.g. UTC
                 else
                 {
-                    $momentDateTime = $this->format('Y-m-d\TH:i:sO');
+                    $momentDateTime = $this->format('Y-m-d\TH:i:se');
                 }
-            }
-
-            // timezone with name: e.g. UTC
-            elseif ($rawTimeZone !== false)
-            {
-                $momentDateTime = $this->format('Y-m-d\TH:i:se');
             }
 
             // no timezone specified
@@ -1029,7 +1032,7 @@ class Moment extends \DateTime
 
     /**
      * @param string $type
-     * @param int    $value
+     * @param int $value
      *
      * @return Moment
      */
@@ -1041,7 +1044,7 @@ class Moment extends \DateTime
     }
 
     /**
-     * @param int    $number
+     * @param int $number
      * @param string $token
      *
      * @return string
@@ -1065,7 +1068,7 @@ class Moment extends \DateTime
      * Check if a moment is the same as another moment
      *
      * @param string|Moment $dateTime
-     * @param string        $period 'seconds|minute|hour|day|month|year'
+     * @param string $period 'seconds|minute|hour|day|month|year'
      *
      * @return boolean
      */
@@ -1080,7 +1083,7 @@ class Moment extends \DateTime
      * Checks if Moment is before given time
      *
      * @param string|Moment $dateTime
-     * @param string        $period 'seconds|minute|hour|day|month|year'
+     * @param string $period 'seconds|minute|hour|day|month|year'
      *
      * @return boolean
      */
@@ -1095,7 +1098,7 @@ class Moment extends \DateTime
      * Checks if Moment is after given time
      *
      * @param string|Moment $dateTime
-     * @param string        $period 'seconds|minute|hour|day|month|year'
+     * @param string $period 'seconds|minute|hour|day|month|year'
      *
      * @return bool
      */
@@ -1111,8 +1114,8 @@ class Moment extends \DateTime
      *
      * @param string|Moment $minDateTime
      * @param string|Moment $maxDateTime
-     * @param boolean       $closed
-     * @param string        $period 'seconds|minute|hour|day|month|year'
+     * @param boolean $closed
+     * @param string $period 'seconds|minute|hour|day|month|year'
      *
      * @return bool
      */
