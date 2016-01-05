@@ -64,8 +64,10 @@ class MomentGermanLocaleTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testCorrectDate()
+    public function testHirbodIssueLocaleDate001()
     {
+        // @see: https://github.com/fightbulc/moment.php/issues/50
+
         $string = '2015-06-14 20:46:22';
         $moment = new Moment($string, 'Europe/Berlin');
         $this->assertEquals('14. Juni', $moment->format('d. F'));
@@ -73,5 +75,13 @@ class MomentGermanLocaleTest extends \PHPUnit_Framework_TestCase
         $string = '2015-03-08T15:14:53-0500';
         $moment = new Moment($string, 'Europe/Berlin');
         $this->assertEquals('08. März', $moment->format('d. F'));
+    }
+
+    public function testHirbodIssueLocaleDate002()
+    {
+        // @see: https://github.com/fightbulc/moment.php/issues/61
+
+        $moment = new Moment('2016-01-03 16:17:07', 'Europe/Berlin');
+        $this->assertEquals('03. Dezember', $moment->subtractMonths(1)->format('d. F'));
     }
 }
