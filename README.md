@@ -69,21 +69,21 @@ echo $m->format('[Wochentag:] l'); // e.g. Wochentag: Mittwoch
 
 __Supported languages so far:__
 
-```zh_CN``` Chinese
-```zh_TW``` Chinese (traditional)
-```cs_CZ``` Czech
-```da_DK``` Danish
-```nl_NL``` Dutch
-```en_GB``` English  (British)
-```en_US``` English  (American)
-```fr_FR``` French (Europe)
-```de_DE``` German (Germany)
-```it_IT``` Italian
-```ja_JP``` Japanese
-```pt_BR``` Portuguese (Brazil)
-```es_ES``` Spanish (Europe)
-```se_SV``` Swedish
-```th_TH``` Thai
+```zh_CN``` Chinese  
+```zh_TW``` Chinese (traditional)  
+```cs_CZ``` Czech  
+```da_DK``` Danish  
+```nl_NL``` Dutch  
+```en_GB``` English (British)  
+```en_US``` English (American)  
+```fr_FR``` French (Europe)  
+```de_DE``` German (Germany)  
+```it_IT``` Italian  
+```ja_JP``` Japanese  
+```pt_BR``` Portuguese (Brazil)  
+```es_ES``` Spanish (Europe)  
+```se_SV``` Swedish  
+```th_TH``` Thai  
 
 -------------------------------------------------
 
