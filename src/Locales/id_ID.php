@@ -1,7 +1,7 @@
 <?php
 
 // locale: Indonesian (Indonesia) (id-id)
-// author: Yuda Sukmana https://github.com/ydatecg
+// author: Yuda Sukmana https://github.com/ydatech
 
 return array(
     "months"        => explode('_', 'Januari_Februari_Maret_April_Mei_Juni_Juli_Agustus_September_Oktober_November_Desember'),
