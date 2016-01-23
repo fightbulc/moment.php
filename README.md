@@ -78,6 +78,7 @@ __Supported languages so far:__
 ```en_US``` English (American)  
 ```fr_FR``` French (Europe)  
 ```de_DE``` German (Germany)  
+```in_ID``` Indonesian  
 ```it_IT``` Italian  
 ```ja_JP``` Japanese  
 ```pt_BR``` Portuguese (Brazil)  
@@ -342,6 +343,10 @@ You can now run through the result and put it formatted into a drop-down field o
 -------------------------------------------------
 
 # Changelog
+
+### 1.16.0
+- added:
+    - Indonesian locale
 
 ### 1.15.0
 - added:
