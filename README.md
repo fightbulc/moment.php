@@ -81,6 +81,7 @@ __Supported languages so far:__
 ```in_ID``` Indonesian  
 ```it_IT``` Italian  
 ```ja_JP``` Japanese  
+```pl_PL``` Polish  
 ```pt_BR``` Portuguese (Brazil)  
 ```es_ES``` Spanish (Europe)  
 ```se_SV``` Swedish  
@@ -343,6 +344,10 @@ You can now run through the result and put it formatted into a drop-down field o
 -------------------------------------------------
 
 # Changelog
+
+### 1.17.0
+- added:
+    - Polish locale
 
 ### 1.16.0
 - added:
