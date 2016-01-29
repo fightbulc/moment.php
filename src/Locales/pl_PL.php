@@ -6,10 +6,11 @@
 
 $ifLastDigitIsSpecial = function ($count, $trueString, $falseString)
 {
-    $specialDigits = ['2', '3', '4'];
+    $specialDigits = array('2', '3', '4');
+
     return
-        (in_array(mb_substr((string)$count, -1), $specialDigits) && $count > 20) ||
-        in_array((string)$count, $specialDigits)
+        (in_array(mb_substr((string)$count, -1), $specialDigits) && $count > 20)
+        || in_array((string)$count, $specialDigits)
             ? $trueString : $falseString;
 };
 
@@ -32,21 +33,25 @@ return array(
         "past"   => '%s temu',
         "s"      => 'kilka sekund',
         "m"      => 'minuta',
-        "mm"     => function ($count) use ($ifLastDigitIsSpecial) {
+        "mm"     => function ($count) use ($ifLastDigitIsSpecial)
+        {
             return $ifLastDigitIsSpecial($count, '%d minuty', '%d minut');
         },
         "h"      => 'godzina',
-        "hh"     => function ($count) use ($ifLastDigitIsSpecial) {
+        "hh"     => function ($count) use ($ifLastDigitIsSpecial)
+        {
             return $ifLastDigitIsSpecial($count, '%d godziny', '%d godzin');
         },
         "d"      => 'dzień',
         "dd"     => '%d dni',
         "M"      => 'miesiąc',
-        "MM"     => function ($count) use ($ifLastDigitIsSpecial) {
+        "MM"     => function ($count) use ($ifLastDigitIsSpecial)
+        {
             return $ifLastDigitIsSpecial($count, '%d miesiące', '%d miesięcy');
         },
         "y"      => 'rok',
-        "yy"     => function ($count) use ($ifLastDigitIsSpecial) {
+        "yy"     => function ($count) use ($ifLastDigitIsSpecial)
+        {
             return $ifLastDigitIsSpecial($count, '%d lata', '%d lat');
         },
     ),
