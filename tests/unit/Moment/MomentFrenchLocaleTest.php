@@ -64,6 +64,22 @@ class MomentFrenchLocaleTest extends \PHPUnit_Framework_TestCase
         }
     }
 
+    public function testFormat()
+    {
+        $a = [
+            ['l, F d Y, g:i:s a',                  'dimanche, février 14 2010, 3:25:50 pm'],
+            ['D, gA',                              'dim., 3PM'],
+            ['n m F M',                            '2 02 février févr.'],
+            ['Y y',                                '2010 10'],
+            ['j d',                                '14 14'],
+            ['[the] z [day of the year]',          'the 44 day of the year']
+        ];
+        $b = new Moment('2010-02-14 15:25:50');
+        for ($i = 0; $i < count($a); $i++) {
+            $this->assertEquals($a[$i][1], $b->format($a[$i][0]));
+        }
+    }
+
     public function testRelative()
     {
         $beginningMoment = new Moment('2015-06-14 20:46:22', 'Europe/Berlin');
