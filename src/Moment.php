@@ -22,6 +22,11 @@ class Moment extends \DateTime
     private $timezoneString;
 
     /**
+     * @var boolean
+     */
+    private $immutableMode;
+
+    /**
      * @param string $locale
      *
      * @return void
@@ -33,12 +38,26 @@ class Moment extends \DateTime
     }
 
     /**
+     * @param boolean $mode
+     *
+     * @return self
+     */
+    public function setImmutableMode($mode)
+    {
+        // set immutable mode to true or false
+        $this->immutableMode = $mode;
+
+        return $this;
+    }
+
+    /**
      * @param string $dateTime
      * @param string $timezone
+     * @param bool $immutableMode
      *
      * @throws MomentException
      */
-    public function __construct($dateTime = 'now', $timezone = 'UTC')
+    public function __construct($dateTime = 'now', $timezone = 'UTC', $immutableMode = false)
     {
         // set moment
         MomentLocale::setMoment($this);
@@ -46,7 +65,11 @@ class Moment extends \DateTime
         // load locale content
         MomentLocale::loadLocaleContent();
 
-        return $this->resetDateTime($dateTime, $timezone);
+        // initialize DateTime
+        $this->resetDateTime($dateTime, $timezone);
+
+        // set immutable mode
+        $this->setImmutableMode($immutableMode);
     }
 
     /**
@@ -58,6 +81,11 @@ class Moment extends \DateTime
      */
     public function resetDateTime($dateTime = 'now', $timezoneString = 'UTC')
     {
+        if ($this->immutableMode)
+        {
+            return $this->implicitCloning(__FUNCTION__, func_get_args());
+        }
+
         // cache dateTime
         $this->setRawDateTimeString($dateTime);
 
@@ -86,6 +114,11 @@ class Moment extends \DateTime
      */
     public function setTimezone($timezone)
     {
+        if ($this->immutableMode)
+        {
+            return $this->implicitCloning(__FUNCTION__, func_get_args());
+        }
+
         $this->setTimezoneString($timezone);
 
         parent::setTimezone($this->getDateTimeZone($timezone));
@@ -411,6 +444,25 @@ class Moment extends \DateTime
     }
 
     /**
+     * @param int $year
+     * @param int $month
+     * @param int $day
+     *
+     * @return self|\DateTime
+     */
+    public function setDate($year, $month, $day)
+    {
+        if ($this->immutableMode)
+        {
+            return $this->implicitCloning(__FUNCTION__, func_get_args());
+        }
+
+        parent::setDate($year, $month, $day);
+
+        return $this;
+    }
+
+    /**
      * @param $second
      *
      * @return Moment
@@ -479,6 +531,11 @@ class Moment extends \DateTime
      */
     public function setTime($hour, $minute, $second = null)
     {
+        if ($this->immutableMode)
+        {
+            return $this->implicitCloning(__FUNCTION__, func_get_args());
+        }
+
         parent::setTime($hour, $minute, $second);
 
         return $this;
@@ -544,6 +601,11 @@ class Moment extends \DateTime
      */
     private function addTime($type = 'day', $value = 1)
     {
+        if ($this->immutableMode)
+        {
+            return $this->implicitCloning(__FUNCTION__, func_get_args());
+        }
+
         parent::modify('+' . $value . ' ' . $type);
 
         return $this;
@@ -855,6 +917,23 @@ class Moment extends \DateTime
     }
 
     /**
+     * @param string $method
+     * @param array $params
+     *
+     * @return self
+     */
+    private function implicitCloning($method, $params = array())
+    {
+        $clone = $this->cloning();
+
+        $clone->setImmutableMode(false);
+        $retval = call_user_func_array(array($clone, $method), $params);
+        $clone->setImmutableMode(true);
+
+        return is_null($retval) ? $clone : $retval;
+    }
+
+    /**
      * @param array $weekdayNumbers
      * @param int $forUpcomingWeeks
      *
@@ -894,6 +973,11 @@ class Moment extends \DateTime
      */
     private function setRawDateTimeString($rawDateTimeString)
     {
+        if ($this->immutableMode)
+        {
+            return $this->implicitCloning(__FUNCTION__, func_get_args());
+        }
+
         $this->rawDateTimeString = $rawDateTimeString;
 
         return $this;
@@ -914,6 +998,11 @@ class Moment extends \DateTime
      */
     private function setTimezoneString($timezoneString)
     {
+        if ($this->immutableMode)
+        {
+            return $this->implicitCloning(__FUNCTION__, func_get_args());
+        }
+
         $this->timezoneString = $timezoneString;
 
         return $this;
@@ -1038,6 +1127,11 @@ class Moment extends \DateTime
      */
     private function subtractTime($type = 'day', $value = 1)
     {
+        if ($this->immutableMode)
+        {
+            return $this->implicitCloning(__FUNCTION__, func_get_args());
+        }
+
         parent::modify('-' . $value . ' ' . $type);
 
         return $this;
