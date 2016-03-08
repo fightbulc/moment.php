@@ -3,6 +3,7 @@
 // locale: Polski (Poland) (pl_PL)
 // author: Mateusz Błaszczyk https://github.com/Zaszczyk
 
+use Moment\Moment;
 
 $ifLastDigitIsSpecial = function ($count, $trueString, $falseString)
 {
@@ -23,7 +24,17 @@ return array(
         "sameDay"  => '[dzisiaj]',
         "nextDay"  => '[jutro]',
         "lastDay"  => '[wczoraj]',
-        "lastWeek" => '[ostatni] l',
+        "lastWeek" => function (Moment $moment)
+        {
+            $pre = 'ostatni';
+
+            if ($moment->getWeekday() >= 6)
+            {
+                $pre = 'ostatnia';
+            }
+
+            return '[' . $pre . '] l';
+        },
         "sameElse" => 'l',
         "withTime" => '[o] H:i',
         "default"  => 'd.m.Y',
@@ -32,12 +43,12 @@ return array(
         "future" => 'za %s',
         "past"   => '%s temu',
         "s"      => 'kilka sekund',
-        "m"      => 'minuta',
+        "m"      => '1 minutę',
         "mm"     => function ($count) use ($ifLastDigitIsSpecial)
         {
             return $ifLastDigitIsSpecial($count, '%d minuty', '%d minut');
         },
-        "h"      => 'godzina',
+        "h"      => '1 godzinę',
         "hh"     => function ($count) use ($ifLastDigitIsSpecial)
         {
             return $ifLastDigitIsSpecial($count, '%d godziny', '%d godzin');
@@ -49,7 +60,7 @@ return array(
         {
             return $ifLastDigitIsSpecial($count, '%d miesiące', '%d miesięcy');
         },
-        "y"      => 'rok',
+        "y"      => '1 rok',
         "yy"     => function ($count) use ($ifLastDigitIsSpecial)
         {
             return $ifLastDigitIsSpecial($count, '%d lata', '%d lat');
