@@ -365,6 +365,7 @@ You can now run through the result and put it formatted into a drop-down field o
 ### 1.18.0
 - added:
     - Immutable mode
+    - fixed Polish locale
 
 ### 1.17.0
 - added:
