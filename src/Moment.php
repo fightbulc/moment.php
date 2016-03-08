@@ -38,19 +38,6 @@ class Moment extends \DateTime
     }
 
     /**
-     * @param boolean $mode
-     *
-     * @return self
-     */
-    public function setImmutableMode($mode)
-    {
-        // set immutable mode to true or false
-        $this->immutableMode = $mode;
-
-        return $this;
-    }
-
-    /**
      * @param string $dateTime
      * @param string $timezone
      * @param bool $immutableMode
@@ -70,6 +57,19 @@ class Moment extends \DateTime
 
         // set immutable mode
         $this->setImmutableMode($immutableMode);
+    }
+
+    /**
+     * @param boolean $mode
+     *
+     * @return self
+     */
+    public function setImmutableMode($mode)
+    {
+        // set immutable mode to true or false
+        $this->immutableMode = $mode;
+
+        return $this;
     }
 
     /**
