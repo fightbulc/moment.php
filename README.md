@@ -83,7 +83,7 @@ __Supported languages so far:__
 ```ja_JP``` Japanese  
 ```pl_PL``` Polish  
 ```pt_BR``` Portuguese (Brazil)  
-```ru_RU``` Russian  
+```ru_RU``` Russian (Basic version)  
 ```es_ES``` Spanish (Europe)  
 ```se_SV``` Swedish  
 ```th_TH``` Thai  
