@@ -83,6 +83,7 @@ __Supported languages so far:__
 ```ja_JP``` Japanese  
 ```pl_PL``` Polish  
 ```pt_BR``` Portuguese (Brazil)  
+```ru_RU``` Russian  
 ```es_ES``` Spanish (Europe)  
 ```se_SV``` Swedish  
 ```th_TH``` Thai  
@@ -362,10 +363,17 @@ You can now run through the result and put it formatted into a drop-down field o
 
 # Changelog
 
+### 1.19.0
+- added:
+    - Russian locale
+- fixed:
+    - Polish locale test
+
 ### 1.18.0
 - added:
     - Immutable mode
-    - fixed Polish locale
+- fixed:
+    - Polish locale
 
 ### 1.17.0
 - added:
