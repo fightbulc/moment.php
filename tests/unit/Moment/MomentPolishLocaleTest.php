@@ -67,7 +67,13 @@ class MomentPolishLocaleTest extends \PHPUnit_Framework_TestCase
 
     public function testLastWeekWeekend()
     {
-        $past = new Moment('2016-03-06 16:17:07', 'Europe/Berlin');
-        $this->assertEquals('ostatnia niedziela', $past->calendar('lastWeek'));
+        $past = new Moment('now', 'Europe/Berlin');
+
+        if ($past->getWeekday() !== 7)
+        {
+            $past->subtractDays(8 - $past->getWeekday());
+        }
+
+        $this->assertEquals('ostatnia niedziela', $past->calendar(false));
     }
 }
