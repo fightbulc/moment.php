@@ -738,13 +738,14 @@ class Moment extends \DateTime
 
     /**
      * @param bool $withTime
+     * @param Moment $refMoment
      *
      * @return string
      */
-    public function calendar($withTime = true)
+    public function calendar($withTime = true, Moment $refMoment = null)
     {
-        $momentNow = new Moment('now', $this->getTimezoneString());
-        $momentFromVo = $this->cloning()->startOf('day')->from($momentNow->startOf('day'));
+        $refMoment = $refMoment ? $refMoment : new Moment('now', $this->getTimezoneString());
+        $momentFromVo = $this->cloning()->startOf('day')->from($refMoment->startOf('day'));
         $diff = $momentFromVo->getDays();
 
         // handle time string
