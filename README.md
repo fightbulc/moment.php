@@ -50,6 +50,31 @@ $m = new \Moment\Moment('now', 'Europe/Berlin');
 echo $m->format(); // e.g. 2012-10-03T12:00:00+0200
 ```
 
+### Accepted date formats
+
+Moment parses the following date formats as input:
+
+```php
+const ATOM = 'Y-m-d\TH:i:sP'; // 2005-08-15T15:52:01+00:00
+const COOKIE = 'l, d-M-y H:i:s T'; // Monday, 15-Aug-2005 15:52:01 UTC
+const ISO8601 = 'Y-m-d\TH:i:sO'; // 2005-08-15T15:52:01+0000
+const RFC822 = 'D, d M y H:i:s O'; // Mon, 15 Aug 05 15:52:01 +0000
+const RFC850 = 'l, d-M-y H:i:s T'; // Monday, 15-Aug-05 15:52:01 UTC
+const RFC1036 = 'D, d M y H:i:s O'; // Mon, 15 Aug 05 15:52:01 +0000
+const RFC1123 = 'D, d M Y H:i:s O'; // Mon, 15 Aug 2005 15:52:01 +0000
+const RFC2822 = 'D, d M Y H:i:s O'; // Mon, 15 Aug 2005 15:52:01 +0000
+const RSS = 'D, d M Y H:i:s O'; // Mon, 15 Aug 2005 15:52:01 +0000
+const W3C = 'Y-m-d\TH:i:sP'; // 2005-08-15T15:52:01+00:00
+
+// Moment also tries to parse dates without timezone or without seconds
+
+const NO_TZ_MYSQL = 'Y-m-d H:i:s'; // 2005-08-15 15:52:01
+const NO_TZ_NO_SECS = 'Y-m-d H:i:s'; // 2005-08-15 15:52
+
+// time fractions ".000" will be automatically removed
+$timeWithFraction = '2016-05-04T10:00:00.000';
+```
+
 -------------------------------------------------
 
 ### Switch locale
