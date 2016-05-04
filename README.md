@@ -50,6 +50,8 @@ $m = new \Moment\Moment('now', 'Europe/Berlin');
 echo $m->format(); // e.g. 2012-10-03T12:00:00+0200
 ```
 
+-------------------------------------------------
+
 ### Accepted date formats
 
 Moment parses the following date formats as input:
