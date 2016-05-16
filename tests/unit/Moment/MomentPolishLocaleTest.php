@@ -25,8 +25,7 @@ class MomentPolishLocaleTest extends \PHPUnit_Framework_TestCase
             7 => array('niedz.', 'niedziela'),
         );
 
-        for ($d = 1; $d < 7; $d++)
-        {
+        for ($d = 1; $d < 7; $d++) {
             $this->assertEquals($weekdayNames[$moment->getWeekday()][0], $moment->getWeekdayNameShort(), 'weekday short name failed');
             $this->assertEquals($weekdayNames[$moment->getWeekday()][1], $moment->getWeekdayNameLong(), 'weekday long name failed');
 
@@ -50,6 +49,35 @@ class MomentPolishLocaleTest extends \PHPUnit_Framework_TestCase
         $moment = new Moment('2016-01-03 16:17:07', 'Europe/Berlin');
         $this->assertEquals('3 grudnia', $moment->subtractMonths(1)->format('j F'));
     }
+
+    public function testMonthFormatFN()
+    {
+        $startingDate = '2016-01-01T00:00:00+0000';
+
+        $moment = new Moment($startingDate);
+
+        $monthsNominative = array(
+            1 => 'styczeń',
+            2 => 'luty',
+            3 => 'marzec',
+            4 => 'kwiecień',
+            5 => 'maj',
+            6 => 'czerwiec',
+            7 => 'lipiec',
+            8 => 'sierpień',
+            9 => 'wrzesień',
+            10 => 'październik',
+            11 => 'listopad',
+            12 => 'grudzień'
+        );
+
+        for ($d = 1; $d < count($monthsNominative); $d++) {
+            $this->assertEquals($monthsNominative[$moment->format('n')], $moment->format('f'), 'month nominative failed');
+
+            $moment->addMonths(1);
+        }
+    }
+
 
     public function testMinutes()
     {

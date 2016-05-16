@@ -114,6 +114,7 @@ class MomentLocale
             // months
             '(?<!\\\)F' => 'n__0001',
             '(?<!\\\)M' => 'n__0002',
+            '(?<!\\\)f' => 'n__0005',
             // weekdays
             '(?<!\\\)l' => 'N__0003',
             '(?<!\\\)D' => 'N__0004',
@@ -138,6 +139,7 @@ class MomentLocale
             // months
             '\d{1,2}__0001' => 'months',
             '\d{1,2}__0002' => 'monthsShort',
+            '\d{1,2}__0005' => 'monthsNominative',
             // weekdays
             '\d__0003'      => 'weekdays',
             '\d__0004'      => 'weekdaysShort',
