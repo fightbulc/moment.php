@@ -15,7 +15,7 @@ $ifLastDigitIsSpecial = function ($count, $trueString, $falseString)
 
 return array(
     "months"        => explode('_', 'stycznia_lutego_marca_kwietnia_maja_czerwca_lipca_sierpnia_września_października_listopada_grudnia'),
-    "monthsNominative"=> explode('_', 'styczeń_luty_marzec_kwiecień_maj_czerwiec_lipiec_sierpień_wrzesień_październik_listopad_grudni'),
+    "monthsNominative" => explode('_', 'styczeń_luty_marzec_kwiecień_maj_czerwiec_lipiec_sierpień_wrzesień_październik_listopad_grudni'),
     "monthsShort"   => explode('_', 'sty._lut._mar._kwi._maj_cze._lip._sie._wrz._paź._lis._gru.'),
     "weekdays"      => explode('_', 'poniedziałek_wtorek_środa_czwartek_piątek_sobota_niedziela'),
     "weekdaysShort" => explode('_', 'pon._wt._śr._czw._pt._sob._niedz.'),
