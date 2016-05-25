@@ -97,5 +97,26 @@ class MomentPolishLocaleTest extends \PHPUnit_Framework_TestCase
     {
         $past = new Moment('2016-04-10');
         $this->assertEquals('ostatnia niedziela', $past->calendar(false, new Moment('2016-04-12')));
+
+        $past = new Moment('2016-04-11');
+        $this->assertEquals('ostatni poniedziałek', $past->calendar(false, new Moment('2016-04-17')));
+        
+        $past = new Moment('2016-04-12');
+        $this->assertEquals('ostatni wtorek', $past->calendar(false, new Moment('2016-04-17')));
+        
+        $past = new Moment('2016-04-13');
+        $this->assertEquals('ostatnia środa', $past->calendar(false, new Moment('2016-04-17')));
+        
+        $past = new Moment('2016-04-14');
+        $this->assertEquals('ostatni czwartek', $past->calendar(false, new Moment('2016-04-17')));
+
+        $past = new Moment('2016-04-15');
+        $this->assertEquals('ostatni piątek', $past->calendar(false, new Moment('2016-04-17')));
+        
+        $past = new Moment('2016-04-16');
+        $this->assertEquals('wczoraj', $past->calendar(false, new Moment('2016-04-17')));
+        
+        $past = new Moment('2016-04-16');
+        $this->assertEquals('ostatnia sobota', $past->calendar(false, new Moment('2016-04-18')));
     }
 }

@@ -15,6 +15,8 @@ $ifLastDigitIsSpecial = function ($count, $trueString, $falseString)
             ? $trueString : $falseString;
 };
 
+$femaleWeekdays = ['3', '6', '7'];
+
 return array(
     "months"        => explode('_', 'stycznia_lutego_marca_kwietnia_maja_czerwca_lipca_sierpnia_września_października_listopada_grudnia'),
     "monthsNominative" => explode('_', 'styczeń_luty_marzec_kwiecień_maj_czerwiec_lipiec_sierpień_wrzesień_październik_listopad_grudni'),
@@ -25,11 +27,11 @@ return array(
         "sameDay"  => '[dzisiaj]',
         "nextDay"  => '[jutro]',
         "lastDay"  => '[wczoraj]',
-        "lastWeek" => function (Moment $moment)
+        "lastWeek" => function (Moment $moment) use ($femaleWeekdays)
         {
             $pre = 'ostatni';
 
-            if ($moment->getWeekday() >= 6)
+            if (in_array($moment->getWeekday(), $femaleWeekdays))
             {
                 $pre = 'ostatnia';
             }
