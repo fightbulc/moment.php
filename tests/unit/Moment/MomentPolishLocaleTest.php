@@ -92,4 +92,10 @@ class MomentPolishLocaleTest extends \PHPUnit_Framework_TestCase
         $relative = $past->from('2016-01-03 16:30:07');
         $this->assertEquals('13 minut temu', $relative->getRelative());
     }
+
+    public function testLastWeekWeekend()
+    {
+        $past = new Moment('2016-04-10');
+        $this->assertEquals('ostatnia niedziela', $past->calendar(false, new Moment('2016-04-12')));
+    }
 }

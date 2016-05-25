@@ -438,4 +438,35 @@ class MomentTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($us->cloning()->startOf('week')->isSame($us_start));
         $this->assertTrue($us->cloning()->endOf('week')->isSame($us_end));
     }
+
+    public function testImplicitCloning()
+    {
+        $origin = new Moment('1923-12-31 12:30:00', 'UTC', true);
+
+        $this->assertNotSame($origin, $origin->addMonths(1));
+        $origin->setImmutableMode(false);
+        $this->assertSame($origin, $origin->addMonths(1));
+        $origin->setImmutableMode(true);
+        $this->assertNotSame($origin, $origin->addMonths(1));
+    }
+
+    /**
+     * @link https://github.com/fightbulc/moment.php/issues/62
+     */
+//    public function testLeapYear()
+//    {
+//        $now = new Moment('2016-01-31', 'Asia/Tokyo');
+//
+//        $now
+//            ->subtractDays(1)
+//            ->addDays(1)
+//            ->startOf('day')
+//            ->cloning()
+//            ->startOf('month')
+//            ->addMonths(1)
+//            ->setDay('30')
+//            ->subtractMonths(1)
+//            ->endOf('month')
+//            ->format();
+//    }
 }

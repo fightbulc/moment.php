@@ -3,13 +3,15 @@
 // locale: Polski (Poland) (pl_PL)
 // author: Mateusz Błaszczyk https://github.com/Zaszczyk
 
+use Moment\Moment;
 
 $ifLastDigitIsSpecial = function ($count, $trueString, $falseString)
 {
-    $specialDigits = ['2', '3', '4'];
+    $specialDigits = array('2', '3', '4');
+
     return
-        (in_array(mb_substr((string)$count, -1), $specialDigits) && $count > 20) ||
-        in_array((string)$count, $specialDigits)
+        (in_array(mb_substr((string)$count, -1), $specialDigits) && $count > 20)
+        || in_array((string)$count, $specialDigits)
             ? $trueString : $falseString;
 };
 
@@ -23,7 +25,17 @@ return array(
         "sameDay"  => '[dzisiaj]',
         "nextDay"  => '[jutro]',
         "lastDay"  => '[wczoraj]',
-        "lastWeek" => '[ostatni] l',
+        "lastWeek" => function (Moment $moment)
+        {
+            $pre = 'ostatni';
+
+            if ($moment->getWeekday() >= 6)
+            {
+                $pre = 'ostatnia';
+            }
+
+            return '[' . $pre . '] l';
+        },
         "sameElse" => 'l',
         "withTime" => '[o] H:i',
         "default"  => 'd.m.Y',
@@ -33,21 +45,25 @@ return array(
         "past"   => '%s temu',
         "s"      => 'kilka sekund',
         "m"      => '1 minutę',
-        "mm"     => function ($count) use ($ifLastDigitIsSpecial) {
+        "mm"     => function ($count) use ($ifLastDigitIsSpecial)
+        {
             return $ifLastDigitIsSpecial($count, '%d minuty', '%d minut');
         },
         "h"      => '1 godzinę',
-        "hh"     => function ($count) use ($ifLastDigitIsSpecial) {
+        "hh"     => function ($count) use ($ifLastDigitIsSpecial)
+        {
             return $ifLastDigitIsSpecial($count, '%d godziny', '%d godzin');
         },
         "d"      => '1 dzień',
         "dd"     => '%d dni',
         "M"      => '1 miesiąc',
-        "MM"     => function ($count) use ($ifLastDigitIsSpecial) {
+        "MM"     => function ($count) use ($ifLastDigitIsSpecial)
+        {
             return $ifLastDigitIsSpecial($count, '%d miesiące', '%d miesięcy');
         },
         "y"      => '1 rok',
-        "yy"     => function ($count) use ($ifLastDigitIsSpecial) {
+        "yy"     => function ($count) use ($ifLastDigitIsSpecial)
+        {
             return $ifLastDigitIsSpecial($count, '%d lata', '%d lat');
         },
     ),
