@@ -15,7 +15,7 @@ $ifLastDigitIsSpecial = function ($count, $trueString, $falseString)
             ? $trueString : $falseString;
 };
 
-$femaleWeekdays = ['3', '6', '7'];
+$femaleWeekdays = array('3', '6', '7');
 
 return array(
     "months"        => explode('_', 'stycznia_lutego_marca_kwietnia_maja_czerwca_lipca_sierpnia_września_października_listopada_grudnia'),
