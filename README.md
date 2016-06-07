@@ -391,6 +391,10 @@ You can now run through the result and put it formatted into a drop-down field o
 
 # Changelog
 
+### 1.20.5
+- fixed:
+    - missing immutable handling
+
 ### 1.20.4
 - fixed:
     - Improved Polish locale (added Nominativ)
