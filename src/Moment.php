@@ -332,6 +332,11 @@ class Moment extends \DateTime
      */
     public function setDay($day)
     {
+        if ($this->immutableMode)
+        {
+            return $this->implicitCloning(__FUNCTION__, func_get_args());
+        }
+
         $this->setDate($this->format('Y'), $this->format('m'), $day);
 
         return $this;
@@ -344,6 +349,11 @@ class Moment extends \DateTime
      */
     public function setMonth($month)
     {
+        if ($this->immutableMode)
+        {
+            return $this->implicitCloning(__FUNCTION__, func_get_args());
+        }
+
         $this->setDate($this->format('Y'), $month, $this->format('d'));
 
         return $this;
@@ -356,6 +366,11 @@ class Moment extends \DateTime
      */
     public function setYear($year)
     {
+        if ($this->immutableMode)
+        {
+            return $this->implicitCloning(__FUNCTION__, func_get_args());
+        }
+
         $this->setDate($year, $this->format('m'), $this->format('d'));
 
         return $this;
@@ -469,6 +484,11 @@ class Moment extends \DateTime
      */
     public function setSecond($second)
     {
+        if ($this->immutableMode)
+        {
+            return $this->implicitCloning(__FUNCTION__, func_get_args());
+        }
+
         $this->setTime($this->format('H'), $this->format('i'), $second);
 
         return $this;
@@ -481,6 +501,11 @@ class Moment extends \DateTime
      */
     public function setMinute($minute)
     {
+        if ($this->immutableMode)
+        {
+            return $this->implicitCloning(__FUNCTION__, func_get_args());
+        }
+
         $this->setTime($this->format('H'), $minute, $this->format('s'));
 
         return $this;
@@ -493,6 +518,11 @@ class Moment extends \DateTime
      */
     public function setHour($hour)
     {
+        if ($this->immutableMode)
+        {
+            return $this->implicitCloning(__FUNCTION__, func_get_args());
+        }
+
         $this->setTime($hour, $this->format('i'), $this->format('s'));
 
         return $this;
