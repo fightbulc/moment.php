@@ -14,7 +14,7 @@
  *
  * @return string
  */
-$getNumEnding = function($number, array $endingArray)
+$getNumEnding = function ($number, array $endingArray)
 {
     $number = $number % 100;
 
@@ -61,18 +61,30 @@ return array(
         'past'   => '%s назад',
         's'      => 'несколько секунд',
         'm'      => 'минуту',
-        'mm'     => '%d минут',
+        'mm'     => function ($number) use ($getNumEnding)
+        {
+            return $getNumEnding($number, array('%d минуту', '%d минуты', '%d минут'));
+        },
         'h'      => 'час',
-        'hh'     => '%d часов',
+        'hh'     => function ($number) use ($getNumEnding)
+        {
+            return $getNumEnding($number, array('%d час', '%d часа', '%d часов'));
+        },
         'd'      => 'день',
         'dd'     => function ($number) use ($getNumEnding)
         {
             return $getNumEnding($number, array('%d день', '%d дня', '%d дней'));
         },
         'M'      => 'месяц',
-        'MM'     => '%d месяцев',
+        'MM'     => function ($number) use ($getNumEnding)
+        {
+            return $getNumEnding($number, array('%d месяц', '%d месяца', '%d месяцев'));
+        },
         'y'      => 'год',
-        'yy'     => '%d лет',
+        'yy'     => function ($number) use ($getNumEnding)
+        {
+            return $getNumEnding($number, array('%d год', '%d года', '%d лет'));
+        },
     ),
     'ordinal'       => function ($number)
     {
