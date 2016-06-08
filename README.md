@@ -391,6 +391,10 @@ You can now run through the result and put it formatted into a drop-down field o
 
 # Changelog
 
+### 1.20.6
+- fixed:
+    - Russian locale relative time: day handling
+
 ### 1.20.5
 - fixed:
     - missing immutable handling
