@@ -50,6 +50,14 @@ class MomentTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($m->isMoment(new Moment('2012-12-01T12:00:00')));
     }
 
+    public function testFromOnLeapYear()
+    {
+        $m = new Moment('2017-01-01 00:00:00');
+        $from = $m->from('2016-01-01 00:00:00');
+
+        $this->assertEquals(-366, $from->getSeconds() / 60 / 60 / 24);
+    }
+
     public function testIsBefore()
     {
         $s = new Moment('2014-01-01T10:10:11');
