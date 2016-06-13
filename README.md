@@ -391,6 +391,11 @@ You can now run through the result and put it formatted into a drop-down field o
 
 # Changelog
 
+### 1.20.8
+ - fixed:
+    - Polish locale
+    - Calculation of seconds
+    
 ### 1.20.7
 - fixed:
     - Russian: more relative time fixes
