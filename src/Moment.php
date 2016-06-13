@@ -649,9 +649,7 @@ class Moment extends \DateTime
     private function fromToSeconds(\DateInterval $dateInterval)
     {
         return
-            ($dateInterval->y * 365 * 24 * 60 * 60)
-            + ($dateInterval->m * 30 * 24 * 60 * 60)
-            + ($dateInterval->d * 24 * 60 * 60)
+            ($dateInterval->days * 24 * 60 * 60)
             + ($dateInterval->h * 60 * 60)
             + ($dateInterval->i * 60)
             + $dateInterval->s;
