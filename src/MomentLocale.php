@@ -61,6 +61,14 @@ class MomentLocale
     }
 
     /**
+     * @return array
+     */
+    public static function getLocaleContent()
+    {
+        return self::$localeContent;
+    }
+
+    /**
      * @param array $keys
      *
      * @return array|string|\Closure

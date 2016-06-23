@@ -143,6 +143,12 @@ class Moment extends \DateTime
         // handle diverse format types
         if ($formatsInterface instanceof FormatsInterface)
         {
+            // merge localized custom formats
+            $localeContent = MomentLocale::getLocaleContent();
+            if (isset($localeContent['customFormats']) && is_array($localeContent['customFormats'])) {
+                $formatsInterface->setTokens($localeContent['customFormats']);
+            }
+
             $format = $formatsInterface->format($format);
         }
 
