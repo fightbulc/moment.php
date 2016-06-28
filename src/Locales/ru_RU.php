@@ -43,20 +43,21 @@ $getNumEnding = function ($number, array $endingArray)
 };
 
 return array(
-    'months'        => explode('_', 'Январь_Февраль_Март_Апрель_Май_Июнь_Июль_Август_Сентябрь_Октябрь_Ноябрь_Декабрь'),
-    'monthsShort'   => explode('_', 'Янв_Фев_Мрт_Апр_Май_Июн_Июл_Авг_Сен_Окт_Нбр_Дек'),
-    'weekdays'      => explode('_', 'Понедельник_Вторник_Среда_Четверг_Пятница_Суббота_Воскресенье'),
-    'weekdaysShort' => explode('_', 'Пн_Вт_Ср_Чт_Пт_Сб_Вс'),
-    'calendar'      => array(
-        'sameDay'  => '[Сегодня]',
-        'nextDay'  => '[Завтра]',
-        'lastDay'  => '[Вчера]',
-        'lastWeek' => '[Прошлой] l',
+    'months'            => explode('_', 'января_февраля_марта_апреля_мая_июня_июля_августа_сентября_октября_ноября_декабря'),
+    'monthsNominative'  => explode('_', 'январь_февраль_март_апрель_май_июнь_июль_август_сентябрь_октябрь_ноябрь_декабрь'),
+    'monthsShort'       => explode('_', 'янв_фев_мрт_апр_май_июн_июл_авг_сен_окт_нбр_дек'),
+    'weekdays'          => explode('_', 'понедельник_вторник_среда_четверг_пятница_суббота_воскресенье'),
+    'weekdaysShort'     => explode('_', 'пн_вт_ср_чт_пт_сб_вс'),
+    'calendar'          => array(
+        'sameDay'  => '[сегодня]',
+        'nextDay'  => '[завтра]',
+        'lastDay'  => '[вчера]',
+        'lastWeek' => 'l',
         'sameElse' => 'l',
-        'withTime' => '[at] H:i',
+        'withTime' => '[в] H:i',
         'default'  => 'd/m/Y',
     ),
-    'relativeTime'  => array(
+    'relativeTime'      => array(
         'future' => 'в %s',
         'past'   => '%s назад',
         's'      => 'несколько секунд',
