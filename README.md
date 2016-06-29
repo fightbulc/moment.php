@@ -391,6 +391,12 @@ You can now run through the result and put it formatted into a drop-down field o
 
 # Changelog
 
+### 1.20.9
+ - fixed:
+    - Russian locale
+ - added:
+    - Russian locale tests
+
 ### 1.20.8
  - fixed:
     - Polish locale
