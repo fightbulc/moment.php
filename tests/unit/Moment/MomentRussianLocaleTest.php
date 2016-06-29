@@ -95,8 +95,8 @@ class MomentRussianLocaleTest extends \PHPUnit_Framework_TestCase
 
     public function testLastWeekWeekend()
     {
-        $past = new Moment('2016-04-10');
-        $this->assertEquals('воскресенье в 12:00', $past->calendar(true, new Moment('2016-04-12')));
+        $past = new Moment('2016-04-10 16:30:07');
+        $this->assertEquals('воскресенье в 16:30', $past->calendar(true, new Moment('2016-04-12')));
 
         $past = new Moment('2016-04-11');
         $this->assertEquals('понедельник', $past->calendar(false, new Moment('2016-04-17')));
