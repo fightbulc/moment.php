@@ -5,7 +5,7 @@ namespace Moment;
 /**
  * MomentFromVo
  * @package Moment
- * @author Tino Ehrich (tino@bigpun.me)
+ * @author  Tino Ehrich (tino@bigpun.me)
  */
 class MomentFromVo
 {
@@ -215,7 +215,7 @@ class MomentFromVo
      */
     public function getYears()
     {
-        return $this->getRoundedValue($this->days / 345);
+        return $this->getRoundedValue($this->days / 365);
     }
 
     /**
@@ -223,56 +223,73 @@ class MomentFromVo
      */
     public function getRelative()
     {
-        $time = null;
+        $formatArgs = array();
 
         if ($this->valueInRange($this->getSeconds(), 0, 45))
         {
-            $time = MomentLocale::renderLocaleString(array('relativeTime', 's'));
+            $localeKeys = array('relativeTime', 's');
+            $formatArgs[] = 1;
         }
         elseif ($this->valueInRange($this->getSeconds(), 45, 90))
         {
-            $time = MomentLocale::renderLocaleString(array('relativeTime', 'm'));
+            $localeKeys = array('relativeTime', 'm');
+            $formatArgs[] = 1;
         }
         elseif ($this->valueInRange($this->getSeconds(), 90, 45 * 60))
         {
-            $time = MomentLocale::renderLocaleString(array('relativeTime', 'mm'), array(round(abs($this->getMinutes()))));
+            $localeKeys = array('relativeTime', 'mm');
+            $formatArgs[] = $this->roundAbs($this->getMinutes());
         }
         elseif ($this->valueInRange($this->getMinutes(), 45, 90))
         {
-            $time = MomentLocale::renderLocaleString(array('relativeTime', 'h'));
+            $localeKeys = array('relativeTime', 'h');
+            $formatArgs[] = 1;
         }
         elseif ($this->valueInRange($this->getMinutes(), 90, 22 * 60))
         {
-            $time = MomentLocale::renderLocaleString(array('relativeTime', 'hh'), array(round(abs($this->getHours()))));
+            $localeKeys = array('relativeTime', 'hh');
+            $formatArgs[] = $this->roundAbs($this->getHours());
         }
         elseif ($this->valueInRange($this->getHours(), 22, 36))
         {
-            $time = MomentLocale::renderLocaleString(array('relativeTime', 'd'));
+            $localeKeys = array('relativeTime', 'd');
+            $formatArgs[] = 1;
         }
         elseif ($this->valueInRange($this->getHours(), 36, 25 * 24))
         {
-            $time = MomentLocale::renderLocaleString(array('relativeTime', 'dd'), array(round(abs($this->getDays()))));
+            $localeKeys = array('relativeTime', 'dd');
+            $formatArgs[] = $this->roundAbs($this->getDays());
         }
         elseif ($this->valueInRange($this->getDays(), 25, 45))
         {
-            $time = MomentLocale::renderLocaleString(array('relativeTime', 'M'));
+            $localeKeys = array('relativeTime', 'M');
+            $formatArgs[] = 1;
         }
         elseif ($this->valueInRange($this->getDays(), 25, 345))
         {
-            $time = MomentLocale::renderLocaleString(array('relativeTime', 'MM'), array(round(abs($this->getMonths()))));
+            $localeKeys = array('relativeTime', 'MM');
+            $formatArgs[] = $this->roundAbs($this->getMonths());
         }
         elseif ($this->valueInRange($this->getDays(), 345, 547))
         {
-            $time = MomentLocale::renderLocaleString(array('relativeTime', 'y'));
+            $localeKeys = array('relativeTime', 'y');
+            $formatArgs[] = 1;
         }
-        elseif ($this->getDays() > 547)
+        else
         {
-            $time = MomentLocale::renderLocaleString(array('relativeTime', 'yy'), array(round(abs($this->getYears()))));
+            $localeKeys = array('relativeTime', 'yy');
+            $formatArgs[] = $this->roundAbs($this->getYears());
         }
 
-        $baseString = MomentLocale::getLocaleString(array('relativeTime', $this->getDirection()));
+        // add to context
+        $formatArgs[] = $this->getDirection();
+        $formatArgs[] = $this->getMoment();
 
-        return vsprintf($baseString, array($time));
+        // render value
+        $time = MomentLocale::renderLocaleString($localeKeys, $formatArgs);
+
+        // render value result by direction string
+        return MomentLocale::renderLocaleString(array('relativeTime', $this->getDirection()), array($time));
     }
 
     /**
@@ -285,5 +302,15 @@ class MomentFromVo
     private function valueInRange($value, $from, $to)
     {
         return abs($value) >= $from && abs($value) <= $to ? true : false;
+    }
+
+    /**
+     * @param $number
+     *
+     * @return float
+     */
+    private function roundAbs($number)
+    {
+        return round(abs($number));
     }
 }

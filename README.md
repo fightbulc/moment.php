@@ -1,13 +1,16 @@
 <pre>
                                       _           _           
  _ __ ___   ___  _ __ ___   ___ _ __ | |_   _ __ | |__  _ __  
-| '_ ` _ \ / _ \| '_ ` _ \ / _ \ '_ \| __| | '_ \| '_ \| '_ \ 
+| '_ ` _ \ / _ \| '_ ` _ \ / _ \ '_ \| __| | '_ \| '_ \| '_ \
 | | | | | | (_) | | | | | |  __/ | | | |_ _| |_) | | | | |_) |
-|_| |_| |_|\___/|_| |_| |_|\___|_| |_|\__(_) .__/|_| |_| .__/ 
+|_| |_| |_|\___/|_| |_| |_|\___|_| |_|\__(_) .__/|_| |_| .__/
                                            |_|         |_|    
 </pre>
 
-Current version: 1.6.* - [Change log](#changelog)
+[![Build Status](https://travis-ci.org/fightbulc/moment.php.svg?branch=master)](https://travis-ci.org/fightbulc/moment.php)
+[![Total Downloads](https://img.shields.io/packagist/dt/fightbulc/moment.svg?style=flat-square)](https://packagist.org/packages/fightbulc/moment)
+
+[Change log](#changelog)
 
 # Intro
 
@@ -28,7 +31,7 @@ Easy install via composer. Still no idea what composer is? Inform yourself [here
 ```json
 {
     "require": {
-        "fightbulc/moment": "1.6.*"
+        "fightbulc/moment": "*"
     }
 }
 ```
@@ -49,9 +52,36 @@ echo $m->format(); // e.g. 2012-10-03T12:00:00+0200
 
 -------------------------------------------------
 
+### Accepted date formats
+
+Moment parses the following date formats as input:
+
+```php
+const ATOM = 'Y-m-d\TH:i:sP'; // 2005-08-15T15:52:01+00:00
+const COOKIE = 'l, d-M-y H:i:s T'; // Monday, 15-Aug-2005 15:52:01 UTC
+const ISO8601 = 'Y-m-d\TH:i:sO'; // 2005-08-15T15:52:01+0000
+const RFC822 = 'D, d M y H:i:s O'; // Mon, 15 Aug 05 15:52:01 +0000
+const RFC850 = 'l, d-M-y H:i:s T'; // Monday, 15-Aug-05 15:52:01 UTC
+const RFC1036 = 'D, d M y H:i:s O'; // Mon, 15 Aug 05 15:52:01 +0000
+const RFC1123 = 'D, d M Y H:i:s O'; // Mon, 15 Aug 2005 15:52:01 +0000
+const RFC2822 = 'D, d M Y H:i:s O'; // Mon, 15 Aug 2005 15:52:01 +0000
+const RSS = 'D, d M Y H:i:s O'; // Mon, 15 Aug 2005 15:52:01 +0000
+const W3C = 'Y-m-d\TH:i:sP'; // 2005-08-15T15:52:01+00:00
+
+// Moment also tries to parse dates without timezone or without seconds
+
+const NO_TZ_MYSQL = 'Y-m-d H:i:s'; // 2005-08-15 15:52:01
+const NO_TZ_NO_SECS = 'Y-m-d H:i'; // 2005-08-15 15:52
+
+// time fractions ".000" will be automatically removed
+$timeWithFraction = '2016-05-04T10:00:00.000';
+```
+
+-------------------------------------------------
+
 ### Switch locale
 
-Have a look at the ```Locales``` folder to see all supported languages. Default locale is ```en_GB```. 
+Have a look at the ```Locales``` folder to see all supported languages. Default locale is ```en_GB```.
 
 ```php
 $m = new \Moment\Moment();
@@ -61,8 +91,30 @@ echo $m->format('[Weekday:] l'); // e.g. Weekday: Wednesday
 \Moment\Moment::setLocale('de_DE');
 
 $m = new \Moment\Moment();
-echo $m->format('[Wochentag:] l'); // e.g. Wochentag: Mittwoch 
+echo $m->format('[Wochentag:] l'); // e.g. Wochentag: Mittwoch
 ```
+
+__Supported languages so far:__
+
+```ca_ES``` Catalan  
+```zh_CN``` Chinese  
+```zh_TW``` Chinese (traditional)  
+```cs_CZ``` Czech  
+```da_DK``` Danish  
+```nl_NL``` Dutch  
+```en_GB``` English (British)  
+```en_US``` English (American)  
+```fr_FR``` French (Europe)  
+```de_DE``` German (Germany)  
+```in_ID``` Indonesian  
+```it_IT``` Italian  
+```ja_JP``` Japanese  
+```pl_PL``` Polish  
+```pt_BR``` Portuguese (Brazil)  
+```ru_RU``` Russian (Basic version)  
+```es_ES``` Spanish (Europe)  
+```se_SV``` Swedish  
+```th_TH``` Thai  
 
 -------------------------------------------------
 
@@ -148,10 +200,27 @@ Sometimes its useful to take a given moment and work with it without changing th
 ```php
 $m = new \Moment\Moment('2012-05-15T12:30:00', 'CET');
 $c = $m->cloning()->addDays(1);
- 
+
 echo $m->getDay(); // 15
 echo $c->getDay(); // 16
 ```
+
+Alternately, you can enable immutable mode on the origin.
+
+```php
+$m = new \Moment\Moment('2012-05-15T12:30:00', 'CET', true);
+$c = $m->addDays(1);
+
+echo $m->getDay(); // 15
+echo $c->getDay(); // 16
+
+// You can also change the immutable mode after creation:
+$m->setImmutableMode(false)->subtractDays(1);
+
+echo $m->getDay(); // 14
+```
+
+Immutable mode makes all modification methods call `cloning()` implicitly before applying their modifications.
 
 #### III. Methods for manipulating the date/time
 
@@ -290,11 +359,11 @@ __Note:__ I ignored the period of ```second``` since we are not dealing with mil
 
 -------------------------------------------------
 
-### Get dates for given weekdays for upcoming weeks 
+### Get dates for given weekdays for upcoming weeks
 
 For one of my customers I needed to get moments by selected weekdays. __The task was:__ give me the dates for
 ```Tuesdays``` and ```Thursdays``` for the next three weeks. So I added a small handler which does exactly this.
-As result you will receive an array filled with ```Moment Objects```. 
+As result you will receive an array filled with ```Moment Objects```.
 
 ```php
 // 1 - 7 = Mon - Sun
@@ -322,6 +391,157 @@ You can now run through the result and put it formatted into a drop-down field o
 
 # Changelog
 
+### 1.20.9
+ - fixed:
+    - Russian locale
+ - added:
+    - Russian locale tests
+
+### 1.20.8
+ - fixed:
+    - Polish locale
+    - Calculation of seconds
+    
+### 1.20.7
+- fixed:
+    - Russian: more relative time fixes
+
+### 1.20.6
+- fixed:
+    - Russian locale relative time: day handling
+
+### 1.20.5
+- fixed:
+    - missing immutable handling
+
+### 1.20.4
+- fixed:
+    - Improved Polish locale (added Nominativ)
+
+### 1.20.3
+- fixed:
+    - Chinese locale
+
+### 1.20.2
+- added accepted formats to README
+
+### 1.20.1
+- fixed:
+    - Thai locale
+
+### 1.20.0
+- added:
+    - Catalan locale
+- fixed:
+    - Polish locale test
+
+### 1.19.0
+- added:
+    - Russian locale
+- fixed:
+    - Polish locale test
+
+### 1.18.0
+- added:
+    - Immutable mode
+- fixed:
+    - Polish locale
+
+### 1.17.0
+- added:
+    - Polish locale
+
+### 1.16.0
+- added:
+    - Indonesian locale
+
+### 1.15.0
+- added:
+    - Japanese locale
+
+### 1.14.1
+- fixed:
+    - typo in Dutch locale
+
+### 1.14.0
+- added:
+    - Dutch locale
+
+### 1.13.0
+- added:
+    - Swedish locale
+
+### 1.12.0
+- added:
+    - Danish locale
+
+### 1.11.4
+- fixed:
+    - fixed starting/ending weekday for Romanian locale
+
+### 1.11.3
+- fixed:
+    - adding delimiter character to Italian locale
+
+### 1.11.1
+- fixed:
+    - passing back new instance for startOf/endOf for week, month, quarter
+
+### 1.11.0
+- added:
+    - locale Czech
+
+### 1.10.4
+- added:
+    - ```calendar``` locale receives as \Closure the following params ```function(Moment $m) {}```
+    - ```relativeTime``` locale receives as \Closure the following params ```function($count, $direction, Moment $m) {}```
+
+### 1.10.3
+- added:
+    - fixed passing closures to locale (calendar, relativeTime)
+    - set correct german locale information
+
+### 1.10.2
+- added:
+    - fixed Thai locale strings
+
+### 1.10.1
+- added:
+    - locale traditional Chinese
+
+### 1.10.0
+- added:
+    - locale Chinese
+    - ordinal formatter receives now the ```token``` e.g. the token within ```dS``` is ```d```  
+
+### 1.9.1
+- fixed: english ordinal issue for numbers between 11 - 13
+
+### 1.9.0
+- added: locale Italian
+
+### 1.8.1
+- fixed: english ordinal issue
+
+### 1.8.0
+- added: locale Portuguese
+
+### 1.7.2
+- fixed:
+    - Locale displayed wrong month name (#34)
+    - Changed the order of weekdays within locale files
+
+### 1.7.1
+- added:
+    - getWeekdayNameLong()
+    - getWeekdayNameShort()
+    - getMonthNameLong()
+    - getMonthNameShort()
+
+### 1.7.0
+- added:
+    - Locale: Thai
+
 ### 1.6.0
 - added:
     - Locale
@@ -340,11 +560,11 @@ You can now run through the result and put it formatted into a drop-down field o
     - MomentFromVo:
         - direction returns now: "future" (-) / "past" (+)
         - time values are now type casted as floats
-    
+
 ### 1.5.2
 - fixed:
     - unrecognised timezone when constructing a Moment
-    
+
 ### 1.5.1
 - added:
     - getMomentsByWeekdays()
@@ -382,15 +602,15 @@ You can now run through the result and put it formatted into a drop-down field o
         - e.g. ```WS``` for 21th week of the year shows now correct ```21th``` etc.
     - you can now escape text by wrapping it in ```[]```
         - e.g. ```[Hello World]``` will be automatically transformed into ```\H\e\l\l\o \W\o\r\l\d```
-    
+
 - removed:
     - add()
     - subtract()
-    
+
 ### 1.4.0
 - added:
     - calendar format as implemented by [moment.js](http://momentjs.com/docs/#/displaying/calendar-time/)
-    
+
 ### 1.3.0
 - fixed:
     - incompatibility w/ PHP 5.3
@@ -398,7 +618,7 @@ You can now run through the result and put it formatted into a drop-down field o
 - added:
     - Exception throw as ```MomentException```
     - Date validation on instantiation:
-        - test for dates w/ format ```YYYY-mm-dd``` and ```YYYY-mm-ddTHH:ii:ss``` 
+        - test for dates w/ format ```YYYY-mm-dd``` and ```YYYY-mm-ddTHH:ii:ss```
         - throws MomentException on invalid dates
     - addSeconds()
     - addMinutes()
@@ -418,7 +638,7 @@ You can now run through the result and put it formatted into a drop-down field o
 - deprecated:
     - add()
     - subtract()
-    
+
 -------------------------------------------------
 
 # License

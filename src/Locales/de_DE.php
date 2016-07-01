@@ -1,14 +1,13 @@
 <?php
 
-// moment.js locale configuration
-// locale => great britain english (en-gb)
-// author => Chris Gedrim => https=>//github.com/chrisgedrim
+// locale: German (Germany) (de_DE)
+// author: Tino Ehrich (tino@bigpun.me)
 
 return array(
     "months"        => explode('_', 'Januar_Februar_März_April_Mai_Juni_Juli_August_September_Oktober_November_Dezember'),
     "monthsShort"   => explode('_', 'Jan_Feb_Mär_Apr_Mai_Jun_Jul_Aug_Sep_Okt_Nov_Dez'),
-    "weekdays"      => explode('_', 'Sonntag_Montag_Dienstag_Mittwoch_Donnerstag_Freitag_Samstag'),
-    "weekdaysShort" => explode('_', 'So_Mo_Di_Mi_Do_Fr_Sa'),
+    "weekdays"      => explode('_', 'Montag_Dienstag_Mittwoch_Donnerstag_Freitag_Samstag_Sonntag'),
+    "weekdaysShort" => explode('_', 'Mo_Di_Mi_Do_Fr_Sa_So'),
     "calendar"      => array(
         "sameDay"  => '[Heute]',
         "nextDay"  => '[Morgen]',
