@@ -12,7 +12,7 @@ return array(
         "sameDay"  => '[اليوم]',
         "nextDay"  => '[غدا ]',
         "lastDay"  => '[أمس ]',
-        "lastWeek" => 'l [آخر]',
+        "lastWeek" => 'l [الماضي]',
         "sameElse" => 'l',
         "withTime" => '[على الساعة] H:i',
         "default"  => 'd/m/Y',
