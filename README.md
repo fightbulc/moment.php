@@ -153,6 +153,8 @@ $m = new \Moment\Moment('2012-04-25T03:00:00', 'CET');
 echo $m->format('LLLL', new \Moment\CustomFormats\MomentJs()); // Wednesday, April 25th 2012 3:00 AM
 ```
 
+`Custom formats` can also come as part of every `Locale`. If it does not exist for your locale yet go ahead and add it. See an example for the [French locale](https://github.com/fightbulc/moment.php/blob/master/src/Locales/fr_FR.php). 
+
 #### III. Easy text escaping
 
 Just wrap all your text within ```[]``` and all characters will be automatically escaped for you.
