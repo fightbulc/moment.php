@@ -57,8 +57,21 @@ $response['test06.02'] = $m->setTimezone('UTC')->format();
 
 // ------------------------------------------
 
-$m = new \Moment\Moment('2012-04-25T03:00:00', 'CET');
-$response['test07'] = $m->format('l, dS F Y / H:i (e)');
+$m = new \Moment\Moment('2012-04-25T15:00:00', 'CET');
+$response['test07.00'] = $m->format('l, dS F Y / H:i (e)');
+
+$momentJs = new \Moment\CustomFormats\MomentJs();
+$response['test07.01'] = $m->format('LT', $momentJs);
+$m->setLocale('fr_FR');
+$response['test07.02'] = $m->format('LT', $momentJs);
+$response['test07.03'] = $m->format('L', $momentJs);
+$response['test07.04'] = $m->format('l', $momentJs);
+$response['test07.05'] = $m->format('LL', $momentJs);
+$response['test07.06'] = $m->format('ll', $momentJs);
+$response['test07.07'] = $m->format('LLL', $momentJs);
+$response['test07.08'] = $m->format('lll', $momentJs);
+$response['test07.09'] = $m->format('LLLL', $momentJs);
+$response['test07.10'] = $m->format('llll', $momentJs);
 
 // ------------------------------------------
 
