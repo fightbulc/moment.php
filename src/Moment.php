@@ -145,7 +145,8 @@ class Moment extends \DateTime
         {
             // merge localized custom formats
             $localeContent = MomentLocale::getLocaleContent();
-            if (isset($localeContent['customFormats']) && is_array($localeContent['customFormats'])) {
+            if (isset($localeContent['customFormats']) && is_array($localeContent['customFormats']))
+            {
                 $formatsInterface->setTokens($localeContent['customFormats']);
             }
 
