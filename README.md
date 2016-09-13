@@ -126,6 +126,16 @@ $m = new \Moment\Moment('2012-04-25T03:00:00', 'CET');
 echo $m->setTimezone('UTC')->format(); // 2012-04-25T01:00:00+0000
 ```
 
+#### Change default timezone
+
+```php
+\Moment\Moment::setDefaultTimezone('CET');
+
+$m = new \Moment\Moment('2016-09-13T14:32:06');
+echo $m->format(); // 2016-09-13T14:32:06+0100
+```
+
+
 -------------------------------------------------
 
 ### Custom format
@@ -394,6 +404,12 @@ You can now run through the result and put it formatted into a drop-down field o
 
 # Changelog
 
+### 1.22.0
+ - added:
+    - Change default timezone
+- fixed:
+    - FormatsInterface docs
+    
 ### 1.21.0
  - added:
     - Arabic locale
