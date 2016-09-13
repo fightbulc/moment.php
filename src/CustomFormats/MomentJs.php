@@ -4,9 +4,15 @@ namespace Moment\CustomFormats;
 
 use Moment\FormatsInterface;
 
+/**
+ * Class MomentJs
+ * @package Moment\CustomFormats
+ */
 class MomentJs implements FormatsInterface
 {
-    /** @var array */
+    /**
+     * @var array
+     */
     protected $tokens = array(
         "M"       => "n", // 1 2 ... 11 12
         "Mo"      => "nS", // month: 1st 2nd ... 11th 12th
