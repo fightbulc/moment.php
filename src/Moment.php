@@ -14,6 +14,11 @@ class Moment extends \DateTime
     /**
      * @var string
      */
+    private static $defaultTimezone = 'UTC';
+
+    /**
+     * @var string
+     */
     private $rawDateTimeString;
 
     /**
@@ -38,14 +43,30 @@ class Moment extends \DateTime
     }
 
     /**
-     * @param string $dateTime
      * @param string $timezone
+     *
+     * @return void
+     */
+    public static function setDefaultTimezone($timezone)
+    {
+        // set current language
+        self::$defaultTimezone = $timezone;
+    }
+
+    /**
+     * @param string $dateTime
+     * @param string|null $timezone
      * @param bool $immutableMode
      *
      * @throws MomentException
      */
-    public function __construct($dateTime = 'now', $timezone = 'UTC', $immutableMode = false)
+    public function __construct($dateTime = 'now', $timezone = null, $immutableMode = false)
     {
+        if($timezone === null)
+        {
+            $timezone = self::$defaultTimezone;
+        }
+
         // set moment
         MomentLocale::setMoment($this);
 
@@ -74,13 +95,18 @@ class Moment extends \DateTime
 
     /**
      * @param string $dateTime
-     * @param string $timezoneString
+     * @param string $timezone
      *
      * @return $this
      * @throws MomentException
      */
-    public function resetDateTime($dateTime = 'now', $timezoneString = 'UTC')
+    public function resetDateTime($dateTime = 'now', $timezone = null)
     {
+        if($timezone === null)
+        {
+            $timezone = self::$defaultTimezone;
+        }
+
         if ($this->immutableMode)
         {
             return $this->implicitCloning(__FUNCTION__, func_get_args());
@@ -90,12 +116,12 @@ class Moment extends \DateTime
         $this->setRawDateTimeString($dateTime);
 
         // create instance
-        parent::__construct($dateTime, $this->getDateTimeZone($timezoneString));
+        parent::__construct($dateTime, $this->getDateTimeZone($timezone));
 
         // set timezone if unix time
         if (strpos($dateTime, '@') !== false)
         {
-            $this->setTimezone($timezoneString);
+            $this->setTimezone($timezone);
         }
 
         // date validation
