@@ -116,6 +116,7 @@ __Supported languages so far:__
 ```es_ES``` Spanish (Europe)  
 ```se_SV``` Swedish  
 ```th_TH``` Thai  
+```vi_VN``` Vietnamese  
 
 -------------------------------------------------
 
