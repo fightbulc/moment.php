@@ -4,7 +4,7 @@
 // author: CROWD Studio https://github.com/crowd-studio
 
 return array(
-    "months"        => explode('_', 'genièr_febrièr_març_abril_mai_junh_julhet_agòst_setembre_octobre_novembre_decembre'),
+    "months"        => explode('_', 'genièr_febrièr_març_abril_mai_junh_julhet_agost_setembre_octobre_novembre_decembre'),
     "monthsShort"   => explode('_', 'gen._febr._mar._abr._mai._jun._jul._ag._set._oct._nov._dec.'),
     "weekdays"      => explode('_', 'dimenge_diluns_dimars_dimecres_dijòus_divendres_dissabte'),
     "weekdaysShort" => explode('_', 'dg._dl._dt._dc._dj._dv._ds.'),
@@ -21,7 +21,7 @@ return array(
         "future" => 'dins %s',
         "past"   => 'fa %s',
         "s"      => 'unas segondas',
-        "m"      => 'un minut',
+        "m"      => 'una minuta',
         "mm"     => '%d minutas',
         "h"      => 'una ora',
         "hh"     => '%d oras',
