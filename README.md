@@ -107,6 +107,7 @@ __Supported languages so far:__
 ```en_US``` English (American)  
 ```fr_FR``` French (Europe)  
 ```de_DE``` German (Germany)  
+```hu_HU``` Hungarian    
 ```in_ID``` Indonesian  
 ```it_IT``` Italian  
 ```ja_JP``` Japanese  
@@ -406,6 +407,10 @@ You can now run through the result and put it formatted into a drop-down field o
 -------------------------------------------------
 
 # Changelog
+
+### 1.24
+ - added:
+    - Hungarian locale  
 
 ### 1.23.1
  - fixed:
