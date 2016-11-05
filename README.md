@@ -118,6 +118,7 @@ __Supported languages so far:__
 ```ru_RU``` Russian (Basic version)  
 ```es_ES``` Spanish (Europe)  
 ```se_SV``` Swedish  
+```uk_UA``` Ukrainian  
 ```th_TH``` Thai  
 ```vi_VN``` Vietnamese  
 
@@ -407,6 +408,10 @@ You can now run through the result and put it formatted into a drop-down field o
 -------------------------------------------------
 
 # Changelog
+
+### 1.25
+ - added:
+    - Ukrainian locale  
 
 ### 1.24
  - added:
