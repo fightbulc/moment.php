@@ -439,7 +439,7 @@ You can now run through the result and put it formatted into a drop-down field o
     - sv_SE OOP
     - pt_BR OOP
     - pt_PT OOP
-    - fr_FR
+    - fr_FR OOP
  - other:
     - Locales uses new array syntax, therefore killing < PHP5.4 support (PHP5.3)   
 
