@@ -409,6 +409,10 @@ You can now run through the result and put it formatted into a drop-down field o
 
 # Changelog
 
+### 1.25.1
+ - fixed:
+    - PHP7.1 setTime requires `$microseconds`  
+
 ### 1.25
  - added:
     - Ukrainian locale  
