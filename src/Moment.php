@@ -588,11 +588,12 @@ class Moment extends \DateTime
     /**
      * @param int $hour
      * @param int $minute
-     * @param null $second
+     * @param int|null $second
+     * @param int|null $microseconds
      *
      * @return $this|\DateTime
      */
-    public function setTime($hour, $minute, $second = null)
+    public function setTime($hour, $minute, $second = null, $microseconds = null)
     {
         if ($this->immutableMode)
         {
