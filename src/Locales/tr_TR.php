@@ -1,17 +1,17 @@
 <?php
+/**
+ * Turkish (tr-TR) language support
+ * @author Engin Dumlu <engindumlu@gmail.com>
+ * @github https://github.com/roadrunner
+ */
 
-// locale: great britain english (en-gb)
-// author: Chris Gedrim https://github.com/chrisgedrim
-// date_default_timezone_set('Europe/Istanbul');
-// setlocale(\LC_ALL, 'tr_TR');
-// die(strftime('%a %b', strtotime('2017-05-15')));
 return array(
-    "months"        => explode('_', 'Ocak_Şubat_Mart_Nisan_Mayıs_Haziran_Temmuz_Ağustos_Eylül_Ekim_Kasım_Aralık'),
-    "monthsNominative"  => explode('_', 'Ocak_Şubat_Mart_Nisan_Mayıs_Haziran_Temmuz_Ağustos_Eylül_Ekim_Kasım_Aralık'),
-    "monthsShort"   => explode('_', 'Oca_Şub_Mar_Nis_May_Haz_Tem_Ağu_Eyl_Eki_Kas_Ara'),
-    "weekdays"      => explode('_', 'Pazartesi_Salı_Çarşamba_Perşembe_Cuma_Cumartesi_Pazar'),
-    "weekdaysShort" => explode('_', 'Pts_Sal_Çar_Per_Cum_Cts_Paz'),
-    "calendar"      => array(
+    "months"           => explode('_', 'Ocak_Şubat_Mart_Nisan_Mayıs_Haziran_Temmuz_Ağustos_Eylül_Ekim_Kasım_Aralık'),
+    "monthsNominative" => explode('_', 'Ocak_Şubat_Mart_Nisan_Mayıs_Haziran_Temmuz_Ağustos_Eylül_Ekim_Kasım_Aralık'),
+    "monthsShort"      => explode('_', 'Oca_Şub_Mar_Nis_May_Haz_Tem_Ağu_Eyl_Eki_Kas_Ara'),
+    "weekdays"         => explode('_', 'Pazartesi_Salı_Çarşamba_Perşembe_Cuma_Cumartesi_Pazar'),
+    "weekdaysShort"    => explode('_', 'Pts_Sal_Çar_Per_Cum_Cts_Paz'),
+    "calendar"         => array(
         "sameDay"  => '[Bugün]',
         "nextDay"  => '[Yarın]',
         "lastDay"  => '[Dün]',
@@ -35,10 +35,9 @@ return array(
         "y"      => 'bir yıl',
         "yy"     => '%d yıl',
     ),
-    "ordinal"       => function ($number) {
-        $n = $number % 100;
+    "ordinal" => function ($number) {
+        $n    = $number % 100;
         $ends = array('inci', 'inci', 'üncü', 'üncü', 'inci', 'ıncı', 'inci', 'inci', 'uncu', 'uncu');
-        // $ends = array('th', 'st', 'nd', 'rd', 'th', 'th', 'th', 'th', 'th', 'th');
 
         if ($number > 0 && $n == 0) {
             return $number . 'uncu';
