@@ -1,4 +1,9 @@
 <?php
+/**
+ * Turkish (tr-TR) language support
+ * @author Engin Dumlu <engindumlu@gmail.com>
+ * @github https://github.com/roadrunner
+ */
 
 namespace Moment;
 
