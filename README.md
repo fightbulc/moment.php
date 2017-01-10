@@ -120,6 +120,7 @@ __Supported languages so far:__
 ```se_SV``` Swedish  
 ```uk_UA``` Ukrainian  
 ```th_TH``` Thai  
+```tr_TR``` Turkish  
 ```vi_VN``` Vietnamese  
 
 -------------------------------------------------
@@ -408,6 +409,12 @@ You can now run through the result and put it formatted into a drop-down field o
 -------------------------------------------------
 
 # Changelog
+
+### 1.26.0
+ - added:
+    - Turkish locale  
+ - fixed:
+    - Lengadocian locale
 
 ### 1.25.1
  - fixed:
