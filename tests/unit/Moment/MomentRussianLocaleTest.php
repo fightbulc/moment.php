@@ -119,4 +119,16 @@ class MomentRussianLocaleTest extends \PHPUnit_Framework_TestCase
         $past = new Moment('2016-04-16');
         $this->assertEquals('суббота', $past->calendar(false, new Moment('2016-04-18')));
     }
+
+    public function testFutureRelative()
+    {
+        $date = new Moment('2017-01-11 01:00:00');
+
+        $this->assertEquals('через несколько секунд', $date->from('2017-01-11 00:59:59')->getRelative(), 'seconds');
+        $this->assertEquals('через 2 минуты', $date->from('2017-01-11 00:58:00')->getRelative(), 'minutes');
+        $this->assertEquals('через 2 часа', $date->from('2017-01-10 23:00:00')->getRelative(), 'hours');
+        $this->assertEquals('через день', $date->from('2017-01-10 00:00:00')->getRelative(), 'days');
+        $this->assertEquals('через месяц', $date->from('2016-12-11 00:00:00')->getRelative(), 'month');
+        $this->assertEquals('через год', $date->from('2016-01-11 00:00:00')->getRelative(), 'year');
+    }
 }

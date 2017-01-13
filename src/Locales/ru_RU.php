@@ -58,7 +58,7 @@ return array(
         'default'  => 'd/m/Y',
     ),
     'relativeTime'      => array(
-        'future' => 'в %s',
+        'future' => 'через %s',
         'past'   => '%s назад',
         's'      => 'несколько секунд',
         'm'      => 'минуту',
