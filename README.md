@@ -113,7 +113,6 @@ __Supported languages so far:__
 ```ja_JP``` Japanese  
 ```oc_LNC``` Lengadocian    
 ```pl_PL``` Polish  
-```pl_PL``` Polish  
 ```pt_BR``` Portuguese (Brazil)  
 ```ru_RU``` Russian (Basic version)  
 ```es_ES``` Spanish (Europe)  
@@ -409,6 +408,10 @@ You can now run through the result and put it formatted into a drop-down field o
 -------------------------------------------------
 
 # Changelog
+
+### 1.26.1
+ - fixed:
+    - Russian locale
 
 ### 1.26.0
  - added:
