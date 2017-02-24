@@ -2,6 +2,8 @@
 
 namespace Moment;
 
+use DateTime;
+
 /**
  * Moment
  * Wrapper for PHP's DateTime class inspired by moment.js
@@ -9,7 +11,7 @@ namespace Moment;
  * @package Moment
  * @author  Tino Ehrich (tino@bigpun.me)
  */
-class Moment extends \DateTime
+class Moment extends DateTime
 {
     /**
      * @var string
@@ -54,7 +56,7 @@ class Moment extends \DateTime
     }
 
     /**
-     * @param string $dateTime
+     * @param string|DateTime $dateTime
      * @param string|null $timezone
      * @param bool $immutableMode
      *
@@ -65,6 +67,11 @@ class Moment extends \DateTime
         if($timezone === null)
         {
             $timezone = self::$defaultTimezone;
+        }
+
+        if ($dateTime instanceof DateTime)
+        {
+            $dateTime = $dateTime->format('Y-m-d\TH:i:s');
         }
 
         // set moment
@@ -136,7 +143,7 @@ class Moment extends \DateTime
     /**
      * @param string $timezone
      *
-     * @return \DateTime|Moment
+     * @return DateTime|Moment
      */
     public function setTimezone($timezone)
     {
@@ -163,7 +170,7 @@ class Moment extends \DateTime
         // set default format
         if ($format === null)
         {
-            $format = \DateTime::ISO8601;
+            $format = DateTime::ISO8601;
         }
 
         // handle diverse format types
@@ -496,7 +503,7 @@ class Moment extends \DateTime
      * @param int $month
      * @param int $day
      *
-     * @return self|\DateTime
+     * @return self|DateTime
      */
     public function setDate($year, $month, $day)
     {
@@ -591,7 +598,7 @@ class Moment extends \DateTime
      * @param int|null $second
      * @param int|null $microseconds
      *
-     * @return $this|\DateTime
+     * @return $this|DateTime
      */
     public function setTime($hour, $minute, $second = null, $microseconds = null)
     {

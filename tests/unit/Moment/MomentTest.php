@@ -2,6 +2,8 @@
 
 namespace Moment;
 
+use DateTime;
+
 class MomentTest extends \PHPUnit_Framework_TestCase
 {
     public function testMoment()
@@ -41,6 +43,19 @@ class MomentTest extends \PHPUnit_Framework_TestCase
         $data = '1923-12-31T12:30:00.123UTC';
         $m = new Moment($data, 'Europe/Warsaw');
         $this->assertEquals('1923-12-31T12:30:00+0000', $m->format());
+
+        $data = new DateTime('1923-12-31 12:30:00.123');
+        $m = new Moment($data);
+        $this->assertEquals('1923-12-31T12:30:00+0000', $m->format());
+    }
+
+    /**
+     * @expectedException \Moment\MomentException
+     */
+    public function testMomentException()
+    {
+        $data = '1923-12-31 12:30:00.123';
+        $m = new Moment($data);
     }
 
     public function testIsMoment()
