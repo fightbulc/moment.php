@@ -72,6 +72,7 @@ const W3C = 'Y-m-d\TH:i:sP'; // 2005-08-15T15:52:01+00:00
 
 const NO_TZ_MYSQL = 'Y-m-d H:i:s'; // 2005-08-15 15:52:01
 const NO_TZ_NO_SECS = 'Y-m-d H:i'; // 2005-08-15 15:52
+const NO_TIME = 'Y-m-d'; // 2005-08-15
 
 // time fractions ".000" will be automatically removed
 $timeWithFraction = '2016-05-04T10:00:00.000';
