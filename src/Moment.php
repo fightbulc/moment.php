@@ -1039,7 +1039,7 @@ class Moment extends \DateTime
     public function getMomentsByWeekdays(array $weekdayNumbers, $forUpcomingWeeks = 1)
     {
         /** @var Moment[] $moments */
-        $dates = [];
+        $dates = array();
 
         // get today's week day number
         $todayWeekday = $this->getWeekday();
