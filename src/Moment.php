@@ -842,46 +842,46 @@ class Moment extends \DateTime
         $diff = $momentFromVo->getDays();
 
         // handle time string
-        $renderedTimeString = MomentLocale::renderLocaleString(['calendar', 'withTime'], [$this]);
+        $renderedTimeString = MomentLocale::renderLocaleString(array('calendar', 'withTime'), array($this));
         $addTime = false;
 
         // apply cases
         if ($diff > 7)
         {
-            $localeKeys = ['calendar', 'default'];
+            $localeKeys = array('calendar', 'default');
         }
         elseif ($diff > 1)
         {
-            $localeKeys = ['calendar', 'lastWeek'];
+            $localeKeys = array('calendar', 'lastWeek');
             $addTime = true;
         }
         elseif ($diff > 0)
         {
-            $localeKeys = ['calendar', 'lastDay'];
+            $localeKeys = array('calendar', 'lastDay');
             $addTime = true;
         }
         elseif ($diff == 0)
         {
-            $localeKeys = ['calendar', 'sameDay'];
+            $localeKeys = array('calendar', 'sameDay');
             $addTime = true;
         }
         elseif ($diff == -1)
         {
-            $localeKeys = ['calendar', 'nextDay'];
+            $localeKeys = array('calendar', 'nextDay');
             $addTime = true;
         }
         elseif ($diff > -7)
         {
-            $localeKeys = ['calendar', 'sameElse'];
+            $localeKeys = array('calendar', 'sameElse');
             $addTime = true;
         }
         else
         {
-            $localeKeys = ['calendar', 'default'];
+            $localeKeys = array('calendar', 'default');
         }
 
         // render format
-        $format = MomentLocale::renderLocaleString($localeKeys, [$this]);
+        $format = MomentLocale::renderLocaleString($localeKeys, array($this));
 
         // add time if valid
         if ($addTime && $withTime === true)
@@ -1018,12 +1018,12 @@ class Moment extends \DateTime
      *
      * @return self
      */
-    private function implicitCloning($method, $params = [])
+    private function implicitCloning($method, $params = array())
     {
         $clone = $this->cloning();
 
         $clone->setImmutableMode(false);
-        $retval = call_user_func_array([$clone, $method], $params);
+        $retval = call_user_func_array(array($clone, $method), $params);
         $clone->setImmutableMode(true);
 
         return is_null($retval) ? $clone : $retval;
@@ -1215,7 +1215,7 @@ class Moment extends \DateTime
      */
     private function getDaysAfterStartOfWeek()
     {
-        $dow = MomentLocale::getLocaleString(['week', 'dow']) % 7;
+        $dow = MomentLocale::getLocaleString(array('week', 'dow')) % 7;
         $currentWeekDay = (int)$this->getWeekday();
         $distance = (7 - $dow + $currentWeekDay) % 7;
 
@@ -1328,6 +1328,6 @@ class Moment extends \DateTime
      */
     private function formatOrdinal($number, $token)
     {
-        return (string)call_user_func(MomentLocale::getLocaleString(['ordinal']), $number, $token);
+        return (string)call_user_func(MomentLocale::getLocaleString(array('ordinal')), $number, $token);
     }
 }
