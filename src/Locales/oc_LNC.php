@@ -5,9 +5,9 @@
 
 return array(
     "months"        => explode('_', 'genièr_febrièr_març_abril_mai_junh_julhet_agost_setembre_octobre_novembre_decembre'),
-    "monthsShort"   => explode('_', 'gen._febr._mar._abr._mai._jun._jul._ag._set._oct._nov._dec.'),
+    "monthsShort"   => explode('_', 'gen._feb._mar._abr._mai._jun._jul._ag._set._oct._nov._dec.'),
     "weekdays"      => explode('_', 'dimenge_diluns_dimars_dimècres_dijòus_divendres_dissabte'),
-    "weekdaysShort" => explode('_', 'dg._dl._dt._dc._dj._dv._ds.'),
+    "weekdaysShort" => explode('_', 'dg._dl._dm._dc._dj._dv._ds.'),
     "calendar"      => array(
         "sameDay"  => '[uèi]',
         "nextDay"  => '[deman]',

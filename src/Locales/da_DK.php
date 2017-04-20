@@ -4,10 +4,10 @@
 // author: Morten Wulff https://github.com/wulff
 
 return array(
-  "months"        => explode('_', 'Januar_Februar_Marts_April_Maj_Juni_Juli_August_September_Oktober_November_December'),
-  "monthsShort"   => explode('_', 'Jan_Feb_Mar_Apr_Maj_Jun_Jul_Aug_Sep_Okt_Nov_Dec'),
-  "weekdays"      => explode('_', 'Mandag_Tirsdag_Onsdag_Torsdag_Fredag_Lørdag_Søndag'),
-  "weekdaysShort" => explode('_', 'Man_Tir_Ons_Tor_Fre_Lør_Søn'),
+  "months"        => explode('_', 'januar_februar_marts_april_maj_juni_juli_august_september_oktober_november_december'),
+  "monthsShort"   => explode('_', 'jan_feb_mar_apr_maj_jun_jul_aug_sep_okt_nov_dec'),
+  "weekdays"      => explode('_', 'mandag_tirsdag_onsdag_torsdag_fredag_lørdag_søndag'),
+  "weekdaysShort" => explode('_', 'man_tir_ons_tor_fre_lør_søn'),
   "calendar"      => array(
     "sameDay"  => '[I dag]',
     "nextDay"  => '[I morgen]',
