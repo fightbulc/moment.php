@@ -409,6 +409,10 @@ You can now run through the result and put it formatted into a drop-down field o
 
 # Changelog
 
+### 1.26.3
+ - fixed:
+    - Danish day- and monthnames correct case
+    
 ### 1.26.2
  - added:
     - Dutch customFormat
