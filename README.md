@@ -413,6 +413,10 @@ You can now run through the result and put it formatted into a drop-down field o
 ### 1.26.3
  - fixed:
     - Danish day- and monthnames correct case
+    - French locale
+    - PHPDocs
+  - added:
+    - consts for `NO_TZ_MYSQL`, `NO_TZ_NO_SECS` and `NO_TIME` when parsing dates
     
 ### 1.26.2
  - added:
