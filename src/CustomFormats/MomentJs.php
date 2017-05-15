@@ -66,7 +66,7 @@ class MomentJs implements FormatsInterface
         "l"       => "n/j/Y", // 9/4/1986
         "LL"      => "F jS Y", // September 4th 1986
         "ll"      => "M j Y", // Sep 4 1986
-        "LLL"     => "F js Y g:i A", // September 4th 1986 8:30 PM
+        "LLL"     => "F jS Y g:i A", // September 4th 1986 8:30 PM
         "lll"     => "M j Y g:i A", // Sep 4 1986 8:30 PM
         "LLLL"    => "l, F jS Y g:i A", // Thursday, September 4th 1986 8:30 PM
         "llll"    => "D, M j Y g:i A", // Thu, Sep 4 1986 8:30 PM
