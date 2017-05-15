@@ -410,6 +410,10 @@ You can now run through the result and put it formatted into a drop-down field o
 
 # Changelog
 
+### 1.26.5
+ - fixed:
+    - Fix format of 'LLL' in Custom Formats
+
 ### 1.26.4
  - fixed:
     - removed php5.4+ only syntax
