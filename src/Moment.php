@@ -106,6 +106,12 @@ class Moment extends \DateTime
      */
     public function resetDateTime($dateTime = 'now', $timezone = null)
     {
+        // unix timestamp helper
+        if (strlen((int)$dateTime) === 10)
+        {
+            $dateTime = '@' . $dateTime;
+        }
+
         if ($timezone === null)
         {
             $timezone = self::$defaultTimezone;
