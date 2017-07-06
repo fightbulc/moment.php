@@ -48,6 +48,12 @@ echo $m->format(); // e.g. 2012-10-03T10:00:00+0000
 
 $m = new \Moment\Moment('now', 'Europe/Berlin');
 echo $m->format(); // e.g. 2012-10-03T12:00:00+0200
+
+$m = new \Moment\Moment('2017-06-06T10:00:00', 'Europe/Berlin');
+echo $m->format(); // e.g. 2012-10-03T12:00:00+0200
+
+$m = new \Moment\Moment(1499366585);
+echo $m->format(); // e.g. 2017-07-06T18:43:05+0000
 ```
 
 -------------------------------------------------
@@ -409,6 +415,10 @@ You can now run through the result and put it formatted into a drop-down field o
 -------------------------------------------------
 
 # Changelog
+
+### 1.26.6
+ - added:
+    - allow initialising Moment with unix timestamp without leading @
 
 ### 1.26.5
  - fixed:
