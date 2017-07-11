@@ -416,6 +416,10 @@ You can now run through the result and put it formatted into a drop-down field o
 
 # Changelog
 
+### 1.26.7
+ - fixed:
+    - Hungarian locale weekdays order
+
 ### 1.26.6
  - added:
     - allow initialising Moment with unix timestamp without leading @
