@@ -8,7 +8,7 @@ return array(
 
     "monthsShort"   => explode('_', 'jan_feb_márc_ápr_máj_jún_júl_aug_szept_okt_nov_dec'),
     "weekdays"      => explode('_', 'hétfő_kedd_szerda_csütörtök_péntek_szombat_vasárnap'),
-    "weekdaysShort" => explode('_', 'vas_hét_kedd_sze_csüt_pén_szo'),
+    "weekdaysShort" => explode('_', 'hét_kedd_sze_csüt_pén_szo_vas'),
     "calendar"      => array(
         "sameDay"  => '[ma] l[-kor]',
         "nextDay"  => '[holnap] l[-kor]',
