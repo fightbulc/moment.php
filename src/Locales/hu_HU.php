@@ -7,7 +7,7 @@ return array(
     "months"        => explode('_', 'január_február_március_április_május_június_július_augusztus_szeptember_október_november_december'),
 
     "monthsShort"   => explode('_', 'jan_feb_márc_ápr_máj_jún_júl_aug_szept_okt_nov_dec'),
-    "weekdays"      => explode('_', 'vasárnap_hétfő_kedd_szerda_csütörtök_péntek_szombat'),
+    "weekdays"      => explode('_', 'hétfő_kedd_szerda_csütörtök_péntek_szombat_vasárnap'),
     "weekdaysShort" => explode('_', 'vas_hét_kedd_sze_csüt_pén_szo'),
     "calendar"      => array(
         "sameDay"  => '[ma] l[-kor]',
