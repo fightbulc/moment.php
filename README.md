@@ -121,6 +121,7 @@ __Supported languages so far:__
 ```oc_LNC``` Lengadocian    
 ```pl_PL``` Polish  
 ```pt_BR``` Portuguese (Brazil)  
+```pt_PT``` Portuguese (Portugal)  
 ```ru_RU``` Russian (Basic version)  
 ```es_ES``` Spanish (Europe)  
 ```se_SV``` Swedish  
@@ -415,6 +416,10 @@ You can now run through the result and put it formatted into a drop-down field o
 -------------------------------------------------
 
 # Changelog
+
+### 1.26.8
+ - added:
+    - Portuguese (pt_PT)
 
 ### 1.26.7
  - fixed:
