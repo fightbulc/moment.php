@@ -89,15 +89,7 @@ return array(
     ),
     'ordinal'       => function ($number)
     {
-        $n = $number % 100;
-        $ends = array('ой', 'ый', 'ой', 'ий', 'ый', 'ый', 'ой', 'ой', 'ой', 'ый');
-
-        if ($n >= 11 && $n <= 13)
-        {
-            return $number . '[th]';
-        }
-
-        return $number . '[' . $ends[$number % 10] . ']';
+        return $number . 'е';
     },
     'week'          => array(
         'dow' => 1, // Monday is the first day of the week.

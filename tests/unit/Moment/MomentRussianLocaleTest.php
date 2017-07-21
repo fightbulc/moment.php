@@ -131,4 +131,20 @@ class MomentRussianLocaleTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('через месяц', $date->from('2016-12-11 00:00:00')->getRelative(), 'month');
         $this->assertEquals('через год', $date->from('2016-01-11 00:00:00')->getRelative(), 'year');
     }
+
+
+    public function testOrdinalFormat()
+    {
+        $date = new Moment('2017-01-01 01:00:00');
+        $this->assertEquals('1е января 2017', $date->format('jS F Y'));
+
+        $date = new Moment('2017-01-12 01:00:00');
+        $this->assertEquals('12е января 2017', $date->format('jS F Y'));
+
+        $date = new Moment('2017-01-23 01:00:00');
+        $this->assertEquals('23е января 2017', $date->format('jS F Y'));
+
+        $date = new Moment('2017-01-25 01:00:00');
+        $this->assertEquals('25е января 2017', $date->format('jS F Y'));
+    }
 }
