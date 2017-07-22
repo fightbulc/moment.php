@@ -417,6 +417,10 @@ You can now run through the result and put it formatted into a drop-down field o
 
 # Changelog
 
+### 1.26.9
+ - fixed:
+    - Russian locale [issue](https://github.com/fightbulc/moment.php/issues/68#issuecomment-264890181)
+
 ### 1.26.8
  - added:
     - Portuguese (pt_PT)
