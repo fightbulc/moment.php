@@ -225,12 +225,17 @@ class MomentFromVo
     {
         $formatArgs = array();
 
-        if ($this->valueInRange($this->getSeconds(), 0, 45))
+        if ($this->valueInRange($this->getSeconds(), 0, 1))
         {
             $localeKeys = array('relativeTime', 's');
             $formatArgs[] = 1;
         }
-        elseif ($this->valueInRange($this->getSeconds(), 45, 90))
+        if ($this->valueInRange($this->getSeconds(), 0, 59))
+        {
+            $localeKeys = array('relativeTime', 'ss');
+            $formatArgs[] = $this->getSeconds();
+        }
+        elseif ($this->valueInRange($this->getSeconds(), 60, 60))
         {
             $localeKeys = array('relativeTime', 'm');
             $formatArgs[] = 1;
