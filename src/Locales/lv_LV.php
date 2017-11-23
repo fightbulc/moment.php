@@ -21,7 +21,7 @@ return array(
         'Pirmdiena_Otrdiena_Trešdiena_Ceturtdiena_Piektdiena_Sestdiena_Svētdiena'
     ),
     'weekdaysShort'    => explode('_', 'Pr_Ot_Tr_Ce_Pk_Se_Sv'),
-    'calendar'         => [
+    'calendar'         => array(
         'sameDay'  => '[Šodien]',
         'nextDay'  => '[Rīt]',
         'lastDay'  => '[Vakar]',
@@ -29,7 +29,7 @@ return array(
         'sameElse' => 'l',
         'withTime' => '[plkst.] H:i',
         'default'  => 'd.m.Y',
-    ],
+    ),
     'relativeTime'  => array(
         'future' => 'pēc %s',
         'past'   => '%s atpakaļ',
