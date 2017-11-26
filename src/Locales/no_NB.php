@@ -2,23 +2,18 @@
 
 namespace Moment\Locales;
 
-use Moment\Helpers\ArrayHelpers;
-use Moment\Provider\LocaleProviderInterface;
+use Moment\Provider\LocaleProvider;
 
 /**
  * Class no_NB
  * @package Moment\Locales
  *
  * Norwegian locale
+ *
+ * @author xZero707 <xzero@elite7hackers.net>
  */
-class no_NB implements LocaleProviderInterface
+class no_NB extends LocaleProvider
 {
-    /** @var array */
-    private $localeDefinitions;
-
-    /** @var string */
-    private $localeName;
-
     /**
      * no_NB constructor.
      *
@@ -26,8 +21,9 @@ class no_NB implements LocaleProviderInterface
      */
     public function __construct(array $definitions = null)
     {
-        $this->localeName        = 'nb_NO';
-        $this->localeDefinitions = [
+        parent::__construct('no_NB');
+
+        $this->setDefinitions([
 
             'months'        => explode('_',
                 'Januar_Februar_Mars_April_Mai_Juni_Juli_August_September_Oktober_November_Desember'),
@@ -70,46 +66,12 @@ class no_NB implements LocaleProviderInterface
                 'doy' => 4  // The week that contains Jan 4th is the first week of the year.
             ]
 
-        ];
+        ]);
+
 
         // Apply $definitions if array is supplied
         if ($definitions !== null) {
-            $arrayHelpers            = new ArrayHelpers();
-            $this->localeDefinitions =
-                $arrayHelpers->array_merge_recursive_distinct($this->localeDefinitions, $definitions);
+            $this->alterDefinitions($definitions);
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getName()
-    {
-        return $this->localeName;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDefinition($name, callable $callback = null)
-    {
-        if (isset($this->localeDefinitions[$name])) {
-            $definition = $this->localeDefinitions[$name];
-
-            return ($callback !== null) ? $callback($definition) : $definition;
-        }
-
-        return null;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDefinitions(callable $callback = null)
-    {
-        return ($callback !== null) ? $callback($this->localeDefinitions) : $this->localeDefinitions;
     }
 }
-
-// locale: Swedish (se-SV)
-// author: Martin Trobäck https://github.com/lekoaf
