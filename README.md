@@ -101,6 +101,21 @@ $m = new \Moment\Moment();
 echo $m->format('[Wochentag:] l'); // e.g. Wochentag: Mittwoch
 ```
 
+Another way to set locale in OOP fashion (dependency injection):
+```php
+// set Norwegian locale - at this very moment, only supported for this way
+\Moment\Moment::setLocale(new \Moment\Locales\no_NB());
+
+// You can also override locale definitions on the fly:
+\Moment\Moment::setLocale(new \Moment\Locales\no_NB([
+    'relativeTime' => [
+        'future' => 'in %s'
+    ]
+]));
+
+(...)
+```
+
 __Supported languages so far:__
 
 ```ar_TN``` Arabic (Tunisia)  
@@ -125,6 +140,7 @@ __Supported languages so far:__
 ```ru_RU``` Russian (Basic version)  
 ```es_ES``` Spanish (Europe)  
 ```se_SV``` Swedish  
+```no_NB``` Norwegian
 ```uk_UA``` Ukrainian  
 ```th_TH``` Thai  
 ```tr_TR``` Turkish  
@@ -416,6 +432,13 @@ You can now run through the result and put it formatted into a drop-down field o
 -------------------------------------------------
 
 # Changelog
+
+### 1.27.0
+ - added:
+    - OOP way of setting locale (dependency injection)
+      - Allows shipping locales in separate composer modules
+      - Allows overriding definitions of locale on the fly
+    - Norwegian locale (no_NB)
 
 ### 1.26.10
  - fixed:
