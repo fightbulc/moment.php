@@ -16,14 +16,10 @@ use Moment\Provider\LocaleProvider;
 class pt_BR extends LocaleProvider
 {
     /**
-     * pt_BR constructor.
-     *
-     * @param array|null $definitions - Allows overriding or adding new definitions on the fly
+     * {@inheritdoc}
      */
-    public function __construct(array $definitions = null)
+    protected function defineLocale(array $definitions = null)
     {
-        parent::__construct('pt_BR');
-
         $this->setDefinitions([
             "months"        => explode('_',
                 'janeiro_fevereiro_março_abril_maio_junho_julho_agosto_setembro_outubro_novembro_dezembro'),

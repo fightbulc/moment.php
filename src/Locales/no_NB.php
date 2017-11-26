@@ -15,14 +15,10 @@ use Moment\Provider\LocaleProvider;
 class no_NB extends LocaleProvider
 {
     /**
-     * no_NB constructor.
-     *
-     * @param array|null $definitions - Allows overriding or adding new definitions on the fly
+     * {@inheritdoc}
      */
-    public function __construct(array $definitions = null)
+    protected function defineLocale(array $definitions = null)
     {
-        parent::__construct('no_NB');
-
         $this->setDefinitions([
 
             'months'        => explode('_',

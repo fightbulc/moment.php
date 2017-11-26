@@ -6,7 +6,7 @@ namespace Moment\Locales;
  * Class pt_PT
  * @package Moment\Locales
  *
- * Native portuguese (en-gb) locale
+ * Native portuguese (pt-PT) locale
  *
  * @author João Ramos <https://github.com/joaomramos>
  */
