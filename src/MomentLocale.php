@@ -11,6 +11,8 @@ use Moment\Provider\LocaleProviderInterface;
  */
 class MomentLocale
 {
+    const LOAD_CAREFULLY = 11;
+
     /**
      * @var Moment
      */
@@ -57,8 +59,11 @@ class MomentLocale
      * @return void
      * @throws MomentException
      */
-    public static function loadLocaleContent()
+    public static function loadLocaleContent($loadCarefully = 0)
     {
+        if(($loadCarefully === self::LOAD_CAREFULLY) && !empty(self::$localeContent)) {
+            return;
+        }
         $pathFile = __DIR__ . '/Locales/' . self::$locale . '.php';
 
         if (file_exists($pathFile) === false)
