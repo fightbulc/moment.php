@@ -43,5 +43,10 @@
         "psr-4": {
             "Moment\\": "src/"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Moment\\Tests\\": "tests/unit"
+        }
     }
 }
