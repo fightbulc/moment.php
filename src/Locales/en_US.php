@@ -1,10 +1,34 @@
 <?php
 
-// locale: american english (en_US)
+namespace Moment\Locales;
 
-$locale = require __DIR__ . '/en_GB.php';
-$locale['calendar']['withTime'] = '[at] h:i A';
-$locale['calendar']['default'] = 'm/d/Y';
-$locale['week']['dow'] = 7;
+/**
+ * Class en_US
+ * @package Moment\Locales
+ *
+ * American english (en_US) locale
+ *
+ * @author Unknown <--- unknown --->
+ */
+class en_US extends en_GB
+{
+    /**
+     * {@inheritdoc}
+     */
+    protected function defineLocale(array $definitions = null)
+    {
+        parent::defineLocale([
+            'calendar' => [
+                'withTime' => '[at] h:i A',
+                'default'  => 'm/d/Y'
+            ],
+            'week'     => [
+                'dow' => 7
+            ]
+        ]);
 
-return $locale;
+        if ($definitions !== null) {
+            $this->alterDefinitions($definitions);
+        }
+    }
+}

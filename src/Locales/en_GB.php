@@ -15,14 +15,10 @@ use Moment\Provider\LocaleProvider;
 class en_GB extends LocaleProvider
 {
     /**
-     * en_GB constructor.
-     *
-     * @param array|null $definitions - Allows overriding or adding new definitions on the fly
+     * {@inheritdoc}
      */
-    public function __construct(array $definitions = null)
+    protected function defineLocale(array $definitions = null)
     {
-        parent::__construct('en_GB');
-
         $this->setDefinitions([
             "months"           => explode('_',
                 'January_February_March_April_May_June_July_August_September_October_November_December'),
