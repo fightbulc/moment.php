@@ -40,4 +40,18 @@ interface LocaleProviderInterface
      * @return array
      */
     public function getDefinitions(callable $callback = null);
+
+    /**
+     * Declares definitions - by replacing whole array with a fresh one
+     *
+     * @param array $definitions
+     */
+    public function setDefinitions(array $definitions);
+
+    /**
+     * Allows overriding definitions
+     *
+     * @param array $definitionsSet
+     */
+    public function alterDefinitions(array $definitionsSet);
 }

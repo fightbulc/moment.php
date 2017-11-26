@@ -63,21 +63,17 @@ abstract class LocaleProvider implements LocaleProviderInterface
     }
 
     /**
-     * Declares definitions - by replacing whole array with a fresh one
-     *
-     * @param array $definitions
+     * {@inheritdoc}
      */
-    protected function setDefinitions(array $definitions)
+    public function setDefinitions(array $definitions)
     {
         $this->localeDefinitions = $definitions;
     }
 
     /**
-     * Allows overriding definitions
-     *
-     * @param array $definitionsSet
+     * {@inheritdoc}
      */
-    protected function alterDefinitions(array $definitionsSet)
+    public function alterDefinitions(array $definitionsSet)
     {
         $arrayHelpers            = new ArrayHelpers();
         $this->localeDefinitions =
