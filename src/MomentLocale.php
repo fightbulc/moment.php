@@ -2,6 +2,8 @@
 
 namespace Moment;
 
+use Moment\Provider\LocaleProviderInterface;
+
 /**
  * MomentLocale
  * @package Moment
@@ -33,13 +35,20 @@ class MomentLocale
     }
 
     /**
-     * @param $locale
+     * @param string|LocaleProviderInterface $locale
      *
      * @return void
      * @throws MomentException
      */
     public static function setLocale($locale)
     {
+        if ($locale instanceof LocaleProviderInterface) {
+            self::$locale        = $locale->getName();
+            self::$localeContent = $locale->getDefinitions();
+
+            return;
+        }
+
         self::$locale = $locale;
         self::loadLocaleContent();
     }
