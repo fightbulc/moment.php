@@ -2,6 +2,7 @@
 
 namespace Moment\Provider;
 
+use ReflectionClass;
 use Moment\Helpers\ArrayHelpers;
 
 /**
@@ -18,22 +19,17 @@ abstract class LocaleProvider implements LocaleProviderInterface
     /** @var string */
     protected $localeName;
 
-    public function __construct($name)
+    /**
+     * LocaleProvider constructor.
+     *
+     * @param array|null $definitions
+     */
+    final public function __construct(array $definitions = null)
     {
-        $this->localeName        = $name;
+        $this->localeName        = (new ReflectionClass(static::class))->getShortName();
         $this->localeDefinitions = [];
-    }
 
-    protected function setDefinitions(array $definitions)
-    {
-        $this->localeDefinitions = $definitions;
-    }
-
-    protected function alterDefinitions(array $definitionsSet)
-    {
-        $arrayHelpers            = new ArrayHelpers();
-        $this->localeDefinitions =
-            $arrayHelpers->array_merge_recursive_distinct($this->localeDefinitions, $definitionsSet);
+        $this->defineLocale($definitions);
     }
 
     /**
@@ -66,4 +62,34 @@ abstract class LocaleProvider implements LocaleProviderInterface
         return ($callback !== null) ? $callback($this->localeDefinitions) : $this->localeDefinitions;
     }
 
+    /**
+     * Declares definitions - by replacing whole array with a fresh one
+     *
+     * @param array $definitions
+     */
+    protected function setDefinitions(array $definitions)
+    {
+        $this->localeDefinitions = $definitions;
+    }
+
+    /**
+     * Allows overriding definitions
+     *
+     * @param array $definitionsSet
+     */
+    protected function alterDefinitions(array $definitionsSet)
+    {
+        $arrayHelpers            = new ArrayHelpers();
+        $this->localeDefinitions =
+            $arrayHelpers->array_merge_recursive_distinct($this->localeDefinitions, $definitionsSet);
+    }
+
+    /**
+     * This is setup stub, kind of constructor. Runs every time locale is initialized
+     *
+     * @param array|null $definitions
+     *
+     * @return void
+     */
+    abstract protected function defineLocale(array $definitions = null);
 }
