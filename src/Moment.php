@@ -75,7 +75,7 @@ class Moment extends \DateTime
         MomentLocale::setMoment($this);
 
         // load locale content
-        MomentLocale::loadLocaleContent();
+        MomentLocale::loadLocaleContent(MomentLocale::LOAD_CAREFULLY);
 
         // initialize DateTime
         $this->resetDateTime($dateTime, $timezone);

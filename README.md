@@ -20,7 +20,7 @@ Date library for parsing, manipulating and formatting dates w/ i18n.
 
 ### Any dependencies?
 
-PHP 5.3 or later since moment.php is based on php's [DateTime Class](http://php.net/manual/en/class.datetime.php).
+PHP 5.4 or later since moment.php is based on php's [DateTime Class](http://php.net/manual/en/class.datetime.php).
 
 -------------------------------------------------
 
@@ -101,6 +101,21 @@ $m = new \Moment\Moment();
 echo $m->format('[Wochentag:] l'); // e.g. Wochentag: Mittwoch
 ```
 
+Another way to set locale in OOP fashion (dependency injection):
+```php
+// set Norwegian locale - at this very moment, few locales are supported for this way
+\Moment\Moment::setLocale(new \Moment\Locales\no_NB());
+
+// You can also override locale definitions on the fly:
+\Moment\Moment::setLocale(new \Moment\Locales\no_NB([
+    'relativeTime' => [
+        'future' => 'in %s'
+    ]
+]));
+
+(...)
+```
+
 __Supported languages so far:__
 
 ```ar_TN``` Arabic (Tunisia)  
@@ -125,6 +140,7 @@ __Supported languages so far:__
 ```ru_RU``` Russian (Basic version)  
 ```es_ES``` Spanish (Europe)  
 ```se_SV``` Swedish  
+```no_NB``` Norwegian  
 ```uk_UA``` Ukrainian  
 ```th_TH``` Thai  
 ```tr_TR``` Turkish  
@@ -416,6 +432,23 @@ You can now run through the result and put it formatted into a drop-down field o
 -------------------------------------------------
 
 # Changelog
+
+### 2.0.0
+ - fixed:
+    - en_GB OOP
+    - sv_SE OOP
+    - pt_BR OOP
+    - pt_PT OOP
+    - fr_FR OOP
+ - other:
+    - Locales uses new array syntax, therefore killing < PHP5.4 support (PHP5.3)   
+
+### 1.27.0
+ - added:
+    - OOP way of setting locale (dependency injection)
+      - Allows shipping locales in separate composer modules
+      - Allows overriding definitions of locale on the fly
+    - Norwegian locale (no_NB)
 
 ### 1.26.10
  - fixed:
