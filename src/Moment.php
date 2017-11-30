@@ -1338,18 +1338,53 @@ class Moment extends \DateTime
     }
 
     /**
-     * Workaround for {@see https://bugs.php.net/bug.php?id=60302} and
-     * {@see https://github.com/fightbulc/moment.php/issues/89}
+     * Creates a new Moment from a DateTime
      *
-     * @inheritdoc
+     * @param DateTimeInterface $date source date
+     * @return static
      */
-    public static function createFromFormat($format, $time, $timezone = null) 
+    public static function fromDateTime(\DateTimeInterface $date)
     {
-        $date = $timezone ? parent::createFromFormat($format, $time, $timezone) : parent::createFromFormat($format, $time);
-
         $moment = new static('@'.$date->format('U'));
         $moment->setTimezone($date->getTimezone());
 
+        if ($date instanceof \DateTimeImmutable)
+        {
+            $moment->setImmutableMode(true);
+        }
+
         return $moment;
+    }
+
+    /**
+     * Workaround for {@see https://bugs.php.net/bug.php?id=60302} and
+     * {@see https://github.com/fightbulc/moment.php/issues/89}
+     *
+     * @param string $format format of the date
+     * @param string $time date string to parse
+     * @param null|DateTimeZone $timezone optional timezone to parse the string with
+     * @param null|FormatsInterface $formatsInterface optional interface to use for {@see $format}.
+     * @return static
+     */
+    public static function createFromFormat($format, $time, $timezone = null, FormatsInterface $formatsInterface = null)
+    {
+        // handle diverse format types
+        if ($formatsInterface instanceof FormatsInterface)
+        {
+            // merge localized custom formats
+            $localeContent = MomentLocale::getLocaleContent();
+            if (isset($localeContent['customFormats']) && is_array($localeContent['customFormats']))
+            {
+                $formatsInterface->setTokens($localeContent['customFormats']);
+            }
+
+            $format = $formatsInterface->format($format);
+        }
+
+        $date = $timezone ?
+            parent::createFromFormat($format, $time, $timezone) : 
+            parent::createFromFormat($format, $time);
+
+        return static::fromDateTime($date);
     }
 }
