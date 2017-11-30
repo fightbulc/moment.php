@@ -1336,4 +1336,20 @@ class Moment extends \DateTime
     {
         return (string)call_user_func(MomentLocale::getLocaleString(array('ordinal')), $number, $token);
     }
+
+    /**
+     * Workaround for {@see https://bugs.php.net/bug.php?id=60302} and
+     * {@see https://github.com/fightbulc/moment.php/issues/89}
+     *
+     * @inheritdoc
+     */
+    public static function createFromFormat($format, $time, $timezone = null) 
+    {
+        $date = $timezone ? parent::createFromFormat($format, $time, $timezone) : parent::createFromFormat($format, $time);
+
+        $moment = new static('@'.$date->format('U'));
+        $moment->setTimezone($date->getTimezone());
+
+        return $moment;
+    }
 }
