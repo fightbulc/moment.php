@@ -118,7 +118,8 @@ __Supported languages so far:__
 ```in_ID``` Indonesian  
 ```it_IT``` Italian  
 ```ja_JP``` Japanese  
-```oc_LNC``` Lengadocian    
+```oc_LNC``` Lengadocian
+```lv_LV``` Latvian (Latviešu)
 ```pl_PL``` Polish  
 ```pt_BR``` Portuguese (Brazil)  
 ```pt_PT``` Portuguese (Portugal)  
