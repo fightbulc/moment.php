@@ -2,7 +2,9 @@
 
 namespace Moment;
 
-class MomentGermanLocaleTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class MomentGermanLocaleTest extends TestCase
 {
     public function setUp()
     {

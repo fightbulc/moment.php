@@ -2,7 +2,9 @@
 
 namespace Moment;
 
-class MomentTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class MomentTest extends TestCase
 {
     public function testMoment()
     {
