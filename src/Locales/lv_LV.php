@@ -6,7 +6,7 @@
 return array(
     'months'  => explode(
         '_',
-        'Janvārī_Februāra_Marta_Aprīļa_Maija_Jūnija_Jūlija_Augustā_Septembrī_Oktobra_Novembra_Decembra'
+        'Janvārī_Februārī_Martā_Aprīlī_Maijā_Jūnijā_Jūlijā_Augustā_Septembrī_Oktobrī_Novembrī_Decembrī'
     ),
     'monthsNominative' => explode(
         '_',
@@ -14,7 +14,7 @@ return array(
     ),
     'monthsShort'  => explode(
         '_',
-        'Jan_Feb_Mar_Apr_Maijs_Jūnijs_Jūlijs_Aug_Sept_Okt_Nov_Dec'
+        'Janv_Febr_Mar_Apr_Maijs_Jūn_Jūl_Aug_Sept_Okt_Nov_Dec'
     ),
     'weekdays'  => explode(
         '_',
@@ -23,8 +23,8 @@ return array(
     'weekdaysShort'    => explode('_', 'Pr_Ot_Tr_Ce_Pk_Se_Sv'),
     'calendar'         => array(
         'sameDay'  => '[Šodien]',
-        'nextDay'  => '[Rīt]',
-        'lastDay'  => '[Vakar]',
+        'nextDay'  => '[Rītdien]',
+        'lastDay'  => '[Vakardien]',
         'lastWeek' => '[Pagājušā] l',
         'sameElse' => 'l',
         'withTime' => '[plkst.] H:i',
@@ -32,16 +32,16 @@ return array(
     ),
     'relativeTime'  => array(
         'future' => 'pēc %s',
-        'past'   => '%s atpakaļ',
+        'past'   => 'pirms %s',
         's'      => 'dažām sekundēm',
-        'm'      => 'minūte',
-        'mm'     => '%d minūtes',
-        'h'      => 'stunda',
-        'hh'     => '%d stundas',
-        'd'      => 'diena',
-        'dd'     => '%d dienas',
-        'M'      => 'mēnesis',
-        'MM'     => '%d mēneši',
+        'm'      => 'minūtes',
+        'mm'     => '%d minūtēm',
+        'h'      => 'stundas',
+        'hh'     => '%d stundām',
+        'd'      => 'dienas',
+        'dd'     => '%d dienām',
+        'M'      => 'mēneša',
+        'MM'     => '%d mēnešiem',
         'y'      => 'gada',
         'yy'     => '%d gadiem',
     ),
