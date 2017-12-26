@@ -144,7 +144,7 @@ class Moment extends \DateTime
     }
 
     /**
-     * @param string $timezone
+     * @param string|\DateTimeZone $timezone
      *
      * @return \DateTime|Moment
      */
@@ -153,6 +153,11 @@ class Moment extends \DateTime
         if ($this->immutableMode)
         {
             return $this->implicitCloning(__FUNCTION__, func_get_args());
+        }
+
+        if ($timezone instanceof \DateTimeZone)
+        {
+            $timezone = $timezone->getName();
         }
 
         $this->setTimezoneString($timezone);
