@@ -93,6 +93,19 @@ class MomentRussianLocaleTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('13 минут назад', $relative->getRelative());
     }
 
+    public function testSeconds()
+    {
+       $past = new Moment('2017-08-30 20:49:30', 'Europe/Samara');
+
+       $relative = $past->from('2017-08-30 20:49:31');
+       $this->assertEquals('1 секунду назад', $relative->getRelative());
+
+       $relative = $past->from('2017-08-30 20:49:34');
+       $this->assertEquals('4 секунды назад', $relative->getRelative());
+
+       $relative = $past->from('2017-08-30 20:49:35');
+       $this->assertEquals('5 секунд назад', $relative->getRelative());
+       }
     public function testLastWeekWeekend()
     {
         $past = new Moment('2016-04-10 16:30:07');
@@ -124,7 +137,7 @@ class MomentRussianLocaleTest extends \PHPUnit_Framework_TestCase
     {
         $date = new Moment('2017-01-11 01:00:00');
 
-        $this->assertEquals('через несколько секунд', $date->from('2017-01-11 00:59:59')->getRelative(), 'seconds');
+        $this->assertEquals('через 1 секунду', $date->from('2017-01-11 00:59:59')->getRelative(), 'seconds');
         $this->assertEquals('через 2 минуты', $date->from('2017-01-11 00:58:00')->getRelative(), 'minutes');
         $this->assertEquals('через 2 часа', $date->from('2017-01-10 23:00:00')->getRelative(), 'hours');
         $this->assertEquals('через день', $date->from('2017-01-10 00:00:00')->getRelative(), 'days');
