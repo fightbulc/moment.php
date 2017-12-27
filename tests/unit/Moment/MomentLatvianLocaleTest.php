@@ -139,7 +139,7 @@ class MomentLatvianLocaleTest extends \PHPUnit_Framework_TestCase
     {
         $date = new Moment('2017-01-11 01:00:00');
 
-        $this->assertEquals('pēc dažām sekundēm', $date->from('2017-01-11 00:59:59')->getRelative(), 'seconds');
+        $this->assertEquals('pēc 1 sekundēm', $date->from('2017-01-11 00:59:59')->getRelative(), 'seconds');
         $this->assertEquals('pēc 2 minūtēm', $date->from('2017-01-11 00:58:00')->getRelative(), 'minutes');
         $this->assertEquals('pēc 2 stundām', $date->from('2017-01-10 23:00:00')->getRelative(), 'hours');
         $this->assertEquals('pēc dienas', $date->from('2017-01-10 00:00:00')->getRelative(), 'days');
@@ -153,8 +153,8 @@ class MomentLatvianLocaleTest extends \PHPUnit_Framework_TestCase
     public function testPastRelative()
     {
         $date = new Moment('2010-01-11 01:00:00');
-
-        $this->assertEquals('pirms dažām sekundēm', $date->from('2010-01-11 01:00:10')->getRelative(), 'seconds');
+        $this->assertEquals('pirms 1 sekundēm', $date->from('2010-01-11 01:00:01')->getRelative(), 'seconds');
+        $this->assertEquals('pirms 10 sekundēm', $date->from('2010-01-11 01:00:10')->getRelative(), 'seconds');
         $this->assertEquals('pirms 2 minūtēm', $date->from('2010-01-11 01:02:00')->getRelative(), 'minutes');
         $this->assertEquals('pirms 2 stundām', $date->from('2010-01-11 03:00:00')->getRelative(), 'hours');
         $this->assertEquals('pirms dienas', $date->from('2010-01-12 01:00:00')->getRelative(), 'days');
