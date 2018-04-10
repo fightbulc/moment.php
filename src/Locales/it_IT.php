@@ -14,7 +14,7 @@ return array(
         "lastDay"  => '[Ieri]',
         "lastWeek" => '[Scorsa] l',
         "sameElse" => 'l',
-        "withTime" => '[alle] H:i',
+        "withTime" => '[alle] G:i',
         "default"  => 'd/m/Y',
     ),
     "relativeTime"  => array(
