@@ -37,19 +37,19 @@ return array(
 
         switch ($number) {
             case 1:
-                $ouput = 'r';
+                $output = 'r';
                 break;
             case 2:
-                $ouput = 'n';
+                $output = 'n';
                 break;
             case 3:
-                $ouput = 'r';
+                $output = 'r';
                 break;
             case 4:
-                $ouput = 't';
+                $output = 't';
                 break;
             default:
-                $ouput = 'è';
+                $output = 'è';
                 break;
         }
 
