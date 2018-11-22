@@ -15,7 +15,7 @@ return array(
         "lastDay"  => '[tegnap] l[-kor]',
         "lastWeek" => function($n, $dir, \Moment\Moment $Moment){
             $weekEndings = explode('_','vasárnap hétfőn kedden szerdán csütörtökön pénteken szombaton');
-			return '[múlt] [' . weekEndings[$Moment->getDay()] . '] l[-kor]';
+			return '[múlt] [' . $weekEndings[$Moment->getDay()] . '] l[-kor]';
         },
         "sameElse" => 'l',
         "withTime" => 'H:i[-kor]',
