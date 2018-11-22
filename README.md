@@ -12,6 +12,12 @@
 
 [Change log](#changelog)
 
+# Info
+
+Hello everybody! Maintenance was slow over the last couple of months. I got married and we became parents so lots of other things to take care.
+For the following months I'd like to migrate the existing version over to PHP7+, clean code and easy to adopt. Both versions will be still maintained.
+Thanks for all the contributions!
+
 # Intro
 
 ### What is moment.php?
@@ -417,6 +423,9 @@ You can now run through the result and put it formatted into a drop-down field o
 -------------------------------------------------
 
 # Changelog
+
+### 1.27.0
+ - fixes and locale additions [(see commits for the 22.11.2018)](https://github.com/fightbulc/moment.php/commits/master)
 
 ### 1.26.10
  - fixed:
