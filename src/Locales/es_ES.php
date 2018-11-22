@@ -16,7 +16,7 @@ return array(
         "lastDay"  => '[ayer]',
         "lastWeek" => '[el] l',
         "sameElse" => 'l',
-        "withTime" => function (Moment $moment) { return '[a la' . ($moment->getHour() !== 1 ? 's' : null) . '] H:i'; },
+        "withTime" => function (Moment $moment) { return '[a la' . ($moment->getHour() != 1 ? 's' : null) . '] G:i [h]'; },
         "default"  => 'd/m/Y',
     ),
     "relativeTime"  => array(
