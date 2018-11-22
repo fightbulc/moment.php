@@ -115,7 +115,7 @@ __Supported languages so far:__
 ```fr_FR``` French (Europe)  
 ```de_DE``` German (Germany)  
 ```hu_HU``` Hungarian    
-```in_ID``` Indonesian  
+```id_ID``` Indonesian  
 ```it_IT``` Italian  
 ```ja_JP``` Japanese  
 ```oc_LNC``` Lengadocian
