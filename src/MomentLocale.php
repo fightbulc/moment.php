@@ -82,6 +82,12 @@ class MomentLocale
         {
             if (isset($string[$key]) === false)
             {
+                if ($key == 'monthsNominative' && isset($string['months']))
+                {
+                    $string = $string['months'];
+                    continue;
+                }
+
                 throw new MomentException('Locale string does not exist for key: ' . join(' > ', $keys));
             }
 

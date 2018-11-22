@@ -86,4 +86,10 @@ class MomentGermanLocaleTest extends TestCase
         $moment = new Moment('2016-01-03 16:17:07', 'Europe/Berlin');
         $this->assertEquals('03. Dezember', $moment->subtractMonths(1)->format('d. F'));
     }
+
+    public function testMonthsNominativeFallback()
+    {
+        $moment = new Moment('2016-01-03 16:17:07', 'Europe/Berlin');
+        $this->assertEquals('Januar 2016', $moment->format('f Y'));
+    }
 }
