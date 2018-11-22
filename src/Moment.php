@@ -1029,7 +1029,7 @@ class Moment extends \DateTime
      *
      * @return self
      */
-    private function implicitCloning($method, $params = array())
+    protected function implicitCloning($method, $params = array())
     {
         $clone = $this->cloning();
 
