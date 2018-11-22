@@ -14,7 +14,7 @@ return array(
         "lastDay"  => '[Gestern]',
         "lastWeek" => '[Letzten] l',
         "sameElse" => 'l',
-        "withTime" => '[um] H:i',
+        "withTime" => '[um] G:i [Uhr]',
         "default"  => 'd.m.Y',
     ),
     "relativeTime"  => array(
