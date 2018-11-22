@@ -103,7 +103,7 @@ echo $m->format('[Wochentag:] l'); // e.g. Wochentag: Mittwoch
 
 __Supported languages so far:__
 
-```ar_TN``` Arabic (Tunisia)  
+```ar_AR``` Arabic
 ```ca_ES``` Catalan  
 ```zh_CN``` Chinese  
 ```zh_TW``` Chinese (traditional)  
