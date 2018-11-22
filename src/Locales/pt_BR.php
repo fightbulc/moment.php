@@ -14,7 +14,7 @@ return array(
         "sameDay"  => '[hoje]',
         "nextDay"  => '[amanhã]',
         "lastDay"  => '[ontem]',
-        "lastWeek" => '[útimo] l',
+        "lastWeek" => '[último] l',
         "sameElse" => 'eu',
         "withTime" => function (Moment $moment) { return '[à' . ($moment->getHour() !== 1 ? 's' : null) . '] H:i'; },
         "default"  => 'd/m/Y',
