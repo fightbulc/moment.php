@@ -28,8 +28,8 @@ class MomentUkrainianLocaleTest extends TestCase
         );
 
         for ($d = 1; $d < 7; $d++) {
-            $this->assertEquals($weekdayNames[$moment->getWeekday()][0], $moment->getWeekdayNameShort(), 'weekday short name failed');
-            $this->assertEquals($weekdayNames[$moment->getWeekday()][1], $moment->getWeekdayNameLong(), 'weekday long name failed');
+            self::assertEquals($weekdayNames[$moment->getWeekday()][0], $moment->getWeekdayNameShort(), 'weekday short name failed');
+            self::assertEquals($weekdayNames[$moment->getWeekday()][1], $moment->getWeekdayNameLong(), 'weekday long name failed');
 
             $moment->addDays(1);
         }
@@ -39,17 +39,17 @@ class MomentUkrainianLocaleTest extends TestCase
     {
         $string = '2015-06-14 20:46:22';
         $moment = new Moment($string, 'Europe/Kiev');
-        $this->assertEquals('14 червня', $moment->format('j F'));
+        self::assertEquals('14 червня', $moment->format('j F'));
 
         $string = '2015-03-08T15:14:53-0500';
         $moment = new Moment($string, 'Europe/Kiev');
-        $this->assertEquals('8 березня', $moment->format('j F'));
+        self::assertEquals('8 березня', $moment->format('j F'));
     }
 
     public function testDayMonthFormat002()
     {
         $moment = new Moment('2016-01-03 16:17:07', 'Europe/Kiev');
-        $this->assertEquals('3 грудня', $moment->subtractMonths(1)->format('j F'));
+        self::assertEquals('3 грудня', $moment->subtractMonths(1)->format('j F'));
     }
 
     public function testMonthFormatFN()
@@ -74,7 +74,7 @@ class MomentUkrainianLocaleTest extends TestCase
         );
 
         for ($d = 1; $d < count($monthsNominative); $d++) {
-            $this->assertEquals($monthsNominative[$moment->format('n')], $moment->format('f'), 'month nominative failed');
+            self::assertEquals($monthsNominative[$moment->format('n')], $moment->format('f'), 'month nominative failed');
 
             $moment->addMonths(1);
         }
@@ -86,42 +86,42 @@ class MomentUkrainianLocaleTest extends TestCase
         $past = new Moment('2016-01-03 16:17:07', 'Europe/Kiev');
 
         $relative = $past->from('2016-01-03 16:34:07');
-        $this->assertEquals('17 хвилин тому', $relative->getRelative());
+        self::assertEquals('17 хвилин тому', $relative->getRelative());
 
         $relative = $past->from('2016-01-03 16:40:07');
-        $this->assertEquals('23 хвилини тому', $relative->getRelative());
+        self::assertEquals('23 хвилини тому', $relative->getRelative());
 
         $relative = $past->from('2016-01-03 16:30:07');
-        $this->assertEquals('13 хвилин тому', $relative->getRelative());
+        self::assertEquals('13 хвилин тому', $relative->getRelative());
     }
 
     public function testLastWeekWeekend()
     {
         $past = new Moment('2016-04-10 16:30:07');
-        $this->assertEquals('неділя о 16:30', $past->calendar(true, new Moment('2016-04-12')));
+        self::assertEquals('неділя о 16:30', $past->calendar(true, new Moment('2016-04-12')));
 
         $past = new Moment('2016-09-24 11:30:07');
-        $this->assertEquals('субота об 11:30', $past->calendar(true, new Moment('2016-09-26')));
+        self::assertEquals('субота об 11:30', $past->calendar(true, new Moment('2016-09-26')));
 
         $past = new Moment('2016-04-11');
-        $this->assertEquals('понеділок', $past->calendar(false, new Moment('2016-04-17')));
+        self::assertEquals('понеділок', $past->calendar(false, new Moment('2016-04-17')));
 
         $past = new Moment('2016-04-12');
-        $this->assertEquals('вівторок', $past->calendar(false, new Moment('2016-04-17')));
+        self::assertEquals('вівторок', $past->calendar(false, new Moment('2016-04-17')));
 
         $past = new Moment('2016-04-13');
-        $this->assertEquals('середа', $past->calendar(false, new Moment('2016-04-17')));
+        self::assertEquals('середа', $past->calendar(false, new Moment('2016-04-17')));
 
         $past = new Moment('2016-04-14');
-        $this->assertEquals('четвер', $past->calendar(false, new Moment('2016-04-17')));
+        self::assertEquals('четвер', $past->calendar(false, new Moment('2016-04-17')));
 
         $past = new Moment('2016-04-15');
-        $this->assertEquals('п’ятниця', $past->calendar(false, new Moment('2016-04-17')));
+        self::assertEquals('п’ятниця', $past->calendar(false, new Moment('2016-04-17')));
 
         $past = new Moment('2016-04-16');
-        $this->assertEquals('вчора', $past->calendar(false, new Moment('2016-04-17')));
+        self::assertEquals('вчора', $past->calendar(false, new Moment('2016-04-17')));
 
         $past = new Moment('2016-04-16');
-        $this->assertEquals('субота', $past->calendar(false, new Moment('2016-04-18')));
+        self::assertEquals('субота', $past->calendar(false, new Moment('2016-04-18')));
     }
 }

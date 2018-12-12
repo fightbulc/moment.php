@@ -32,8 +32,8 @@ class MomentBritishEnglishLocaleTest extends TestCase
         );
 
         for ($d = 1; $d < 7; $d++) {
-            $this->assertEquals($weekdayNames[$moment->getWeekday()][0], $moment->getWeekdayNameShort(), 'weekday short name failed');
-            $this->assertEquals($weekdayNames[$moment->getWeekday()][1], $moment->getWeekdayNameLong(), 'weekday long name failed');
+            self::assertEquals($weekdayNames[$moment->getWeekday()][0], $moment->getWeekdayNameShort(), 'weekday short name failed');
+            self::assertEquals($weekdayNames[$moment->getWeekday()][1], $moment->getWeekdayNameLong(), 'weekday long name failed');
 
             $moment->addDays(1);
         }
@@ -61,8 +61,8 @@ class MomentBritishEnglishLocaleTest extends TestCase
         );
 
         for ($d = 1; $d < 12; $d++) {
-            $this->assertEquals($monthNames[$moment->format('n')][0], $moment->getMonthNameShort(), 'month short name failed');
-            $this->assertEquals($monthNames[$moment->format('n')][1], $moment->getMonthNameLong(), 'month long name failed');
+            self::assertEquals($monthNames[$moment->format('n')][0], $moment->getMonthNameShort(), 'month short name failed');
+            self::assertEquals($monthNames[$moment->format('n')][1], $moment->getMonthNameLong(), 'month long name failed');
 
             $moment->addMonths(1);
         }
@@ -80,7 +80,7 @@ class MomentBritishEnglishLocaleTest extends TestCase
         );
         $b = new Moment('2010-06-12 22:00:00');
         for ($i = 0; $i < count($a); $i++) {
-            $this->assertEquals($a[$i][1], $b->format($a[$i][0]));
+            self::assertEquals($a[$i][1], $b->format($a[$i][0]));
         }
     }
 
@@ -100,16 +100,16 @@ class MomentBritishEnglishLocaleTest extends TestCase
         );
         $b = new Moment('2010-06-12 22:00:00');
         for ($i = 0; $i < count($a); $i++) {
-            $this->assertEquals($a[$i][1], $b->format($a[$i][0], new MomentJs()));
+            self::assertEquals($a[$i][1], $b->format($a[$i][0], new MomentJs()));
         }
     }
 
     public function testOrdinalsFormat()
     {
         $moment = new Moment('2010-06-02T00:00:00+0000');
-        $this->assertEquals('2nd', $moment->format('jS'));
+        self::assertEquals('2nd', $moment->format('jS'));
         $moment = new Moment('2010-06-12T00:00:00+0000');
-        $this->assertEquals('12th', $moment->format('jS'));
+        self::assertEquals('12th', $moment->format('jS'));
     }
 
 	public function testRelative()
@@ -135,8 +135,8 @@ class MomentBritishEnglishLocaleTest extends TestCase
 
 		for ($i = 0; $i < count($a); $i++) {
 			$endMoment = $a[$i][0];
-			$this->assertEquals($a[$i][1], $endMoment->from($beginningMoment)->getRelative(), $a[$i][3]);
-			$this->assertEquals($a[$i][2], $beginningMoment->from($endMoment)->getRelative(), $a[$i][3]);
+			self::assertEquals($a[$i][1], $endMoment->from($beginningMoment)->getRelative(), $a[$i][3]);
+			self::assertEquals($a[$i][2], $beginningMoment->from($endMoment)->getRelative(), $a[$i][3]);
 		}
 
 	}

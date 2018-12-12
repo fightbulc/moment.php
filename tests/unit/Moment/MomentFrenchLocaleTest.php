@@ -29,8 +29,8 @@ class MomentFrenchLocaleTest extends TestCase
 
         for ($d = 1; $d < 7; $d++)
         {
-            $this->assertEquals($weekdayNames[$moment->getWeekday()][0], $moment->getWeekdayNameShort(), 'weekday short name failed');
-            $this->assertEquals($weekdayNames[$moment->getWeekday()][1], $moment->getWeekdayNameLong(), 'weekday long name failed');
+            self::assertEquals($weekdayNames[$moment->getWeekday()][0], $moment->getWeekdayNameShort(), 'weekday short name failed');
+            self::assertEquals($weekdayNames[$moment->getWeekday()][1], $moment->getWeekdayNameLong(), 'weekday long name failed');
 
             $moment->addDays(1);
         }
@@ -59,8 +59,8 @@ class MomentFrenchLocaleTest extends TestCase
 
         for ($d = 1; $d < 12; $d++)
         {
-            $this->assertEquals($monthNames[$moment->format('n')][0], $moment->getMonthNameShort(), 'month short name failed');
-            $this->assertEquals($monthNames[$moment->format('n')][1], $moment->getMonthNameLong(), 'month long name failed');
+            self::assertEquals($monthNames[$moment->format('n')][0], $moment->getMonthNameShort(), 'month short name failed');
+            self::assertEquals($monthNames[$moment->format('n')][1], $moment->getMonthNameLong(), 'month long name failed');
 
             $moment->addMonths(1);
         }
@@ -78,7 +78,7 @@ class MomentFrenchLocaleTest extends TestCase
         );
         $b = new Moment('2010-02-14 15:25:50');
         for ($i = 0; $i < count($a); $i++) {
-            $this->assertEquals($a[$i][1], $b->format($a[$i][0]));
+            self::assertEquals($a[$i][1], $b->format($a[$i][0]));
         }
     }
 
@@ -86,7 +86,7 @@ class MomentFrenchLocaleTest extends TestCase
     {
         $beginningMoment = new Moment('2015-06-14 20:46:22', 'Europe/Berlin');
         $endMoment = new Moment('2015-06-14 20:48:32', 'Europe/Berlin');
-        $this->assertEquals('dans 2 minutes', $endMoment->from($beginningMoment)->getRelative());
-        $this->assertEquals('il y a 2 minutes', $beginningMoment->from($endMoment)->getRelative());
+        self::assertEquals('dans 2 minutes', $endMoment->from($beginningMoment)->getRelative());
+        self::assertEquals('il y a 2 minutes', $beginningMoment->from($endMoment)->getRelative());
     }
 }

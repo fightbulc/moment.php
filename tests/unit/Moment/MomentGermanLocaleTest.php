@@ -29,8 +29,8 @@ class MomentGermanLocaleTest extends TestCase
 
         for ($d = 1; $d < 7; $d++)
         {
-            $this->assertEquals($weekdayNames[$moment->getWeekday()][0], $moment->getWeekdayNameShort(), 'weekday short name failed');
-            $this->assertEquals($weekdayNames[$moment->getWeekday()][1], $moment->getWeekdayNameLong(), 'weekday long name failed');
+            self::assertEquals($weekdayNames[$moment->getWeekday()][0], $moment->getWeekdayNameShort(), 'weekday short name failed');
+            self::assertEquals($weekdayNames[$moment->getWeekday()][1], $moment->getWeekdayNameLong(), 'weekday long name failed');
 
             $moment->addDays(1);
         }
@@ -59,8 +59,8 @@ class MomentGermanLocaleTest extends TestCase
 
         for ($d = 1; $d < 12; $d++)
         {
-            $this->assertEquals($monthNames[$moment->format('n')][0], $moment->getMonthNameShort(), 'month short name failed');
-            $this->assertEquals($monthNames[$moment->format('n')][1], $moment->getMonthNameLong(), 'month long name failed');
+            self::assertEquals($monthNames[$moment->format('n')][0], $moment->getMonthNameShort(), 'month short name failed');
+            self::assertEquals($monthNames[$moment->format('n')][1], $moment->getMonthNameLong(), 'month long name failed');
 
             $moment->addMonths(1);
         }
@@ -72,11 +72,11 @@ class MomentGermanLocaleTest extends TestCase
 
         $string = '2015-06-14 20:46:22';
         $moment = new Moment($string, 'Europe/Berlin');
-        $this->assertEquals('14. Juni', $moment->format('d. F'));
+        self::assertEquals('14. Juni', $moment->format('d. F'));
 
         $string = '2015-03-08T15:14:53-0500';
         $moment = new Moment($string, 'Europe/Berlin');
-        $this->assertEquals('08. März', $moment->format('d. F'));
+        self::assertEquals('08. März', $moment->format('d. F'));
     }
 
     public function testHirbodIssueLocaleDate002()
@@ -84,12 +84,12 @@ class MomentGermanLocaleTest extends TestCase
         // @see: https://github.com/fightbulc/moment.php/issues/61
 
         $moment = new Moment('2016-01-03 16:17:07', 'Europe/Berlin');
-        $this->assertEquals('03. Dezember', $moment->subtractMonths(1)->format('d. F'));
+        self::assertEquals('03. Dezember', $moment->subtractMonths(1)->format('d. F'));
     }
 
     public function testMonthsNominativeFallback()
     {
         $moment = new Moment('2016-01-03 16:17:07', 'Europe/Berlin');
-        $this->assertEquals('Januar 2016', $moment->format('f Y'));
+        self::assertEquals('Januar 2016', $moment->format('f Y'));
     }
 }

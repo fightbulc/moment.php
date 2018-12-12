@@ -1345,8 +1345,10 @@ class Moment extends \DateTime
     /**
      * Creates a new Moment from a DateTime
      *
-     * @param DateTimeInterface $date source date
-     * @return static
+     * @param \DateTimeInterface $date
+     *
+     * @return Moment
+     * @throws MomentException
      */
     public static function fromDateTime(\DateTimeInterface $date)
     {
@@ -1369,6 +1371,7 @@ class Moment extends \DateTime
      * @param string $time date string to parse
      * @param null|DateTimeZone $timezone optional timezone to parse the string with
      * @param null|FormatsInterface $formatsInterface optional interface to use for {@see $format}.
+     * 
      * @return static
      */
     public static function createFromFormat($format, $time, $timezone = null, FormatsInterface $formatsInterface = null)
