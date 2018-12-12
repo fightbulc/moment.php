@@ -69,7 +69,7 @@ class Moment extends \DateTime
      */
     public static function fromDateTime(\DateTimeInterface $date)
     {
-        $moment = new static('@'.$date->format('U'));
+        $moment = new static('@' . $date->format('U'));
         $moment->setTimezone($date->getTimezone());
 
         if ($date instanceof \DateTimeImmutable)
@@ -84,9 +84,9 @@ class Moment extends \DateTime
      * Workaround for {@see https://bugs.php.net/bug.php?id=60302} and
      * {@see https://github.com/fightbulc/moment.php/issues/89}
      *
-     * @param string $format format of the date
-     * @param string $time date string to parse
-     * @param null|DateTimeZone $timezone optional timezone to parse the string with
+     * @param string                $format format of the date
+     * @param string                $time date string to parse
+     * @param null|DateTimeZone     $timezone optional timezone to parse the string with
      * @param null|FormatsInterface $formatsInterface optional interface to use for {@see $format}.
      *
      * @return static
@@ -115,9 +115,9 @@ class Moment extends \DateTime
     }
 
     /**
-     * @param string $dateTime
+     * @param string      $dateTime
      * @param string|null $timezone
-     * @param bool $immutableMode
+     * @param bool        $immutableMode
      *
      * @throws MomentException
      */
@@ -226,7 +226,7 @@ class Moment extends \DateTime
     }
 
     /**
-     * @param null|string $format
+     * @param null|string           $format
      * @param null|FormatsInterface $formatsInterface
      *
      * @return string
@@ -679,8 +679,8 @@ class Moment extends \DateTime
     }
 
     /**
-     * @param int $hour
-     * @param int $minute
+     * @param int      $hour
+     * @param int      $minute
      * @param int|null $second
      * @param int|null $microseconds
      *
@@ -700,7 +700,7 @@ class Moment extends \DateTime
 
     /**
      * @param string|Moment $fromMoment
-     * @param null $timezoneString
+     * @param null          $timezoneString
      *
      * @return MomentFromVo
      * @throws MomentException
@@ -755,7 +755,7 @@ class Moment extends \DateTime
 
     /**
      * @param string $type
-     * @param int $value
+     * @param int    $value
      *
      * @return Moment
      */
@@ -900,7 +900,7 @@ class Moment extends \DateTime
     }
 
     /**
-     * @param bool $withTime
+     * @param bool        $withTime
      * @param Moment|null $refMoment
      *
      * @return string
@@ -1085,7 +1085,7 @@ class Moment extends \DateTime
 
     /**
      * @param string $method
-     * @param array $params
+     * @param array  $params
      *
      * @return self
      */
@@ -1102,7 +1102,7 @@ class Moment extends \DateTime
 
     /**
      * @param array $weekdayNumbers
-     * @param int $forUpcomingWeeks
+     * @param int   $forUpcomingWeeks
      *
      * @return Moment[]
      * @throws MomentException
@@ -1148,7 +1148,7 @@ class Moment extends \DateTime
      * Check if a moment is the same as another moment
      *
      * @param string|Moment $dateTime
-     * @param string $period 'seconds|minute|hour|day|month|year'
+     * @param string        $period 'seconds|minute|hour|day|month|year'
      *
      * @return bool
      * @throws MomentException
@@ -1164,7 +1164,7 @@ class Moment extends \DateTime
      * Checks if Moment is before given time
      *
      * @param string|Moment $dateTime
-     * @param string $period 'seconds|minute|hour|day|month|year'
+     * @param string        $period 'seconds|minute|hour|day|month|year'
      *
      * @return bool
      * @throws MomentException
@@ -1180,7 +1180,7 @@ class Moment extends \DateTime
      * Checks if Moment is after given time
      *
      * @param string|Moment $dateTime
-     * @param string $period 'seconds|minute|hour|day|month|year'
+     * @param string        $period 'seconds|minute|hour|day|month|year'
      *
      * @return bool
      * @throws MomentException
@@ -1197,8 +1197,8 @@ class Moment extends \DateTime
      *
      * @param string|Moment $minDateTime
      * @param string|Moment $maxDateTime
-     * @param boolean $closed
-     * @param string $period 'seconds|minute|hour|day|month|year'
+     * @param boolean       $closed
+     * @param string        $period 'seconds|minute|hour|day|month|year'
      *
      * @return bool
      * @throws MomentException
@@ -1369,12 +1369,33 @@ class Moment extends \DateTime
             $momentDateTime = $this->format(self::NO_TIME);
         }
 
-        return $rawDateTime === $momentDateTime;
+        $isValid = $rawDateTime === $momentDateTime;
+
+        // TODO: hack until we include a proper validation
+
+        if (!$isValid)
+        {
+            $rfcs = array(
+                self::RFC2822,
+                self::RFC822,
+                self::RFC1036,
+            );
+
+            foreach ($rfcs as $rfc)
+            {
+                if ($this->format($rfc) === $rawDateTime)
+                {
+                    return true;
+                }
+            }
+        }
+
+        return $isValid;
     }
 
     /**
      * @param string $type
-     * @param int $value
+     * @param int    $value
      *
      * @return Moment
      */
@@ -1391,7 +1412,7 @@ class Moment extends \DateTime
     }
 
     /**
-     * @param int $number
+     * @param int    $number
      * @param string $token
      *
      * @return string
