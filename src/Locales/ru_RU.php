@@ -60,7 +60,7 @@ return array(
     'relativeTime'      => array(
         'future' => 'через %s',
         'past'   => '%s назад',
-        's'      => 'секунду',
+        's'      => 'несколько секунд',
         'ss'     => function ($number) use ($getNumEnding)
         {
            return $getNumEnding($number, array('%d секунду', '%d секунды', '%d секунд'));
