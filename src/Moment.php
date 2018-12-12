@@ -703,6 +703,7 @@ class Moment extends \DateTime
      * @param null $timezoneString
      *
      * @return MomentFromVo
+     * @throws MomentException
      */
     public function from($fromMoment = 'now', $timezoneString = null)
     {
@@ -732,6 +733,7 @@ class Moment extends \DateTime
      * @param null $timezoneString
      *
      * @return MomentFromVo
+     * @throws MomentException
      */
     public function fromNow($timezoneString = null)
     {
