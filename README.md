@@ -424,6 +424,10 @@ You can now run through the result and put it formatted into a drop-down field o
 
 # Changelog
 
+### 1.28.0
+ - fixed relative time
+ - added Norwegian locale
+
 ### 1.27.0
  - fixes and locale additions [(see commits for the 22.11.2018)](https://github.com/fightbulc/moment.php/commits/master)
 
