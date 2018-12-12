@@ -424,6 +424,9 @@ You can now run through the result and put it formatted into a drop-down field o
 
 # Changelog
 
+### 1.28.1
+ - fixed RFC2822 as valid format
+
 ### 1.28.0
  - fixed relative time
  - added Norwegian locale
