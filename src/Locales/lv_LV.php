@@ -33,7 +33,7 @@ return array(
     'relativeTime'  => array(
         'future' => 'pēc %s',
         'past'   => 'pirms %s',
-        's'      => 'dažas sekundes',
+        's'      => 'dažām sekundēm',
         'ss'     => '%d sekundēm',
         'm'      => 'minūtes',
         'mm'     => '%d minūtēm',
