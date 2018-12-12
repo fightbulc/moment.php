@@ -483,6 +483,20 @@ class MomentTest extends TestCase
         }
     }
 
+    public function testValidUnixtimeLength()
+    {
+        $dates = array(
+            999992800, // September 9th, 2001 1:46 AM
+            1544652373 // December 12th, 2018 11:06 PM
+        );
+
+        foreach ($dates as $date)
+        {
+            $m = new Moment($date);
+            self::assertEquals($date, $m->format('U'));
+        }
+    }
+
     /**
      * @link https://github.com/fightbulc/moment.php/issues/62
      */

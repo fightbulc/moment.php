@@ -164,8 +164,10 @@ class Moment extends \DateTime
      */
     public function resetDateTime($dateTime = 'now', $timezone = null)
     {
+        $lengthDateTime = strlen((int)$dateTime);
+
         // unix timestamp helper
-        if (strlen((int)$dateTime) === 10)
+        if ($lengthDateTime >= 9 && $lengthDateTime <= 10)
         {
             $dateTime = '@' . $dateTime;
         }
@@ -187,7 +189,7 @@ class Moment extends \DateTime
         parent::__construct($dateTime, $this->getDateTimeZone($timezone));
 
         // set timezone if unix time
-        if (strpos($dateTime, '@') !== false)
+        if (strpos($dateTime, '@') !== false && $timezone)
         {
             $this->setTimezone($timezone);
         }
