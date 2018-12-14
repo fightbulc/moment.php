@@ -21,6 +21,7 @@ return array(
         "future" => 'om %s',
         "past"   => '%s sen',
         "s"      => 'några sekunder',
+        "ss"      => '%d sekunder',
         "m"      => 'en minut',
         "mm"     => '%d minuter',
         "h"      => 'en timme',

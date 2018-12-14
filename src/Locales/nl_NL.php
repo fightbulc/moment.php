@@ -21,6 +21,7 @@ return array(
         "future" => 'in %s',
         "past"   => '%s geleden',
         "s"      => 'een paar seconden',
+        "ss"      => '%d seconden',
         "m"      => 'een minuut',
         "mm"     => '%d minuten',
         "h"      => 'een uur',

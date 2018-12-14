@@ -23,6 +23,7 @@ return array(
         "future" => 'em %s',
         "past"   => 'há %s',
         "s"      => 'alguns segundos',
+        "ss"      => '%d segundos',
         "m"      => 'um minuto',
         "mm"     => '%d minutos',
         "h"      => 'uma hora',

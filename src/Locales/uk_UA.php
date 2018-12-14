@@ -68,6 +68,7 @@ return array(
         },
         'past'   => '%s тому',
         's'      => 'кілька секунд',
+        'ss'      => 'кілька секунд',   // needs review by native speaker see https://github.com/fightbulc/moment.php/issues/166
         'm'      => 'хвилину',
         'mm'     => function ($number) use ($getNumEnding)
         {

@@ -43,6 +43,7 @@ return array(
         "future" => 'peste %s',
         "past"   => 'În urmă cu %s',
         "s"      => 'câteva secunde',
+        "ss"      => '%d secunde',
         "m"      => 'un minut',
         "mm"     => function ($count, $direction, Moment $m) use ($rtwp)
         {

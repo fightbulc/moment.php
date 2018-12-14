@@ -46,6 +46,10 @@ return array(
         "future" => 'za %s',
         "past"   => '%s temu',
         "s"      => 'kilka sekund',
+        "ss"     => function ($count) use ($ifLastDigitIsSpecial)
+        {
+            return $ifLastDigitIsSpecial($count, '%d sekundy', '%d sekund');
+        },
         "m"      => '1 minutę',
         "mm"     => function ($count) use ($ifLastDigitIsSpecial)
         {
