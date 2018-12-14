@@ -414,6 +414,11 @@ You can now run through the result and put it formatted into a drop-down field o
 
 # Changelog
 
+### 1.28.2
+ - fixed:
+    - missing relativeTime format
+    - allow 9-digit unixtime
+
 ### 1.28.1
  - fixed RFC2822 as valid format
 
