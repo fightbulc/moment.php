@@ -27,6 +27,9 @@ return array(
         "s"      => function($n, $dir){
             return ($dir === 'future') ? 'néhány másodperc' : 'néhány másodperce';
         },
+        "ss"     => function($n, $dir){
+            return "$n " . ($dir === 'future' ? 'másodperc' : 'másodperce');
+        },
         "m"      => function($n, $dir){
             return 'egy ' . ($dir === 'future' ? 'perc' : 'perce');
         },

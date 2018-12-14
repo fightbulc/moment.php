@@ -51,6 +51,10 @@ return array(
         {
             return $ifPast($direction, 'okamžikem', 'okamžik');
         },
+        "ss"      => function ($count, $direction, Moment $m) use ($ifPast)
+        {
+            return $ifPast($direction, 'okamžikem', 'okamžik');
+        },
         "m"      => function ($count, $direction, Moment $m) use ($ifPast)
         {
             return $ifPast($direction, 'minutou', 'minutu');

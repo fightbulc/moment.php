@@ -21,6 +21,7 @@ return array(
         "future" => 'tra %s',
         "past"   => '%s fa',
         "s"      => 'pochi secondi',
+        "ss"      => '%d secondi',
         "m"      => 'un minuto',
         "mm"     => '%d minuti',
         "h"      => 'una ora',
