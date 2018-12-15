@@ -2,8 +2,6 @@
 
 namespace Moment;
 
-use DateTimeZone;
-
 /**
  * Moment
  * Wrapper for PHP's DateTime class inspired by moment.js
@@ -86,13 +84,13 @@ class Moment extends \DateTime
      *
      * @param string                $format format of the date
      * @param string                $time date string to parse
-     * @param null|DateTimeZone     $timezone optional timezone to parse the string with
+     * @param null|\DateTimeZone    $timezone optional timezone to parse the string with
      * @param null|FormatsInterface $formatsInterface optional interface to use for {@see $format}.
      *
      * @return static
      * @throws MomentException
      */
-    public static function createFromFormat($format, $time, DateTimeZone $timezone = null, FormatsInterface $formatsInterface = null)
+    public static function createFromFormat($format, $time, $timezone = null, FormatsInterface $formatsInterface = null)
     {
         // handle diverse format types
         if ($formatsInterface instanceof FormatsInterface)
