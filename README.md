@@ -414,6 +414,9 @@ You can now run through the result and put it formatted into a drop-down field o
 
 # Changelog
 
+### 1.28.3
+ - fixed typehint issue
+
 ### 1.28.2
  - fixed:
     - missing relativeTime format
