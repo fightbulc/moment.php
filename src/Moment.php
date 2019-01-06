@@ -37,13 +37,14 @@ class Moment extends \DateTime
 
     /**
      * @param string $locale
+     * @param boolean $localeSimilar
      *
      * @throws MomentException
      */
-    public static function setLocale($locale)
+    public static function setLocale($locale, $localeSimilar = false)
     {
         // set current language
-        MomentLocale::setLocale($locale);
+        MomentLocale::setLocale($locale, $localeSimilar);
     }
 
     /**

@@ -63,7 +63,7 @@ $response['test07.00'] = $m->format('l, dS F Y / H:i (e)');
 
 $momentJs = new \Moment\CustomFormats\MomentJs();
 $response['test07.01'] = $m->format('LT', $momentJs);
-$m->setLocale($response['test07.locale']);
+$m->setLocale($response['test07.locale'], true);
 $response['test07.02'] = $m->format('LT', $momentJs);
 $response['test07.03'] = $m->format('L', $momentJs);
 $response['test07.04'] = $m->format('l', $momentJs);
