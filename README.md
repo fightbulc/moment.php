@@ -414,6 +414,12 @@ You can now run through the result and put it formatted into a drop-down field o
 
 # Changelog
 
+### 1.29.0
+ - updated Italian locale
+ - added:
+    - custom formats for en_US
+    - flag for loading similar locale
+
 ### 1.28.3
  - fixed typehint issue
 
