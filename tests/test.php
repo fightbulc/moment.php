@@ -57,12 +57,13 @@ $response['test06.02'] = $m->setTimezone('UTC')->format();
 
 // ------------------------------------------
 
+$response['test07.locale'] = isset($_GET['locale']) ? $_GET['locale'] : 'fr_FR';
 $m = new \Moment\Moment('2012-04-25T15:00:00', 'CET');
 $response['test07.00'] = $m->format('l, dS F Y / H:i (e)');
 
 $momentJs = new \Moment\CustomFormats\MomentJs();
 $response['test07.01'] = $m->format('LT', $momentJs);
-$m->setLocale('fr_FR');
+$m->setLocale($response['test07.locale'], true);
 $response['test07.02'] = $m->format('LT', $momentJs);
 $response['test07.03'] = $m->format('L', $momentJs);
 $response['test07.04'] = $m->format('l', $momentJs);

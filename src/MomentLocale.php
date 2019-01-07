@@ -20,6 +20,11 @@ class MomentLocale
     private static $locale = 'en_GB';
 
     /**
+     * @var boolean
+     */
+    private static $localeSimilar = false;
+
+    /**
      * @var array
      */
     private static $localeContent = array();
@@ -38,9 +43,10 @@ class MomentLocale
      * @return void
      * @throws MomentException
      */
-    public static function setLocale($locale)
+    public static function setLocale($locale, $localeSimilar = false)
     {
         self::$locale = $locale;
+        self::$localeSimilar = $localeSimilar;
         self::loadLocaleContent();
     }
 
@@ -54,7 +60,16 @@ class MomentLocale
 
         if (file_exists($pathFile) === false)
         {
-            throw new MomentException('Locale does not exist: ' . $pathFile);
+            $tries = glob(__DIR__ . '/Locales/' . self::$locale . '*.php');
+
+            if (self::$localeSimilar && $tries !== FALSE && count($tries) > 0)
+            {
+                $pathFile = $tries[0];
+            }
+            else
+            {
+                throw new MomentException('Locale does not exist: ' . $pathFile);
+            }
         }
 
         self::$localeContent = require $pathFile;
