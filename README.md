@@ -109,6 +109,7 @@ __Supported languages so far:__
 ```en_GB``` English (British)  
 ```en_US``` English (American)  
 ```fr_FR``` French (Europe)  
+```fa_IR``` Persian (IRAN)  
 ```de_DE``` German (Germany)  
 ```hu_HU``` Hungarian    
 ```id_ID``` Indonesian  
