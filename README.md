@@ -121,7 +121,7 @@ __Supported languages so far:__
 ```pt_PT``` Portuguese (Portugal)  
 ```ru_RU``` Russian (Basic version)  
 ```es_ES``` Spanish (Europe)  
-```se_SV``` Swedish  
+```sv_SE``` Swedish  
 ```uk_UA``` Ukrainian  
 ```th_TH``` Thai  
 ```tr_TR``` Turkish  
