@@ -2,7 +2,9 @@
 
 namespace Moment;
 
-class MomentRussianLocaleTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class MomentRussianLocaleTest extends TestCase
 {
     public function setUp()
     {
@@ -26,8 +28,8 @@ class MomentRussianLocaleTest extends \PHPUnit_Framework_TestCase
         );
 
         for ($d = 1; $d < 7; $d++) {
-            $this->assertEquals($weekdayNames[$moment->getWeekday()][0], $moment->getWeekdayNameShort(), 'weekday short name failed');
-            $this->assertEquals($weekdayNames[$moment->getWeekday()][1], $moment->getWeekdayNameLong(), 'weekday long name failed');
+            self::assertEquals($weekdayNames[$moment->getWeekday()][0], $moment->getWeekdayNameShort(), 'weekday short name failed');
+            self::assertEquals($weekdayNames[$moment->getWeekday()][1], $moment->getWeekdayNameLong(), 'weekday long name failed');
 
             $moment->addDays(1);
         }
@@ -37,17 +39,17 @@ class MomentRussianLocaleTest extends \PHPUnit_Framework_TestCase
     {
         $string = '2015-06-14 20:46:22';
         $moment = new Moment($string, 'Europe/Moscow');
-        $this->assertEquals('14 июня', $moment->format('j F'));
+        self::assertEquals('14 июня', $moment->format('j F'));
 
         $string = '2015-03-08T15:14:53-0500';
         $moment = new Moment($string, 'Europe/Moscow');
-        $this->assertEquals('8 марта', $moment->format('j F'));
+        self::assertEquals('8 марта', $moment->format('j F'));
     }
 
     public function testDayMonthFormat002()
     {
         $moment = new Moment('2016-01-03 16:17:07', 'Europe/Moscow');
-        $this->assertEquals('3 декабря', $moment->subtractMonths(1)->format('j F'));
+        self::assertEquals('3 декабря', $moment->subtractMonths(1)->format('j F'));
     }
 
     public function testMonthFormatFN()
@@ -72,7 +74,7 @@ class MomentRussianLocaleTest extends \PHPUnit_Framework_TestCase
         );
 
         for ($d = 1; $d < count($monthsNominative); $d++) {
-            $this->assertEquals($monthsNominative[$moment->format('n')], $moment->format('f'), 'month nominative failed');
+            self::assertEquals($monthsNominative[$moment->format('n')], $moment->format('f'), 'month nominative failed');
 
             $moment->addMonths(1);
         }
@@ -84,51 +86,82 @@ class MomentRussianLocaleTest extends \PHPUnit_Framework_TestCase
         $past = new Moment('2016-01-03 16:17:07', 'Europe/Moscow');
 
         $relative = $past->from('2016-01-03 16:34:07');
-        $this->assertEquals('17 минут назад', $relative->getRelative());
+        self::assertEquals('17 минут назад', $relative->getRelative());
 
         $relative = $past->from('2016-01-03 16:40:07');
-        $this->assertEquals('23 минуты назад', $relative->getRelative());
+        self::assertEquals('23 минуты назад', $relative->getRelative());
 
         $relative = $past->from('2016-01-03 16:30:07');
-        $this->assertEquals('13 минут назад', $relative->getRelative());
+        self::assertEquals('13 минут назад', $relative->getRelative());
     }
+
+    public function testSeconds()
+    {
+       $past = new Moment('2017-08-30 20:49:30', 'Europe/Samara');
+
+       $relative = $past->from('2017-08-30 20:49:31');
+       self::assertEquals('несколько секунд назад', $relative->getRelative());
+
+       $relative = $past->from('2017-08-30 20:49:34');
+       self::assertEquals('4 секунды назад', $relative->getRelative());
+
+       $relative = $past->from('2017-08-30 20:49:35');
+       self::assertEquals('5 секунд назад', $relative->getRelative());
+       }
 
     public function testLastWeekWeekend()
     {
         $past = new Moment('2016-04-10 16:30:07');
-        $this->assertEquals('воскресенье в 16:30', $past->calendar(true, new Moment('2016-04-12')));
+        self::assertEquals('воскресенье в 16:30', $past->calendar(true, new Moment('2016-04-12')));
 
         $past = new Moment('2016-04-11');
-        $this->assertEquals('понедельник', $past->calendar(false, new Moment('2016-04-17')));
+        self::assertEquals('понедельник', $past->calendar(false, new Moment('2016-04-17')));
 
         $past = new Moment('2016-04-12');
-        $this->assertEquals('вторник', $past->calendar(false, new Moment('2016-04-17')));
+        self::assertEquals('вторник', $past->calendar(false, new Moment('2016-04-17')));
 
         $past = new Moment('2016-04-13');
-        $this->assertEquals('среда', $past->calendar(false, new Moment('2016-04-17')));
+        self::assertEquals('среда', $past->calendar(false, new Moment('2016-04-17')));
 
         $past = new Moment('2016-04-14');
-        $this->assertEquals('четверг', $past->calendar(false, new Moment('2016-04-17')));
+        self::assertEquals('четверг', $past->calendar(false, new Moment('2016-04-17')));
 
         $past = new Moment('2016-04-15');
-        $this->assertEquals('пятница', $past->calendar(false, new Moment('2016-04-17')));
+        self::assertEquals('пятница', $past->calendar(false, new Moment('2016-04-17')));
 
         $past = new Moment('2016-04-16');
-        $this->assertEquals('вчера', $past->calendar(false, new Moment('2016-04-17')));
+        self::assertEquals('вчера', $past->calendar(false, new Moment('2016-04-17')));
 
         $past = new Moment('2016-04-16');
-        $this->assertEquals('суббота', $past->calendar(false, new Moment('2016-04-18')));
+        self::assertEquals('суббота', $past->calendar(false, new Moment('2016-04-18')));
     }
 
     public function testFutureRelative()
     {
         $date = new Moment('2017-01-11 01:00:00');
 
-        $this->assertEquals('через несколько секунд', $date->from('2017-01-11 00:59:59')->getRelative(), 'seconds');
-        $this->assertEquals('через 2 минуты', $date->from('2017-01-11 00:58:00')->getRelative(), 'minutes');
-        $this->assertEquals('через 2 часа', $date->from('2017-01-10 23:00:00')->getRelative(), 'hours');
-        $this->assertEquals('через день', $date->from('2017-01-10 00:00:00')->getRelative(), 'days');
-        $this->assertEquals('через месяц', $date->from('2016-12-11 00:00:00')->getRelative(), 'month');
-        $this->assertEquals('через год', $date->from('2016-01-11 00:00:00')->getRelative(), 'year');
+	    self::assertEquals('через несколько секунд', $date->from('2017-01-11 00:59:59')->getRelative(), 'seconds');
+	    self::assertEquals('через 30 секунд', $date->from('2017-01-11 00:59:30')->getRelative(), 'seconds');
+        self::assertEquals('через 2 минуты', $date->from('2017-01-11 00:58:00')->getRelative(), 'minutes');
+        self::assertEquals('через 2 часа', $date->from('2017-01-10 23:00:00')->getRelative(), 'hours');
+        self::assertEquals('через день', $date->from('2017-01-10 00:00:00')->getRelative(), 'days');
+        self::assertEquals('через месяц', $date->from('2016-12-11 00:00:00')->getRelative(), 'month');
+        self::assertEquals('через год', $date->from('2016-01-11 00:00:00')->getRelative(), 'year');
+    }
+
+
+    public function testOrdinalFormat()
+    {
+        $date = new Moment('2017-01-01 01:00:00');
+        self::assertEquals('1е января 2017', $date->format('jS F Y'));
+
+        $date = new Moment('2017-01-12 01:00:00');
+        self::assertEquals('12е января 2017', $date->format('jS F Y'));
+
+        $date = new Moment('2017-01-23 01:00:00');
+        self::assertEquals('23е января 2017', $date->format('jS F Y'));
+
+        $date = new Moment('2017-01-25 01:00:00');
+        self::assertEquals('25е января 2017', $date->format('jS F Y'));
     }
 }

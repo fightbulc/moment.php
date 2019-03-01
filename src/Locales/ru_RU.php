@@ -61,6 +61,10 @@ return array(
         'future' => 'через %s',
         'past'   => '%s назад',
         's'      => 'несколько секунд',
+        'ss'     => function ($number) use ($getNumEnding)
+        {
+           return $getNumEnding($number, array('%d секунду', '%d секунды', '%d секунд'));
+        },
         'm'      => 'минуту',
         'mm'     => function ($number) use ($getNumEnding)
         {
@@ -89,15 +93,7 @@ return array(
     ),
     'ordinal'       => function ($number)
     {
-        $n = $number % 100;
-        $ends = array('ой', 'ый', 'ой', 'ий', 'ый', 'ый', 'ой', 'ой', 'ой', 'ый');
-
-        if ($n >= 11 && $n <= 13)
-        {
-            return $number . '[th]';
-        }
-
-        return $number . '[' . $ends[$number % 10] . ']';
+        return $number . 'е';
     },
     'week'          => array(
         'dow' => 1, // Monday is the first day of the week.

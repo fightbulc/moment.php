@@ -22,6 +22,7 @@ return array(
         "future" => 'vào %s',
         "past"   => '%s trước đây',
         "s"      => 'một vài giây',
+        "ss"      => '%d giây',
         "m"      => 'một phút',
         "mm"     => '%d phút',
         "h"      => 'một giờ',

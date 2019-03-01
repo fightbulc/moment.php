@@ -21,6 +21,7 @@ return array(
         "future" => 'in %s',
         "past"   => '%s geleden',
         "s"      => 'een paar seconden',
+        "ss"      => '%d seconden',
         "m"      => 'een minuut',
         "mm"     => '%d minuten',
         "h"      => 'een uur',
@@ -41,6 +42,7 @@ return array(
         "doy" => 4  // The week that contains Jan 4th is the first week of the year.
     ),
     "customFormats" => array(
+        "LTS"  => "G:i:s", // 20:30:15
         "LT"   => "G:i", // 20:30
         "L"    => "d/m/Y", // 04/09/1986
         "l"    => "j/n/Y", // 4/9/1986

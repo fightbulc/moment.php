@@ -225,47 +225,52 @@ class MomentFromVo
     {
         $formatArgs = array();
 
-        if ($this->valueInRange($this->getSeconds(), 0, 45))
+        if ($this->valueInRange($this->getSeconds(), 0, 3))
         {
             $localeKeys = array('relativeTime', 's');
             $formatArgs[] = 1;
         }
-        elseif ($this->valueInRange($this->getSeconds(), 45, 90))
+        elseif ($this->valueInRange($this->getSeconds(), 4, 59))
+        {
+            $localeKeys = array('relativeTime', 'ss');
+	        $formatArgs[] = $this->roundAbs($this->getSeconds());
+        }
+        elseif ($this->valueInRange($this->getSeconds(), 60, 89))
         {
             $localeKeys = array('relativeTime', 'm');
             $formatArgs[] = 1;
         }
-        elseif ($this->valueInRange($this->getSeconds(), 90, 45 * 60))
+        elseif ($this->valueInRange($this->getSeconds(), 90, (45 * 60)-1))
         {
             $localeKeys = array('relativeTime', 'mm');
             $formatArgs[] = $this->roundAbs($this->getMinutes());
         }
-        elseif ($this->valueInRange($this->getMinutes(), 45, 90))
+        elseif ($this->valueInRange($this->getMinutes(), 45, 89))
         {
             $localeKeys = array('relativeTime', 'h');
             $formatArgs[] = 1;
         }
-        elseif ($this->valueInRange($this->getMinutes(), 90, 22 * 60))
+        elseif ($this->valueInRange($this->getMinutes(), 90, (22 * 60)-1))
         {
             $localeKeys = array('relativeTime', 'hh');
             $formatArgs[] = $this->roundAbs($this->getHours());
         }
-        elseif ($this->valueInRange($this->getHours(), 22, 36))
+        elseif ($this->valueInRange($this->getHours(), 22, 35))
         {
             $localeKeys = array('relativeTime', 'd');
             $formatArgs[] = 1;
         }
-        elseif ($this->valueInRange($this->getHours(), 36, 25 * 24))
+        elseif ($this->valueInRange($this->getHours(), 36, (25 * 24)-1))
         {
             $localeKeys = array('relativeTime', 'dd');
             $formatArgs[] = $this->roundAbs($this->getDays());
         }
-        elseif ($this->valueInRange($this->getDays(), 25, 45))
+        elseif ($this->valueInRange($this->getDays(), 25, 44))
         {
             $localeKeys = array('relativeTime', 'M');
             $formatArgs[] = 1;
         }
-        elseif ($this->valueInRange($this->getDays(), 25, 345))
+        elseif ($this->valueInRange($this->getDays(), 45, 344))
         {
             $localeKeys = array('relativeTime', 'MM');
             $formatArgs[] = $this->roundAbs($this->getMonths());

@@ -1,11 +1,10 @@
 <?php
 
-// locale: danish (da-dk)
-// author: Morten Wulff https://github.com/wulff
+// locale: norweigan (no-NO)
 
 return array(
-    "months" => explode('_', 'januar_februar_marts_april_maj_juni_juli_august_september_oktober_november_december'),
-    "monthsShort" => explode('_', 'jan_feb_mar_apr_maj_jun_jul_aug_sep_okt_nov_dec'),
+    "months" => explode('_', 'januar_februar_mars_april_mai_juni_juli_august_september_oktober_november_desember'),
+    "monthsShort" => explode('_', 'jan_feb_mars_apr_mai_jun_jul_aug_sep_okt_nov_des'),
     "weekdays" => explode('_', 'mandag_tirsdag_onsdag_torsdag_fredag_lørdag_søndag'),
     "weekdaysShort" => explode('_', 'man_tir_ons_tor_fre_lør_søn'),
     "calendar" => array(
@@ -22,17 +21,18 @@ return array(
         "past" => '%s siden',
         "s" => 'få sekunder',
         "ss" => '%d sekunder',
-        "m" => 'et minut',
+        "m" => 'ett minutt',
         "mm" => '%d minutter',
         "h" => 'en time',
         "hh" => '%d timer',
         "d" => 'en dag',
-        "dd" => '%d dage',
+        "dd" => '%d dager',
         "M" => 'en måned',
         "MM" => '%d måneder',
         "y" => 'et år',
         "yy" => '%d år',
     ),
+
     "ordinal" => function ($number) {
         return $number . '.';
     },

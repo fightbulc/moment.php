@@ -3,24 +3,27 @@
 // locale: Catalan (ca_ES)
 // author: CROWD Studio https://github.com/crowd-studio
 
+use Moment\Moment;
+
 return array(
     "months"        => explode('_', 'gener_febrer_març_abril_maig_juny_juliol_agost_setembre_octubre_novembre_desembre'),
     "monthsShort"   => explode('_', 'gen._febr._mar._abr._mai._jun._jul._ag._set._oct._nov._des.'),
-    "weekdays"      => explode('_', 'diumenge_dilluns_dimarts_dimecres_dijous_divendres_dissabte'),
-    "weekdaysShort" => explode('_', 'dg._dl._dt._dc._dj._dv._ds.'),
+    "weekdays"      => explode('_', 'dilluns_dimarts_dimecres_dijous_divendres_dissabte_diumenge'),
+    "weekdaysShort" => explode('_', 'dl._dt._dc._dj._dv._ds._dg.'),
     "calendar"      => array(
         "sameDay"  => '[avui]',
         "nextDay"  => '[demà]',
         "lastDay"  => '[ahir]',
         "lastWeek" => '[el] l',
         "sameElse" => 'l',
-        "withTime" => function (Moment $moment) { return '[a' . ($moment->getHour() !== 1 ? ' les' : null) . '] H:i'; },
+        "withTime" => function (Moment $moment) { return '[a' . ($moment->getHour() != 1 ? ' les ' : ' l\'') . ']G.i [h]'; },
         "default"  => 'd/m/Y',
     ),
     "relativeTime"  => array(
         "future" => 'en %s',
         "past"   => 'fa %s',
         "s"      => 'uns segons',
+        "ss"      => '%d segons',
         "m"      => 'un minut',
         "mm"     => '%d minuts',
         "h"      => 'una hora',
@@ -37,19 +40,19 @@ return array(
 
         switch ($number) {
             case 1:
-                $ouput = 'r';
+                $output = 'r';
                 break;
             case 2:
-                $ouput = 'n';
+                $output = 'n';
                 break;
             case 3:
-                $ouput = 'r';
+                $output = 'r';
                 break;
             case 4:
-                $ouput = 't';
+                $output = 't';
                 break;
             default:
-                $ouput = 'è';
+                $output = 'è';
                 break;
         }
 

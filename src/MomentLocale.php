@@ -20,6 +20,11 @@ class MomentLocale
     private static $locale = 'en_GB';
 
     /**
+     * @var boolean
+     */
+    private static $findSimilar = false;
+
+    /**
      * @var array
      */
     private static $localeContent = array();
@@ -33,14 +38,16 @@ class MomentLocale
     }
 
     /**
-     * @param $locale
+     * @param string $locale
+     * @param bool   $findSimilar
      *
      * @return void
      * @throws MomentException
      */
-    public static function setLocale($locale)
+    public static function setLocale($locale, $findSimilar = false)
     {
         self::$locale = $locale;
+        self::$findSimilar = $findSimilar;
         self::loadLocaleContent();
     }
 
@@ -50,13 +57,14 @@ class MomentLocale
      */
     public static function loadLocaleContent()
     {
-        $pathFile = __DIR__ . '/Locales/' . self::$locale . '.php';
+        $pathFile = self::findLocaleFile();
 
-        if (file_exists($pathFile) === false)
+        if (!$pathFile)
         {
             throw new MomentException('Locale does not exist: ' . $pathFile);
         }
 
+        /** @noinspection PhpIncludeInspection */
         self::$localeContent = require $pathFile;
     }
 
@@ -82,6 +90,12 @@ class MomentLocale
         {
             if (isset($string[$key]) === false)
             {
+                if ($key == 'monthsNominative' && isset($string['months']))
+                {
+                    $string = $string['months'];
+                    continue;
+                }
+
                 throw new MomentException('Locale string does not exist for key: ' . join(' > ', $keys));
             }
 
@@ -96,6 +110,7 @@ class MomentLocale
      * @param array $formatArgs
      *
      * @return string
+     * @throws MomentException
      */
     public static function renderLocaleString(array $localeKeys, array $formatArgs = array())
     {
@@ -140,6 +155,7 @@ class MomentLocale
      * @param string $format
      *
      * @return string
+     * @throws MomentException
      */
     public static function renderSpecialLocaleTags($format)
     {
@@ -169,5 +185,43 @@ class MomentLocale
         }
 
         return $format;
+    }
+
+    /**
+     * @return null|string
+     */
+    private static function findLocaleFile()
+    {
+        $basePathFile = __DIR__ . '/Locales/' . self::$locale;
+        $pathFile = $basePathFile . '.php';
+
+        if (file_exists($pathFile) === false)
+        {
+            $pathFile = null;
+
+            if (self::$findSimilar && $similarLocales = self::fetchSimilarLocales($basePathFile))
+            {
+                $pathFile = $similarLocales[0];
+            }
+        }
+
+        return $pathFile;
+    }
+
+    /**
+     * @param string $path
+     *
+     * @return null|array
+     */
+    private static function fetchSimilarLocales($path)
+    {
+        $locales = glob($path . '*.php');
+
+        if ($locales && !empty($locales))
+        {
+            return $locales;
+        }
+
+        return null;
     }
 }

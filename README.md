@@ -28,12 +28,8 @@ PHP 5.3 or later since moment.php is based on php's [DateTime Class](http://php.
 
 Easy install via composer. Still no idea what composer is? Inform yourself [here](http://getcomposer.org).
 
-```json
-{
-    "require": {
-        "fightbulc/moment": "*"
-    }
-}
+```
+composer require fightbulc/moment
 ```
 
 -------------------------------------------------
@@ -48,6 +44,12 @@ echo $m->format(); // e.g. 2012-10-03T10:00:00+0000
 
 $m = new \Moment\Moment('now', 'Europe/Berlin');
 echo $m->format(); // e.g. 2012-10-03T12:00:00+0200
+
+$m = new \Moment\Moment('2017-06-06T10:00:00', 'Europe/Berlin');
+echo $m->format(); // e.g. 2012-10-03T12:00:00+0200
+
+$m = new \Moment\Moment(1499366585);
+echo $m->format(); // e.g. 2017-07-06T18:43:05+0000
 ```
 
 -------------------------------------------------
@@ -72,6 +74,7 @@ const W3C = 'Y-m-d\TH:i:sP'; // 2005-08-15T15:52:01+00:00
 
 const NO_TZ_MYSQL = 'Y-m-d H:i:s'; // 2005-08-15 15:52:01
 const NO_TZ_NO_SECS = 'Y-m-d H:i'; // 2005-08-15 15:52
+const NO_TIME = 'Y-m-d'; // 2005-08-15
 
 // time fractions ".000" will be automatically removed
 $timeWithFraction = '2016-05-04T10:00:00.000';
@@ -108,12 +111,14 @@ __Supported languages so far:__
 ```fr_FR``` French (Europe)  
 ```de_DE``` German (Germany)  
 ```hu_HU``` Hungarian    
-```in_ID``` Indonesian  
+```id_ID``` Indonesian  
 ```it_IT``` Italian  
 ```ja_JP``` Japanese  
-```oc_LNC``` Lengadocian    
+```oc_LNC``` Lengadocian
+```lv_LV``` Latvian (Latviešu)
 ```pl_PL``` Polish  
 ```pt_BR``` Portuguese (Brazil)  
+```pt_PT``` Portuguese (Portugal)  
 ```ru_RU``` Russian (Basic version)  
 ```es_ES``` Spanish (Europe)  
 ```se_SV``` Swedish  
@@ -409,6 +414,66 @@ You can now run through the result and put it formatted into a drop-down field o
 
 # Changelog
 
+### 1.29.0
+ - updated Italian locale
+ - added:
+    - custom formats for en_US
+    - flag for loading similar locale
+
+### 1.28.3
+ - fixed typehint issue
+
+### 1.28.2
+ - fixed:
+    - missing relativeTime format
+    - allow 9-digit unixtime
+
+### 1.28.1
+ - fixed RFC2822 as valid format
+
+### 1.28.0
+ - fixed relative time
+ - added Norwegian locale
+
+### 1.27.0
+ - fixes and locale additions [(see commits for the 22.11.2018)](https://github.com/fightbulc/moment.php/commits/master)
+
+### 1.26.10
+ - fixed:
+    - Occitan locale
+
+### 1.26.9
+ - fixed:
+    - Russian locale [issue](https://github.com/fightbulc/moment.php/issues/68#issuecomment-264890181)
+
+### 1.26.8
+ - added:
+    - Portuguese (pt_PT)
+
+### 1.26.7
+ - fixed:
+    - Hungarian locale weekdays order
+
+### 1.26.6
+ - added:
+    - allow initialising Moment with unix timestamp without leading @
+
+### 1.26.5
+ - fixed:
+    - Fix format of 'LLL' in Custom Formats
+
+### 1.26.4
+ - fixed:
+    - removed php5.4+ only syntax
+
+### 1.26.3
+ - fixed:
+    - Danish day- and monthnames correct case
+    - French locale
+    - PHPDocs
+  - added:
+    - consts for `NO_TZ_MYSQL`, `NO_TZ_NO_SECS` and `NO_TIME` when parsing dates
+    
 ### 1.26.2
  - added:
     - Dutch customFormat
@@ -708,10 +773,22 @@ You can now run through the result and put it formatted into a drop-down field o
 # License
 Moment.php is freely distributable under the terms of the MIT license.
 
-Copyright (c) 2014 Tino Ehrich
+Copyright (c) 2017 Tino Ehrich
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.

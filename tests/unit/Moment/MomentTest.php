@@ -2,52 +2,54 @@
 
 namespace Moment;
 
-class MomentTest extends \PHPUnit_Framework_TestCase
+use PHPUnit\Framework\TestCase;
+
+class MomentTest extends TestCase
 {
     public function testMoment()
     {
         $data = '1923-12-31 12:30:00';
         $m = new Moment($data);
-        $this->assertEquals('1923-12-31T12:30:00+0000', $m->format());
+        self::assertEquals('1923-12-31T12:30:00+0000', $m->format());
 
         $data = '1923-12-31T12:30:00.000';
         $m = new Moment($data);
-        $this->assertEquals('1923-12-31T12:30:00+0000', $m->format());
+        self::assertEquals('1923-12-31T12:30:00+0000', $m->format());
 
         $data = '1923-12-31T12:30:00.123';
         $m = new Moment($data);
-        $this->assertEquals('1923-12-31T12:30:00+0000', $m->format());
+        self::assertEquals('1923-12-31T12:30:00+0000', $m->format());
 
         $data = '1923-12-31T12:30:00.123+02:00';
         $m = new Moment($data);
-        $this->assertEquals('1923-12-31T12:30:00+0200', $m->format());
+        self::assertEquals('1923-12-31T12:30:00+0200', $m->format());
 
         $data = '1923-12-31T12:30:00.123+0200';
         $m = new Moment($data);
-        $this->assertEquals('1923-12-31T12:30:00+0200', $m->format());
+        self::assertEquals('1923-12-31T12:30:00+0200', $m->format());
 
         $data = '1923-12-31T12:30:00.123Z';
         $m = new Moment($data);
-        $this->assertEquals('1923-12-31T12:30:00+0000', $m->format());
+        self::assertEquals('1923-12-31T12:30:00+0000', $m->format());
 
         $data = '1923-12-31T12:30:00.123Europe/Warsaw';
         $m = new Moment($data);
-        $this->assertEquals('1923-12-31T12:30:00+0100', $m->format());
+        self::assertEquals('1923-12-31T12:30:00+0100', $m->format());
 
         $data = '1923-12-31T12:30:00.123Europe/Warsaw';
         $m = new Moment($data, 'UTC');
-        $this->assertEquals('1923-12-31T12:30:00+0100', $m->format());
+        self::assertEquals('1923-12-31T12:30:00+0100', $m->format());
 
         $data = '1923-12-31T12:30:00.123UTC';
         $m = new Moment($data, 'Europe/Warsaw');
-        $this->assertEquals('1923-12-31T12:30:00+0000', $m->format());
+        self::assertEquals('1923-12-31T12:30:00+0000', $m->format());
     }
 
     public function testIsMoment()
     {
         $m = new Moment();
-        $this->assertFalse($m->isMoment('2012-12-01T12:00:00'));
-        $this->assertTrue($m->isMoment(new Moment('2012-12-01T12:00:00')));
+        self::assertFalse($m->isMoment('2012-12-01T12:00:00'));
+        self::assertTrue($m->isMoment(new Moment('2012-12-01T12:00:00')));
     }
 
     public function testFromOnLeapYear()
@@ -55,113 +57,113 @@ class MomentTest extends \PHPUnit_Framework_TestCase
         $m = new Moment('2017-01-01 00:00:00');
         $from = $m->from('2016-01-01 00:00:00');
 
-        $this->assertEquals(-366, $from->getSeconds() / 60 / 60 / 24);
+        self::assertEquals(-366, $from->getSeconds() / 60 / 60 / 24);
     }
 
     public function testIsBefore()
     {
         $s = new Moment('2014-01-01T10:10:11');
         $i = new Moment('2014-01-01T10:10:12');
-        $this->assertTrue($s->isBefore($i));
-        $this->assertFalse($i->isBefore($s));
+        self::assertTrue($s->isBefore($i));
+        self::assertFalse($i->isBefore($s));
 
-        $this->assertFalse($s->isBefore($i, 'minute'));
-        $this->assertFalse($i->isBefore($s, 'minute'));
+        self::assertFalse($s->isBefore($i, 'minute'));
+        self::assertFalse($i->isBefore($s, 'minute'));
 
         $s = new Moment('2014-01-01T10:10:11');
         $i = new Moment('2014-01-01T10:12:12');
-        $this->assertTrue($s->isBefore($i, 'minute'));
-        $this->assertFalse($i->isBefore($s, 'minute'));
+        self::assertTrue($s->isBefore($i, 'minute'));
+        self::assertFalse($i->isBefore($s, 'minute'));
 
-        $this->assertFalse($s->isBefore($i, 'hour'));
-        $this->assertFalse($i->isBefore($s, 'hour'));
+        self::assertFalse($s->isBefore($i, 'hour'));
+        self::assertFalse($i->isBefore($s, 'hour'));
 
         $s = new Moment('2014-01-01T10:10:11');
         $i = new Moment('2014-01-01T12:12:12');
-        $this->assertTrue($s->isBefore($i, 'minute'));
-        $this->assertFalse($i->isBefore($s, 'minute'));
+        self::assertTrue($s->isBefore($i, 'minute'));
+        self::assertFalse($i->isBefore($s, 'minute'));
 
-        $this->assertFalse($s->isBefore($i, 'day'));
-        $this->assertFalse($i->isBefore($s, 'day'));
+        self::assertFalse($s->isBefore($i, 'day'));
+        self::assertFalse($i->isBefore($s, 'day'));
 
         $s = new Moment('2014-01-01T10:10:11');
         $i = new Moment('2014-01-02T12:12:12');
-        $this->assertTrue($s->isBefore($i, 'day'));
-        $this->assertFalse($i->isBefore($s, 'day'));
+        self::assertTrue($s->isBefore($i, 'day'));
+        self::assertFalse($i->isBefore($s, 'day'));
 
-        $this->assertFalse($s->isBefore($i, 'month'));
-        $this->assertFalse($i->isBefore($s, 'month'));
+        self::assertFalse($s->isBefore($i, 'month'));
+        self::assertFalse($i->isBefore($s, 'month'));
 
         $s = new Moment('2014-01-01T10:10:11');
         $i = new Moment('2014-02-02T12:12:12');
-        $this->assertTrue($s->isBefore($i, 'month'));
-        $this->assertFalse($i->isBefore($s, 'month'));
+        self::assertTrue($s->isBefore($i, 'month'));
+        self::assertFalse($i->isBefore($s, 'month'));
 
-        $this->assertFalse($s->isBefore($i, 'year'));
-        $this->assertFalse($i->isBefore($s, 'year'));
+        self::assertFalse($s->isBefore($i, 'year'));
+        self::assertFalse($i->isBefore($s, 'year'));
 
         //from string
         $s = new Moment('2014-01-01T10:10:11');
         $i = '2014-01-01T10:12:12';
-        $this->assertTrue($s->isBefore($i, 'minute'));
+        self::assertTrue($s->isBefore($i, 'minute'));
 
         $s = '2014-01-01T10:10:11';
         $i = new Moment('2014-01-01T10:12:12');
 
-        $this->assertFalse($i->isBefore($s, 'minute'));
+        self::assertFalse($i->isBefore($s, 'minute'));
     }
 
     public function testIsAfter()
     {
         $s = new Moment('2014-01-01T10:10:11');
         $i = new Moment('2014-01-01T10:10:12');
-        $this->assertTrue($i->isAfter($s));
-        $this->assertFalse($s->isAfter($i));
+        self::assertTrue($i->isAfter($s));
+        self::assertFalse($s->isAfter($i));
 
-        $this->assertFalse($s->isAfter($i, 'minute'));
-        $this->assertFalse($i->isAfter($s, 'minute'));
+        self::assertFalse($s->isAfter($i, 'minute'));
+        self::assertFalse($i->isAfter($s, 'minute'));
 
         $s = new Moment('2014-01-01T10:10:11');
         $i = new Moment('2014-01-01T10:12:12');
-        $this->assertFalse($s->isAfter($i, 'minute'));
-        $this->assertTrue($i->isAfter($s, 'minute'));
+        self::assertFalse($s->isAfter($i, 'minute'));
+        self::assertTrue($i->isAfter($s, 'minute'));
 
-        $this->assertFalse($s->isAfter($i, 'hour'));
-        $this->assertFalse($i->isAfter($s, 'hour'));
+        self::assertFalse($s->isAfter($i, 'hour'));
+        self::assertFalse($i->isAfter($s, 'hour'));
 
         $s = new Moment('2014-01-01T10:10:11');
         $i = new Moment('2014-01-01T12:12:12');
-        $this->assertFalse($s->isAfter($i, 'minute'));
-        $this->assertTrue($i->isAfter($s, 'minute'));
+        self::assertFalse($s->isAfter($i, 'minute'));
+        self::assertTrue($i->isAfter($s, 'minute'));
 
-        $this->assertFalse($s->isAfter($i, 'day'));
-        $this->assertFalse($i->isAfter($s, 'day'));
+        self::assertFalse($s->isAfter($i, 'day'));
+        self::assertFalse($i->isAfter($s, 'day'));
 
         $s = new Moment('2014-01-01T10:10:11');
         $i = new Moment('2014-01-02T12:12:12');
-        $this->assertFalse($s->isAfter($i, 'day'));
-        $this->assertTrue($i->isAfter($s, 'day'));
+        self::assertFalse($s->isAfter($i, 'day'));
+        self::assertTrue($i->isAfter($s, 'day'));
 
-        $this->assertFalse($s->isAfter($i, 'month'));
-        $this->assertFalse($i->isAfter($s, 'month'));
+        self::assertFalse($s->isAfter($i, 'month'));
+        self::assertFalse($i->isAfter($s, 'month'));
 
         $s = new Moment('2014-01-01T10:10:11');
         $i = new Moment('2014-02-02T12:12:12');
-        $this->assertFalse($s->isAfter($i, 'month'));
-        $this->assertTrue($i->isAfter($s, 'month'));
+        self::assertFalse($s->isAfter($i, 'month'));
+        self::assertTrue($i->isAfter($s, 'month'));
 
-        $this->assertFalse($s->isAfter($i, 'year'));
-        $this->assertFalse($i->isAfter($s, 'year'));
+        self::assertFalse($s->isAfter($i, 'year'));
+        self::assertFalse($i->isAfter($s, 'year'));
 
         //from string
         $s = new Moment('2014-01-01T10:10:11');
         $i = '2014-01-01T10:12:12';
-        $this->assertFalse($s->isAfter($i, 'minute'));
+        self::assertFalse($s->isAfter($i, 'minute'));
 
         $s = '2014-01-01T10:10:11';
         $i = new Moment('2014-01-01T10:12:12');
 
-        $this->assertTrue($i->isAfter($s, 'minute'));
+        self::assertTrue($i->isAfter($s, 'minute'));
     }
 
     public function testIsAfterTz()
@@ -169,26 +171,26 @@ class MomentTest extends \PHPUnit_Framework_TestCase
         $s = new Moment('2014-01-01T10:10:00+0100');
         $i = new Moment('2014-01-01T10:10:00+0000');
 
-        $this->assertTrue($i->isAfter($s));
-        $this->assertFalse($s->isAfter($i));
+        self::assertTrue($i->isAfter($s));
+        self::assertFalse($s->isAfter($i));
 
         $s = new Moment('2014-01-01T10:10:00+0100');
         $i = new Moment('2014-01-01T10:10:01+0000');
 
-        $this->assertTrue($i->isAfter($s));
-        $this->assertFalse($s->isAfter($i));
+        self::assertTrue($i->isAfter($s));
+        self::assertFalse($s->isAfter($i));
 
         $s = new Moment('2014-01-01T10:10:00CET');
         $i = new Moment('2014-01-01T09:10:00UTC');
 
-        $this->assertFalse($i->isAfter($s));
-        $this->assertFalse($s->isAfter($i));
+        self::assertFalse($i->isAfter($s));
+        self::assertFalse($s->isAfter($i));
 
         $s = new Moment('2014-01-01T10:10:00Europe/Warsaw');
         $i = new Moment('2014-01-01T09:10:01UTC');
 
-        $this->assertTrue($i->isAfter($s));
-        $this->assertFalse($s->isAfter($i));
+        self::assertTrue($i->isAfter($s));
+        self::assertFalse($s->isAfter($i));
     }
 
     public function testIsSame()
@@ -196,38 +198,38 @@ class MomentTest extends \PHPUnit_Framework_TestCase
         $s = new Moment('2014-01-01T10:10:00+0100');
         $i = new Moment('2014-01-01T10:10:00+0000');
 
-        $this->assertFalse($i->isSame($s));
-        $this->assertFalse($s->isSame($i));
+        self::assertFalse($i->isSame($s));
+        self::assertFalse($s->isSame($i));
 
         $s = new Moment('2014-01-01T10:10:00+0100');
         $i = new Moment('2014-01-01T10:10:00CET');
-        $this->assertTrue($i->isSame($s));
+        self::assertTrue($i->isSame($s));
 
         $s = new Moment('2014-01-01T10:10:00+0100');
         $i = new Moment('2014-01-01T10:10:00Europe/Warsaw');
-        $this->assertTrue($i->isSame($s));
+        self::assertTrue($i->isSame($s));
 
 
         $s = new Moment('2014-01-01T10:10:00CET');
         $i = new Moment('2014-01-01T09:10:00UTC');
-        $this->assertTrue($i->isSame($s));
+        self::assertTrue($i->isSame($s));
 
         $s = new Moment('2014-01-01T10:10:00+0100');
         $i = '2014-01-01T10:10:00Europe/Warsaw';
-        $this->assertTrue($s->isSame($i));
+        self::assertTrue($s->isSame($i));
 
         //Periods
 
         $s = new Moment('2014-01-01T10:10:00+0100');
         $i = new Moment('2014-01-01T09:10:01+0000');
 
-        $this->assertFalse($i->isSame($s));
+        self::assertFalse($i->isSame($s));
 
-        $this->assertTrue($i->isSame($s, 'minute'));
+        self::assertTrue($i->isSame($s, 'minute'));
 
         $i = new Moment('2014-01-01T09:11:01+0000');
-        $this->assertFalse($i->isSame($s, 'minute'));
-        $this->assertTrue($i->isSame($s, 'hour'));
+        self::assertFalse($i->isSame($s, 'minute'));
+        self::assertTrue($i->isSame($s, 'hour'));
     }
 
     public function testIsSameHour()
@@ -236,20 +238,20 @@ class MomentTest extends \PHPUnit_Framework_TestCase
         $s = new Moment('2014-01-01T09:40:00+0030');
         $i = new Moment('2014-01-01T09:10:00+0000');
 
-        $this->assertTrue($i->isSame($s));
-        $this->assertTrue($s->isSame($i));
+        self::assertTrue($i->isSame($s));
+        self::assertTrue($s->isSame($i));
 
         $s = new Moment('2014-01-01T10:05:00+0045');
         $i = new Moment('2014-01-01T09:20:00+0000');
 
-        $this->assertTrue($i->isSame($s));
-        $this->assertTrue($s->isSame($i));
+        self::assertTrue($i->isSame($s));
+        self::assertTrue($s->isSame($i));
 
         $s = new Moment('2014-01-01T10:04:00+0045');
         $i = new Moment('2014-01-01T09:20:00+0000');
 
-        $this->assertTrue($i->isSame($s, 'hour'));
-        $this->assertTrue($s->isSame($i, 'hour'));
+        self::assertTrue($i->isSame($s, 'hour'));
+        self::assertTrue($s->isSame($i, 'hour'));
     }
 
     public function testIsSameDay()
@@ -257,20 +259,20 @@ class MomentTest extends \PHPUnit_Framework_TestCase
         $s = new Moment('2014-01-01T00:14:00+0230');
         $i = new Moment('2013-12-31T23:45:00+0000');
 
-        $this->assertFalse($i->isSame($s));
-        $this->assertFalse($s->isSame($i));
+        self::assertFalse($i->isSame($s));
+        self::assertFalse($s->isSame($i));
 
-        $this->assertFalse($i->isSame($s, 'hour'));
-        $this->assertFalse($s->isSame($i, 'hour'));
+        self::assertFalse($i->isSame($s, 'hour'));
+        self::assertFalse($s->isSame($i, 'hour'));
 
-        $this->assertTrue($i->isSame($s, 'day'));
-        $this->assertTrue($s->isSame($i, 'day'));
+        self::assertTrue($i->isSame($s, 'day'));
+        self::assertTrue($s->isSame($i, 'day'));
 
-        $this->assertTrue($i->isSame($s, 'month'));
-        $this->assertTrue($s->isSame($i, 'month'));
+        self::assertTrue($i->isSame($s, 'month'));
+        self::assertTrue($s->isSame($i, 'month'));
 
-        $this->assertTrue($i->isSame($s, 'year'));
-        $this->assertTrue($s->isSame($i, 'year'));
+        self::assertTrue($i->isSame($s, 'year'));
+        self::assertTrue($s->isSame($i, 'year'));
     }
 
     public function testIsSameMonth()
@@ -278,20 +280,20 @@ class MomentTest extends \PHPUnit_Framework_TestCase
         $s = new Moment('2014-01-01T00:14:00+0230');
         $i = new Moment('2013-12-30T23:45:00+0000');
 
-        $this->assertFalse($i->isSame($s));
-        $this->assertFalse($s->isSame($i));
+        self::assertFalse($i->isSame($s));
+        self::assertFalse($s->isSame($i));
 
-        $this->assertFalse($i->isSame($s, 'hour'));
-        $this->assertFalse($s->isSame($i, 'hour'));
+        self::assertFalse($i->isSame($s, 'hour'));
+        self::assertFalse($s->isSame($i, 'hour'));
 
-        $this->assertFalse($i->isSame($s, 'day'));
-        $this->assertFalse($s->isSame($i, 'day'));
+        self::assertFalse($i->isSame($s, 'day'));
+        self::assertFalse($s->isSame($i, 'day'));
 
-        $this->assertTrue($i->isSame($s, 'month'));
-        $this->assertTrue($s->isSame($i, 'month'));
+        self::assertTrue($i->isSame($s, 'month'));
+        self::assertTrue($s->isSame($i, 'month'));
 
-        $this->assertTrue($i->isSame($s, 'year'));
-        $this->assertTrue($s->isSame($i, 'year'));
+        self::assertTrue($i->isSame($s, 'year'));
+        self::assertTrue($s->isSame($i, 'year'));
     }
 
     public function testIsSameYear()
@@ -299,20 +301,20 @@ class MomentTest extends \PHPUnit_Framework_TestCase
         $s = new Moment('2014-01-01T00:14:00+0230');
         $i = new Moment('2013-11-30T23:45:00+0000');
 
-        $this->assertFalse($i->isSame($s));
-        $this->assertFalse($s->isSame($i));
+        self::assertFalse($i->isSame($s));
+        self::assertFalse($s->isSame($i));
 
-        $this->assertFalse($i->isSame($s, 'hour'));
-        $this->assertFalse($s->isSame($i, 'hour'));
+        self::assertFalse($i->isSame($s, 'hour'));
+        self::assertFalse($s->isSame($i, 'hour'));
 
-        $this->assertFalse($i->isSame($s, 'day'));
-        $this->assertFalse($s->isSame($i, 'day'));
+        self::assertFalse($i->isSame($s, 'day'));
+        self::assertFalse($s->isSame($i, 'day'));
 
-        $this->assertFalse($i->isSame($s, 'month'));
-        $this->assertFalse($s->isSame($i, 'month'));
+        self::assertFalse($i->isSame($s, 'month'));
+        self::assertFalse($s->isSame($i, 'month'));
 
-        $this->assertTrue($i->isSame($s, 'year'));
-        $this->assertTrue($s->isSame($i, 'year'));
+        self::assertTrue($i->isSame($s, 'year'));
+        self::assertTrue($s->isSame($i, 'year'));
     }
 
     public function testIsBetween()
@@ -321,76 +323,76 @@ class MomentTest extends \PHPUnit_Framework_TestCase
         $r = new Moment('2014-01-01T12:00:00Z');
 
         $n = $l->cloning();
-        $this->assertTrue($n->isBetween($l, $r, true));
-        $this->assertFalse($n->isBetween($l, $r, false));
+        self::assertTrue($n->isBetween($l, $r, true));
+        self::assertFalse($n->isBetween($l, $r, false));
 
         $n = $r->cloning();
-        $this->assertTrue($n->isBetween($l, $r, true));
-        $this->assertFalse($n->isBetween($l, $r, false));
+        self::assertTrue($n->isBetween($l, $r, true));
+        self::assertFalse($n->isBetween($l, $r, false));
 
         //Minutes
         $l = new Moment('2014-01-01T10:30:30Z');
         $r = new Moment('2014-01-01T12:30:30Z');
 
         $n = new Moment('2014-01-01T10:30:00Z');
-        $this->assertFalse($n->isBetween($l, $r, true));
+        self::assertFalse($n->isBetween($l, $r, true));
         $n = new Moment('2014-01-01T12:30:45Z');
-        $this->assertFalse($n->isBetween($l, $r, true));
+        self::assertFalse($n->isBetween($l, $r, true));
 
         $n = new Moment('2014-01-01T10:30:00Z');
-        $this->assertTrue($n->isBetween($l, $r, true, 'minute'));
+        self::assertTrue($n->isBetween($l, $r, true, 'minute'));
         $n = new Moment('2014-01-01T12:30:45Z');
-        $this->assertTrue($n->isBetween($l, $r, true, 'minute'));
+        self::assertTrue($n->isBetween($l, $r, true, 'minute'));
 
         //Hour
         $n = new Moment('2014-01-01T10:29:00Z');
-        $this->assertFalse($n->isBetween($l, $r, true, 'minute'));
+        self::assertFalse($n->isBetween($l, $r, true, 'minute'));
         $n = new Moment('2014-01-01T12:31:45Z');
-        $this->assertFalse($n->isBetween($l, $r, true, 'minute'));
+        self::assertFalse($n->isBetween($l, $r, true, 'minute'));
 
         $n = new Moment('2014-01-01T10:29:00Z');
-        $this->assertTrue($n->isBetween($l, $r, true, 'hour'));
+        self::assertTrue($n->isBetween($l, $r, true, 'hour'));
         $n = new Moment('2014-01-01T12:31:45Z');
-        $this->assertTrue($n->isBetween($l, $r, true, 'hour'));
+        self::assertTrue($n->isBetween($l, $r, true, 'hour'));
 
         //Day
         $n = new Moment('2014-01-01T09:29:00Z');
-        $this->assertFalse($n->isBetween($l, $r, true, 'hour'));
+        self::assertFalse($n->isBetween($l, $r, true, 'hour'));
         $n = new Moment('2014-01-01T13:31:45Z');
-        $this->assertFalse($n->isBetween($l, $r, true, 'hour'));
+        self::assertFalse($n->isBetween($l, $r, true, 'hour'));
 
         $n = new Moment('2014-01-01T10:29:00Z');
-        $this->assertTrue($n->isBetween($l, $r, true, 'day'));
+        self::assertTrue($n->isBetween($l, $r, true, 'day'));
         $n = new Moment('2014-01-01T12:31:45Z');
-        $this->assertTrue($n->isBetween($l, $r, true, 'day'));
+        self::assertTrue($n->isBetween($l, $r, true, 'day'));
 
         //Month
         $l = new Moment('2014-01-10T10:30:30Z');
         $r = new Moment('2014-01-20T12:30:30Z');
 
         $n = new Moment('2014-01-09T09:29:00Z');
-        $this->assertFalse($n->isBetween($l, $r, true, 'day'));
+        self::assertFalse($n->isBetween($l, $r, true, 'day'));
         $n = new Moment('2014-01-21T13:31:45Z');
-        $this->assertFalse($n->isBetween($l, $r, true, 'day'));
+        self::assertFalse($n->isBetween($l, $r, true, 'day'));
 
         $n = new Moment('2014-01-09T10:29:00Z');
-        $this->assertTrue($n->isBetween($l, $r, true, 'month'));
+        self::assertTrue($n->isBetween($l, $r, true, 'month'));
         $n = new Moment('2014-01-21T12:31:45Z');
-        $this->assertTrue($n->isBetween($l, $r, true, 'month'));
+        self::assertTrue($n->isBetween($l, $r, true, 'month'));
 
         //year
         $l = new Moment('2014-04-10T10:30:30Z');
         $r = new Moment('2015-08-20T12:30:30Z');
 
         $n = new Moment('2014-03-09T09:29:00Z');
-        $this->assertFalse($n->isBetween($l, $r, true, 'month'));
+        self::assertFalse($n->isBetween($l, $r, true, 'month'));
         $n = new Moment('2015-09-21T13:31:45Z');
-        $this->assertFalse($n->isBetween($l, $r, true, 'month'));
+        self::assertFalse($n->isBetween($l, $r, true, 'month'));
 
         $n = new Moment('2014-03-09T10:29:00Z');
-        $this->assertTrue($n->isBetween($l, $r, true, 'year'));
+        self::assertTrue($n->isBetween($l, $r, true, 'year'));
         $n = new Moment('2015-09-21T12:31:45Z');
-        $this->assertTrue($n->isBetween($l, $r, true, 'year'));
+        self::assertTrue($n->isBetween($l, $r, true, 'year'));
     }
 
     public function testLocaleDow()
@@ -405,20 +407,20 @@ class MomentTest extends \PHPUnit_Framework_TestCase
         //Current date: Middle of the week
         $gb = new Moment('2015-04-28T10:29:00Z');
 
-        $this->assertTrue($gb->cloning()->startOf('week')->isSame($gb_start));
-        $this->assertTrue($gb->cloning()->endOf('week')->isSame($gb_end));
+        self::assertTrue($gb->cloning()->startOf('week')->isSame($gb_start));
+        self::assertTrue($gb->cloning()->endOf('week')->isSame($gb_end));
 
         //Current Date: Beginning of the week
         $gb = new Moment('2015-04-27T10:29:00Z');
 
-        $this->assertTrue($gb->cloning()->startOf('week')->isSame($gb_start));
-        $this->assertTrue($gb->cloning()->endOf('week')->isSame($gb_end));
+        self::assertTrue($gb->cloning()->startOf('week')->isSame($gb_start));
+        self::assertTrue($gb->cloning()->endOf('week')->isSame($gb_end));
 
         //Current Date: End of week
         $gb = new Moment('2015-05-03T10:29:00Z');
 
-        $this->assertTrue($gb->cloning()->startOf('week')->isSame($gb_start));
-        $this->assertTrue($gb->cloning()->endOf('week')->isSame($gb_end));
+        self::assertTrue($gb->cloning()->startOf('week')->isSame($gb_start));
+        self::assertTrue($gb->cloning()->endOf('week')->isSame($gb_end));
 
 
         //Test en_US for Sunday start of week
@@ -431,31 +433,68 @@ class MomentTest extends \PHPUnit_Framework_TestCase
         //Current date: Middle of the week
         $us = new Moment('2015-04-28T10:29:00Z');
 
-        $this->assertTrue($us->cloning()->startOf('week')->isSame($us_start));
-        $this->assertTrue($us->cloning()->endOf('week')->isSame($us_end));
+        self::assertTrue($us->cloning()->startOf('week')->isSame($us_start));
+        self::assertTrue($us->cloning()->endOf('week')->isSame($us_end));
 
         //Current Date: Beginning of the week
         $us = new Moment('2015-04-26T10:29:00Z');
 
-        $this->assertTrue($us->cloning()->startOf('week')->isSame($us_start));
-        $this->assertTrue($us->cloning()->endOf('week')->isSame($us_end));
+        self::assertTrue($us->cloning()->startOf('week')->isSame($us_start));
+        self::assertTrue($us->cloning()->endOf('week')->isSame($us_end));
 
         //Current Date: End of week
         $us = new Moment('2015-05-02T10:29:00Z');
 
-        $this->assertTrue($us->cloning()->startOf('week')->isSame($us_start));
-        $this->assertTrue($us->cloning()->endOf('week')->isSame($us_end));
+        self::assertTrue($us->cloning()->startOf('week')->isSame($us_start));
+        self::assertTrue($us->cloning()->endOf('week')->isSame($us_end));
     }
 
     public function testImplicitCloning()
     {
         $origin = new Moment('1923-12-31 12:30:00', 'UTC', true);
 
-        $this->assertNotSame($origin, $origin->addMonths(1));
+        self::assertNotSame($origin, $origin->addMonths(1));
         $origin->setImmutableMode(false);
-        $this->assertSame($origin, $origin->addMonths(1));
+        self::assertSame($origin, $origin->addMonths(1));
         $origin->setImmutableMode(true);
-        $this->assertNotSame($origin, $origin->addMonths(1));
+        self::assertNotSame($origin, $origin->addMonths(1));
+    }
+
+    public function testRFC2822Parsing()
+    {
+        $tz = 'CET';
+        $format = 'Y-m-d H:i';
+
+        $dates = array(
+            array(
+                'input'  => 'Tue, 11 Dec 2018 14:12:01 +0000',
+                'output' => '2018-12-11 15:12',
+            ),
+            array(
+                'input'  => 'Tue, 11 Dec 2018 07:46:41 -0500',
+                'output' => '2018-12-11 13:46',
+            ),
+        );
+
+        foreach ($dates as $date)
+        {
+            $m = new Moment($date['input']);
+            self::assertEquals($date['output'], $m->setTimezone($tz)->format($format));
+        }
+    }
+
+    public function testValidUnixtimeLength()
+    {
+        $dates = array(
+            999992800, // September 9th, 2001 1:46 AM
+            1544652373 // December 12th, 2018 11:06 PM
+        );
+
+        foreach ($dates as $date)
+        {
+            $m = new Moment($date);
+            self::assertEquals($date, $m->format('U'));
+        }
     }
 
     /**

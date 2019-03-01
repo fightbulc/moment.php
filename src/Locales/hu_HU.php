@@ -7,15 +7,15 @@ return array(
     "months"        => explode('_', 'január_február_március_április_május_június_július_augusztus_szeptember_október_november_december'),
 
     "monthsShort"   => explode('_', 'jan_feb_márc_ápr_máj_jún_júl_aug_szept_okt_nov_dec'),
-    "weekdays"      => explode('_', 'vasárnap_hétfő_kedd_szerda_csütörtök_péntek_szombat'),
-    "weekdaysShort" => explode('_', 'vas_hét_kedd_sze_csüt_pén_szo'),
+    "weekdays"      => explode('_', 'hétfő_kedd_szerda_csütörtök_péntek_szombat_vasárnap'),
+    "weekdaysShort" => explode('_', 'hét_kedd_sze_csüt_pén_szo_vas'),
     "calendar"      => array(
         "sameDay"  => '[ma] l[-kor]',
         "nextDay"  => '[holnap] l[-kor]',
         "lastDay"  => '[tegnap] l[-kor]',
         "lastWeek" => function($n, $dir, \Moment\Moment $Moment){
             $weekEndings = explode('_','vasárnap hétfőn kedden szerdán csütörtökön pénteken szombaton');
-			return '[múlt] [' . weekEndings[$Moment->getDay()] . '] l[-kor]';
+			return '[múlt] [' . $weekEndings[$Moment->getDay()] . '] l[-kor]';
         },
         "sameElse" => 'l',
         "withTime" => 'H:i[-kor]',
@@ -26,6 +26,9 @@ return array(
         "past"   => '%s',
         "s"      => function($n, $dir){
             return ($dir === 'future') ? 'néhány másodperc' : 'néhány másodperce';
+        },
+        "ss"     => function($n, $dir){
+            return "$n " . ($dir === 'future' ? 'másodperc' : 'másodperce');
         },
         "m"      => function($n, $dir){
             return 'egy ' . ($dir === 'future' ? 'perc' : 'perce');
