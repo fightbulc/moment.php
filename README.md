@@ -413,7 +413,13 @@ You can now run through the result and put it formatted into a drop-down field o
 
 -------------------------------------------------
 
-# Changelog
+# Change Log
+
+### 1.30.0
+ - added:
+    - Finish locale
+ - fixed:
+    - Swedish locale
 
 ### 1.29.0
  - updated Italian locale
