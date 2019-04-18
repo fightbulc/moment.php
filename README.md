@@ -108,6 +108,7 @@ __Supported languages so far:__
 ```nl_NL``` Dutch  
 ```en_GB``` English (British)  
 ```en_US``` English (American)  
+```fi_FI``` Finnish  
 ```fr_FR``` French (Europe)  
 ```de_DE``` German (Germany)  
 ```hu_HU``` Hungarian    
