@@ -44,8 +44,8 @@ return array(
     "customFormats" => array(
         "LTS"  => "G:i:s", // 20:30:15
         "LT"   => "G:i", // 20:30
-        "L"    => "d/m/Y", // 04/09/1986
-        "l"    => "j/n/Y", // 4/9/1986
+        "L"    => "d-m-Y", // 04-09-1986
+        "l"    => "j-n-Y", // 4-9-1986
         "LL"   => "jS F Y", // 4 September 1986
         "ll"   => "j M Y", // 4 Sep 1986
         "LLL"  => "jS F Y G:i", // 4 September 1986 20:30
