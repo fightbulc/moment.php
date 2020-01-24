@@ -115,8 +115,8 @@ __Supported languages so far:__
 ```id_ID``` Indonesian  
 ```it_IT``` Italian  
 ```ja_JP``` Japanese  
-```oc_LNC``` Lengadocian
-```lv_LV``` Latvian (Latviešu)
+```oc_LNC``` Lengadocian  
+```lv_LV``` Latvian (Latviešu)  
 ```pl_PL``` Polish  
 ```pt_BR``` Portuguese (Brazil)  
 ```pt_PT``` Portuguese (Portugal)  
@@ -363,7 +363,7 @@ Same process as for moment.js: mutates the original moment by setting it to the 
 $m = new \Moment\Moment('20140515T10:15:23', 'CET');
 
 $m->startOf('year');    // set to January 1st, 00:00 this year
-$m->startOf('quarter');  // set to the beginning of the current quarter, 1st day of months, 00:00
+$m->startOf('quarter'); // set to the beginning of the current quarter, 1st day of months, 00:00
 $m->startOf('month');   // set to the first of this month, 00:00
 $m->startOf('week');    // set to the first day of this week, 00:00
 $m->startOf('day');     // set to 00:00 today
@@ -371,7 +371,7 @@ $m->startOf('hour');    // set to now, but with 0 mins, 0 secs
 $m->startOf('minute');  // set to now, but with 0 seconds
 
 $m->endOf('year');    // set to December 31st, 23:59 this year
-$m->endOf('quarter');  // set to the end of the current quarter, last day of month, 23:59
+$m->endOf('quarter'); // set to the end of the current quarter, last day of month, 23:59
 $m->endOf('month');   // set to the last of this month, 23:59
 $m->endOf('week');    // set to the last day of this week, 23:59
 $m->endOf('day');     // set to 23:59 today
