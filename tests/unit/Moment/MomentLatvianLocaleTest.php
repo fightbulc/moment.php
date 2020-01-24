@@ -143,6 +143,7 @@ class MomentLatvianLocaleTest extends TestCase
 
         self::assertEquals('pēc dažām sekundēm', $date->from('2017-01-11 00:59:59')->getRelative(), 'seconds');
         self::assertEquals('pēc 2 minūtēm', $date->from('2017-01-11 00:58:00')->getRelative(), 'minutes');
+        self::assertEquals('pēc stundas', $date->from('2017-01-10 23:30:59')->getRelative(), 'hours');
         self::assertEquals('pēc 2 stundām', $date->from('2017-01-10 23:00:00')->getRelative(), 'hours');
         self::assertEquals('pēc dienas', $date->from('2017-01-10 00:00:00')->getRelative(), 'days');
         self::assertEquals('pēc 10 dienām', $date->from('2017-01-01 00:00:00')->getRelative(), 'days');
