@@ -1364,6 +1364,12 @@ class Moment extends \DateTime
             }
         }
 
+        // raw timestamp
+        elseif (strpos($rawDateTime, '@') === 0)
+        {
+            $momentDateTime = '@' . $this->format('U');
+        }
+
         // without time
         else
         {
