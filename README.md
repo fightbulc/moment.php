@@ -415,6 +415,10 @@ You can now run through the result and put it formatted into a drop-down field o
 
 # Change Log
 
+### 1.30.1
+ - fixed:
+    - merge with a couple of PRs (thanks!)
+
 ### 1.30.0
  - added:
     - Finish locale
