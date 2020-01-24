@@ -1,3 +1,9 @@
+# Support
+
+I am a dad now for the last 1,5 years and that clearly shows in being on time with merging PRs or pushing this package further.
+Time is the biggest constraint here. I would be happy to pass the project on to somebody who has more time and the motivation to push the project forward.
+Just drop me a message. Cheers!
+
 <pre>
                                       _           _           
  _ __ ___   ___  _ __ ___   ___ _ __ | |_   _ __ | |__  _ __  
