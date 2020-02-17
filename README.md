@@ -112,10 +112,12 @@ __Supported languages so far:__
 ```cs_CZ``` Czech  
 ```da_DK``` Danish  
 ```nl_NL``` Dutch  
+```en_CA``` English (Canada)  
 ```en_GB``` English (British)  
 ```en_US``` English (American)  
 ```fi_FI``` Finnish  
 ```fr_FR``` French (Europe)  
+```fr_CA``` French (Canada)  
 ```de_DE``` German (Germany)  
 ```hu_HU``` Hungarian    
 ```id_ID``` Indonesian  
