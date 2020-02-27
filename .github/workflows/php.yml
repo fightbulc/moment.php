@@ -1,7 +1,7 @@
 name: qa
 on: [push]
 jobs:
-  PHP5.3:
+  PHP5_3:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -24,7 +24,7 @@ jobs:
       - name: Run PHPUnit
         run: vendor/bin/phpunit -c tests/build.xml
 
-  PHP5.4:
+  PHP5_4:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -47,7 +47,7 @@ jobs:
       - name: Run PHPUnit
         run: vendor/bin/phpunit -c tests/build.xml
 
-  PHP5.5:
+  PHP5_5:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -70,7 +70,7 @@ jobs:
       - name: Run PHPUnit
         run: vendor/bin/phpunit -c tests/build.xml
 
-  PHP5.6:
+  PHP5_6:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -93,7 +93,7 @@ jobs:
       - name: Run PHPUnit
         run: vendor/bin/phpunit -c tests/build.xml
 
-  PHP7.0:
+  PHP7_0:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -116,7 +116,7 @@ jobs:
       - name: Run PHPUnit
         run: vendor/bin/phpunit -c tests/build.xml
 
-  PHP7.1:
+  PHP7_1:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -139,7 +139,7 @@ jobs:
       - name: Run PHPUnit
         run: vendor/bin/phpunit -c tests/build.xml
 
-  PHP7.2:
+  PHP7_2:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -162,7 +162,7 @@ jobs:
       - name: Run PHPUnit
         run: vendor/bin/phpunit -c tests/build.xml
 
-  PHP7.3:
+  PHP7_3:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -185,7 +185,7 @@ jobs:
       - name: Run PHPUnit
         run: vendor/bin/phpunit -c tests/build.xml
 
-  PHP7.4:
+  PHP7_4:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
