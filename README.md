@@ -13,7 +13,7 @@ Just drop me a message. Cheers!
                                            |_|         |_|    
 </pre>
 
-[![Build Status](https://travis-ci.org/fightbulc/moment.php.svg?branch=master)](https://travis-ci.org/fightbulc/moment.php)
+![Build Status](https://github.com/fightbulc/moment.php/workflows/qa/badge.svg?branch=master)
 [![Total Downloads](https://img.shields.io/packagist/dt/fightbulc/moment.svg?style=flat-square)](https://packagist.org/packages/fightbulc/moment)
 
 [Change log](#changelog)
@@ -422,6 +422,11 @@ You can now run through the result and put it formatted into a drop-down field o
 -------------------------------------------------
 
 # Change Log
+
+### 1.31.0
+ - added:
+    - code checks vis GH action workflows
+    - Canadian locale for English/French
 
 ### 1.30.1
  - fixed:
