@@ -52,7 +52,7 @@ echo "GH WORKFLOW GENERATOR\n\n";
 echo "-> BUILDING JOBS\n";
 foreach ($phpVersions as $version) {
     echo "- PHP ${version}\n";
-    $actions[] = str_replace(['{template-name}', '{php-version}'], [sprintf('PHP%s', $version), $version], $job);
+    $actions[] = str_replace(['{template-name}', '{php-version}'], [sprintf('PHP%s', str_replace('.', '_', $version)), $version], $job);
 }
 echo "\n";
 
