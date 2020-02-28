@@ -1,5 +1,5 @@
 name: qa
-on: [push]
+on: [push, pull_request]
 jobs:
   PHP5_3:
     runs-on: ubuntu-latest
