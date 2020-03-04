@@ -115,6 +115,7 @@ __Supported languages so far:__
 ```en_CA``` English (Canada)  
 ```en_GB``` English (British)  
 ```en_US``` English (American)  
+```fa_IR``` Farsi  
 ```fi_FI``` Finnish  
 ```fr_FR``` French (Europe)  
 ```fr_CA``` French (Canada)  
@@ -422,6 +423,10 @@ You can now run through the result and put it formatted into a drop-down field o
 -------------------------------------------------
 
 # Change Log
+
+### 1.32.0
+ - added:
+    - Farsi locale
 
 ### 1.31.0
  - added:
