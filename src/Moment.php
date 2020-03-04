@@ -88,7 +88,7 @@ class Moment extends \DateTime
      * @param null|\DateTimeZone    $timezone optional timezone to parse the string with
      * @param null|FormatsInterface $formatsInterface optional interface to use for {@see $format}.
      *
-     * @return static
+     * @return static|false         Returns a new Moment instance or FALSE on failure.
      * @throws MomentException
      */
     public static function createFromFormat($format, $time, $timezone = null, FormatsInterface $formatsInterface = null)
@@ -109,6 +109,11 @@ class Moment extends \DateTime
         $date = $timezone ?
             parent::createFromFormat($format, $time, $timezone) :
             parent::createFromFormat($format, $time);
+
+        if ($date === false)
+        {
+            return false;
+        }
 
         return static::fromDateTime($date);
     }
