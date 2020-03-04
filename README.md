@@ -424,6 +424,10 @@ You can now run through the result and put it formatted into a drop-down field o
 
 # Change Log
 
+### 1.32.1
+ - fixed:
+    - DateTime::createFromFormat signature match
+
 ### 1.32.0
  - added:
     - Farsi locale
