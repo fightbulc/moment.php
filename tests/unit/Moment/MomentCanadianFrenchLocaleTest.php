@@ -16,7 +16,7 @@ namespace Moment;
 
 use PHPUnit\Framework\TestCase;
 
-class MomentCandianFrenchLocaleTest extends TestCase
+class MomentCanadianFrenchLocaleTest extends TestCase
 {
     public function setUp()
     {
