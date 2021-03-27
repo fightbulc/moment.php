@@ -123,7 +123,8 @@ __Supported languages so far:__
 ```hu_HU``` Hungarian    
 ```id_ID``` Indonesian  
 ```it_IT``` Italian  
-```ja_JP``` Japanese  
+```ja_JP``` Japanese
+```kz_KZ``` Kazakh
 ```oc_LNC``` Lengadocian  
 ```lv_LV``` Latvian (Latviešu)  
 ```pl_PL``` Polish  
