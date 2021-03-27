@@ -17,7 +17,7 @@ namespace Moment;
 use Moment\CustomFormats\MomentJs;
 use PHPUnit\Framework\TestCase;
 
-class MomentCandianEnglishLocaleTest extends TestCase
+class MomentCanadianEnglishLocaleTest extends TestCase
 {
     public function setUp()
     {
