@@ -115,6 +115,7 @@ __Supported languages so far:__
 ```en_CA``` English (Canada)  
 ```en_GB``` English (British)  
 ```en_US``` English (American)  
+```eo_EO``` Esperanto
 ```fa_IR``` Farsi  
 ```fi_FI``` Finnish  
 ```fr_FR``` French (Europe)  
