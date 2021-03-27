@@ -2,7 +2,7 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-$response = [];
+$response = array();
 
 // ############################################
 
@@ -57,8 +57,22 @@ $response['test06.02'] = $m->setTimezone('UTC')->format();
 
 // ------------------------------------------
 
-$m = new \Moment\Moment('2012-04-25T03:00:00', 'CET');
-$response['test07'] = $m->format('l, dS F Y / H:i (e)');
+$response['test07.locale'] = isset($_GET['locale']) ? $_GET['locale'] : 'fr_FR';
+$m = new \Moment\Moment('2012-04-25T15:00:00', 'CET');
+$response['test07.00'] = $m->format('l, dS F Y / H:i (e)');
+
+$momentJs = new \Moment\CustomFormats\MomentJs();
+$response['test07.01'] = $m->format('LT', $momentJs);
+$m->setLocale($response['test07.locale'], true);
+$response['test07.02'] = $m->format('LT', $momentJs);
+$response['test07.03'] = $m->format('L', $momentJs);
+$response['test07.04'] = $m->format('l', $momentJs);
+$response['test07.05'] = $m->format('LL', $momentJs);
+$response['test07.06'] = $m->format('ll', $momentJs);
+$response['test07.07'] = $m->format('LLL', $momentJs);
+$response['test07.08'] = $m->format('lll', $momentJs);
+$response['test07.09'] = $m->format('LLLL', $momentJs);
+$response['test07.10'] = $m->format('llll', $momentJs);
 
 // ------------------------------------------
 
@@ -145,7 +159,7 @@ $m = new \Moment\Moment($date, 'CET');
 
 $response['test11.00'] = $m->format();
 
-foreach (['minute', 'hour', 'day', 'week', 'month', 'quarter', 'year'] as $k => $period)
+foreach (array('minute', 'hour', 'day', 'week', 'month', 'quarter', 'year') as $k => $period)
 {
     $index = $k + 1;
     $response['test11.0' . $index] = $m->startOf($period)->format();
@@ -158,7 +172,7 @@ $m = new \Moment\Moment($date, 'CET');
 
 $response['test12.00'] = $m->format();
 
-foreach (['minute', 'hour', 'day', 'week', 'month', 'quarter', 'year'] as $k => $period)
+foreach (array('minute', 'hour', 'day', 'week', 'month', 'quarter', 'year') as $k => $period)
 {
     $index = $k + 1;
     $response['test12.0' . $index] = $m->endOf($period)->format();

@@ -1,0 +1,209 @@
+name: qa
+on: [push, pull_request]
+jobs:
+  PHP5_3:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '5.3'
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Install composer helper
+        run: composer global require hirak/prestissimo
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Run PHPUnit
+        run: vendor/bin/phpunit -c tests/build.xml
+
+  PHP5_4:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '5.4'
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Install composer helper
+        run: composer global require hirak/prestissimo
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Run PHPUnit
+        run: vendor/bin/phpunit -c tests/build.xml
+
+  PHP5_5:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '5.5'
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Install composer helper
+        run: composer global require hirak/prestissimo
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Run PHPUnit
+        run: vendor/bin/phpunit -c tests/build.xml
+
+  PHP5_6:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '5.6'
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Install composer helper
+        run: composer global require hirak/prestissimo
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Run PHPUnit
+        run: vendor/bin/phpunit -c tests/build.xml
+
+  PHP7_0:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.0'
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Install composer helper
+        run: composer global require hirak/prestissimo
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Run PHPUnit
+        run: vendor/bin/phpunit -c tests/build.xml
+
+  PHP7_1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.1'
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Install composer helper
+        run: composer global require hirak/prestissimo
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Run PHPUnit
+        run: vendor/bin/phpunit -c tests/build.xml
+
+  PHP7_2:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.2'
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Install composer helper
+        run: composer global require hirak/prestissimo
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Run PHPUnit
+        run: vendor/bin/phpunit -c tests/build.xml
+
+  PHP7_3:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.3'
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Install composer helper
+        run: composer global require hirak/prestissimo
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Run PHPUnit
+        run: vendor/bin/phpunit -c tests/build.xml
+
+  PHP7_4:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate
+
+      - name: Install composer helper
+        run: composer global require hirak/prestissimo
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Run PHPUnit
+        run: vendor/bin/phpunit -c tests/build.xml

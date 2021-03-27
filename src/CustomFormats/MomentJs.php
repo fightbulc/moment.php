@@ -4,9 +4,15 @@ namespace Moment\CustomFormats;
 
 use Moment\FormatsInterface;
 
+/**
+ * Class MomentJs
+ * @package Moment\CustomFormats
+ */
 class MomentJs implements FormatsInterface
 {
-    /** @var array */
+    /**
+     * @var array
+     */
     protected $tokens = array(
         "M"       => "n", // 1 2 ... 11 12
         "Mo"      => "nS", // month: 1st 2nd ... 11th 12th
@@ -55,12 +61,13 @@ class MomentJs implements FormatsInterface
         "Z"       => "P", // -07:00 -06:00 ... +06:00 +07:00
         "ZZ"      => "O", // -0700 -0600 ... +0600 +0700
         "X"       => "U", // 1360013296
+        "LTS"     => "g:i:s A", // 8:30:15 PM
         "LT"      => "g:i A", // 8:30 PM
         "L"       => "m/d/Y", // 09/04/1986
         "l"       => "n/j/Y", // 9/4/1986
         "LL"      => "F jS Y", // September 4th 1986
         "ll"      => "M j Y", // Sep 4 1986
-        "LLL"     => "F js Y g:i A", // September 4th 1986 8:30 PM
+        "LLL"     => "F jS Y g:i A", // September 4th 1986 8:30 PM
         "lll"     => "M j Y g:i A", // Sep 4 1986 8:30 PM
         "LLLL"    => "l, F jS Y g:i A", // Thursday, September 4th 1986 8:30 PM
         "llll"    => "D, M j Y g:i A", // Thu, Sep 4 1986 8:30 PM
@@ -106,7 +113,7 @@ class MomentJs implements FormatsInterface
         $tokens = $this->getTokens();
 
         // find all tokens from string, using regular expression
-        $regExp = "/(\[[^\[]*\])|(\\\\)?(LT|LL?L?L?|l{1,4}|Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|YYYYY|YYYY|YY|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|mm?|ss?|SS?S?|X|zz?|ZZ?|.)/";
+        $regExp = "/(\[[^\[]*\])|(\\\\)?(LTS?|LL?L?L?|l{1,4}|Mo|MM?M?M?|Do|DDDo|DD?D?D?|ddd?d?|do?|w[o|w]?|W[o|W]?|YYYYY|YYYY|YY|gg(ggg?)?|GG(GGG?)?|e|E|a|A|hh?|HH?|mm?|ss?|SS?S?|X|zz?|ZZ?|.)/";
         $matches = array();
         preg_match_all($regExp, $format, $matches);
 

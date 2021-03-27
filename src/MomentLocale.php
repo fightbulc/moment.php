@@ -5,7 +5,7 @@ namespace Moment;
 /**
  * MomentLocale
  * @package Moment
- * @author Tino Ehrich (tino@bigpun.me)
+ * @author  Tino Ehrich (tino@bigpun.me)
  */
 class MomentLocale
 {
@@ -18,6 +18,11 @@ class MomentLocale
      * @var string
      */
     private static $locale = 'en_GB';
+
+    /**
+     * @var boolean
+     */
+    private static $findSimilar = false;
 
     /**
      * @var array
@@ -33,14 +38,16 @@ class MomentLocale
     }
 
     /**
-     * @param $locale
+     * @param string $locale
+     * @param bool   $findSimilar
      *
      * @return void
      * @throws MomentException
      */
-    public static function setLocale($locale)
+    public static function setLocale($locale, $findSimilar = false)
     {
         self::$locale = $locale;
+        self::$findSimilar = $findSimilar;
         self::loadLocaleContent();
     }
 
@@ -50,14 +57,23 @@ class MomentLocale
      */
     public static function loadLocaleContent()
     {
-        $pathFile = __DIR__ . '/Locales/' . self::$locale . '.php';
+        $pathFile = self::findLocaleFile();
 
-        if (file_exists($pathFile) === false)
+        if (!$pathFile)
         {
             throw new MomentException('Locale does not exist: ' . $pathFile);
         }
 
+        /** @noinspection PhpIncludeInspection */
         self::$localeContent = require $pathFile;
+    }
+
+    /**
+     * @return array
+     */
+    public static function getLocaleContent()
+    {
+        return self::$localeContent;
     }
 
     /**
@@ -74,6 +90,12 @@ class MomentLocale
         {
             if (isset($string[$key]) === false)
             {
+                if ($key == 'monthsNominative' && isset($string['months']))
+                {
+                    $string = $string['months'];
+                    continue;
+                }
+
                 throw new MomentException('Locale string does not exist for key: ' . join(' > ', $keys));
             }
 
@@ -88,8 +110,9 @@ class MomentLocale
      * @param array $formatArgs
      *
      * @return string
+     * @throws MomentException
      */
-    public static function renderLocaleString(array $localeKeys, $formatArgs = [])
+    public static function renderLocaleString(array $localeKeys, array $formatArgs = array())
     {
         // get locale handler
         $localeString = self::getLocaleString($localeKeys);
@@ -97,7 +120,7 @@ class MomentLocale
         // handle callback
         if ($localeString instanceof \Closure)
         {
-            $localeString = call_user_func($localeString, self::$moment);
+            $localeString = call_user_func_array($localeString, $formatArgs);
         }
 
         return vsprintf($localeString, $formatArgs);
@@ -112,11 +135,12 @@ class MomentLocale
     {
         $placeholders = array(
             // months
-            '(?<!\\\)F' => 'm__0001',
-            '(?<!\\\)M' => 'm__0002',
+            '(?<!\\\)F' => 'n__0001',
+            '(?<!\\\)M' => 'n__0002',
+            '(?<!\\\)f' => 'n__0005',
             // weekdays
-            '(?<!\\\)l' => 'w__0003',
-            '(?<!\\\)D' => 'w__0004',
+            '(?<!\\\)l' => 'N__0003',
+            '(?<!\\\)D' => 'N__0004',
         );
 
         foreach ($placeholders as $regexp => $tag)
@@ -131,16 +155,18 @@ class MomentLocale
      * @param string $format
      *
      * @return string
+     * @throws MomentException
      */
     public static function renderSpecialLocaleTags($format)
     {
         $placeholders = array(
             // months
-            '\d{2}__0001' => 'months',
-            '\d{2}__0002' => 'monthsShort',
+            '\d{1,2}__0001' => 'months',
+            '\d{1,2}__0002' => 'monthsShort',
+            '\d{1,2}__0005' => 'monthsNominative',
             // weekdays
-            '\d__0003'    => 'weekdays',
-            '\d__0004'    => 'weekdaysShort',
+            '\d__0003'      => 'weekdays',
+            '\d__0004'      => 'weekdaysShort',
         );
 
         foreach ($placeholders as $regexp => $tag)
@@ -152,12 +178,50 @@ class MomentLocale
                 foreach ($match[1] as $date)
                 {
                     list($localeIndex, $type) = explode('__', $date);
-                    $localeString = self::renderLocaleString(array($tag, (int)$localeIndex));
+                    $localeString = self::renderLocaleString(array($tag, --$localeIndex));
                     $format = preg_replace('/' . $date . '/u', $localeString, $format);
                 }
             }
         }
 
         return $format;
+    }
+
+    /**
+     * @return null|string
+     */
+    private static function findLocaleFile()
+    {
+        $basePathFile = __DIR__ . '/Locales/' . self::$locale;
+        $pathFile = $basePathFile . '.php';
+
+        if (file_exists($pathFile) === false)
+        {
+            $pathFile = null;
+
+            if (self::$findSimilar && $similarLocales = self::fetchSimilarLocales($basePathFile))
+            {
+                $pathFile = $similarLocales[0];
+            }
+        }
+
+        return $pathFile;
+    }
+
+    /**
+     * @param string $path
+     *
+     * @return null|array
+     */
+    private static function fetchSimilarLocales($path)
+    {
+        $locales = glob($path . '*.php');
+
+        if ($locales && !empty($locales))
+        {
+            return $locales;
+        }
+
+        return null;
     }
 }
