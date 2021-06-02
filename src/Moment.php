@@ -1303,7 +1303,7 @@ class Moment extends \DateTime
      * @return bool
      * @throws MomentException
      */
-    private function isValidDate()
+    public function isValidDate()
     {
         $rawDateTime = $this->getRawDateTimeString();
 
