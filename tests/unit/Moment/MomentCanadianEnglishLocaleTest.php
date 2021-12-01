@@ -19,7 +19,7 @@ use PHPUnit\Framework\TestCase;
 
 class MomentCanadianEnglishLocaleTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         Moment::setLocale('en_CA');
     }
@@ -122,31 +122,29 @@ class MomentCanadianEnglishLocaleTest extends TestCase
         self::assertEquals('12th', $moment->format('jS'));
     }
 
-	public function testRelative()
-	{
-		$beginningMoment = new Moment('2010-06-12 00:00:00', 'Europe/London');
+    public function testRelative()
+    {
+        $beginningMoment = new Moment('2010-06-12 00:00:00', 'Europe/London');
 
-		$a = array(
-			array(new Moment('2010-06-12 00:00:01', 'Europe/London'), 'in a few seconds', 'a few seconds ago', '0s - 3s'),
-			array(new Moment('2010-06-12 00:00:07', 'Europe/London'), 'in 7 seconds', '7 seconds ago', '4s - 59s'),
-			array(new Moment('2010-06-12 00:01:10', 'Europe/London'), 'in a minute', 'a minute ago', '60s - 89s'),
-			array(new Moment('2010-06-12 00:05:45', 'Europe/London'), 'in 6 minutes', '6 minutes ago', '90s - 45m'),
-			array(new Moment('2010-06-12 00:45:45', 'Europe/London'), 'in an hour', 'an hour ago', '45m - 89m'),
-			array(new Moment('2010-06-12 08:00:45', 'Europe/London'), 'in 8 hours', '8 hours ago', '90m - 22h'),
-			array(new Moment('2010-06-12 23:00:45', 'Europe/London'), 'in a day', 'a day ago', '22h - 35h'),
-			array(new Moment('2010-06-13 15:00:45', 'Europe/London'), 'in 2 days', '2 days ago', '36h - 25d'),
-			array(new Moment('2010-07-12 00:00:45', 'Europe/London'), 'in a month', 'a month ago', '25d - 44d'),
-			array(new Moment('2010-08-12 00:00:45', 'Europe/London'), 'in 2 months', '2 months ago', '45ds - 344d'),
-			array(new Moment('2011-06-12 00:00:45', 'Europe/London'), 'in a year', 'a year ago', '345d - 547d'),
-			array(new Moment('2013-06-12 00:00:45', 'Europe/London'), 'in 3 years', '3 years ago', '547d -'),
-		);
+        $a = array(
+            array(new Moment('2010-06-12 00:00:01', 'Europe/London'), 'in a few seconds', 'a few seconds ago', '0s - 3s'),
+            array(new Moment('2010-06-12 00:00:07', 'Europe/London'), 'in 7 seconds', '7 seconds ago', '4s - 59s'),
+            array(new Moment('2010-06-12 00:01:10', 'Europe/London'), 'in a minute', 'a minute ago', '60s - 89s'),
+            array(new Moment('2010-06-12 00:05:45', 'Europe/London'), 'in 6 minutes', '6 minutes ago', '90s - 45m'),
+            array(new Moment('2010-06-12 00:45:45', 'Europe/London'), 'in an hour', 'an hour ago', '45m - 89m'),
+            array(new Moment('2010-06-12 08:00:45', 'Europe/London'), 'in 8 hours', '8 hours ago', '90m - 22h'),
+            array(new Moment('2010-06-12 23:00:45', 'Europe/London'), 'in a day', 'a day ago', '22h - 35h'),
+            array(new Moment('2010-06-13 15:00:45', 'Europe/London'), 'in 2 days', '2 days ago', '36h - 25d'),
+            array(new Moment('2010-07-12 00:00:45', 'Europe/London'), 'in a month', 'a month ago', '25d - 44d'),
+            array(new Moment('2010-08-12 00:00:45', 'Europe/London'), 'in 2 months', '2 months ago', '45ds - 344d'),
+            array(new Moment('2011-06-12 00:00:45', 'Europe/London'), 'in a year', 'a year ago', '345d - 547d'),
+            array(new Moment('2013-06-12 00:00:45', 'Europe/London'), 'in 3 years', '3 years ago', '547d -'),
+        );
 
-		for ($i = 0; $i < count($a); $i++) {
-			$endMoment = $a[$i][0];
-			self::assertEquals($a[$i][1], $endMoment->from($beginningMoment)->getRelative(), $a[$i][3]);
-			self::assertEquals($a[$i][2], $beginningMoment->from($endMoment)->getRelative(), $a[$i][3]);
-		}
-
-	}
-
+        for ($i = 0; $i < count($a); $i++) {
+            $endMoment = $a[$i][0];
+            self::assertEquals($a[$i][1], $endMoment->from($beginningMoment)->getRelative(), $a[$i][3]);
+            self::assertEquals($a[$i][2], $beginningMoment->from($endMoment)->getRelative(), $a[$i][3]);
+        }
+    }
 }

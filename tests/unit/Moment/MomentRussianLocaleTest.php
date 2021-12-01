@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 class MomentRussianLocaleTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         Moment::setLocale('ru_RU');
     }
@@ -97,17 +97,17 @@ class MomentRussianLocaleTest extends TestCase
 
     public function testSeconds()
     {
-       $past = new Moment('2017-08-30 20:49:30', 'Europe/Samara');
+        $past = new Moment('2017-08-30 20:49:30', 'Europe/Samara');
 
-       $relative = $past->from('2017-08-30 20:49:31');
-       self::assertEquals('несколько секунд назад', $relative->getRelative());
+        $relative = $past->from('2017-08-30 20:49:31');
+        self::assertEquals('несколько секунд назад', $relative->getRelative());
 
-       $relative = $past->from('2017-08-30 20:49:34');
-       self::assertEquals('4 секунды назад', $relative->getRelative());
+        $relative = $past->from('2017-08-30 20:49:34');
+        self::assertEquals('4 секунды назад', $relative->getRelative());
 
-       $relative = $past->from('2017-08-30 20:49:35');
-       self::assertEquals('5 секунд назад', $relative->getRelative());
-       }
+        $relative = $past->from('2017-08-30 20:49:35');
+        self::assertEquals('5 секунд назад', $relative->getRelative());
+    }
 
     public function testLastWeekWeekend()
     {
@@ -140,8 +140,8 @@ class MomentRussianLocaleTest extends TestCase
     {
         $date = new Moment('2017-01-11 01:00:00');
 
-	    self::assertEquals('через несколько секунд', $date->from('2017-01-11 00:59:59')->getRelative(), 'seconds');
-	    self::assertEquals('через 30 секунд', $date->from('2017-01-11 00:59:30')->getRelative(), 'seconds');
+        self::assertEquals('через несколько секунд', $date->from('2017-01-11 00:59:59')->getRelative(), 'seconds');
+        self::assertEquals('через 30 секунд', $date->from('2017-01-11 00:59:30')->getRelative(), 'seconds');
         self::assertEquals('через 2 минуты', $date->from('2017-01-11 00:58:00')->getRelative(), 'minutes');
         self::assertEquals('через 2 часа', $date->from('2017-01-10 23:00:00')->getRelative(), 'hours');
         self::assertEquals('через день', $date->from('2017-01-10 00:00:00')->getRelative(), 'days');

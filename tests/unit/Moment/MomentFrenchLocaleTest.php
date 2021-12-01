@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 class MomentFrenchLocaleTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         Moment::setLocale('fr_FR');
     }
@@ -27,8 +27,7 @@ class MomentFrenchLocaleTest extends TestCase
             7 => array('dim.', 'dimanche'),
         );
 
-        for ($d = 1; $d < 7; $d++)
-        {
+        for ($d = 1; $d < 7; $d++) {
             self::assertEquals($weekdayNames[$moment->getWeekday()][0], $moment->getWeekdayNameShort(), 'weekday short name failed');
             self::assertEquals($weekdayNames[$moment->getWeekday()][1], $moment->getWeekdayNameLong(), 'weekday long name failed');
 
@@ -57,8 +56,7 @@ class MomentFrenchLocaleTest extends TestCase
             12 => array('déc.', 'décembre'),
         );
 
-        for ($d = 1; $d < 12; $d++)
-        {
+        for ($d = 1; $d < 12; $d++) {
             self::assertEquals($monthNames[$moment->format('n')][0], $moment->getMonthNameShort(), 'month short name failed');
             self::assertEquals($monthNames[$moment->format('n')][1], $moment->getMonthNameLong(), 'month long name failed');
 

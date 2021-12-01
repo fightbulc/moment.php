@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 class MomentLatvianLocaleTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         Moment::setLocale('lv_LV');
     }

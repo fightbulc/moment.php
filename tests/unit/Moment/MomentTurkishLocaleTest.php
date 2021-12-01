@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Turkish (tr-TR) language support
  * @author Engin Dumlu <engindumlu@gmail.com>
@@ -11,7 +12,7 @@ use PHPUnit\Framework\TestCase;
 
 class MomentTurkishLocaleTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         Moment::setLocale('tr_TR');
     }

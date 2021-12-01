@@ -71,8 +71,7 @@ class Moment extends \DateTime
         $moment = new static('@' . $date->format('U'));
         $moment->setTimezone($date->getTimezone());
 
-        if ($date instanceof \DateTimeImmutable)
-        {
+        if ($date instanceof \DateTimeImmutable) {
             $moment->setImmutableMode(true);
         }
 
@@ -94,12 +93,10 @@ class Moment extends \DateTime
     public static function createFromFormat($format, $time, $timezone = null, FormatsInterface $formatsInterface = null)
     {
         // handle diverse format types
-        if ($formatsInterface instanceof FormatsInterface)
-        {
+        if ($formatsInterface instanceof FormatsInterface) {
             // merge localized custom formats
             $localeContent = MomentLocale::getLocaleContent();
-            if (isset($localeContent['customFormats']) && is_array($localeContent['customFormats']))
-            {
+            if (isset($localeContent['customFormats']) && is_array($localeContent['customFormats'])) {
                 $formatsInterface->setTokens($localeContent['customFormats']);
             }
 
@@ -110,8 +107,7 @@ class Moment extends \DateTime
             parent::createFromFormat($format, $time, $timezone) :
             parent::createFromFormat($format, $time);
 
-        if ($date === false)
-        {
+        if ($date === false) {
             return false;
         }
 
@@ -127,8 +123,7 @@ class Moment extends \DateTime
      */
     public function __construct($dateTime = 'now', $timezone = null, $immutableMode = false)
     {
-        if ($timezone === null)
-        {
+        if ($timezone === null) {
             $timezone = self::$defaultTimezone;
         }
 
@@ -171,18 +166,15 @@ class Moment extends \DateTime
         $lengthDateTime = strlen((int)$dateTime);
 
         // unix timestamp helper
-        if ($lengthDateTime >= 9 && $lengthDateTime <= 10)
-        {
+        if ($lengthDateTime >= 9 && $lengthDateTime <= 10) {
             $dateTime = '@' . $dateTime;
         }
 
-        if ($timezone === null)
-        {
+        if ($timezone === null) {
             $timezone = self::$defaultTimezone;
         }
 
-        if ($this->immutableMode)
-        {
+        if ($this->immutableMode) {
             return $this->implicitCloning(__FUNCTION__, func_get_args());
         }
 
@@ -193,14 +185,12 @@ class Moment extends \DateTime
         parent::__construct($dateTime, $this->getDateTimeZone($timezone));
 
         // set timezone if unix time
-        if (strpos($dateTime, '@') !== false && $timezone)
-        {
+        if (strpos($dateTime, '@') !== false && $timezone) {
             $this->setTimezone($timezone);
         }
 
         // date validation
-        if ($this->isValidDate() === false)
-        {
+        if ($this->isValidDate() === false) {
             throw new MomentException('Given date of "' . $dateTime . '" is invalid');
         }
 
@@ -214,13 +204,11 @@ class Moment extends \DateTime
      */
     public function setTimezone($timezone)
     {
-        if ($this->immutableMode)
-        {
+        if ($this->immutableMode) {
             return $this->implicitCloning(__FUNCTION__, func_get_args());
         }
 
-        if ($timezone instanceof \DateTimeZone)
-        {
+        if ($timezone instanceof \DateTimeZone) {
             $timezone = $timezone->getName();
         }
 
@@ -241,18 +229,15 @@ class Moment extends \DateTime
     public function format($format = null, $formatsInterface = null)
     {
         // set default format
-        if ($format === null)
-        {
+        if ($format === null) {
             $format = \DateTime::ISO8601;
         }
 
         // handle diverse format types
-        if ($formatsInterface instanceof FormatsInterface)
-        {
+        if ($formatsInterface instanceof FormatsInterface) {
             // merge localized custom formats
             $localeContent = MomentLocale::getLocaleContent();
-            if (isset($localeContent['customFormats']) && is_array($localeContent['customFormats']))
-            {
+            if (isset($localeContent['customFormats']) && is_array($localeContent['customFormats'])) {
                 $formatsInterface->setTokens($localeContent['customFormats']);
             }
 
@@ -260,14 +245,11 @@ class Moment extends \DateTime
         }
 
         // handle ordinals
-        if (strpos($format, 'S') !== false)
-        {
+        if (strpos($format, 'S') !== false) {
             preg_match_all('/(\wS)/', $format, $matches);
 
-            if (count($matches) >= 1)
-            {
-                foreach ($matches[1] as $part)
-                {
+            if (count($matches) >= 1) {
+                foreach ($matches[1] as $part) {
                     $token = substr($part, 0, 1);
                     $number = $this->format($token);
                     $format = str_replace($part, $this->formatOrdinal($number, $token), $format);
@@ -276,12 +258,10 @@ class Moment extends \DateTime
         }
 
         // handle text
-        if (strpos($format, '[') !== false)
-        {
+        if (strpos($format, '[') !== false) {
             preg_match_all('/\[([^\[]*)\]/', $format, $matches);
 
-            foreach ($matches[1] as $part)
-            {
+            foreach ($matches[1] as $part) {
                 $format = preg_replace('/\[' . $part . '\]/u', preg_replace('/(\w)/u', '\\\\\1', $part), $format);
             }
         }
@@ -446,8 +426,7 @@ class Moment extends \DateTime
      */
     public function setDay($day)
     {
-        if ($this->immutableMode)
-        {
+        if ($this->immutableMode) {
             return $this->implicitCloning(__FUNCTION__, func_get_args());
         }
 
@@ -464,8 +443,7 @@ class Moment extends \DateTime
      */
     public function setMonth($month)
     {
-        if ($this->immutableMode)
-        {
+        if ($this->immutableMode) {
             return $this->implicitCloning(__FUNCTION__, func_get_args());
         }
 
@@ -482,8 +460,7 @@ class Moment extends \DateTime
      */
     public function setYear($year)
     {
-        if ($this->immutableMode)
-        {
+        if ($this->immutableMode) {
             return $this->implicitCloning(__FUNCTION__, func_get_args());
         }
 
@@ -593,8 +570,7 @@ class Moment extends \DateTime
      */
     public function setDate($year, $month, $day)
     {
-        if ($this->immutableMode)
-        {
+        if ($this->immutableMode) {
             return $this->implicitCloning(__FUNCTION__, func_get_args());
         }
 
@@ -611,8 +587,7 @@ class Moment extends \DateTime
      */
     public function setSecond($second)
     {
-        if ($this->immutableMode)
-        {
+        if ($this->immutableMode) {
             return $this->implicitCloning(__FUNCTION__, func_get_args());
         }
 
@@ -629,8 +604,7 @@ class Moment extends \DateTime
      */
     public function setMinute($minute)
     {
-        if ($this->immutableMode)
-        {
+        if ($this->immutableMode) {
             return $this->implicitCloning(__FUNCTION__, func_get_args());
         }
 
@@ -647,8 +621,7 @@ class Moment extends \DateTime
      */
     public function setHour($hour)
     {
-        if ($this->immutableMode)
-        {
+        if ($this->immutableMode) {
             return $this->implicitCloning(__FUNCTION__, func_get_args());
         }
 
@@ -694,8 +667,7 @@ class Moment extends \DateTime
      */
     public function setTime($hour, $minute, $second = null, $microseconds = null)
     {
-        if ($this->immutableMode)
-        {
+        if ($this->immutableMode) {
             return $this->implicitCloning(__FUNCTION__, func_get_args());
         }
 
@@ -714,8 +686,7 @@ class Moment extends \DateTime
     public function from($fromMoment = 'now', $timezoneString = null)
     {
         // create moment first
-        if ($this->isMoment($fromMoment) === false)
-        {
+        if ($this->isMoment($fromMoment) === false) {
             // use custom timezone or fallback the current moment
             $useTimezoneString = $timezoneString !== null ? $timezoneString : $this->getTimezoneString();
             $fromMoment = new Moment($fromMoment, $useTimezoneString);
@@ -731,8 +702,7 @@ class Moment extends \DateTime
             ->setMinutes($this->fromToMinutes($dateDiff))
             ->setHours($this->fromToHours($dateDiff))
             ->setDays($this->fromToDays($dateDiff))
-            ->setWeeks($this->fromToWeeks($dateDiff))
-            ;
+            ->setWeeks($this->fromToWeeks($dateDiff));
     }
 
     /**
@@ -767,8 +737,7 @@ class Moment extends \DateTime
      */
     protected function addTime($type = 'day', $value = 1)
     {
-        if ($this->immutableMode)
-        {
+        if ($this->immutableMode) {
             return $this->implicitCloning(__FUNCTION__, func_get_args());
         }
 
@@ -784,8 +753,7 @@ class Moment extends \DateTime
      */
     private function fromToSeconds(\DateInterval $dateInterval)
     {
-        return
-            ($dateInterval->days * 24 * 60 * 60)
+        return ($dateInterval->days * 24 * 60 * 60)
             + ($dateInterval->h * 60 * 60)
             + ($dateInterval->i * 60)
             + $dateInterval->s;
@@ -839,26 +807,23 @@ class Moment extends \DateTime
      */
     public function getPeriod($period)
     {
-        switch ($period)
-        {
+        switch ($period) {
             case 'week':
                 $interval = $this->format('W');
 
                 $start = new Moment('@' . $this->format('U'));
                 $start->setTimezone($this->getTimezoneString())
-                      ->subtractDays($this->getDaysAfterStartOfWeek())
-                      ->setTime(0, 0, 0)
-                ;
+                    ->subtractDays($this->getDaysAfterStartOfWeek())
+                    ->setTime(0, 0, 0);
 
                 $end = new Moment('@' . $this->format('U'));
                 $end->setTimezone($this->getTimezoneString())
                     ->addDays(6 - $this->getDaysAfterStartOfWeek())
-                    ->setTime(23, 59, 59)
-                ;
+                    ->setTime(23, 59, 59);
 
                 break;
 
-            // ------------------------------
+                // ------------------------------
 
             case 'month':
                 $maxMonthDays = $this->format('t');
@@ -867,19 +832,17 @@ class Moment extends \DateTime
 
                 $start = new Moment('@' . $this->format('U'));
                 $start->setTimezone($this->getTimezoneString())
-                      ->subtractDays($currentMonthDay - 1)
-                      ->setTime(0, 0, 0)
-                ;
+                    ->subtractDays($currentMonthDay - 1)
+                    ->setTime(0, 0, 0);
 
                 $end = new Moment('@' . $this->format('U'));
                 $end->setTimezone($this->getTimezoneString())
                     ->addDays($maxMonthDays - $currentMonthDay)
-                    ->setTime(23, 59, 59)
-                ;
+                    ->setTime(23, 59, 59);
 
                 break;
 
-            // ------------------------------
+                // ------------------------------
 
             case 'quarter':
                 $quarter = $this->getQuarter();
@@ -889,7 +852,7 @@ class Moment extends \DateTime
                 $interval = $quarter;
                 break;
 
-            // ------------------------------
+                // ------------------------------
 
             default:
                 throw new MomentException("Period \"{$period}\" is not supported. Supported: \"week\", \"month\", \"quarter\".");
@@ -901,8 +864,7 @@ class Moment extends \DateTime
             ->setRefDate($this)
             ->setInterval($interval)
             ->setStartDate($start)
-            ->setEndDate($end)
-            ;
+            ->setEndDate($end);
     }
 
     /**
@@ -923,37 +885,24 @@ class Moment extends \DateTime
         $addTime = false;
 
         // apply cases
-        if ($diff > 7)
-        {
+        if ($diff > 7) {
             $localeKeys = array('calendar', 'default');
-        }
-        elseif ($diff > 1)
-        {
+        } elseif ($diff > 1) {
             $localeKeys = array('calendar', 'lastWeek');
             $addTime = true;
-        }
-        elseif ($diff > 0)
-        {
+        } elseif ($diff > 0) {
             $localeKeys = array('calendar', 'lastDay');
             $addTime = true;
-        }
-        elseif ($diff == 0)
-        {
+        } elseif ($diff == 0) {
             $localeKeys = array('calendar', 'sameDay');
             $addTime = true;
-        }
-        elseif ($diff == -1)
-        {
+        } elseif ($diff == -1) {
             $localeKeys = array('calendar', 'nextDay');
             $addTime = true;
-        }
-        elseif ($diff > -7)
-        {
+        } elseif ($diff > -7) {
             $localeKeys = array('calendar', 'sameElse');
             $addTime = true;
-        }
-        else
-        {
+        } else {
             $localeKeys = array('calendar', 'default');
         }
 
@@ -961,8 +910,7 @@ class Moment extends \DateTime
         $format = MomentLocale::renderLocaleString($localeKeys, array($this));
 
         // add time if valid
-        if ($addTime && $withTime === true)
-        {
+        if ($addTime && $withTime === true) {
             $format .= ' ' . $renderedTimeString;
         }
 
@@ -977,45 +925,44 @@ class Moment extends \DateTime
      */
     public function startOf($period)
     {
-        switch ($period)
-        {
-            // set to now, but with 0 seconds
+        switch ($period) {
+                // set to now, but with 0 seconds
             case 'minute':
                 return $this->setTime($this->getHour(), $this->getMinute(), 0);
                 break;
 
-            // set to now, but with 0 mins, 0 secs
+                // set to now, but with 0 mins, 0 secs
             case 'hour':
                 return $this->setTime($this->getHour(), 0, 0);
                 break;
 
-            // set to 00:00:00 today
+                // set to 00:00:00 today
             case 'day':
                 return $this->setTime(0, 0, 0);
                 break;
 
-            // set to the first day of this week, 00:00:00
+                // set to the first day of this week, 00:00:00
             case 'week':
                 return $this->resetDateTime(
                     $this->getPeriod('week')->getStartDate()->format('c')
                 );
                 break;
 
-            // set to the beginning of the current quarter, 1st day of months, 00:00:00
+                // set to the beginning of the current quarter, 1st day of months, 00:00:00
             case 'quarter':
                 return $this->resetDateTime(
                     $this->getPeriod('quarter')->getStartDate()->format('c')
                 );
                 break;
 
-            // set to the first of this month, 00:00:00
+                // set to the first of this month, 00:00:00
             case 'month':
                 return $this->resetDateTime(
                     $this->getPeriod('month')->getStartDate()->format('c')
                 );
                 break;
 
-            // set to January 1st, 00:00:00 this year
+                // set to January 1st, 00:00:00 this year
             case 'year':
                 return $this->setDate($this->getYear(), 1, 1)->setTime(0, 0, 0);
                 break;
@@ -1033,45 +980,44 @@ class Moment extends \DateTime
      */
     public function endOf($period)
     {
-        switch ($period)
-        {
-            // set to now, but with 59 seconds
+        switch ($period) {
+                // set to now, but with 59 seconds
             case 'minute':
                 return $this->setTime($this->getHour(), $this->getMinute(), 59);
                 break;
 
-            // set to now, but with 59 mins, 59 secs
+                // set to now, but with 59 mins, 59 secs
             case 'hour':
                 return $this->setTime($this->getHour(), 59, 59);
                 break;
 
-            // set to 23:59:59 today
+                // set to 23:59:59 today
             case 'day':
                 return $this->setTime(23, 59, 59);
                 break;
 
-            // set to the last day of this week, 23:59
+                // set to the last day of this week, 23:59
             case 'week':
                 return $this->resetDateTime(
                     $this->getPeriod('week')->getEndDate()->format('c')
                 );
                 break;
 
-            // set to the end of the current quarter, last day of months, 23:59:59
+                // set to the end of the current quarter, last day of months, 23:59:59
             case 'quarter':
                 return $this->resetDateTime(
                     $this->getPeriod('quarter')->getEndDate()->format('c')
                 );
                 break;
 
-            // set to the last of this month, 23:59:59
+                // set to the last of this month, 23:59:59
             case 'month':
                 return $this->resetDateTime(
                     $this->getPeriod('month')->getEndDate()->format('c')
                 );
                 break;
 
-            // set to January 1st, 23:59:59 this year
+                // set to January 1st, 23:59:59 this year
             case 'year':
                 return $this->setDate($this->getYear(), 12, 31)->setTime(23, 59, 59);
                 break;
@@ -1086,7 +1032,7 @@ class Moment extends \DateTime
      */
     public function cloning()
     {
-        return clone($this);
+        return clone ($this);
     }
 
     /**
@@ -1122,12 +1068,9 @@ class Moment extends \DateTime
         $todayWeekday = $this->getWeekday();
 
         // generate for upcoming weeks
-        for ($w = 1; $w <= $forUpcomingWeeks; $w++)
-        {
-            for ($d = 1; $d <= 7; $d++)
-            {
-                if (in_array($d, $weekdayNumbers) && ($w > 1 || $d > $todayWeekday))
-                {
+        for ($w = 1; $w <= $forUpcomingWeeks; $w++) {
+            for ($d = 1; $d <= 7; $d++) {
+                if (in_array($d, $weekdayNumbers) && ($w > 1 || $d > $todayWeekday)) {
                     // calculate add days from today's perspective
                     $addDays = $w === 1 ? $d - $todayWeekday : ($d - $todayWeekday) + ($w * 7 - 7);
 
@@ -1215,8 +1158,7 @@ class Moment extends \DateTime
         $isAfter = $this->isAfter($maxDateTime, $period);
 
         // include endpoints
-        if ($closed === true)
-        {
+        if ($closed === true) {
             return $isBefore === false && $isAfter === false;
         }
 
@@ -1230,8 +1172,7 @@ class Moment extends \DateTime
      */
     protected function setRawDateTimeString($rawDateTimeString)
     {
-        if ($this->immutableMode)
-        {
+        if ($this->immutableMode) {
             return $this->implicitCloning(__FUNCTION__, func_get_args());
         }
 
@@ -1255,8 +1196,7 @@ class Moment extends \DateTime
      */
     protected function setTimezoneString($timezoneString)
     {
-        if ($this->immutableMode)
-        {
+        if ($this->immutableMode) {
             return $this->implicitCloning(__FUNCTION__, func_get_args());
         }
 
@@ -1307,16 +1247,14 @@ class Moment extends \DateTime
     {
         $rawDateTime = $this->getRawDateTimeString();
 
-        if (strpos($rawDateTime, '-') === false)
-        {
+        if (strpos($rawDateTime, '-') === false) {
             return true;
         }
 
         // ----------------------------------
 
         // time with indicator "T"
-        if (strpos($rawDateTime, 'T') !== false)
-        {
+        if (strpos($rawDateTime, 'T') !== false) {
             // remove fraction if any
             $rawDateTime = preg_replace('/\.[0-9][0-9][0-9]/', '', $rawDateTime);
 
@@ -1324,60 +1262,48 @@ class Moment extends \DateTime
             $rawTimeZone = substr($rawDateTime, 19);
 
             // timezone w/ difference in hours: e.g. +0200
-            if (empty($rawTimeZone) === false)
-            {
-                if (strpos($rawTimeZone, '+') !== false || strpos($rawTimeZone, '-') !== false)
-                {
+            if (empty($rawTimeZone) === false) {
+                if (strpos($rawTimeZone, '+') !== false || strpos($rawTimeZone, '-') !== false) {
                     // with colon: +-HH:MM
-                    if (substr_count($rawTimeZone, ':') > 0)
-                    {
+                    if (substr_count($rawTimeZone, ':') > 0) {
                         $momentDateTime = $this->format('Y-m-d\TH:i:sP');
                     }
 
                     // without colon: +-HHMM
-                    else
-                    {
+                    else {
                         $momentDateTime = $this->format('Y-m-d\TH:i:sO');
                     }
                 }
 
                 // timezone with name: e.g. UTC
-                else
-                {
+                else {
                     $momentDateTime = $this->format('Y-m-d\TH:i:se');
                 }
             }
 
             // no timezone specified
-            else
-            {
+            else {
                 $momentDateTime = $this->format('Y-m-d\TH:i:s');
             }
         }
 
         // time without indicator "T"
-        elseif (strpos($rawDateTime, ':') !== false)
-        {
+        elseif (strpos($rawDateTime, ':') !== false) {
             // with seconds
-            if (substr_count($rawDateTime, ':') === 2)
-            {
+            if (substr_count($rawDateTime, ':') === 2) {
                 $momentDateTime = $this->format(self::NO_TZ_MYSQL);
-            }
-            else
-            {
+            } else {
                 $momentDateTime = $this->format(self::NO_TZ_NO_SECS);
             }
         }
 
         // raw timestamp
-        elseif (strpos($rawDateTime, '@') === 0)
-        {
+        elseif (strpos($rawDateTime, '@') === 0) {
             $momentDateTime = '@' . $this->format('U');
         }
 
         // without time
-        else
-        {
+        else {
             $momentDateTime = $this->format(self::NO_TIME);
         }
 
@@ -1385,18 +1311,15 @@ class Moment extends \DateTime
 
         // TODO: hack until we include a proper validation
 
-        if (!$isValid)
-        {
+        if (!$isValid) {
             $rfcs = array(
                 self::RFC2822,
                 self::RFC822,
                 self::RFC1036,
             );
 
-            foreach ($rfcs as $rfc)
-            {
-                if ($this->format($rfc) === $rawDateTime)
-                {
+            foreach ($rfcs as $rfc) {
+                if ($this->format($rfc) === $rawDateTime) {
                     return true;
                 }
             }
@@ -1413,8 +1336,7 @@ class Moment extends \DateTime
      */
     protected function subtractTime($type = 'day', $value = 1)
     {
-        if ($this->immutableMode)
-        {
+        if ($this->immutableMode) {
             return $this->implicitCloning(__FUNCTION__, func_get_args());
         }
 
@@ -1434,5 +1356,4 @@ class Moment extends \DateTime
     {
         return (string)call_user_func(MomentLocale::getLocaleString(array('ordinal')), $number, $token);
     }
-
 }
