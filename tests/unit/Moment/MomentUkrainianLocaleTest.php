@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 class MomentUkrainianLocaleTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         Moment::setLocale('uk_UA');
     }

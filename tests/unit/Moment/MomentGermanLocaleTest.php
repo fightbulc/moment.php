@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 class MomentGermanLocaleTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         Moment::setLocale('de_DE');
     }

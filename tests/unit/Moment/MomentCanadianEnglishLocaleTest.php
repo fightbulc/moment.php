@@ -19,7 +19,7 @@ use PHPUnit\Framework\TestCase;
 
 class MomentCanadianEnglishLocaleTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         Moment::setLocale('en_CA');
     }

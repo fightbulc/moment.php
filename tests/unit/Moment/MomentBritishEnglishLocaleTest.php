@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class MomentBritishEnglishLocaleTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         Moment::setLocale('en_GB');
     }

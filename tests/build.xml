@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<phpunit bootstrap="bootstrap.php" backupGlobals="false" colors="true" backupStaticAttributes="false" strict="true" verbose="true">
-    <testsuites>
-        <testsuite name="unit">
-            <directory>unit</directory>
-        </testsuite>
-    </testsuites>
-    <filter>
-        <whitelist processUncoveredFilesFromWhitelist="false">
-            <directory suffix=".php">../src/</directory>
-        </whitelist>
-    </filter>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="bootstrap.php" backupGlobals="false" colors="true" backupStaticAttributes="false" verbose="true" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+  <coverage processUncoveredFiles="false">
+    <include>
+      <directory suffix=".php">../src/</directory>
+    </include>
+  </coverage>
+  <testsuites>
+    <testsuite name="unit">
+      <directory>unit</directory>
+    </testsuite>
+  </testsuites>
 </phpunit>
