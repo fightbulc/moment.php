@@ -19,12 +19,12 @@ use PHPUnit\Framework\TestCase;
 
 class MomentCanadianEnglishLocaleTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         Moment::setLocale('en_CA');
     }
 
-    public function testWeekdayNames()
+    public function testWeekdayNames(): void
     {
         $startingDate = '2015-01-04T00:00:00+0000';
 
@@ -48,7 +48,7 @@ class MomentCanadianEnglishLocaleTest extends TestCase
         }
     }
 
-    public function testMonthNames()
+    public function testMonthNames(): void
     {
         $startingDate = '2015-01-04T00:00:00+0000';
 
@@ -77,7 +77,7 @@ class MomentCanadianEnglishLocaleTest extends TestCase
         }
     }
 
-    public function testFormat()
+    public function testFormat(): void
     {
         $a = array(
             array('l, d F Y, G:i:s', 'Saturday, 12 June 2010, 22:00:00'),
@@ -93,7 +93,7 @@ class MomentCanadianEnglishLocaleTest extends TestCase
         }
     }
 
-    public function testCustomLocaleFormat()
+    public function testCustomLocaleFormat(): void
     {
         $a = array(
             array('LT', '10:00 PM',),
@@ -114,7 +114,7 @@ class MomentCanadianEnglishLocaleTest extends TestCase
         }
     }
 
-    public function testOrdinalsFormat()
+    public function testOrdinalsFormat(): void
     {
         $moment = new Moment('2010-06-02T00:00:00+0000');
         self::assertEquals('2nd', $moment->format('jS'));
@@ -122,7 +122,7 @@ class MomentCanadianEnglishLocaleTest extends TestCase
         self::assertEquals('12th', $moment->format('jS'));
     }
 
-	public function testRelative()
+	public function testRelative(): void
 	{
 		$beginningMoment = new Moment('2010-06-12 00:00:00', 'Europe/London');
 

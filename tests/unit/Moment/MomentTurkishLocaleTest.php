@@ -11,12 +11,12 @@ use PHPUnit\Framework\TestCase;
 
 class MomentTurkishLocaleTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         Moment::setLocale('tr_TR');
     }
 
-    public function testWeekdayNames()
+    public function testWeekdayNames(): void
     {
         $startingDate = '2015-01-04T00:00:00+0000';
 
@@ -39,7 +39,7 @@ class MomentTurkishLocaleTest extends TestCase
         }
     }
 
-    public function testMonthNames()
+    public function testMonthNames(): void
     {
         $startingDate = '2015-01-04T00:00:00+0000';
 
@@ -68,7 +68,7 @@ class MomentTurkishLocaleTest extends TestCase
         }
     }
 
-    public function testFormat()
+    public function testFormat(): void
     {
         $a = array(
             array('l, F d Y, g:i:s a',                  'Pazar, Şubat 14 2010, 3:25:50 pm'),
@@ -84,7 +84,7 @@ class MomentTurkishLocaleTest extends TestCase
         }
     }
 
-    public function testRelative()
+    public function testRelative(): void
     {
         $beginningMoment = new Moment('2015-06-14 20:46:22', 'Europe/Istanbul');
         $endMoment = new Moment('2015-06-14 20:48:32', 'Europe/Istanbul');
@@ -92,7 +92,7 @@ class MomentTurkishLocaleTest extends TestCase
         self::assertEquals('2 dakika önce', $beginningMoment->from($endMoment)->getRelative());
     }
 
-    public function testMinutes()
+    public function testMinutes(): void
     {
         $past = new Moment('2016-01-03 16:17:07', 'Europe/Kiev');
 
@@ -106,7 +106,7 @@ class MomentTurkishLocaleTest extends TestCase
         self::assertEquals('13 dakika önce', $relative->getRelative());
     }
 
-    public function testLastWeekWeekend()
+    public function testLastWeekWeekend(): void
     {
         $past = new Moment('2016-04-10 16:30:07');
         self::assertEquals('Geçen hafta Pazar 16:30', $past->calendar(true, new Moment('2016-04-12')));

@@ -6,12 +6,12 @@ use PHPUnit\Framework\TestCase;
 
 class MomentRussianLocaleTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         Moment::setLocale('ru_RU');
     }
 
-    public function testWeekdayNames()
+    public function testWeekdayNames(): void
     {
         $startingDate = '2016-01-29T00:00:00+0000';
 
@@ -35,7 +35,7 @@ class MomentRussianLocaleTest extends TestCase
         }
     }
 
-    public function testDayMonthFormat001()
+    public function testDayMonthFormat001(): void
     {
         $string = '2015-06-14 20:46:22';
         $moment = new Moment($string, 'Europe/Moscow');
@@ -46,13 +46,13 @@ class MomentRussianLocaleTest extends TestCase
         self::assertEquals('8 марта', $moment->format('j F'));
     }
 
-    public function testDayMonthFormat002()
+    public function testDayMonthFormat002(): void
     {
         $moment = new Moment('2016-01-03 16:17:07', 'Europe/Moscow');
         self::assertEquals('3 декабря', $moment->subtractMonths(1)->format('j F'));
     }
 
-    public function testMonthFormatFN()
+    public function testMonthFormatFN(): void
     {
         $startingDate = '2016-01-01T00:00:00+0000';
 
@@ -81,7 +81,7 @@ class MomentRussianLocaleTest extends TestCase
     }
 
 
-    public function testMinutes()
+    public function testMinutes(): void
     {
         $past = new Moment('2016-01-03 16:17:07', 'Europe/Moscow');
 
@@ -95,7 +95,7 @@ class MomentRussianLocaleTest extends TestCase
         self::assertEquals('13 минут назад', $relative->getRelative());
     }
 
-    public function testSeconds()
+    public function testSeconds(): void
     {
        $past = new Moment('2017-08-30 20:49:30', 'Europe/Samara');
 
@@ -109,7 +109,7 @@ class MomentRussianLocaleTest extends TestCase
        self::assertEquals('5 секунд назад', $relative->getRelative());
        }
 
-    public function testLastWeekWeekend()
+    public function testLastWeekWeekend(): void
     {
         $past = new Moment('2016-04-10 16:30:07');
         self::assertEquals('воскресенье в 16:30', $past->calendar(true, new Moment('2016-04-12')));
@@ -136,7 +136,7 @@ class MomentRussianLocaleTest extends TestCase
         self::assertEquals('суббота', $past->calendar(false, new Moment('2016-04-18')));
     }
 
-    public function testFutureRelative()
+    public function testFutureRelative(): void
     {
         $date = new Moment('2017-01-11 01:00:00');
 
@@ -150,7 +150,7 @@ class MomentRussianLocaleTest extends TestCase
     }
 
 
-    public function testOrdinalFormat()
+    public function testOrdinalFormat(): void
     {
         $date = new Moment('2017-01-01 01:00:00');
         self::assertEquals('1е января 2017', $date->format('jS F Y'));

@@ -6,12 +6,12 @@ use PHPUnit\Framework\TestCase;
 
 class MomentLatvianLocaleTest extends TestCase
 {
-    public function setUp()
+    public function setUp(): void
     {
         Moment::setLocale('lv_LV');
     }
 
-    public function testWeekdayNames()
+    public function testWeekdayNames(): void
     {
         $startingDate = '2017-10-20T00:00:00+0000';
 
@@ -46,7 +46,7 @@ class MomentLatvianLocaleTest extends TestCase
         }
     }
 
-    public function testMonthFormat()
+    public function testMonthFormat(): void
     {
         $startingDate = '2016-01-01T00:00:00+0000';
 
@@ -94,7 +94,7 @@ class MomentLatvianLocaleTest extends TestCase
         }
     }
 
-    public function testDayMonthFormat001()
+    public function testDayMonthFormat001(): void
     {
         $string = '2015-06-14 20:46:22';
         $moment = new Moment($string, 'Europe/Riga');
@@ -105,7 +105,7 @@ class MomentLatvianLocaleTest extends TestCase
         self::assertEquals('8 Martā', $moment->format('j F'));
     }
 
-    public function testMinutes()
+    public function testMinutes(): void
     {
         $past = new Moment('2016-01-03 16:17:07', 'Europe/Riga');
 
@@ -113,7 +113,7 @@ class MomentLatvianLocaleTest extends TestCase
         self::assertEquals('pirms 17 minūtēm', $relative->getRelative());
     }
 
-    public function testShowRelativeCalendarDates()
+    public function testShowRelativeCalendarDates(): void
     {
         $past = new Moment('2016-04-10 16:30:07');
         self::assertEquals('Pagājušā Svētdiena plkst. 16:30', $past->calendar(true, new Moment('2016-04-12')));
@@ -137,7 +137,7 @@ class MomentLatvianLocaleTest extends TestCase
         self::assertEquals('15.04.2116', $past->calendar(false, new Moment('2017-04-23')));
     }
 
-    public function testFutureRelative()
+    public function testFutureRelative(): void
     {
         $date = new Moment('2017-01-11 01:00:00');
 
@@ -153,7 +153,7 @@ class MomentLatvianLocaleTest extends TestCase
         self::assertEquals('pēc 7 gadiem', $date->from('2010-01-11 00:00:00')->getRelative(), 'year');
     }
 
-    public function testPastRelative()
+    public function testPastRelative(): void
     {
         $date = new Moment('2010-01-11 01:00:00');
         self::assertEquals('pirms dažām sekundēm', $date->from('2010-01-11 01:00:01')->getRelative(), 'seconds');
@@ -168,7 +168,7 @@ class MomentLatvianLocaleTest extends TestCase
         self::assertEquals('pirms 5 gadiem', $date->from('2015-01-11 01:00:00')->getRelative(), 'year');
     }
 
-    public function testOrdinalFormat()
+    public function testOrdinalFormat(): void
     {
         $date = new Moment('2017-01-01 01:00:00', 'Europe/Riga');
         self::assertEquals('1. Janvāris 2017', $date->format('jS f Y'));
