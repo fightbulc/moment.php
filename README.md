@@ -426,6 +426,11 @@ You can now run through the result and put it formatted into a drop-down field o
 
 # Change Log
 
+### Unreleased
+
+- added:
+  - support for PHP 8.2 [#218](https://github.com/fightbulc/moment.php/pull/218)
+
 ### 1.33.0
  - fixed:
     - French locale
