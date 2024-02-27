@@ -5,8 +5,9 @@
  * @github https://github.com/roadrunner
  */
 
-namespace Moment;
+namespace Moment\Test\Unit;
 
+use Moment\Moment;
 use PHPUnit\Framework\TestCase;
 
 class MomentTurkishLocaleTest extends TestCase

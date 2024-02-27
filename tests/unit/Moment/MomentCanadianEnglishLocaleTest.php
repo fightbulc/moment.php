@@ -12,9 +12,10 @@
  * February 17, 2020
  */
 
-namespace Moment;
+namespace Moment\Test\Unit;
 
 use Moment\CustomFormats\MomentJs;
+use Moment\Moment;
 use PHPUnit\Framework\TestCase;
 
 class MomentCanadianEnglishLocaleTest extends TestCase

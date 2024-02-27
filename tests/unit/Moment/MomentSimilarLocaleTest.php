@@ -1,6 +1,9 @@
 <?php
 
-namespace Moment;
+namespace Moment\Test\Unit;
+
+use Moment\Moment;
+use Moment\MomentException;
 
 class MomentSimilarLocaleTest extends MomentBritishEnglishLocaleTest
 {

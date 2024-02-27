@@ -3,9 +3,10 @@
 // locale: British English (en_GB)
 // author: https://github.com/blacknell
 
-namespace Moment;
+namespace Moment\Test\Unit;
 
 use Moment\CustomFormats\MomentJs;
+use Moment\Moment;
 use PHPUnit\Framework\TestCase;
 
 class MomentBritishEnglishLocaleTest extends TestCase

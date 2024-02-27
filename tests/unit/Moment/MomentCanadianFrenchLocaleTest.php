@@ -12,8 +12,9 @@
  * February 17, 2020
  */
 
-namespace Moment;
+namespace Moment\Test\Unit;
 
+use Moment\Moment;
 use PHPUnit\Framework\TestCase;
 
 class MomentCanadianFrenchLocaleTest extends TestCase
