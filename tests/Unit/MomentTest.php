@@ -7,6 +7,56 @@ use PHPUnit\Framework\TestCase;
 
 class MomentTest extends TestCase
 {
+    public function testCreateFromFormatReturnsMomentWhenFormatAndTimeArePresent()
+    {
+        $format = 'Y-m-d H:i:s';
+        $time = '2018-01-01 12:00:00';
+
+        $moment = Moment::createFromFormat(
+            $format,
+            $time
+        );
+
+        self::assertInstanceOf(Moment::class, $moment);
+
+        self::assertSame($time, $moment->format($format));
+    }
+
+    public function testCanSetDate()
+    {
+        $moment = new Moment('2014-01-01T10:10:00+0100');
+
+        $moment->setDate(
+            2015,
+            12,
+            31
+        );
+
+        self::assertSame('2015-12-31T10:10:00+0100', $moment->format());
+    }
+
+    public function testCanSetTimeWhenHourMinuteAndSecondArePresent()
+    {
+        $moment = new Moment('2014-01-01T10:10:00+0100');
+
+        $moment->setTime(
+            12,
+            30,
+            12
+        );
+
+        self::assertSame('2014-01-01T12:30:12+0100', $moment->format());
+    }
+
+    public function testCanSetTimezone()
+    {
+        $moment = new Moment('2014-01-01T10:10:00+0100');
+
+        $moment->setTimezone('UTC');
+
+        self::assertSame('2014-01-01T09:10:00+0000', $moment->format());
+    }
+
     public function testMoment()
     {
         $data = '1923-12-31 12:30:00';
