@@ -36,7 +36,7 @@
   },
   "autoload-dev": {
     "psr-4": {
-      "Moment\\Test\\Unit\\": "tests/unit/"
+      "Moment\\Test\\": "tests/"
     }
   }
 }
