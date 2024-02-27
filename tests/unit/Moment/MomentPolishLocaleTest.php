@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 
 class MomentPolishLocaleTest extends TestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         Moment::setLocale('pl_PL');
     }

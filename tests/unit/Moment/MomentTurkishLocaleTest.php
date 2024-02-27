@@ -11,7 +11,7 @@ use PHPUnit\Framework\TestCase;
 
 class MomentTurkishLocaleTest extends TestCase
 {
-    public function setUp(): void
+    protected function setUp(): void
     {
         Moment::setLocale('tr_TR');
     }
