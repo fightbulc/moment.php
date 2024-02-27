@@ -24,7 +24,7 @@ jobs:
       - name: "Checkout"
         uses: "actions/checkout@v4"
 
-      - name: "Setup PHP"
+      - name: "Set up PHP"
         uses: "shivammathur/setup-php@v2"
         with:
           php-version: "${{ matrix.php-version }}'"
@@ -32,8 +32,8 @@ jobs:
       - name: "Validate composer.json and composer.lock"
         run: "composer validate"
 
-      - name: "Install dependencies"
+      - name: "Install dependencies with composer"
         run: "composer install --prefer-dist --no-progress --no-suggest"
 
-      - name: "Run PHPUnit"
+      - name: "Run tests with phpunit/phpunit"
         run: "vendor/bin/phpunit -c tests/build.xml"
