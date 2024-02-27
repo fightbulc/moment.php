@@ -33,7 +33,7 @@ jobs:
         run: "composer validate --ansi"
 
       - name: "Install dependencies with composer"
-        run: "composer install --ansi --prefer-dist --no-progress --no-suggest"
+        run: "composer install --ansi --prefer-dist --no-progress"
 
       - name: "Run tests with phpunit/phpunit"
         run: "vendor/bin/phpunit --colors=always --configuration=tests/build.xml"
