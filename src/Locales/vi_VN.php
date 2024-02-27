@@ -20,7 +20,7 @@ return array(
     ),
     "relativeTime"  => array(
         "future" => 'vào %s',
-        "past"   => '%s trước đây',
+        "past"   => '%s trước',
         "s"      => 'một vài giây',
         "ss"      => '%d giây',
         "m"      => 'một phút',
