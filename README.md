@@ -5,12 +5,12 @@ Time is the biggest constraint here. I would be happy to pass the project on to 
 Just drop me a message. Cheers!
 
 <pre>
-                                      _           _           
- _ __ ___   ___  _ __ ___   ___ _ __ | |_   _ __ | |__  _ __  
+                                      _           _
+ _ __ ___   ___  _ __ ___   ___ _ __ | |_   _ __ | |__  _ __
 | '_ ` _ \ / _ \| '_ ` _ \ / _ \ '_ \| __| | '_ \| '_ \| '_ \
 | | | | | | (_) | | | | | |  __/ | | | |_ _| |_) | | | | |_) |
 |_| |_| |_|\___/|_| |_| |_|\___|_| |_|\__(_) .__/|_| |_| .__/
-                                           |_|         |_|    
+                                           |_|         |_|
 </pre>
 
 [![Integrate](https://github.com/fightbulc/moment.php/actions/workflows/integrate.yaml/badge.svg?branch=master)](https://github.com/fightbulc/moment.php/actions/workflows/integrate.yaml)
@@ -108,39 +108,39 @@ echo $m->format('[Wochentag:] l'); // e.g. Wochentag: Mittwoch
 
 __Supported languages so far:__
 
-```ar_TN``` Arabic (Tunisia)  
-```ca_ES``` Catalan  
-```zh_CN``` Chinese  
-```zh_TW``` Chinese (traditional)  
-```cs_CZ``` Czech  
-```da_DK``` Danish  
-```nl_NL``` Dutch  
-```en_CA``` English (Canada)  
-```en_GB``` English (British)  
-```en_US``` English (American)  
-```eo_EO``` Esperanto  
-```fa_IR``` Farsi  
-```fi_FI``` Finnish  
-```fr_FR``` French (Europe)  
-```fr_CA``` French (Canada)  
-```de_DE``` German (Germany)  
-```hu_HU``` Hungarian    
-```id_ID``` Indonesian  
-```it_IT``` Italian  
-```ja_JP``` Japanese  
-```kz_KZ``` Kazakh  
-```oc_LNC``` Lengadocian  
-```lv_LV``` Latvian (Latviešu)  
-```pl_PL``` Polish  
-```pt_BR``` Portuguese (Brazil)  
-```pt_PT``` Portuguese (Portugal)  
-```ru_RU``` Russian (Basic version)  
-```es_ES``` Spanish (Europe)  
-```sv_SE``` Swedish  
-```uk_UA``` Ukrainian  
-```th_TH``` Thai  
-```tr_TR``` Turkish  
-```vi_VN``` Vietnamese  
+```ar_TN``` Arabic (Tunisia)
+```ca_ES``` Catalan
+```zh_CN``` Chinese
+```zh_TW``` Chinese (traditional)
+```cs_CZ``` Czech
+```da_DK``` Danish
+```nl_NL``` Dutch
+```en_CA``` English (Canada)
+```en_GB``` English (British)
+```en_US``` English (American)
+```eo_EO``` Esperanto
+```fa_IR``` Farsi
+```fi_FI``` Finnish
+```fr_FR``` French (Europe)
+```fr_CA``` French (Canada)
+```de_DE``` German (Germany)
+```hu_HU``` Hungarian
+```id_ID``` Indonesian
+```it_IT``` Italian
+```ja_JP``` Japanese
+```kz_KZ``` Kazakh
+```oc_LNC``` Lengadocian
+```lv_LV``` Latvian (Latviešu)
+```pl_PL``` Polish
+```pt_BR``` Portuguese (Brazil)
+```pt_PT``` Portuguese (Portugal)
+```ru_RU``` Russian (Basic version)
+```es_ES``` Spanish (Europe)
+```sv_SE``` Swedish
+```uk_UA``` Ukrainian
+```th_TH``` Thai
+```tr_TR``` Turkish
+```vi_VN``` Vietnamese
 
 -------------------------------------------------
 
@@ -188,7 +188,7 @@ $m = new \Moment\Moment('2012-04-25T03:00:00', 'CET');
 echo $m->format('LLLL', new \Moment\CustomFormats\MomentJs()); // Wednesday, April 25th 2012 3:00 AM
 ```
 
-`Custom formats` can also come as part of every `Locale`. If it does not exist for your locale yet go ahead and add it. See an example for the [French locale](https://github.com/fightbulc/moment.php/blob/master/src/Locales/fr_FR.php). 
+`Custom formats` can also come as part of every `Locale`. If it does not exist for your locale yet go ahead and add it. See an example for the [French locale](https://github.com/fightbulc/moment.php/blob/master/src/Locales/fr_FR.php).
 
 #### III. Easy text escaping
 
@@ -525,7 +525,7 @@ You can now run through the result and put it formatted into a drop-down field o
     - PHPDocs
   - added:
     - consts for `NO_TZ_MYSQL`, `NO_TZ_NO_SECS` and `NO_TIME` when parsing dates
-    
+
 ### 1.26.2
  - added:
     - Dutch customFormat
@@ -536,37 +536,37 @@ You can now run through the result and put it formatted into a drop-down field o
 
 ### 1.26.0
  - added:
-    - Turkish locale  
+    - Turkish locale
  - fixed:
     - Lengadocian locale
 
 ### 1.25.1
  - fixed:
-    - PHP7.1 setTime requires `$microseconds`  
+    - PHP7.1 setTime requires `$microseconds`
 
 ### 1.25
  - added:
-    - Ukrainian locale  
+    - Ukrainian locale
 
 ### 1.24
  - added:
-    - Hungarian locale  
+    - Hungarian locale
 
 ### 1.23.1
  - fixed:
-    - Lengadocian locale  
+    - Lengadocian locale
 
 ### 1.23.0
  - added:
     - Vietnamese locale
-    - Lengadocian locale  
+    - Lengadocian locale
 
 ### 1.22.0
  - added:
     - Change default timezone
 - fixed:
     - FormatsInterface docs
-    
+
 ### 1.21.0
  - added:
     - Arabic locale
@@ -582,7 +582,7 @@ You can now run through the result and put it formatted into a drop-down field o
  - fixed:
     - Polish locale
     - Calculation of seconds
-    
+
 ### 1.20.7
 - fixed:
     - Russian: more relative time fixes
@@ -693,7 +693,7 @@ You can now run through the result and put it formatted into a drop-down field o
 ### 1.10.0
 - added:
     - locale Chinese
-    - ordinal formatter receives now the ```token``` e.g. the token within ```dS``` is ```d```  
+    - ordinal formatter receives now the ```token``` e.g. the token within ```dS``` is ```d```
 
 ### 1.9.1
 - fixed: english ordinal issue for numbers between 11 - 13
