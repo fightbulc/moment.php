@@ -821,6 +821,10 @@ You can now run through the result and put it formatted into a drop-down field o
 
 -------------------------------------------------
 
+# Contributing
+
+The maintainers of this project suggest following the [contribution guide](.github/CONTRIBUTING.md).
+
 # License
 Moment.php is freely distributable under the terms of the MIT license.
 
