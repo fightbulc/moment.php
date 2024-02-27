@@ -36,4 +36,4 @@ jobs:
         run: "composer install --prefer-dist --no-progress --no-suggest"
 
       - name: "Run tests with phpunit/phpunit"
-        run: "vendor/bin/phpunit -c tests/build.xml"
+        run: "vendor/bin/phpunit --configuration=tests/build.xml"
