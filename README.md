@@ -15,9 +15,9 @@ Just drop me a message. Cheers!
 
 [![Integrate](https://github.com/fightbulc/moment.php/actions/workflows/integrate.yaml/badge.svg?branch=master)](https://github.com/fightbulc/moment.php/actions/workflows/integrate.yaml)
 
-[![Latest Stable Version](https://poser.pugx.org/fightbulc/moment.php/v/stable)](https://packagist.org/packages/fightbulc/moment.php)
-[![Total Downloads](https://poser.pugx.org/fightbulc/moment.php/downloads)](https://packagist.org/packages/fightbulc/moment.php)
-[![Monthly Downloads](http://poser.pugx.org/fightbulc/moment.php/d/monthly)](https://packagist.org/packages/fightbulc/moment.php)
+[![Latest Stable Version](https://poser.pugx.org/fightbulc/moment/v/stable)](https://packagist.org/packages/fightbulc/moment)
+[![Total Downloads](https://poser.pugx.org/fightbulc/moment/downloads)](https://packagist.org/packages/fightbulc/moment)
+[![Monthly Downloads](http://poser.pugx.org/fightbulc/moment/d/monthly)](https://packagist.org/packages/fightbulc/moment)
 
 [Change log](#changelog)
 
