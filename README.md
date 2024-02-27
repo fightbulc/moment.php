@@ -13,7 +13,7 @@ Just drop me a message. Cheers!
                                            |_|         |_|    
 </pre>
 
-[![Integrate](https://github.com/fightbulc/moment.php/actions/workflows/integrate.yaml/badge.svg?branch=main)](https://github.com/fightbulc/moment.php/actions/workflows/integrate.yaml)
+[![Integrate](https://github.com/fightbulc/moment.php/actions/workflows/integrate.yaml/badge.svg?branch=master)](https://github.com/fightbulc/moment.php/actions/workflows/integrate.yaml)
 [![Total Downloads](https://img.shields.io/packagist/dt/fightbulc/moment.svg?style=flat-square)](https://packagist.org/packages/fightbulc/moment)
 
 [Change log](#changelog)
