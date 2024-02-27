@@ -7,6 +7,7 @@
   bootstrap="../vendor/autoload.php"
   cacheResult="false"
   colors="true"
+  columns="max"
   verbose="true"
 >
   <coverage processUncoveredFiles="false">
