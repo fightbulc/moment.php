@@ -36,6 +36,9 @@ jobs:
       - name: "Set up problem matchers for PHP"
         run: "echo \"::add-matcher::${{ runner.tool_cache }}/php.json\""
 
+      - name: "Set up problem matchers for phpunit/phpunit"
+        run: "echo \"::add-matcher::${{ runner.tool_cache }}/phpunit.json\""
+
       - name: "Validate composer.json and composer.lock"
         run: "composer validate --ansi"
 
