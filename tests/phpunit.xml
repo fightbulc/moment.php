@@ -5,6 +5,7 @@
   backupGlobals="false"
   backupStaticAttributes="false"
   bootstrap="../vendor/autoload.php"
+  cacheResult="false"
   colors="true"
   verbose="true"
 >
