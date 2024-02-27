@@ -23,7 +23,7 @@
   </coverage>
   <testsuites>
     <testsuite name="unit">
-      <directory>unit</directory>
+      <directory>Unit</directory>
     </testsuite>
   </testsuites>
 </phpunit>
