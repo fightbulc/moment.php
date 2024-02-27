@@ -36,4 +36,4 @@ jobs:
         run: "composer install --ansi --prefer-dist --no-progress"
 
       - name: "Run tests with phpunit/phpunit"
-        run: "vendor/bin/phpunit --colors=always --configuration=tests/build.xml"
+        run: "vendor/bin/phpunit --colors=always --configuration=tests/phpunit.xml"
