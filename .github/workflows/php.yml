@@ -1,9 +1,16 @@
 name: qa
 on: [push, pull_request]
 jobs:
-
-  PHP7_4:
+  tests:
     runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        php-version:
+          - '7.4'
+          - '8.0'
+          - '8.1'
+
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -11,47 +18,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '7.4'
-
-      - name: Validate composer.json and composer.lock
-        run: composer validate
-
-      - name: Install dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
-
-      - name: Run PHPUnit
-        run: vendor/bin/phpunit -c tests/build.xml
-
-  PHP8_0:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.0'
-
-      - name: Validate composer.json and composer.lock
-        run: composer validate
-
-      - name: Install dependencies
-        run: composer install --prefer-dist --no-progress --no-suggest
-
-      - name: Run PHPUnit
-        run: vendor/bin/phpunit -c tests/build.xml
-
-  PHP8_1:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.1'
+          php-version: ${{ matrix.php-version }}'
 
       - name: Validate composer.json and composer.lock
         run: composer validate
