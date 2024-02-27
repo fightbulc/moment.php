@@ -110,37 +110,37 @@ __Supported languages so far:__
 
 ```ar_TN``` Arabic (Tunisia)
 ```ca_ES``` Catalan
-```zh_CN``` Chinese
-```zh_TW``` Chinese (traditional)
 ```cs_CZ``` Czech
 ```da_DK``` Danish
-```nl_NL``` Dutch
+```de_DE``` German (Germany)
 ```en_CA``` English (Canada)
 ```en_GB``` English (British)
 ```en_US``` English (American)
 ```eo_EO``` Esperanto
+```es_ES``` Spanish (Europe)
 ```fa_IR``` Farsi
 ```fi_FI``` Finnish
-```fr_FR``` French (Europe)
 ```fr_CA``` French (Canada)
-```de_DE``` German (Germany)
+```fr_FR``` French (Europe)
 ```hu_HU``` Hungarian
 ```id_ID``` Indonesian
 ```it_IT``` Italian
 ```ja_JP``` Japanese
 ```kz_KZ``` Kazakh
-```oc_LNC``` Lengadocian
 ```lv_LV``` Latvian (Latviešu)
+```nl_NL``` Dutch
+```oc_LNC``` Lengadocian
 ```pl_PL``` Polish
 ```pt_BR``` Portuguese (Brazil)
 ```pt_PT``` Portuguese (Portugal)
 ```ru_RU``` Russian (Basic version)
-```es_ES``` Spanish (Europe)
 ```sv_SE``` Swedish
-```uk_UA``` Ukrainian
 ```th_TH``` Thai
 ```tr_TR``` Turkish
+```uk_UA``` Ukrainian
 ```vi_VN``` Vietnamese
+```zh_CN``` Chinese
+```zh_TW``` Chinese (traditional)
 
 -------------------------------------------------
 
