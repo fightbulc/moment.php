@@ -92,7 +92,7 @@ class Moment extends \DateTime
      * @throws MomentException
      */
     #[\ReturnTypeWillChange]
-    public static function createFromFormat($format, $time, $timezone = null, FormatsInterface $formatsInterface = null)
+    public static function createFromFormat($format, $time, $timezone = null, ?FormatsInterface $formatsInterface = null)
     {
         // handle diverse format types
         if ($formatsInterface instanceof FormatsInterface)
@@ -917,7 +917,7 @@ class Moment extends \DateTime
      * @return string
      * @throws MomentException
      */
-    public function calendar($withTime = true, Moment $refMoment = null)
+    public function calendar($withTime = true, ?Moment $refMoment = null)
     {
         $refMoment = $refMoment ? $refMoment : new Moment('now', $this->getTimezoneString());
         $momentFromVo = $this->cloning()->startOf('day')->from($refMoment->startOf('day'));
