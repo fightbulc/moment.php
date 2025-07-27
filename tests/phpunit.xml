@@ -15,6 +15,7 @@
   colors="true"
   columns="max"
   convertWarningsToExceptions="true"
+  failOnWarning="true"
   verbose="true"
 >
   <coverage processUncoveredFiles="false">
