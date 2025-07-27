@@ -14,6 +14,7 @@
   cacheResult="false"
   colors="true"
   columns="max"
+  convertWarningsToExceptions="true"
   verbose="true"
 >
   <coverage processUncoveredFiles="false">
