@@ -109,6 +109,7 @@ echo $m->format('[Wochentag:] l'); // e.g. Wochentag: Mittwoch
 __Supported languages so far:__
 
 ```ar_TN``` Arabic (Tunisia)
+```bg_BG``` Bulgarian
 ```ca_ES``` Catalan
 ```cs_CZ``` Czech
 ```da_DK``` Danish
@@ -434,6 +435,7 @@ You can now run through the result and put it formatted into a drop-down field o
 - added:
   - support for PHP 8.2 [#218](https://github.com/fightbulc/moment.php/pull/218)
   - support for PHP 8.3 [#227](https://github.com/fightbulc/moment.php/pull/227)
+  - Bulgarian locale [#206](https://github.com/fightbulc/moment.php/pull/206)
 
 ### 1.33.0
  - fixed:
