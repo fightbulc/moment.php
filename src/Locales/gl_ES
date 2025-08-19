@@ -1,0 +1,46 @@
+<?php
+
+// locale: galician (gl)
+// author: Victorino Freire https://github.com/laabuelita
+
+use Moment\Moment;
+
+return array(
+    "months"        => explode('_', 'xaneiro_febreiro_marzo_abril_maio_juño_jullo_agosto_setembro_outubro_novembro_decembro'),
+    "monthsShort"   => explode('_', 'xan._feb._mar._abr._mai._xuñ._xul._ago._set._out._nov._dec.'),
+    "weekdays"      => explode('_', 'luns_martes_mércores_xoves_venres_sábado_domingo'),
+    "weekdaysShort" => explode('_', 'lun._mar._mér._xov._ven._sáb._dom.'),
+    "calendar"      => array(
+        "sameDay"  => '[hoxe]',
+        "nextDay"  => '[mañá]',
+        "lastDay"  => '[onte]',
+        "lastWeek" => '[o] l',
+        "sameElse" => 'l',
+        "withTime" => function (Moment $moment) { return '[á' . ($moment->getHour() != 1 ? 's' : null) . '] G:i [h]'; },
+        "default"  => 'd/m/Y',
+    ),
+    "relativeTime"  => array(
+        "future" => 'en %s',
+        "past"   => 'hai %s',
+        "s"      => 'uns segundos',
+        "ss"      => '%d segundos',
+        "m"      => 'un minuto',
+        "mm"     => '%d minutos',
+        "h"      => 'unha hora',
+        "hh"     => '%d horas',
+        "d"      => 'un día',
+        "dd"     => '%d días',
+        "M"      => 'un mes',
+        "MM"     => '%d meses',
+        "y"      => 'un ano',
+        "yy"     => '%d anos',
+    ),
+    "ordinal"       => function ($number)
+    {
+        return $number . 'º';
+    },
+    "week"          => array(
+        "dow" => 1, // Monday is the first day of the week.
+        "doy" => 4  // The week that contains Jan 4th is the first week of the year.
+    ),
+);
