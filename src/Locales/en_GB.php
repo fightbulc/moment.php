@@ -59,7 +59,7 @@ return array(
         "ll" => "j M Y",             // 12 Jun 2010
         "LLL" => "j F Y G:i",        // 12 June 2010 22:00
         "lll" => "j M Y G:i",        // 12 Jun 2010 22:00
-        "LLLL" => "l, j F F Y G:i",  // Saturday, 12 June June 2010 22:00
+        "LLLL" => "l, j F Y G:i",    // Saturday, 12 June 2010 22:00
         "llll" => "D, j M Y G:i",    // Sat, 12 Jun 2010 22:00
     ),
 );
